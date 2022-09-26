@@ -1,0 +1,195 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+/* =======header========= */
+/* header-top */
+.header {
+    width: 100%;
+    min-width: 1300px;
+    height: 110px;
+    margin: 0 auto;
+    /*background: #31b0d5;*/
+    /* border-bottom: 1px solid #eff0f1; */
+    border-bottom: 3px solid rgb(92, 225, 230); 
+   
+}
+ .middle{
+    width: 1200px;
+    min-width: 1100px;
+    margin: 0 auto;
+}
+/* 顶部 */
+.header .header-top{
+    height: 20px;
+    background-color: #ebeae9;
+}
+.header .header-top p{
+    padding-left: 5px;
+    font-size: 13px;
+    float: left;
+}
+.header .header-top .right{
+    float: right;
+}
+.header .header-top .left{
+    float: left;
+}
+.header .header-top a,.header .header-top span{
+    font-size: 13px;
+    padding-left: 5px;
+    text-decoration: none;
+    color: #23b7b7;
+    float: left;
+}
+/* 导航区 */
+/* -----网站Log---- */
+.header .header-navigation .header-img img {
+    float: left;
+    width: 20%;
+    height: 90px;
+    background-color: rgb(241, 198, 25)
+}
+
+/* -----导航 */
+.header .header-navigation .header-nav{
+    margin-top: 32px;
+    float: right;
+    width: 80%;
+    
+    height: 60px;
+}
+.header-nav a{
+    font-weight: bolder;
+    font-size: 16px;
+    height: 58px;
+    text-decoration: none;
+    color:  #787474;
+    display: block;
+}
+  /* 悬浮倒三角 */
+/* .header-nav span{
+   margin: 0 auto;
+   margin-top: -9px;
+    background-color: rgb(92, 225, 230);
+    width: 24px;
+    height: 2px;
+    display: block;
+    position: relative;
+    opacity: 0;
+} */
+.middle .header-nav li span {
+        position:absolute;
+        
+        width: 22px;
+        height: 22px;
+        margin-left: 46px;
+        margin-top: -17px;
+        display: block;
+      }
+.header-nav {
+
+    color: rgb(92, 225, 230);
+}
+.header-nav li{
+    margin-right: 5px;
+    line-height: 60px;
+    width: 12%;
+    text-align: center;
+    height: 100%;
+    list-style-type: none;
+    float: left;
+    /* content: '';
+    display: block;
+    height: 2px;
+    position: absolute;
+    width: 24px;
+    left: calc(50% - 12px);
+    bottom: -5px;
+    background-color: #3370ff;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; */
+}
+.header-nav a:hover{
+    background: url(../images/top.svg) no-repeat;
+    background-size: 112px 25px;
+    background-position: 0px 40px;
+    display: block;
+    position: relative;
+    color: rgb(92, 225, 230);
+
+}
+.active{
+    background: url(../images/top.svg) no-repeat;
+    background-size: 112px 25px;
+    background-position: 0px 40px;
+    display: block;
+    position: relative;
+    color: rgb(92, 225, 230);
+}
+/* 底部栏 */
+.index-bottom{
+    min-width: 1300px;
+    float: left;
+    margin-top: 70px;
+    height:339px;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+.index-bottom .bottom-account{
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    height: 209px;
+}
+.index-bottom .bottom-account ul{
+    margin-top: 17px;
+    display: block;
+    float: left;
+    width:  164px;
+    height: 237px;
+    margin-right: 5px;
+}
+.index-bottom .bottom-account ul span{
+    color: #6a6a6a;
+    float: left;
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    line-height: 50px;
+    font-weight: 500;
+}
+.index-bottom .bottom-account ul li {
+    
+    float: left;
+    margin-top: 3px;
+    margin-left: 43px;
+    display: block;
+    height: 35px;
+    width: 100%;
+    line-height: 35px;
+}
+.index-bottom .bottom-account ul li a {
+    color: #6a6a6a;
+    font-size: 14px;
+}
+/* 相关信息 */
+.connect{
+    float: left;
+}
+.connect .line-one{
+    float: left;
+    height: 35px;
+    width: 100%;
+
+}
+.connect .line-one li,.connect .line-one span{
+    float: left;
+}
+.connect .line-one a,.connect .line-one span,.connect .line-two a{
+    margin-right: 11px;
+    color: #707070;
+    font-size: 13px;
+}
+

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下订单</title>
+    <link rel="stylesheet" href="../css/order_drop.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+
+
+<!-- 头部导航 -->
+<div class="header">
+    <!-- header-top -->
+    <div class="header-top">
+        <div class="middle">
+            <ul class="right">
+                <a href="javascript:void(0)">帮助中心</a><span>|</span>
+                <a href="javascript:void(0)">400-321-2202</a><span>|</span>
+                <p href="javascript:void()">微信</p>
+            </ul>
+            <ul class="left">
+                <a href="../customer/login.html">登陆</a><span>|</span>
+                <a href="../customer/regist.html">注册</a><span>|</span>
+                <p class="name" >我的随行</p>
+            </ul>
+        </div>
+    </div>
+
+    <!-- header-navigation -->
+    <div class="header-navigation">
+        <div class="middle">
+            <!-- log -->
+            <div class="header-img">
+                <img src="../images/header-logo.PNG" alt="">
+            </div>
+            <div class="header-nav">
+                <li><a href="../index.html" class="header-word">首页</a><span></span></li>
+                <li><a href="../car_rental/car_filter.html"  class="header-word">去租车</a><span></span></li>
+                <li><a  href="../car_rental/car_select.html"  class="header-word">车型查询</a><span></span></li>
+                <li><a href="../network/businessoutlets.html"  class="header-word">网点导航</a><span></span></li>
+                <li><a href="../customer/customer_center.html"  class="header-word">个人中心</a><span></span></li>
+                <li><a href="../preferential/special_models.html" class="header-word">特价优惠</a><span></span></li>
+                <li><a href="../customer/mycollect.html" class="header-word">我的收藏</a><span></span></li>
+
+            </div>
+       </div>
+    </div>
+</div>
+<div id="main">
+    <div class="order_details">
+        <div class="car_picture">
+            <img src="../images/order_img/car_dazhong.png">
+            <p>租期：<span class="day">2</span>天</p>
+        </div>
+        <div class="car_describe">
+            <div class="car_name">
+                <p>大众迈腾</p>
+                <a href="../details/details_of_cars.html" class="details">车辆详情></a>
+                <a href="../car_rental/car_filter.html" class="fanhui">返回修改</a>
+            </div>
+            <div class="car_address">
+                <table >
+                    <tr>
+                        <td class="address_a">取车地点</td>
+                        <td class="address_a">还车地点</td>
+                    </tr>
+                    <tr>
+                        <td>取车门店:<span>八万人体育场店</span></td>
+                        <td>还车门店:<span>八万人体育场店</span></td>
+                    </tr>
+                    <tr>
+                        <td>取车时间：<span>2022-08-27 09:00</span></td>
+                        <td>还车时间:<span>2022-08-29 09:00</span></td>
+                    </tr>
+                    <tr>
+                        <td>取车地址：<span>上海上海市徐汇区斜土路2899号</span></td>
+                        <td>还车地址：<span>上海上海市徐汇区斜土路2899号</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p>订单说明</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">不限公里数，超时费按车辆租赁费及门店服务费均价/6收取实际超期小时费 (部分0元活动订单，按照40元/小时进行收取)。</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+<!-----------优惠--------------------------->
+        <div class="preferential">
+            <div class="pre_title">
+                <h3>优惠活动</h3>
+            </div>
+            <div class="pre_content">
+                <input type="radio" class="select" name="pre"> 使用优惠券<br>
+                <div class="coupon">
+                    <div class="coupon1">
+                        <h1>￥<span>100</span></h1>
+                        <p>有效期至<span>2022/8/28</span>23:59:59</p>
+                        <div class="part_coupon1">
+                            <h5>满800减100优惠券</h5>
+                        </div>
+                    </div>
+
+                    <div class="coupon1">
+                        <h1>￥<span>105</span></h1>
+                        <p>有效期至<span>2022/8/28</span>23:59:59</p>
+                        <div class="part_coupon1">
+                            <h5>满850减105优惠券</h5>
+                        </div>
+                    </div>
+
+                    <div class="coupon1">
+                        <h1>￥<span>110</span></h1>
+                        <p>有效期至<span>2022/8/28</span>23:59:59</p>
+                        <div class="part_coupon1">
+                            <h5>满900减110优惠券</h5>
+                        </div>
+                    </div>
+
+                </div>
+                <input type="radio" name="pre" class="other_select"> 新用户特惠<br>
+                <div class="new_user">
+                    <div class="coupon1">
+                        <h1>￥<span>100</span></h1>
+                        <p>有效期至<span>2022/8/28</span>23:59:59</p>
+                        <div class="part_coupon1">
+                            <h5>新用户首单立减100元</h5>
+                        </div>
+                    </div>
+                </div>
+                <input type="radio" name="pre" class=" oth"> 不参加以上任何活动
+
+            </div>
+        </div>
+
+<!------------其它服务----------------->
+        <div class="service">
+            <div class="pre_title">
+                <h3>其它服务</h3>
+            </div>
+            <div class="ser_content">
+                <input type="radio" name="other_service" class="other_s1">
+                <div class="protection">
+                    <ul>
+                        <li>
+                            <p class="name">优享补充保障</p>
+                            <p class="introduce">增强三者保障至30万+5000元以下车损免赔</p>
+                            <p class="limited">限时特惠</p>
+                        </li>
+                        <li class="center">
+                            53*<span class="day">2</span>
+                        </li>
+                        <li class="right">
+                            <p>￥<span class="price_now1">106</span></p>
+                            <p class="original">原价￥110</p>
+                        </li>
+                    </ul>
+
+                </div>
+                <input type="radio" name="other_service" class="other_s2">
+                <div class="protection">
+                    <ul>
+                        <li>
+                            <p class="name">尊享补充保障</p>
+                            <p class="introduce">增强三者保障至70万+5000元以下车损免赔</p>
+                            <p class="limited">限时特惠</p>
+                        </li>
+                        <li class="center">
+                            72*<span class="day">2</span>
+                        </li>
+                        <li class="right">
+                            <p>￥<span class="price_now2">144</span></p>
+                            <p class="original">原价￥160</p>
+                        </li>
+                    </ul>
+
+                </div>
+                <input type="radio" name="other_service" class="other_s3">
+                <div class="protection">
+                    <ul>
+                        <li>
+                            <p class="name">百万补充保障</p>
+                            <p class="introduce">增强三者保障至120万+5000元以下车损免赔</p>
+                            <p class="limited">限时特惠</p>
+                        </li>
+                        <li class="center center1">
+                            95*<span class="day">2</span>
+                        </li>
+                        <li class="right">
+                            <p>￥<span class="price_now3">190</span></p>
+                            <p class="original">原价￥210</p>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+<!--    ---------费用明细------------------>
+    <div class="order_confirm">
+        <div class="pre_title">
+            <h3>费用明细</h3>
+        </div>
+        <div class="expense_statement">
+            <ul>
+                <li>
+                    <p>车辆租赁费及门店服务费
+                        <span class="price">￥<span class="price_one">570</span><img class="change_img" src="../images/order_img/down.svg"></span>
+                    </p>
+                    <p class="exp_add">现付价</p>
+                    <hr class="hr1">
+                    <div class="date">
+                        <div class="date1">
+                            <p>08/27 周六</p>
+                            <p>￥<span>275</span></p>
+                        </div>
+                        <div class="date2">
+                            <p>08/28 周日</p>
+                            <p>￥<span>275</span></p>
+                        </div>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="border">
+                        <p>基本保障服务费
+                            <span class="price">￥<span class="price_two">100</span></span>
+                        </p>
+                        <p class="exp_add">基本保障服务费*<span class="day">2</span>天</p>
+                    </div>
+                    <div class="other">
+                        <p>其它服务费
+                            <span class="service_price">￥<span>20</span><img class=" img" src="../images/order_img/down.svg"></span>
+                        </p>
+                        <hr class="hr1">
+                        <div class="expenses">
+                            <div class="expenses1">
+                                <p>手续费 <span class="expenses_price">￥<span class="expenses_p">20</span></span></p>
+                            </div>
+                            <div class="expenses1 youzhi">
+                                <p><span class="word">优享补充保障</span> <span class="expenses1_price">￥<span class="p">275</span></span></p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr class="hr3">
+                    <div class="deposit">
+                        <p>车辆保证金<span class="tui">(可退)</span><span class="price">￥3000</span></p>
+                        <p>违章押金<span class="tui">(可退)</span><span  class="price1">￥2000</span></p>
+                    </div>
+                    <hr class="hr2">
+                    <div class="total_price">
+                        总计：<span>￥<span class="t_price">790</span></span><br>
+                        <div class="a_">
+                            <a href="order_confirm.html">提交订单</a>
+                        </div>
+
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+<script src="../js/order_drop.js"></script>
+</body>
+</html>

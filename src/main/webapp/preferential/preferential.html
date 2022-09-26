@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/preferential.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<div class="preferential">
+<!--    头部-->
+    <div class="preferential-head">
+        <h4>我的优惠编码</h4>
+    </div>
+<!--    绑定优惠码-->
+    <div class="coupon-bind">
+        <p class="coupon-bind-tips">在此输入您的优惠编码，点击“绑定”后，
+            此优惠编码将自动绑定您的一嗨账户。下次租车时可选择优惠编码抵用租金。</p>
+        <div class="coupon-bind-panel">
+            <h3>优惠编码：</h3>
+            <input id="textPromotionCode" type="text" placeholder="请输入您的优惠编码" maxlength="10">
+            <i style="color: #ff0000;font-style: normal;display: inline-block;padding-right: 10px;">*</i>
+            <a id="btnBind" class="ui-btn ui-btn-orange-l" href="">绑定</a>
+        </div>
+    </div>
+    <div class="hd">
+        <i>自驾优惠</i>
+    </div>
+    <div id="divPromotions" class="mod coupon-list">
+        <table class="ui-table-list" width="100%">
+            <tbody>
+            <tr>
+                <th width="30%" class="row-first-cell">优惠券</th>
+                <th width="15%">到期时间</th>
+                <th width="15%">使用状态</th>
+                <th width="15%">使用规则</th>
+            </tr>
+
+            <tr>
+                <td class="row-first-cell" data-content="1、自绑定日起2个月有效，租期满足2天及以上，租期包含任意法定节假日（含公休及调休）及前一天不能使用；&lt;br/&gt;2、适用于经济或舒适车型，仅限非首次取车订单可用，仅减免订单中最低一日的车辆租赁费及门店服务费，最高可减200元，其他费用正常收取； &lt;br/&gt;3、不可与一嗨其他优惠共享，不可重复使用，仅限一嗨国内自驾业务使用；&lt;br/&gt;4、奖品仅限本人使用，不可转让。">
+                    200元优惠券-1088礼包             </td>
+                <td> 2022-10-18</td>
+                <td>
+                    <span class="green bold">未使用</span>
+
+                </td>
+
+                <td class="btn-show-rules">
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal">使用规则</a>
+                    <script type="text/html">
+                        <li>
+                            1、自绑定日起2个月有效，租期满足2天及以上，租期包含任意法定节假日（含公休及调休）及前一天不能使用；<br/>2、适用于经济或舒适车型，仅限非首次取车订单可用，仅减免订单中最低一日的车辆租赁费及门店服务费，最高可减200元，其他费用正常收取； <br/>3、不可与一嗨其他优惠共享，不可重复使用，仅限一嗨国内自驾业务使用；<br/>4、奖品仅限本人使用，不可转让。
+                        </li>
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td class="row-first-cell" data-content="1.生日优惠券使用有效期为生日之日起60天有效；&lt;br/&gt;2.仅对车辆租赁费及门店服务费部分进行减免，其他费用正常收取；&lt;br/&gt;3.一年内仅可享受一次生日优惠，不可与其他优惠同享，租期包含任意法定节假日（含公休及调休）及前一天不能使用 ；&lt;br/&gt;4.仅限一嗨国内自驾业务使用。">
+                    普卡生日优惠             </td>
+                <td> 2022-10-27</td>
+                <td>
+                    <span class="green bold">未使用</span>
+
+                </td>
+
+                <td class="btn-show-rules">
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal">使用规则</a>
+                    <script type="text/html">
+                        <li>
+                            1.生日优惠券使用有效期为生日之日起60天有效；<br/>2.仅对车辆租赁费及门店服务费部分进行减免，其他费用正常收取；<br/>3.一年内仅可享受一次生日优惠，不可与其他优惠同享，租期包含任意法定节假日（含公休及调休）及前一天不能使用 ；<br/>4.仅限一嗨国内自驾业务使用。
+                        </li>
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td class="row-first-cell" data-content="1、新用户注册后，首单租期满2天及以上可使用该优惠，预订订单租期小于2天，续租后租期≥2天的订单，不享受该优惠；&lt;br/&gt;2、订单第一天车辆租赁费及门店服务费低于100元的减免第一天车辆租赁费及门店服务费费用，订单第一天车辆租赁费及门店服务费高于100元的最高抵扣车辆租赁费及门店服务费100元，其他费用正常收取；&lt;br/&gt;3、优惠券自绑定日起3个月有效，不可重复使用，限新用户本人使用，不与一嗨租车其他优惠活动并用，仅限一嗨租车国内自驾业务使用；&lt;br/&gt;4、新用户指同一账户在一嗨从未有过成功订单（非取消状态的订单）的用户，同一身份证下通过任意手机号注册的账户均属于同一账户。">
+                    一嗨新用户首单立减100元             </td>
+                <td> 2022-11-17</td>
+                <td>
+                    <span class="green bold">未使用</span>
+
+                </td>
+
+                <td class="btn-show-rules">
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal">使用规则</a>
+                    <script type="text/html">
+                        <li>
+                            1、新用户注册后，首单租期满2天及以上可使用该优惠，预订订单租期小于2天，续租后租期≥2天的订单，不享受该优惠；<br/>2、订单第一天车辆租赁费及门店服务费低于100元的减免第一天车辆租赁费及门店服务费费用，订单第一天车辆租赁费及门店服务费高于100元的最高抵扣车辆租赁费及门店服务费100元，其他费用正常收取；<br/>3、优惠券自绑定日起3个月有效，不可重复使用，限新用户本人使用，不与一嗨租车其他优惠活动并用，仅限一嗨租车国内自驾业务使用；<br/>4、新用户指同一账户在一嗨从未有过成功订单（非取消状态的订单）的用户，同一身份证下通过任意手机号注册的账户均属于同一账户。
+                        </li>
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td class="row-first-cell" data-content="1、自绑定日起6个月有效，单笔订单车辆租赁费及门店服务费部分满800元可用，仅减免车辆租赁费及门店服务费部分，其他费用正常收取；&lt;br/&gt;2、租期包含任意法定节假日（含公休及调休）及前一天不能使用，不可与一嗨其他优惠共享，仅限一嗨国内自驾业务使用。">
+                    满800减88元优惠券-1088礼包             </td>
+                <td> 2023-02-15</td>
+                <td>
+                    <span class="green bold">未使用</span>
+
+                </td>
+
+                <td class="btn-show-rules">
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal">使用规则</a>
+                    <script type="text/html">
+                        <li>
+                            1、自绑定日起6个月有效，单笔订单车辆租赁费及门店服务费部分满800元可用，仅减免车辆租赁费及门店服务费部分，其他费用正常收取；<br/>2、租期包含任意法定节假日（含公休及调休）及前一天不能使用，不可与一嗨其他优惠共享，仅限一嗨国内自驾业务使用。
+                        </li>
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td class="row-first-cell" data-content="1.仅限新用户使用；仅限经济/舒适型车型可用；&lt;br/&gt;2.优惠券有效期以实际显示为准，租期包含任意法定节假日（含公休及调休）及前一天不能使用；&lt;br/&gt;3. 仅减免订单车辆租赁费及门店服务费部分，其他费用正常收取；&lt;br/&gt;4. 该券不兑现、不找零、不可叠加使用，不与其他优惠同享；&lt;br/&gt;5. 领取成功后不更换、退还。">
+                    车型试驾50元优惠券             </td>
+                <td> 2022-08-29</td>
+                <td>
+                    <span class="gray bold">已过期</span>
+
+                </td>
+
+                <td class="btn-show-rules">
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal">使用规则</a>
+                    <script type="text/html">
+                        <li>
+                            1.仅限新用户使用；仅限经济/舒适型车型可用；<br/>2.优惠券有效期以实际显示为准，租期包含任意法定节假日（含公休及调休）及前一天不能使用；<br/>3. 仅减免订单车辆租赁费及门店服务费部分，其他费用正常收取；<br/>4. 该券不兑现、不找零、不可叠加使用，不与其他优惠同享；<br/>5. 领取成功后不更换、退还。
+                        </li>
+                    </script>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="ui-page">
+            <div class="pages">
+                <a href="javascript:void(0)" class="on" data-page-index="1">1</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src="../images/btn-myshow-close.png"></button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert-rulebox">
+                    <h3>使用规则：</h3>
+                    <ol class="alert-rulebox-rules">
+                        <li>
+                            "1、自绑定日起2个月有效，租期满足2天及以上，租期包含任意法定节假日（含公休及调休）及前一天不能使用；<br>
+                            2、适用于经济或舒适车型，仅限非首次取车订单可用，仅减免订单中最低一日的车辆租赁费及门店服务费，最高可减200元，其他费用正常收取；<br>
+                            3、不可与一嗨其他优惠共享，不可重复使用，仅限一嗨国内自驾业务使用；<br>
+                            4、奖品仅限本人使用，不可转让。"
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="../index.html" class="common-orgbtn rule-btn">立即使用</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="../bootstrap/js/bootstrap.js"></script>
+<script src="../js/preferential.js"></script>
+</body>
+</html>

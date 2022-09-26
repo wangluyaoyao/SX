@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>车辆详情</title>
+    <link rel="stylesheet" href="../css/details.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div id="header">
+    <div class="login_part">
+        <img src="../images/header-logo.png">
+    </div>
+
+</div>
+
+<div id="main">
+    <div class="product_picture">
+        <div class="picture_head">
+            <h4>车辆图片</h4>
+        </div>
+        <img src="../images/bydsong.jpg">
+
+    </div>
+    <div class="product_border">
+        <div class="details_head">
+            <h2>车辆详情</h2>
+        </div>
+        <div class="details_detail">
+            <div class="details_present">
+                <p>汽车型号</p>
+            </div>
+            <div class="details_contents"></div>
+        </div>
+
+        <div class="details_detail">
+            <div class="details_present">
+                <p>生产厂家</p>
+            </div>
+            <div class="details_contents"></div>
+        </div>
+        <div class="details_detail">
+            <div class="details_present">
+                <p>能源类型</p>
+            </div>
+            <div class="details_contents"></div>
+        </div>
+        <div class="details_detail">
+            <div class="details_present">
+                <p>上市时间</p>
+            </div>
+            <div class="details_contents"></div>
+        </div>
+        <div class="details_detail">
+            <div class="details_present">
+                <p>级别</p>
+            </div>
+            <div class="details_contents"></div>
+        </div>
+        <div class="details_detail">
+            <div class="details_present">
+                <p>长x宽x高(mm)</p>
+            </div>
+            <div class="details_contents"></div>
+
+        </div>
+    </div>
+</div>
+
+<div id="pro_details">
+    <div class="recommend">
+        <div class="recommend_">
+            <p>热门车型</p>
+        </div>
+        <div class="re_img">
+            <img src="../images/bydsong.jpg">
+            <div class="word">
+                第三代i-MMD双电机混合动力系统，综合工况油耗4.0L/100km
+            </div>
+            <p>￥<span>115,999.00</span></p>
+        </div>
+
+        <div class="re_img">
+            <img src="../images/bydsong.jpg">
+            <div class="word">
+                第三代i-MMD双电机混合动力系统，综合工况油耗4.0L/100km
+            </div>
+            <p>￥<span>115,999.00</span></p>
+        </div>
+
+        <div class="re_img">
+            <img src="../images/bydsong.jpg">
+            <div class="word">
+                第三代i-MMD双电机混合动力系统，综合工况油耗4.0L/100km
+            </div>
+            <p>￥<span>115,999.00</span></p>
+        </div>
+
+
+    </div>
+    <div class="product_detail">
+        <ul class="details_nav ">
+            <li class="active"><a href="#d1" data-toggle="tab">商品介绍</a></li>
+            <li><a href="#d2" data-toggle="tab">商品评价</a></li>
+            <li class="product_cart"><a href="">收藏吧！</a></li>
+        </ul>
+        <div class="tab-content">
+         <div class="details active tab-pane" id="d1">
+            <table >
+                <tr>
+                    <td colspan="4">品牌：广汽本田</td>
+
+                </tr>
+                <tr>
+                    <td>车辆名称：雅阁</td>
+                    <td>级别：中型车</td>
+                    <td>能源类型：汽油</td>
+                    <td>上市时间：2021.10</td>
+                </tr>
+                <tr>
+                    <td >发动机：1.5T 194马力 L4</td>
+                    <td>最大功率(kW)：143(194Ps)</td>
+                    <td>最大扭矩(N.m)：260</td>
+                    <td>发动机最大扭矩(N.m)：260</td>
+                </tr>
+                <tr>
+                    <td >变速箱：CVT无级变速</td>
+                    <td>长x宽x高(mm)：4906x1862x1449</td>
+                    <td>车身结构：4门5座三厢车</td>
+                    <td>最高车速(km/h)：188</td>
+                </tr>
+                <tr>
+                    <td >NEDC综合油耗(L/100km)：6.0</td>
+                    <td>百公里耗电量(kWh/100km)：-</td>
+                    <td>6万公里保养总成本预估：5176.0元</td>
+
+                </tr>
+            </table>
+            <hr>
+
+
+        </div>
+
+        <div id="d2" class="details tab-pane">
+
+            <!-- 评价选择 -->
+            <p class="switch-head-line">
+                <label style="width: 80px;color: #999;">排序：</label>
+                <span class="mr chooseActive" eval_data='1' onclick="chooseEval(this)">好评(6)</span>
+                <span class="mr" eval_data='2' onclick="chooseEval(this)">中评(0)</span>
+                <span class="mr" eval_data='3' onclick="chooseEval(this)">差评(1)</span>
+            </p>
+            <!-- 评价选择 -->
+
+            <ul id="user_evaluate">
+                <li class="evaluate_li">
+					 <span class="img">
+						<img src="../images/yage.webp" alt="头像" />
+					</span>
+                    <span class="info">
+						<h4>御风剑士</h4>
+						<p>你好，很高兴认识你！</p>
+						<p class="time">2019-04-28</p>
+						<div class="reply_info"> 回复：你好。 </div>
+					</span>
+                </li>
+            </ul>
+
+            <!-- 分页-START -->
+            <div class="switch-tag-wrap " >
+                <!--<div class="js-switch next  fr" data-external="2" onclick="trunPage(this)">下一页</div>
+                <div class="js-switch prev fr" data-external="1" onclick="trunPage(this)">上一页</div>
+                <div class="js-switch first-page fr" data-external="1" onclick="trunPage(this)">首页</div> -->
+            </div>
+            <!-- 分页-END -->
+
+          </div>
+        </div>
+
+
+    </div>
+    <!-- 底部导航栏 -->
+
+    <div class="index-bottom">
+        <div class="middle">
+            <!-- 账户服务 -->
+            <div class="bottom-account">
+                <ul>
+                    <span>新手指南</span>
+                    <li><a href="javascript:void(0)">注册新用户</a></li>
+                    <li><a href="javascript:void(0)">预定演示</a></li>
+                    <li><a href="javascript:void(0)">取消或者修改订单</a></li>
+                </ul>
+                <ul>
+                    <span>租车贴士</span>
+                    <li><a href="javascript:void(0)">支付方式</a></li>
+                    <li><a href="javascript:void(0)">精彩活动</a></li>
+
+                </ul>
+                <ul>
+                    <span>售后服务</span>
+                    <li><a href="javascript:void(0)">联系售后</a></li>
+
+                </ul>
+                <ul>
+                    <span>会员服务</span>
+                    <li><a href="javascript:void(0)">忘记密码</a></li>
+                    <li><a href="javascript:void(0)">会员充值</a></li>
+                    <li><a href="javascript:void(0)">积分说明</a></li>
+
+
+                </ul>
+                <ul>
+                    <span>网站帮助</span>
+                    <li><a href="javascript:void(0)">注册新用户</a></li>
+
+                    <li><a href="javascript:void(0)">联系我们</a></li>
+                </ul>
+                <ul>
+                </ul>
+
+
+            </div>
+            <!--相关信息-->
+            <div class="connect">
+                <div class="line-one">
+                    <li><a>关于随行</a></li> <span>｜</span>
+                    <li><a>移动客户端</a></li> <span>｜</span>
+                    <li><a>帮助中心</a></li> <span>｜</span>
+                    <li><a>投诉</a></li> <span>｜</span>
+                    <li><a>联系我们</a></li>
+                </div>
+                <div class="line-two">
+                    <a>
+                        Copyright © 2007-2022 苏州随行信息技术服务有限公司  &nbsp;
+                        ICP证：沪B2-20140130沪ICP备08010394号 &nbsp;&nbsp;
+                        违法和不良信息举报：fuzhaohong@1hai.cn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/details.js"></script>
+</body>
+</html>
