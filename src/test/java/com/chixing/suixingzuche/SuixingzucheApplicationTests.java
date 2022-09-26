@@ -8,6 +8,7 @@ class SuixingzucheApplicationTests {
 
     @Test
     void contextLoads() {
+        int sel;
     }
 
 }
