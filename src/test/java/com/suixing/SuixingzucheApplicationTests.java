@@ -1,4 +1,4 @@
-package com.chixing.suixingzuche;
+package com.suixing;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
