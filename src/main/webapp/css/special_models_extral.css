@@ -211,7 +211,7 @@ ul {
 }
 
 
-.active {
+.special_active {
     background-color: #ff5e00;
 }
 /* 给左右按钮添加样式 */
