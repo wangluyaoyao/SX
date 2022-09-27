@@ -260,11 +260,11 @@
         count++;//1
         // 判断flag的值
         // 回滚到flag初始0
-        if (flag == circles.length) {
+        if (flag === circles.length) {
             flag = 0;
         };
         // 判断count的值回归
-        if (count == viewpage.children.length) {
+        if (count === viewpage.children.length) {
             // 拉回到left=0
             viewpage.style.left = 0;
             console.log('拉回');
@@ -284,7 +284,7 @@
     // 4.给左边按钮绑定事件,ul移动,小圆点跟随图片变化
     prev.onclick = function() {
         // 是否是第一张图片
-        if (count == 0) {
+        if (count === 0) {
             count = viewpage.children.length - 1;//最后一个下标
             viewpage.style.left = count * (-1519) + 'px';
         };
@@ -311,11 +311,11 @@
             count++;//1
             // 判断flag的值
             // 回滚到flag初始0
-            if (flag == circles.length) {
+            if (flag === circles.length) {
                 flag = 0;
             };
             // 判断count的值回归
-            if (count == viewpage.children.length) {
+            if (count === viewpage.children.length) {
                 // 拉回到left=0
                 viewpage.style.left = 0;
                 console.log('拉回');
@@ -395,18 +395,6 @@
 
 </script>
 
-<script>
-    var custId = "${loginCustomer.custId}";
-    if(custId != ""){
-        var url = "${pageContext.request.contextPath}/pushMessage";
-        $.get(url,{
-            custId:custId
-        }),function (result){
-            console.log(result)
-        }
-            ,"json"
-    }
 
-</script>
 </body>
 </html>
