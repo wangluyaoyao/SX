@@ -18,18 +18,19 @@ a{
     margin: 20px auto;
 }
 .collect-main-box li{
-    margin-top: 20px;
     float: left;
     border: 1px solid #ccc;
+    margin: 5px;
 
 }
 .collect-car-box {
-    width: 585px;
+    width: 575px;
     height: 190px;
     /*border-bottom: 1px solid #ccc;*/
     position: relative;
     color: #666;
     float: left;
+
 
 }
 .collect-car-box .car-img {
@@ -42,78 +43,69 @@ a{
     height: 170px;
     float: left;
 }
-.collect-car-box .car-info {
-    width: 140px;
-    height: 210px;
-    margin-top: 0;
-    float: left;
-    padding-left: 5px;
-    /*padding-right: 15px;*/
-}
-.collect-car-box .car-info .car-name {
-    font-size: 18px;
-    margin-top: 30px;
-}
-.collect-car-box .car-info .car-des {
-    font-size: 16px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.collect-car-box .car-info .car-des p{
-    margin-top: 8px;
-}
-.collect-car-box .car-infoother {
-    width: 240px;
-    height: 210px;
-    margin-top: 0;
-    float: left;
-    padding-left: 30px;
-    padding-right: 30px;
-}
-.collect-car-box .car-infoother .car-des {
-    font-size: 16px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-}
-.collect-car-box .car-infoother p{
-    margin-top: 12px;
-}
 
-.collect-car-box .car-a {
-    width: 150px;
-    height: 210px;
-    margin-top: -5px;
-    float: left;
-    padding-left: 30px;
-    padding-right: 0;
-
-}
-.collect-car-box .car-a .car-des {
-    font-size: 16px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-}
-.collect-car-box .car-a p{
-    margin-top: 12px;
-}
-.collect-car-box .car-info .view-car-para {
-    color: #23b7b7;
-    font-size: 14px;
-    font-weight: bolder;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 0;
-    margin-top: 20px;
-}
-.collect-car-box .car-a .esc{
-    float: left;
-    margin-left: 70px;
-    margin-top: 12px;
+.collect-car-box .car-esc .esc{
+    float: right;
+    padding-top: 5px;
+    padding-right: 15px;
+    text-align: right;
     font-size: 10px;
     background-color: white;
     border: none;
     outline: none;
 }
-.collect-car-box .car-a .esc:hover{
+.collect-car-box .car-esc .esc:hover{
     color: #23b7b7;
 }
+
+.collect-car-box .car-tittle{
+    float: left;
+    width: 55%;
+}
+.collect-car-box .car-tittle .car-name {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+
+.collect-car-box .car-info {
+    width: 130px;
+    height: 120px;
+    margin-top: 8px;
+    float: left;
+    padding-left: 15px;
+    /*padding-right: 15px;*/
+}
+
+.collect-car-box .car-info .car-des {
+    font-size: 16px;
+
+}
+.collect-car-box .car-info .car-des p{
+    margin-top: 8px;
+}
+.collect-car-box .car-infoother {
+    width: 130px;
+    height: 120px;
+    margin-top: 8px;
+    float: left;
+    padding-left: 30px;
+
+}
+.collect-car-box .car-infoother .car-des {
+    font-size: 16px;
+    margin-top: 5px;
+}
+.collect-car-box .car-infoother p{
+    margin-top: 8px;
+}
+.collect-car-box .car-infoother .view-car-para {
+    color: #23b7b7;
+    font-size: 14px;
+    font-weight: bolder;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 15px;
+}
+

@@ -28,19 +28,18 @@ $(".bt1").click(function (){
 });
 
 //取消收藏
-$(".esc").attr().click(function(){
+$(".esc").click(function(){
 
      layer.alert('确定提交吗？', {
           skin: 'layui-layer-molv' //样式类名 自定义样式
           , closeBtn: 1 // 是否显示关闭按钮
-          , title : '网页提示！！' //标题
+          , title : '提示！！' //标题
           , anim: 1 //动画类型
           , btn: ['确定', '取消'] //按钮
           , yes: function() {　　　　　　　　　 //这里也可以写响应的ajax请求
           }
           , btn2: function () {
                layer.msg('已取消');
-               $(".esc").remove();
           }
      })
      var delectEle = $(".esc").parent().parent().parent();
