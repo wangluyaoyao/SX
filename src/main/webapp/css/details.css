@@ -400,3 +400,15 @@
      text-align: right;
      float: right;
  }
+
+
+/* 收藏按钮*/
+.collect_btn a{
+    height: 30px;
+
+}
+
+.add_collect_btn span{
+    margin-top: 0;
+    font-size: 20px;
+}

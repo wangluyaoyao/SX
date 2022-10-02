@@ -7,6 +7,8 @@
     <script src="../js/details.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -55,7 +57,7 @@
             <div class="div-myshowbox" style="width: 1180px; height: 450px; border-bottom: 1px #78767a solid;">
                 <div class="common-modalBox">
                     <div class="current-carname">
-                        <h3>BYD</h3>
+                        <h3 >BYD</h3>
                     </div>
                 </div>
                 <div class="current-carbox">
@@ -98,6 +100,11 @@
                     </div>
 
                 </div>
+                <div class="container">
+                    <button type="button" class="btn btn-default" id="btn_collect" style="border: 0px">
+                        <span class="glyphicon glyphicon-star-empty" id="btn_collect_icon" aria-hidden="true" style="color: orange"></span>收藏吧！
+                    </button>
+                </div>
                 <div class="current-carintro">
                     <h3>车辆颜色说明</h3>
                     <p>车辆颜色请以门店为准，图片仅为车型示意图。</p>
@@ -121,8 +128,18 @@
 
 <script src="../js/details.js"></script>
 <script src="../layui/layui.js"></script>
-<script>
-
+<script type="text/javascript">
+    $("#btn_collect").click(function(){
+        var classname = $("#btn_collect_icon").attr("class");
+        $("#btn_collect_icon").removeClass("glyphicon-star-empty glyphicon-star");
+        if(classname == "glyphicon glyphicon-star-empty" ){
+            $("#btn_collect_icon").addClass("glyphicon glyphicon-star");
+            // alert("收藏成功");
+        }else{
+            $("#btn_collect_icon").addClass("glyphicon glyphicon-star-empty");
+            // alert("取消收藏");
+        }
+    });
 </script>
 </body>
 </html>
