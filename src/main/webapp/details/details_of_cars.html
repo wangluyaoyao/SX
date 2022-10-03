@@ -1,249 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
     <title>车辆详情</title>
     <link rel="stylesheet" href="../css/details.css">
+    <script src="../js/details.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 
 <body>
-<div id="header">
-    <div class="login_part">
-        <img src="../images/header-logo.png">
-    </div>
 
-</div>
-
-<div id="main">
-    <div class="product_picture">
-        <div class="picture_head">
-            <h4>车辆图片</h4>
-        </div>
-        <img src="../images/bydsong.jpg">
-
-    </div>
-    <div class="product_border">
-        <div class="details_head">
-            <h2>车辆详情</h2>
-        </div>
-        <div class="details_detail">
-            <div class="details_present">
-                <p>汽车型号</p>
-            </div>
-            <div class="details_contents"></div>
-        </div>
-
-        <div class="details_detail">
-            <div class="details_present">
-                <p>生产厂家</p>
-            </div>
-            <div class="details_contents"></div>
-        </div>
-        <div class="details_detail">
-            <div class="details_present">
-                <p>能源类型</p>
-            </div>
-            <div class="details_contents"></div>
-        </div>
-        <div class="details_detail">
-            <div class="details_present">
-                <p>上市时间</p>
-            </div>
-            <div class="details_contents"></div>
-        </div>
-        <div class="details_detail">
-            <div class="details_present">
-                <p>级别</p>
-            </div>
-            <div class="details_contents"></div>
-        </div>
-        <div class="details_detail">
-            <div class="details_present">
-                <p>长x宽x高(mm)</p>
-            </div>
-            <div class="details_contents"></div>
-
-        </div>
-    </div>
-</div>
-
-<div id="pro_details">
-    <div class="recommend">
-        <div class="recommend_">
-            <p>热门车型</p>
-        </div>
-        <div class="re_img">
-            <img src="../images/bydsong.jpg">
-            <div class="word">
-                第三代i-MMD双电机混合动力系统，综合工况油耗4.0L/100km
-            </div>
-            <p>￥<span>115,999.00</span></p>
-        </div>
-
-        <div class="re_img">
-            <img src="../images/bydsong.jpg">
-            <div class="word">
-                第三代i-MMD双电机混合动力系统，综合工况油耗4.0L/100km
-            </div>
-            <p>￥<span>115,999.00</span></p>
-        </div>
-
-        <div class="re_img">
-            <img src="../images/bydsong.jpg">
-            <div class="word">
-                第三代i-MMD双电机混合动力系统，综合工况油耗4.0L/100km
-            </div>
-            <p>￥<span>115,999.00</span></p>
-        </div>
-
-
-    </div>
-    <div class="product_detail">
-        <ul class="details_nav ">
-            <li class="active"><a href="#d1" data-toggle="tab">商品介绍</a></li>
-            <li><a href="#d2" data-toggle="tab">商品评价</a></li>
-            <li class="product_cart"><a href="">收藏吧！</a></li>
-        </ul>
-        <div class="tab-content">
-         <div class="details active tab-pane" id="d1">
-            <table >
-                <tr>
-                    <td colspan="4">品牌：广汽本田</td>
-
-                </tr>
-                <tr>
-                    <td>车辆名称：雅阁</td>
-                    <td>级别：中型车</td>
-                    <td>能源类型：汽油</td>
-                    <td>上市时间：2021.10</td>
-                </tr>
-                <tr>
-                    <td >发动机：1.5T 194马力 L4</td>
-                    <td>最大功率(kW)：143(194Ps)</td>
-                    <td>最大扭矩(N.m)：260</td>
-                    <td>发动机最大扭矩(N.m)：260</td>
-                </tr>
-                <tr>
-                    <td >变速箱：CVT无级变速</td>
-                    <td>长x宽x高(mm)：4906x1862x1449</td>
-                    <td>车身结构：4门5座三厢车</td>
-                    <td>最高车速(km/h)：188</td>
-                </tr>
-                <tr>
-                    <td >NEDC综合油耗(L/100km)：6.0</td>
-                    <td>百公里耗电量(kWh/100km)：-</td>
-                    <td>6万公里保养总成本预估：5176.0元</td>
-
-                </tr>
-            </table>
-            <hr>
-
-
-        </div>
-
-        <div id="d2" class="details tab-pane">
-
-            <!-- 评价选择 -->
-            <p class="switch-head-line">
-                <label style="width: 80px;color: #999;">排序：</label>
-                <span class="mr chooseActive" eval_data='1' onclick="chooseEval(this)">好评(6)</span>
-                <span class="mr" eval_data='2' onclick="chooseEval(this)">中评(0)</span>
-                <span class="mr" eval_data='3' onclick="chooseEval(this)">差评(1)</span>
-            </p>
-            <!-- 评价选择 -->
-
-            <ul id="user_evaluate">
-                <li class="evaluate_li">
-					 <span class="img">
-						<img src="../images/yage.webp" alt="头像" />
-					</span>
-                    <span class="info">
-						<h4>御风剑士</h4>
-						<p>你好，很高兴认识你！</p>
-						<p class="time">2019-04-28</p>
-						<div class="reply_info"> 回复：你好。 </div>
-					</span>
-                </li>
-            </ul>
-
-            <!-- 分页-START -->
-            <div class="switch-tag-wrap " >
-                <!--<div class="js-switch next  fr" data-external="2" onclick="trunPage(this)">下一页</div>
-                <div class="js-switch prev fr" data-external="1" onclick="trunPage(this)">上一页</div>
-                <div class="js-switch first-page fr" data-external="1" onclick="trunPage(this)">首页</div> -->
-            </div>
-            <!-- 分页-END -->
-
-          </div>
-        </div>
-
-
-    </div>
-    <!-- 底部导航栏 -->
-
-    <div class="index-bottom">
+<!--头部导航-->
+<div class="header">
+    <!-- header-top -->
+    <div class="header-top">
         <div class="middle">
-            <!-- 账户服务 -->
-            <div class="bottom-account">
-                <ul>
-                    <span>新手指南</span>
-                    <li><a href="javascript:void(0)">注册新用户</a></li>
-                    <li><a href="javascript:void(0)">预定演示</a></li>
-                    <li><a href="javascript:void(0)">取消或者修改订单</a></li>
-                </ul>
-                <ul>
-                    <span>租车贴士</span>
-                    <li><a href="javascript:void(0)">支付方式</a></li>
-                    <li><a href="javascript:void(0)">精彩活动</a></li>
-
-                </ul>
-                <ul>
-                    <span>售后服务</span>
-                    <li><a href="javascript:void(0)">联系售后</a></li>
-
-                </ul>
-                <ul>
-                    <span>会员服务</span>
-                    <li><a href="javascript:void(0)">忘记密码</a></li>
-                    <li><a href="javascript:void(0)">会员充值</a></li>
-                    <li><a href="javascript:void(0)">积分说明</a></li>
-
-
-                </ul>
-                <ul>
-                    <span>网站帮助</span>
-                    <li><a href="javascript:void(0)">注册新用户</a></li>
-
-                    <li><a href="javascript:void(0)">联系我们</a></li>
-                </ul>
-                <ul>
-                </ul>
-
-
+            <ul class="right">
+                <a href="javascript:void(0)">帮助中心</a><span>|</span>
+                <a href="javascript:void(0)">400-321-2202</a><span>|</span>
+                <p href="javascript:void()">微信</p>
+            </ul>
+            <ul class="left">
+                <a href="javascript:void(0)">登陆</a><span>|</span>
+                <a href="javascript:void(0)">注册</a><span>|</span>
+                <p class="name" >我的随行</p>
+            </ul>
+        </div>
+    </div>
+    <!-- header-navigation -->
+    <div class="header-navigation">
+        <div class="middle">
+            <!-- log -->
+            <div class="header-img">
+                <img src="../images/header-logo.png" alt="" style="height: 86px;">
             </div>
-            <!--相关信息-->
-            <div class="connect">
-                <div class="line-one">
-                    <li><a>关于随行</a></li> <span>｜</span>
-                    <li><a>移动客户端</a></li> <span>｜</span>
-                    <li><a>帮助中心</a></li> <span>｜</span>
-                    <li><a>投诉</a></li> <span>｜</span>
-                    <li><a>联系我们</a></li>
-                </div>
-                <div class="line-two">
-                    <a>
-                        Copyright © 2007-2022 苏州随行信息技术服务有限公司  &nbsp;
-                        ICP证：沪B2-20140130沪ICP备08010394号 &nbsp;&nbsp;
-                        违法和不良信息举报：fuzhaohong@1hai.cn</a>
-                </div>
+            <div class="header-nav">
+                <li><a href="../index.html" class="header-word">首页</a><span></span></li>
+                <li><a href="../car_rental/car_filter.html"  class="header-word">去租车</a><span></span></li>
+                <li><a href="../car_rental/car_select.html"  class="header-word">车型查询</a><span></span></li>
+                <li><a href="../network/businessoutlets.html"  class="header-word">网点导航</a><span></span></li>
+                <li><a href="../customer/customer_center.html"  class="header-word active">个人中心</a><span></span></li>
+                <li><a href="../preferential/special_models.html" class="header-word">特价优惠</a><span></span></li>
+                <li><a href="../customer/mycollect.html" class="header-word">我的收藏</a><span></span></li>
+
             </div>
         </div>
     </div>
 </div>
+<div class="w1180">
+    <div class="myshowbox">
+        <div class="myshowbox-container">
+            <a href="javascript:void(0)" class="btn-close"><span></span></a>
+            <div class="div-myshowbox" style="width: 1180px; height: 450px; border-bottom: 1px #78767a solid;">
+                <div class="common-modalBox">
+                    <div class="current-carname">
+                        <h3 >BYD</h3>
+                    </div>
+                </div>
+                <div class="current-carbox">
+                    <div class="current-carlist">
+                        <div class="current-carinfo">
+
+                            <div class="current-carpic">
+                                <img src="../images/benchic.jpg" alt="">
+                                <span class="video-playbtn video-li" data-cartypeids="421" id="carInfoVideo"></span>
+                            </div>
+                            <p>XxXX</p>
+                        </div>
+                        <ul class="current-carconfigure clear_float">
+                            <c:if test="${!empty serverResponse.data.carTankCapacity}">
+                                <li id="li-first-child">
+                                    <p class="configure-name"><span class="configure-icon">
+                                    <img src="http://r1nxp2i0y.hn-bkt.clouddn.com/images/car-shift.png" alt=""></span></p>
+                                    <p>变速箱:<span>XXX</span></p>
+                                </li>
+                                <li>
+                                    <p class="configure-name"><span class="configure-icon"><img src="http://r1nxp2i0y.hn-bkt.clouddn.com/images/car-tank-capacity.png" alt=""></span></p>
+                                    <p>油箱容量:<span>100L</span></p>
+                                </li>
+                                <li>
+                                    <p class="configure-name"><span class="configure-icon"><img src="http://r1nxp2i0y.hn-bkt.clouddn.com/images/car-displacement.png" alt=""></span></p>
+                                    <p>排量:<span>10T</span>L</p>
+                                </li>
+                            </c:if>
+                            <li>
+                                <p class="configure-name"><span class="configure-icon"><img src="http://r1nxp2i0y.hn-bkt.clouddn.com/images/car-seat-number.png" alt=""></span></p>
+                                <p>座位数:<span>3</span></p>
+                            </li>
+                            <c:if test="${!empty serverResponse.data.carTankCapacity}">
+                                <li>
+                                    <p class="configure-name"><span class="configure-icon"><img src="http://r1nxp2i0y.hn-bkt.clouddn.com/images/car-air-inlet-mode.png" alt=""></span></p>
+                                    <p>进气:<span>10L</span></p>
+                                </li>
+                            </c:if>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="container">
+                    <button type="button" class="btn btn-default" id="btn_collect" style="border: 0px">
+                        <span class="glyphicon glyphicon-star-empty" id="btn_collect_icon" aria-hidden="true" style="color: orange"></span>收藏吧！
+                    </button>
+                </div>
+                <div class="current-carintro">
+                    <h3>车辆颜色说明</h3>
+                    <p>车辆颜色请以门店为准，图片仅为车型示意图。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment-box">
+            <h3 style="cursor: pointer" class="comment-title">显示评论</h3>
+            <div style="display: none;" class="replay-show-hiden">
+                <ul class="comment-ul">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <script src="../js/details.js"></script>
+<script src="../layui/layui.js"></script>
+<script type="text/javascript">
+    $("#btn_collect").click(function(){
+        var classname = $("#btn_collect_icon").attr("class");
+        $("#btn_collect_icon").removeClass("glyphicon-star-empty glyphicon-star");
+        if(classname == "glyphicon glyphicon-star-empty" ){
+            $("#btn_collect_icon").addClass("glyphicon glyphicon-star");
+            // alert("收藏成功");
+        }else{
+            $("#btn_collect_icon").addClass("glyphicon glyphicon-star-empty");
+            // alert("取消收藏");
+        }
+    });
+</script>
 </body>
 </html>

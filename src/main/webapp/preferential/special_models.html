@@ -98,45 +98,17 @@
             </div>
             <div class="hotcar-right">
                    <a class="hotcar-liinfo" href="">
+                       <div class="hotcar-car" style="right: -20px;">
+                           <img src="../images/bmw3xi.jpg" ></div>
                 <span class="iconmore hoticon"></span>
                 <div class="hotcar-info">
                     <div class="hotcar-name">本田新飞度</div>
                     <div class="hotcar-type"><span>经济型 | 自动 | 5座</span></div>
                     <div class="hotcar-price"><span><em>￥</em>126</span>/天起</div>
                 </div>
-                <div class="hotcar-car" style="right: -20px;">
-                    <img src="../images/bmw3xi.jpg" ></div>
+
             </a>
-                <a class="hotcar-liinfo" href="">
-                    <span class="iconmore hoticon"></span>
-                    <div class="hotcar-info">
-                        <div class="hotcar-name">本田新飞度</div>
-                        <div class="hotcar-type"><span>经济型 | 自动 | 5座</span></div>
-                        <div class="hotcar-price"><span><em>￥</em>126</span>/天起</div>
-                    </div>
-                    <div class="hotcar-car" style="right: -20px;">
-                        <img src="../images/bmw3xi.jpg" ></div>
-                </a>
-                <a class="hotcar-liinfo" href="">
-                    <span class="iconmore hoticon"></span>
-                    <div class="hotcar-info">
-                        <div class="hotcar-name">本田新飞度</div>
-                        <div class="hotcar-type"><span>经济型 | 自动 | 5座</span></div>
-                        <div class="hotcar-price"><span><em>￥</em>126</span>/天起</div>
-                    </div>
-                    <div class="hotcar-car" style="right: -20px;">
-                        <img src="../images/bmw3xi.jpg" ></div>
-                </a>
-                <a class="hotcar-liinfo" href="">
-                    <span class="iconmore hoticon"></span>
-                    <div class="hotcar-info">
-                        <div class="hotcar-name">本田新飞度</div>
-                        <div class="hotcar-type"><span>经济型 | 自动 | 5座</span></div>
-                        <div class="hotcar-price"><span><em>￥</em>126</span>/天起</div>
-                    </div>
-                    <div class="hotcar-car" style="right: -20px;">
-                        <img src="../images/bmw3xi.jpg" ></div>
-                </a>
+
 
             </div>
 
@@ -282,7 +254,7 @@
     prev.onclick = function() {
         // 是否是第一张图片
         if (count === 0) {
-            count = viewpage.children.length - 1;//最后一个下标
+            count = viewpage.children.length -2;//最后一个下标
             viewpage.style.left = count * (-1519) + 'px';
         };
         count--;
