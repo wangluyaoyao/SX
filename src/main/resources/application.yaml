@@ -4,3 +4,8 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/company?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: 12345678
+#    掐头去尾
+  mvc:  #静态资源配置
+    view:
+      prefix: /
+      suffix: .html
