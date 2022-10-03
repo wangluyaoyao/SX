@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("sx_collect")
+@TableName("collect")
 @ApiModel(value = "SxCollect对象", description = "")
 public class Collect implements Serializable {
 

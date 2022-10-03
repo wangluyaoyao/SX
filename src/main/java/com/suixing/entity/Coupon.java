@@ -17,7 +17,7 @@ import java.time.LocalDate;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("sx_coupon")
+@TableName("coupon")
 @ApiModel(value = "SxCoupon对象", description = "")
 public class Coupon implements Serializable {
 

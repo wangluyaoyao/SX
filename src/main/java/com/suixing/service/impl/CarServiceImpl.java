@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.suixing.entity.Car;
 import com.suixing.mapper.CarMapper;
 import com.suixing.service.ICarService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarService {
-
+    @Autowired
+    private CarMapper sxCarMapper;
+    @Override
+    public Car selectId(int carId) {
+        return sxCarMapper.selectById(carId);
+    }
 }

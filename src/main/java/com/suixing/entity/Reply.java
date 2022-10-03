@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("sx_reply")
+@TableName("reply")
 @ApiModel(value = "SxReply对象", description = "")
 public class Reply implements Serializable {
 

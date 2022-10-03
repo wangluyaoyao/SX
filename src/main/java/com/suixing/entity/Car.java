@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("sx_car")
+@TableName("car")
 @ApiModel(value = "SxCar对象", description = "")
 public class Car implements Serializable {
 

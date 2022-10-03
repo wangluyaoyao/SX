@@ -3,6 +3,6 @@
 <mapper namespace="com.suixing.mapper.CarMapper">
     <!-- 举例   -->
     <select id="selectById" resultType="com.suixing.entity.Car">
-        select * from sx_car where car_id =#{carId}
+        select * from car where car_id =#{carId}
     </select>
 </mapper>

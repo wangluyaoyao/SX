@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("sx_order")
+@TableName("order")
 @ApiModel(value = "SxOrder对象", description = "")
 public class Order implements Serializable {
 

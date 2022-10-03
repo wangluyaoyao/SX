@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("sx_user_coupno")
+@TableName("user_coupno")
 @ApiModel(value = "SxUserCoupno对象", description = "")
 public class UserCoupno implements Serializable {
 

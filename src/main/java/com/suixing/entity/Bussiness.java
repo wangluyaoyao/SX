@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("sx_bussiness")
+@TableName("bussiness")
 @ApiModel(value = "SxBussiness对象", description = "")
 public class Bussiness implements Serializable {
 

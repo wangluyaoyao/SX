@@ -12,5 +12,5 @@ import com.suixing.entity.Car;
  * @since 2022-10-03
  */
 public interface ICarService extends IService<Car> {
-
+    Car selectId(int carId);
 }

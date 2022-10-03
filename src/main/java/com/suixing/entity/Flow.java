@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("sx_flow")
+@TableName("flow")
 @ApiModel(value = "SxFlow对象", description = "")
 public class Flow implements Serializable {
 

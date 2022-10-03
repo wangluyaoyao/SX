@@ -17,7 +17,7 @@ import java.time.LocalDate;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("sx_user")
+@TableName("user")
 @ApiModel(value = "SxUser对象", description = "")
 public class User implements Serializable {
 
