@@ -21,6 +21,6 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
     private CarMapper sxCarMapper;
     @Override
     public Car selectId(int carId) {
-        return sxCarMapper.selectById(carId);
+        return sxCarMapper.selectByCarId(1);
     }
 }

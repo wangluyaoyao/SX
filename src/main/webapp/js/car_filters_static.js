@@ -28,13 +28,13 @@ function selectTime(){
     ,min: '2019-10-19'
     ,max: '2080-10-14',
   });
-  
+
 }
  document.querySelector(".area").onclick = function showall(){
   var e = document.getElementById("showAll")
   if(e.style.display == 'none'){
     e.style.display = 'block'
-    
+
     // e.style.z-index == 9999;
   }else{
     e.style.display = 'none'
@@ -59,11 +59,6 @@ document.querySelector(".car-model").onclick = function(event){
  }
   element.className = "hot-active"
 }
-
-
-
-
-
 //事件冒泡：事件作用在那个元素，那个元素就出现 ;事件：event
 document.querySelector(".car-name").onclick = function(event){
   var element = event.target;
@@ -76,12 +71,11 @@ document.querySelector(".car-name").onclick = function(event){
  var temp = workArray[1].children[0].className
  console.log(temp)
  for(var i = 0;i<workArray.length;i++){
-  
+
   workArray[i].children[0].className = " "
  }
   element.className = "active"
 }
-
 //价格事件冒泡
 //事件冒泡：事件作用在那个元素，那个元素就出现 ;事件：event
 document.querySelector(".car-select").onclick = function(event){
@@ -103,7 +97,7 @@ document.querySelector(".area").onclick = function showall(){
   console.log(e)
   if(e.style.display == 'none'){
     e.style.display = 'block'
-    
+
     // e.style.z-index == 9999;
   }else{
     e.style.display = 'none'
@@ -118,7 +112,7 @@ document.querySelector(".area1").onclick = function showall1(){
   console.log(e)
   if(e.style.display == 'none'){
     e.style.display = 'block'
-    
+
     // e.style.z-index == 9999;
   }else{
     e.style.display = 'none'
@@ -127,8 +121,6 @@ document.querySelector(".area1").onclick = function showall1(){
   console.log("show")
   // document.querySelector(".show").className += " showAll"
 }
-
-
 
 // ==========地区选择============
 var json = {
@@ -149,9 +141,7 @@ var json = {
       {"双流区": ["随行店5", "啡尝不可店4"]},
   ]
 };
-
 var sheng = document.getElementById("select-city");
-
             for (var i in json) { //使用for  in 迭代对象，变量i就是key
                 /*  console.log(i); */
                 var shengOpt = document.createElement("a");
@@ -162,7 +152,6 @@ var sheng = document.getElementById("select-city");
                 sheng.appendChild(shengOpt);
             }
 //城市点击事件
-
 document.querySelector(".select-city").onclick = function(event){
 // var workArray = document.querySelector(".select").children;
 var element = event.target;
@@ -221,15 +210,10 @@ document.querySelector(".select-store").onclick = function(event){
   var e = document.getElementById("showAll")
   e.style.display = 'none'
   document.querySelector(".left .in-store").value =  event.target.innerText;
-  
+
 }
-
-
-
-
 // ==========还车地点
 var sheng1 = document.getElementById("select-city1");
-
             for (var i in json) { //使用for  in 迭代对象，变量i就是key
                 /*  console.log(i); */
                 var shengOpt = document.createElement("a");
@@ -240,7 +224,6 @@ var sheng1 = document.getElementById("select-city1");
                 sheng1.appendChild(shengOpt);
             }
 //城市点击事件
-
 document.querySelector(".select-city1").onclick = function(event){
     // var workArray = document.querySelector(".select").children;
     var element = event.target;
@@ -267,7 +250,6 @@ document.querySelector(".select-city1").onclick = function(event){
     }
     document.querySelector(".select-area1").className+=" botto"
 }
-
 //区点击事件
 document.querySelector(".select-area1").onclick = function(event){
 var workArray = document.querySelector(".select-area1").children;
@@ -302,3 +284,4 @@ document.querySelector(".select-store1").onclick = function(event){
   console.log(event.target.innerText)
   document.querySelector(".in-store1").value =  event.target.innerText;
 }
+

@@ -12,5 +12,5 @@ import com.suixing.entity.Car;
  * @since 2022-10-03
  */
 public interface CarMapper extends BaseMapper<Car> {
-    public Car selectById(int carId);
+    public Car selectByCarId(int carId);
 }
