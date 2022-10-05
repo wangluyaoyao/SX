@@ -23,7 +23,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+   <!--     内置tomcat        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -57,11 +57,12 @@
             <artifactId>mybatis-plus-boot-starter-test</artifactId>
             <version>3.5.2</version>
         </dependency>
-
+<!--   自动资源管理、自动生成getter、setter、equals、hashCode和toString等等！     -->
         <dependency>
-            <groupId> io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.14</version>
+            <scope>provided</scope>
         </dependency>
         <!--   兄弟姐妹们，新增依赖一定记得注释是用来干嘛的！！！！！！！！！！    -->
 
