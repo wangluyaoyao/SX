@@ -14,9 +14,7 @@ import java.util.List;
  * @since 2022-10-03
  */
 public interface IUserService extends IService<User> {
-    public void add(User user);
-    public void delete(int id);
-    public void update(User user);
-    public User getUser(int id);
-    public List<User> getAllUser();
+
+    //登录
+    public User login(Long userTel,String userPsd);
 }
