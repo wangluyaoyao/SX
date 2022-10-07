@@ -6,6 +6,9 @@ import com.suixing.mapper.UserMapper;
 import com.suixing.service.IUserService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -14,7 +17,13 @@ import org.springframework.stereotype.Service;
  * @author baomidou
  * @since 2022-10-03
  */
-@Service
+@Service("iUserService")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
+    @Resource(name = "userMapper")
+    private UserMapper mapper;
+    @Override
+    public User login(Long userTel, String userPsd) {
+        return mapper.login(userTel,userPsd);
+    }
 }
