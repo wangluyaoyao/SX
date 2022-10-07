@@ -6,6 +6,8 @@ import com.suixing.mapper.UserMapper;
 import com.suixing.service.IUserService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
+    @Override
+    public void add(User user) {
+
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public void update(User user) {
+
+    }
+
+    @Override
+    public User getUser(int id) {
+        return null;
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        return null;
+    }
 }
