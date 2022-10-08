@@ -67,7 +67,7 @@ ul {
     overflow-x: hidden;
 }
 .store-box {
-    background: url("../images/businessoutlets_icon.png") no-repeat 35px 20px;
+    background: url("../images/business/businessoutlets_icon.png") no-repeat 35px 20px;
     background-color: #fff;
     cursor: pointer;
 }
