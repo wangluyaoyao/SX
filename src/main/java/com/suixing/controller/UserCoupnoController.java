@@ -16,15 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-10-03
  */
 @Controller
-@RequestMapping("/car")
+
 public class UserCoupnoController {
-    @Autowired
-    private ICarService carService;
-    @GetMapping("getCarById/{page}")
-    @ResponseBody
-    public ServerResponse getCarById(@PathVariable("page") Integer page){
-        ServerResponse response = carService.getPage(page);
-        System.out.println("查询到的数据："+response.getData());
-        return response;
-    }
+
 }
