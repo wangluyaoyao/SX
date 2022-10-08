@@ -1,6 +1,7 @@
 package com.suixing.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Coupon;
 
 /**
@@ -12,5 +13,5 @@ import com.suixing.entity.Coupon;
  * @since 2022-10-03
  */
 public interface ICouponService extends IService<Coupon> {
-
+    ServerResponse getCouponAll();
 }

@@ -8,7 +8,7 @@
     /*border:1px solid #676767;*/
     width: 100%;
     height: 500px;
-    background-color: #f6f6f6;
+    /*background-color: #f6f6f6;*/
 
 }
 .coupno-real{
@@ -27,7 +27,7 @@
 }
 .coupno-real .coupno-img{
     float: left;
-    background-color: rgb(255,255,255);
+    background-color: rgb(231,231,231);
     height: 100%;
     width: 140px;
 }
@@ -36,8 +36,8 @@
     width: 85%;
     float: left;
 /*  缺角  */
-    background:     radial-gradient(circle at top right, transparent 10px,rgb(255,255,255) 0) top right,
-    radial-gradient(circle at bottom right, transparent 10px,rgb(255,255,255) 0) bottom right;
+    background:     radial-gradient(circle at top right, transparent 10px,rgb(231,231,231) 0) top right,
+    radial-gradient(circle at bottom right, transparent 10px,rgb(231,231,231) 0) bottom right;
     /*border: 1px solid chartreuse ;*/
     background-size: 60% 50%;
     background-repeat: no-repeat;

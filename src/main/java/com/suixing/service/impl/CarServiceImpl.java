@@ -7,6 +7,7 @@ import com.suixing.entity.Car;
 import com.suixing.mapper.CarMapper;
 import com.suixing.service.ICarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,15 +21,17 @@ import java.util.List;
  * @since 2022-10-03
  */
 @Service
+@Component
 public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarService {
     @Autowired
     private CarMapper CarMapper;
 //分页查询
     @Override
     public ServerResponse getPage(int page) {
-        Page<Car> curret = new Page<>(1,3);
+        Page<Car> curret = new Page<>(1,2);
         Page<Car> pageInfo = CarMapper.selectPage(curret,null);
         List<Car> list = pageInfo.getRecords();
+        System.out.println(list);
         if (list != null)
             return ServerResponse.success("查询成功",list);
         else

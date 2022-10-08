@@ -1,8 +1,11 @@
 package com.suixing.controller;
 
 
+import com.suixing.commons.ServerResponse;
+import com.suixing.service.ICarService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -13,7 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2022-10-03
  */
 @Controller
-@RequestMapping("/sx-user-coupno")
+@RequestMapping("/car")
 public class UserCoupnoController {
-
+    @Autowired
+    private ICarService carService;
+    @GetMapping("getCarById/{page}")
+    @ResponseBody
+    public ServerResponse getCarById(@PathVariable("page") Integer page){
+        ServerResponse response = carService.getPage(page);
+        System.out.println("查询到的数据："+response.getData());
+        return response;
+    }
 }
