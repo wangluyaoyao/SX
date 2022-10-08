@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2022-10-03
  */
 @Controller
-@RequestMapping("/sx-user-coupno")
+@RequestMapping("/sx-user-coupon")
 public class UserCoupnoController {
 
 }
