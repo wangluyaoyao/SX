@@ -1,29 +1,24 @@
-package com.suixing;
+package com.suixing.testGanv;
 
 import com.suixing.commons.ServerResponse;
-import com.suixing.entity.Car;
-import com.suixing.mapper.CarMapper;
 import com.suixing.service.ICarService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SuixingzucheApplicationTests {
-
+public class test {
     @Autowired
     private ICarService service;
     @Test
-    void contextLoads() {
-
+    public void getAll(){
+        System.out.println(service.getCarAll().getData());
     }
 
     @Test
-    public void selectById(){
-        Car sxCar = service.selectId(1);
-        System.out.println(sxCar);
+    public void getPage(){
+        ServerResponse serverResponse =  service.getPage(1);
+        Object list =serverResponse.getData();
+        System.out.println(list);
     }
-
-
-
 }

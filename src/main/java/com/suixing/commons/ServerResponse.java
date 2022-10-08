@@ -71,4 +71,5 @@ public class ServerResponse {
                 ", data=" + data +
                 '}';
     }
+
 }

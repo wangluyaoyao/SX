@@ -32,41 +32,81 @@ function addMarker() {
     time:'8:00-20:00',
     tel:'18013116796',
     icon: "https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-1.png", //点标记图片路径
-    position: [120.585467, 31.317761],
-    offset: new AMap.Pixel(-12, -30)
+    position: [120.571608,31.307677],
+    offset: new AMap.Pixel(-10, -40)
+}, {
+    title: '东兴路便捷点',
+    content:'苏州市工业园区东兴路118号栖庭花园商业地下停车场',
+    time:'8:00-20:00',
+    tel:'18120071550',
+    icon: "https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png", //点标记图片路径
+    position: [120.52144,31.242205],
+        offset: new AMap.Pixel(-10, -40)
 }, {
     title: '水上乐园送车点',
-    content:'苏州市姑苏区和园路197号102室',
-    time:'8:00-20:00',
-    tel:'18013116796',
-    icon: "https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png", //点标记图片路径
-    position: [120.562363,31.288968],
-    offset: new AMap.Pixel(-12, -30)
-}, {
-    title: '东兴路便捷点',
-    content:'苏州市姑苏区和园路197号102室',
-    time:'8:00-20:00',
-    tel:'18013116796',
+    content:'玉山路166号',
+    time:'9:00-19:00',
+    tel:'17751434314',
     icon: "https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-3.png", //点标记图片路径
-    position: [120.585467, 31.307761],
-    offset: new AMap.Pixel(-12, -30)
+    position: [120.567445,31.260476],
+        offset: new AMap.Pixel(-10, -40)
 }, {
-    title: '东兴路便捷点',
-    content:'苏州市姑苏区和园路197号102室',
-    time:'8:00-20:00',
+    title: '留园送车点',
+    content:'姑苏区留园路289号（姑苏人家）',
+    time:'9:00-19:00',
     tel:'18013116796',
     icon: "https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-4.png", //点标记图片路径
-    position: [120.614004,31.298387],
-    offset: new AMap.Pixel(-12, -30)
+    position: [120.59328,31.314864],
+        offset: new AMap.Pixel(-10, -40)
 }, {
-    title: '东兴路便捷点',
-    content:'苏州市姑苏区和园路197号102室',
-    time:'8:00-20:00',
-    tel:'18013116796',
+    title: '木渎影视城送车点',
+    content:'苏州市吴中区竹园路金山南路路口(送车点)',
+    time:'9:00-19:00',
+    tel:'15312151522',
     icon: "https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-5.png", //点标记图片路径
-    position: [120.612545,31.271247],
-    offset: new AMap.Pixel(-12, -30)
-}]
+    position: [120.519208,31.249103],
+        offset: new AMap.Pixel(-10, -40)
+}, {
+        title: '苏州新区高铁站送车点',
+        content:'苏州城铁南路与浒莲路交叉口西南100米',
+        time:'9:00-20:00',
+        tel:'17315571696',
+        icon: "http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png", //点标记图片路径
+        position: [120.523156,31.370466],
+        offset: new AMap.Pixel(-10, -40)
+    }, {
+        title: '苏州园区高铁站送车点',
+        content:'苏州市吴中区至和路园区站2层平台',
+        time:'9:00-19:00',
+        tel:'18112722619',
+        icon: "http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png", //点标记图片路径
+        position: [120.707177,31.340158],
+        offset: new AMap.Pixel(-10, -40)
+    }, {
+        title: '绿宝广场送车点',
+        content:'长江路436号绿宝广场',
+        time:'9:00-19:00',
+        tel:'17751434314',
+        icon: "http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png", //点标记图片路径
+        position: [120.543927,31.300417],
+        offset: new AMap.Pixel(-10, -40)
+    }, {
+        title: '长江湾广场送车点',
+        content:'长江路与余角里路交汇处南',
+        time:'10:00-18:00',
+        tel:'18013116796',
+        icon: "http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png", //点标记图片路径
+        position: [120.51835,31.363614],
+        offset: new AMap.Pixel(-10, -40)
+    }, {
+        title: '苏州世贸生活广场送车点',
+        content:'苏州市吴中区宝带西路1177号',
+        time:'9:00-19:00',
+        tel:'18068006084',
+        icon: "http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png", //点标记图片路径
+        position: [120.599374,31.259632],
+        offset: new AMap.Pixel(-10, -40)
+    }]
     var arr = []
     markerData.forEach((item) => {
     var marker = new AMap.Marker({
@@ -107,7 +147,7 @@ function getContent() {
     var content = '<div class="info-title">'+devInfo.title+'</div><div class="info-content">' +
     '地址：'+ devInfo.content+' <br/>' +
     '营业时间：'+ devInfo.time+' <br/>' +
-    '门店电话：'+ devInfo.content+' <br/>' +
+    '门店电话：'+ devInfo.tel+' <br/>' +
     '</div>'
     return content
 }
@@ -124,6 +164,7 @@ function openInfoWindow(infoWindow, marker) {
 
 
 
+/*
 //地图区域样式切换
 $(".new-area-box").click(function (event){
     var element = event.target;
@@ -135,14 +176,14 @@ $(".new-area-box").click(function (event){
 });
 
 //点击左侧切换
-/*$(".business-main-box-left").click(function (){
+/!*$(".business-main-box-left").click(function (){
     console.log(markerData[0].title);
     var infoWindow = createInfoWindow();
     openInfoWindow(infoWindow, marker);
     //关闭窗体
     closeInfoWindow();
 });
-    console.log(markerData[1].title);*/
+    console.log(markerData[1].title);*!/
     var content1 = '<div class="info-title">寒山寺</div><div class="info-content">' +
         '地址：苏州市姑苏区和园路197号102室<br/>' +
         '营业时间：8:00-20:00 <br/>' +
@@ -177,4 +218,4 @@ $(".new-area-box").click(function (event){
         content: content3,
         position:[120.585467, 31.307761],
         offset: new AMap.Pixel(16, -45)
-    });
+    });*/

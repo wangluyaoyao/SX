@@ -64,14 +64,15 @@
             <version>1.18.14</version>
             <scope>provided</scope>
         </dependency>
-        <!--   兄弟姐妹们，新增依赖一定记得注释是用来干嘛的！！！！！！！！！！    -->
-
-<!--        解决io报红-->
+<!--entity报红加这个就好-->
         <dependency>
             <groupId> io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.7.0</version>
         </dependency>
+
+        <!--   兄弟姐妹们，新增依赖一定记得注释是用来干嘛的！！！！！！！！！！    -->
+
 
 
     </dependencies>
