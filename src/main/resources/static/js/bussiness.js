@@ -32,7 +32,7 @@ var content2 = '<div class="info-title">东兴路便捷点</div><div class="info
 var infowindow2 = new AMap.AdvancedInfoWindow({
     isCustom: true,
     content: content2,
-    position:[120.52144,31.242205],
+    position:[120.535042,31.235405],
     offset: new AMap.Pixel(16, -45)
 });
 var content3 = '<div class="info-title">水上乐园送车点</div><div class="info-content">' +
@@ -109,7 +109,7 @@ var content9 = '<div class="info-title">长江湾广场送车点</div><div class
 var infowindow9 = new AMap.AdvancedInfoWindow({
     isCustom: true,
     content: content9,
-    position:[120.51835,31.363614],
+    position:[120.497705,31.387492],
     offset: new AMap.Pixel(16, -45)
 });
 var content10 = '<div class="info-title">苏州世贸生活广场送车点</div><div class="info-content">' +
