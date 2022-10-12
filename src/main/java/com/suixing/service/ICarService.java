@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Car;
 
-import java.util.List;
-
 /**
  * <p>
  *  服务类

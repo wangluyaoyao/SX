@@ -19,8 +19,6 @@ function moveAnimation1(ele, target) {
         };
     }, 50);
 };
-
-
 function moveAnimation2(ele, target) {
     // 使用DOM元素,用定时的id值来添加DOM元素属性
     clearInterval(ele.interId);
@@ -45,3 +43,151 @@ function moveAnimation2(ele, target) {
         }
     }, 20);
 };
+            // 获取元素
+            // ul元素
+            var viewpage = document.getElementsByClassName('viewpage')[0];
+            // 所有小圆点
+            var circles = document.getElementsByClassName('circle');
+            // 左右按钮
+            var prev = document.getElementsByClassName('prev')[0];
+            var next = document.getElementsByClassName('next')[0];
+            // 放置图片和左右按钮的区域
+            var calList = document.getElementsByClassName('cal-list')[0];
+            // 排他函数
+            function backcircle(ele) {
+            for (var j = 0; j < ele.length; j++) {
+            ele[j].className = "circle";
+        };
+        }
+
+            // 1.鼠标放置到图片区域时,显示左右按钮,自动轮播停止
+            // 2.鼠标离开图片区域时,左右按钮消失,自动轮播开始
+            // 3.给右边按钮绑定事件,ul移动,小圆点跟随图片变化
+            // 4.给左边按钮绑定事件,ul移动,小圆点跟随图片变化
+            // 5.自动轮播调用右边按钮事件就可以了
+            // 6.焦点轮播
+
+            // 1.鼠标放置到图片区域时,显示左右按钮,自动轮播停止
+            calList.onmouseover = function() {
+            prev.style.display = "block";
+            next.style.display = "block";
+            // 轮播停止
+            clearInterval(viewpage.autoId);
+        };
+            // 2.鼠标离开图片区域时,左右按钮消失,自动轮播开始
+            calList.onmouseout = function() {
+            prev.style.display = "none";
+            next.style.display = "none";
+            // 轮播开始
+            autoplay();
+        };
+            // 3.给右边按钮绑定事件,ul移动,小圆点跟随图片变化
+            // li的数量和小圆点的数量是不相同的,所以需要2个计数器,分别指代li和小圆点当前的状态
+
+            // 设置小圆点的计数器
+            var flag = 0;
+            // li目标走的位置
+            var count = 0;
+            // 给右边按钮绑定事件
+            next.onclick = function() {
+            // 变成第二元素为当前的状态
+            flag++;//1
+            count++;//1
+            // 判断flag的值
+            // 回滚到flag初始0
+            if (flag === circles.length) {
+            flag = 0;
+        };
+            // 判断count的值回归
+            if (count === viewpage.children.length) {
+            // 拉回到left=0
+            viewpage.style.left = 0;
+            console.log('拉回');
+            // 设置count为1,这样就可以看到第二张图片了
+            count = 1;
+        };
+
+            // ①设置小圆点的样式
+            // 先排他
+            backcircle(circles);
+            circles[flag].className = "circle active";
+            // ②移动当前的ul使图片进行移动
+            var target = count * (-1519);
+            // 走动画
+            moveAnimation2(viewpage, target);
+        };
+            // 4.给左边按钮绑定事件,ul移动,小圆点跟随图片变化
+            prev.onclick = function() {
+            // 是否是第一张图片
+            if (count === 0) {
+            count = viewpage.children.length -2;//最后一个下标
+            viewpage.style.left = count * (-1519) + 'px';
+        };
+            count--;
+            flag--;
+            if (flag < 0) {
+            flag = circles.length - 1;
+        };
+            // ①设置小圆点的样式
+            // 先排他
+            backcircle(circles);
+            circles[flag].className = "circle active";
+            // ②移动当前的ul使图片进行移动
+            var target = count * (-1519);
+            // 走动画
+            moveAnimation2(viewpage, target);
+        };
+            // 5. 自动轮播调用右边按钮事件就可以了
+            function autoplay() {
+            viewpage.autoId = setInterval(function() {
+                // 调用右边按钮的点击事件
+                // 变成第二元素为当前的状态
+                flag++;//1
+                count++;//1
+                // 判断flag的值
+                // 回滚到flag初始0
+                if (flag === circles.length) {
+                    flag = 0;
+                };
+                // 判断count的值回归
+                if (count === viewpage.children.length) {
+                    // 拉回到left=0
+                    viewpage.style.left = 0;
+                    console.log('拉回');
+                    // 设置count为1,这样就可以看到第二张图片了
+                    count = 1;
+                };
+
+                // ①设置小圆点的样式
+                // 先排他
+                backcircle(circles);
+                circles[flag].className = "circle active";
+                // ②移动当前的ul使图片进行移动
+                var target = count * (-1519);
+                // 走动画
+                moveAnimation2(viewpage, target);
+            }, 3000);
+        };
+            autoplay();
+            // 6.焦点轮播
+            // 循环给小圆点绑定事件
+            for (var i = 0; i < circles.length; i++) {
+            // 保存i值
+            circles[i].index = i;
+            // 绑定事件
+            circles[i].onclick = function() {
+            // 设置同步
+            flag = this.index;
+            count = this.index;
+            console.log(flag);
+            console.log(count);
+            // 1.样式
+            // 先排他
+            backcircle(circles);
+            this.className = "circle active";
+            // 2.ul进行移动
+            var target = this.index * (-1519);
+            // 走动画
+            moveAnimation2(viewpage, target);
+        }
+            };
