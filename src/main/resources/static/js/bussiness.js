@@ -126,29 +126,30 @@ var infowindow10 = new AMap.AdvancedInfoWindow({
 
 
 
-selectAll();
+
 
 //侧栏地图显示
+selectAll();
 function selectAll(){
     var url = "/bussiness";
     //侧栏地址显示
     $.get(url,function (result){
         $(".business-main-box-left").show();
-        console.log(result);
-        console.log(result.data);
+        //console.log(result);
+        //console.log(result.data);
         var data = result.data;
         for (var i = 0; i<data.length;i++){
             var bussiness = data[i];
-            console.log(bussiness);
+            //console.log(bussiness);
             bussinessId = bussiness.busId;
             bussinessName = bussiness.busName;
             bussinessTel = bussiness.busTel;
             bussinessAddr = bussiness.busAddress;
             bussinessLal = bussiness.busLal;
             bussinessTime = bussiness.busTime;
-            console.log(bussinessId);
-            console.log(bussinessTel);
-            console.log(bussinessLal);
+            //console.log(bussinessId);
+            //console.log(bussinessTel);
+            //console.log(bussinessLal);
             var ele = " <div class=\"store-box\" onclick=\"infowindow"+bussinessId+".open(map,["+bussinessLal+"])\">\n" +
                 "                <ul>\n" +
                 "                    <li class=\"store-nummark\">"+bussinessId+"\n" +
