@@ -84,23 +84,8 @@
         <!--   兄弟姐妹们，新增依赖一定记得注释是用来干嘛的！！！！！！！！！！    -->
 
 
-<!--        适用于Web和独立环境的现代服务器端Java模板引擎。-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-<!--阿里-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.1.14</version>
-        </dependency>
-<!--Mybatis-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.2.0</version>
-        </dependency>
+
+
     </dependencies>
 
 

@@ -4,17 +4,7 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/suixing?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
-  #Spring Data JPA配置
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    database: mysql
-  jackson:
-    serialization:
-      indent-output: true
-  main:
-    allow-bean-definition-overriding: true
+
 
 
   #    掐头去尾
