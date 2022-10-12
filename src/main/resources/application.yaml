@@ -4,7 +4,10 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/suixing?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
-#    掐头去尾
+  thymeleaf:
+    cache: false
+    mode: LEGACY-HTML5
+  #    掐头去尾
   mvc:  #静态资源配置
     view:
       prefix: /
