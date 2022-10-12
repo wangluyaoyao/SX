@@ -1,8 +1,15 @@
 package com.suixing.controller;
 
 
+import com.suixing.commons.ServerResponse;
+import com.suixing.entity.Order;
+import com.suixing.service.IOrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.xml.transform.Result;
 
 /**
  * <p>
@@ -15,5 +22,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/sx-order")
 public class OrderController {
+    @Autowired
+    private IOrderService iOrderService;
+
+    @GetMapping("order")
+    @ResponseBody
+    public ServerResponse selectOrderAll(){
+        ServerResponse result = iOrderService.selectOrderAll();
+        return result;
+    }
+
+    @GetMapping("order/{ordNumber}")
+    @ResponseBody
+    public ServerResponse selectByOrderNum(Long ordNumber){
+        ServerResponse result = iOrderService.selectByOrderNum(ordNumber);
+        return result;
+    }
+
+    @PostMapping("order")
+    @ResponseBody
+    public ServerResponse saveOrder(Order order){
+        return null;
+    }
 
 }

@@ -7,7 +7,7 @@
     <script src="../js/details.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">-->
     <script src="../bootstrap/js/bootstrap.min.js"></script>
 </head>
 
@@ -101,8 +101,11 @@
 
                 </div>
                 <div class="container">
-                    <button type="button" class="btn btn-default" id="btn_collect" style="border: 0px">
-                        <span class="glyphicon glyphicon-star-empty" id="btn_collect_icon" aria-hidden="true" style="color: orange"></span>收藏吧！
+                    <button type="button" class="btn btn-default" id="btn_collect" style="border: 0">
+                        <img alt="" src="../images/collect/collect.png" class="collect_img" id="btn_collect_icon"><span>收藏吧！</span>
+                    </button>
+                    <button type="button" class="order_btn" id="to_order">
+                        立即购买！
                     </button>
                 </div>
                 <div class="current-carintro">
@@ -113,10 +116,37 @@
         </div>
 
         <div class="comment-box">
-            <h3 style="cursor: pointer" class="comment-title">显示评论</h3>
+            <h3 style="cursor: pointer;width: 100px;
+    color: #fcfcfc;
+    background-color: #0aeeee;
+    text-align: center;" class="comment-title">显示评论</h3>
             <div style="display: none;" class="replay-show-hiden">
                 <ul class="comment-ul">
+                    <div class="comment-customer">
+                                                   <div class="customer-img">
+                                                            <img src="../images/details/用户.png">
+                                                       </div>
+                                                    <div class="a-link">
+                                                            <h5 class="customer-name">镍铬</h5>
+                                                          <span class="type-text">eeeeeee</span>
+                                                           <span class="stars-show"></span>
+                                                            <div class="comment-handle">
+                                                                    <span class="evaluate-time">10:10:10</span>
+                                                                    <a class="replay-handle" href="">回复</a>
+                                                                    <span>|</span>
+                                                                    <a href="javascript:void(0)">
+                                                                        <span style="display:none;" class="evaluate-id">xxxx</span>
+                                                                       <span style="display:none;">0</span>
+                                                                            <span id = "praisedStatus' + evaluateId + '" class="icon-act"></span>
+                                                                        </a>
 
+                                                       </div>
+                                                </div>
+                                            <ul class="replay-ul">
+                                            </ul>
+
+                                        </li>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -128,18 +158,19 @@
 
 <script src="../js/details.js"></script>
 <script src="../layui/layui.js"></script>
-<script type="text/javascript">
-    $("#btn_collect").click(function(){
-        var classname = $("#btn_collect_icon").attr("class");
-        $("#btn_collect_icon").removeClass("glyphicon-star-empty glyphicon-star");
-        if(classname == "glyphicon glyphicon-star-empty" ){
-            $("#btn_collect_icon").addClass("glyphicon glyphicon-star");
-            // alert("收藏成功");
-        }else{
-            $("#btn_collect_icon").addClass("glyphicon glyphicon-star-empty");
-            // alert("取消收藏");
-        }
-    });
+<script>
+   var btn = document.getElementById("btn_collect_icon")
+   var flag = false;
+
+   btn.onclick = function (){
+       if (flag){
+           btn.src = "../images/collect/collect.png"
+           flag=false;
+       }else{
+           btn.src= "../images/collect/collectsuccess.png"
+           flag = true;
+       }
+   }
 </script>
 </body>
 </html>

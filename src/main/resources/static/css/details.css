@@ -403,12 +403,39 @@
 
 
 /* 收藏按钮*/
-.collect_btn a{
-    height: 30px;
-
+.btn-default{
+    background-color: white;
+    display: block;
 }
 
-.add_collect_btn span{
-    margin-top: 0;
-    font-size: 20px;
+.btn-default img{
+
+
+    float: left;
 }
+.btn-default span{
+    margin-top: 2px;
+    font-size: 18px;
+    float: left;
+}
+.btn-default{
+    width: 130px;
+    float: left;
+}
+
+.container{
+    display: inline-block;
+    width: 250px;
+}
+
+.order_btn{
+    margin-top: 2px;
+    padding: 0;
+    float: right;
+    margin-right: 20px;
+    border: 0;
+    font-size: 18px;
+    background-color: white;
+    color: #f13409;
+}
+/*评论*/
