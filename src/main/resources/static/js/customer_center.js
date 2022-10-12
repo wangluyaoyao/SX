@@ -6,7 +6,6 @@ $(".sub-nav").click(function (event){
         this.className = "cc-change";
     })
     element.className = "cc-change ck";
-
     var eId = element.id;
     console.log(eId);
     //内容切换
@@ -24,8 +23,25 @@ $(".sub-nav").click(function (event){
     }else if (eId === "exchange-info5"){
         $("#info5").attr("class","information");
     }
+});
+//点击个人中心-用户信息中的修改跳到修改信息
+$(".update-info").click(function (){
+    //侧栏样式
+    $(".cc-change").each(function (){
+        this.className = "cc-change";
+    })
+
+
+    $("#exchange-info3").attr("class","cc-change ck");
+    //内容切换
+    $(".information").each(function (){
+        this.className = "information hide";
+    });
+    $("#info3").attr("class","information");
 
 });
+
+
 
 $(".order_exchange").click(function (){
     console.log("1a");
@@ -135,3 +151,109 @@ $('#myTab a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
 })
+
+//显示当前用户信息
+showUser();
+function showUser(){
+    var url = "/usercenter/user";
+    $.get(url,function (user){
+
+        console.log(user.data);
+        var user = user.data;
+        userId = user.userId;
+        userTel = user.userTel;
+        userPsd = user.userPsd;
+        userGender = user.userGender;
+        if (userGender === "0"){
+            userGender = '男';
+            console.log("0")
+        }else{
+            userGender = '女';
+            console.log("1")
+        }
+
+        userIdcard = user.userIdcard;
+        userName = user.userName;
+        userEmail = user.userEmail;
+        userBir = user.userBir;
+        userPetname = user.userPetname;
+        var userEle = "<h2>用户信息</h2>\n" +
+            "                <div class=\"mod information-index\">\n" +
+            "                    <div class=\"ui-bfc information-index-panel\">\n" +
+            "                        <!--头像暂定-->\n" +
+            "                        <div class=\"ui-bfc-hd hd\">\n" +
+            "                            <img src=\"../images/customer_photo.png\" width=\"99\" height=\"99\">\n" +
+            "                        </div>\n" +
+            "                        <!-- 个人信息-->\n" +
+            "                        <div class=\"ui-bfc-bd bd\">\n" +
+            "                            <table width=\"100%\">\n" +
+            "                                <tbody>\n" +
+            "                                <tr>\n" +
+            "                                    <td class=\"cell-title\">用户名：</td>\n" +
+            "                                    <td>\n" +
+            "                                        <p>"+userPetname+"</p>\n" +
+            "                                    </td>\n" +
+            "                                </tr>\n" +
+            "                                    <tr>\n" +
+            "                                        <td class=\"cell-title\">电子邮箱：</td>\n" +
+            "                                        <td>\n" +
+            "                                            <p>"+userEmail+"</p>\n" +
+            "                                            <span class=\"gray\">(未验证)</span>\n" +
+            "                                            <a class=\"update-info\">修改</a>\n" +
+            "                                        </td>\n" +
+            "\n" +
+            "                                    </tr>\n" +
+            "                                    <tr>\n" +
+            "                                        <td class=\"cell-title\">手机号码：</td>\n" +
+            "                                        <td>\n" +
+            "                                            <p>"+userTel+"</p>\n" +
+            "                                            <span class=\"gray\">(未验证)</span>\n" +
+            "                                            <a class=\"update-info\">修改</a>\n" +
+            "                                        </td>\n" +
+            "                                    </tr>\n" +
+            "                                <tr>\n" +
+            "                                    <td class=\"cell-title\">身份证：</td>\n" +
+            "                                    <td>\n" +
+            "                                        <p>"+userIdcard+"</p>\n" +
+            "                                        <span class=\"gray\">(未验证)</span>\n" +
+            "                                        <a class=\"update-info\">立即认证</a>\n" +
+            "                                    </td>\n" +
+            "                                </tr>\n" +
+            "                                <tr>\n" +
+            "                                    <td class=\"cell-title\">真实姓名：</td>\n" +
+            "                                    <td>\n" +
+            "                                        <p>"+userName+"</p>\n" +
+            "                                    </td>\n" +
+            "                                </tr>\n" +
+            "                                <tr>\n" +
+            "                                    <td class=\"cell-title\">生日：</td>\n" +
+            "                                    <td>\n" +
+            "                                        <p>"+userBir+" </p>\n" +
+            "                                    </td>\n" +
+            "                                </tr>\n" +
+            "                                <tr>\n" +
+            "                                    <td class=\"cell-title\">性别：</td>\n" +
+            "                                    <td>\n" +
+            "                                        <p>"+userGender+" </p>\n" +
+            "                                    </td>\n" +
+            "                                </tr>\n" +
+            "                                </tbody>\n" +
+            "                            </table>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                    <div class=\"operate-panel\">\n" +
+            "                        <a class=\"ui-btn ui-btn-white-l update-info\">修改信息</a>\n" +
+            "                    </div>\n" +
+            "                </div>";
+        $("#info1").append(userEle);
+
+
+    })
+
+}
+
+
+
+
+
+
