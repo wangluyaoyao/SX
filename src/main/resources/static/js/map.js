@@ -40,7 +40,7 @@ function addMarker() {
     time:'8:00-20:00',
     tel:'18120071550',
     icon: "https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png", //点标记图片路径
-    position: [120.52144,31.242205],
+    position: [120.535042,31.235405],
         offset: new AMap.Pixel(-10, -40)
 }, {
     title: '水上乐园送车点',
@@ -96,7 +96,7 @@ function addMarker() {
         time:'10:00-18:00',
         tel:'18013116796',
         icon: "http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png", //点标记图片路径
-        position: [120.51835,31.363614],
+        position: [120.497705,31.387492],
         offset: new AMap.Pixel(-10, -40)
     }, {
         title: '苏州世贸生活广场送车点',
