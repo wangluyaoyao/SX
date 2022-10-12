@@ -1,7 +1,10 @@
 package com.suixing.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Order;
+
+import javax.xml.transform.Result;
 
 /**
  * <p>
@@ -11,6 +14,14 @@ import com.suixing.entity.Order;
  * @author baomidou
  * @since 2022-10-03
  */
-public interface IOrderService extends IService<Order> {
+public interface IOrderService  {
+
+    ServerResponse selectOrderAll();
+    ServerResponse selectbyOrdSatus(String ordSatus);
+    ServerResponse selectByOrderNum(Long ordNumber);
+    ServerResponse saveOrder(Order order);
+
+
+
 
 }
