@@ -11,5 +11,5 @@ import com.suixing.commons.ServerResponse;
  * @since 2022-10-03
  */
 public interface IBussinessService {
-    ServerResponse selectAll();
+    ServerResponse getAll();
 }

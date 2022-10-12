@@ -23,7 +23,7 @@ public class BussinessServiceImpl  implements IBussinessService {
     @Autowired
     private BussinessMapper bussinessMapper;
     @Override
-    public ServerResponse selectAll() {
+    public ServerResponse getAll() {
         List<Bussiness> list = bussinessMapper.selectList(null);
         if (list != null){
             return ServerResponse.success("查询成功",list);
