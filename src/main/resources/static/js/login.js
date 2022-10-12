@@ -6,10 +6,10 @@ function checkUsername(){
     var username = $(".username").val()
 
     if(username === "" || username == null){
-        $(".usernameTip").text("用户名不能为空")
+        $(".usernameTip").text("手机号不能为空")
         return false;
-    }else if( !/^[a-zA-Z]\w{5,11}$/.test(username)){
-        $(".usernameTip").text("用户名只能由字母、数字、下划线组成，长度为6-12个字符之间")
+    }else if( !/^[0-9]\w{10}$/.test(username)){
+        $(".usernameTip").text("手机号格式不正确")
         return false;
     }else{
 
@@ -27,7 +27,7 @@ function checkuserpwd(){
     if(userpwd === "" || userpwd == null){
         $(".psdTip").text("密码不能为空")
         return false;
-    }else if( !/^[a-zA-Z0-9]\w{6,11}$/.test(userpwd)){
+    }else if( !/^[a-zA-Z0-9]\w{5,100}$/.test(userpwd)){
         $(".psdTip").text("密码格式错误")
         return false;
     }else{
@@ -44,7 +44,7 @@ function checkPhoneNo(){
     if(phoneNo === "" || phoneNo == null){
         $(".phoneTip").text("手机号不能为空")
         return false;
-    }else if( !/^[a-zA-Z]\w{11}$/.test(phoneNo)){
+    }else if( !/^[0-9]\w{10}$/.test(phoneNo)){
         $(".phoneTip").text("手机号格式错误")
         return false;
     }else{
