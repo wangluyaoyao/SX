@@ -1,8 +1,14 @@
 package com.suixing.controller;
 
 
+import com.suixing.commons.ServerResponse;
+import com.suixing.service.ICouponService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * <p>
@@ -13,7 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2022-10-03
  */
 @Controller
-@RequestMapping("/sx-coupon")
+@RequestMapping("/coupon")
 public class CouponController {
+    @Autowired
+    private ICouponService iCouponService;
 
+    @GetMapping("getCoupon")
+    @ResponseBody
+    public ServerResponse getCarById(){
+        ServerResponse response = iCouponService.getCouponAll();
+        return response;
+    }
 }

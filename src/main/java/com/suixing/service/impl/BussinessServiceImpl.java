@@ -1,6 +1,5 @@
 package com.suixing.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Bussiness;
 import com.suixing.mapper.BussinessMapper;

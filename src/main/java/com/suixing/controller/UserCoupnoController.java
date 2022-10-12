@@ -1,8 +1,11 @@
 package com.suixing.controller;
 
 
+import com.suixing.commons.ServerResponse;
+import com.suixing.service.ICarService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -13,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2022-10-03
  */
 @Controller
-@RequestMapping("/sx-user-coupon")
+
 public class UserCoupnoController {
 
 }
