@@ -25,7 +25,7 @@ public class BussinessController {
     @GetMapping("bussiness")
     @ResponseBody
     public ServerResponse selectAll(){
-        ServerResponse result = bussinessService.selectAll();
+        ServerResponse result = bussinessService.getAll();
         return result;
 
     }
