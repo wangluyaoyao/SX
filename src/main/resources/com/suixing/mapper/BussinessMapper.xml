@@ -5,8 +5,8 @@
     <resultMap id="MapList" type="com.suixing.entity.User">
 
     </resultMap>
-<!--    登陆-->
-    <select id="login" resultMap="com.suixing.entity.User">
-        SELECT *FROM user WHERE userTel = #{userTel} AND userPsd = #{userPsd}
-    </select>
+<!--&lt;!&ndash;    登陆&ndash;&gt;-->
+<!--    <select id="login" resultMap="com.suixing.entity.User">-->
+<!--        SELECT *FROM user WHERE userTel = #{userTel} AND userPsd = #{userPsd}-->
+<!--    </select>-->
 </mapper>

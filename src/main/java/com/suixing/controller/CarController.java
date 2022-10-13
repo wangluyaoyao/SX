@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @since 2022-10-03
  */
 @Controller
-@RequestMapping("/car")
+@RequestMapping("/Car")
 public class CarController {
     @Autowired
     private ICarService carService;
