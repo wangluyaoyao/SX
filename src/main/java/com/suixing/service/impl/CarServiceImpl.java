@@ -28,7 +28,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
 //分页查询
     @Override
     public ServerResponse getPage(int page) {
-        Page<Car> curret = new Page<>(page,2);
+        Page<Car> curret = new Page<>(page,5);
         Page<Car> pageInfo = CarMapper.selectPage(curret,null);
 //        List<Car> list = pageInfo.getRecords();
         System.out.println(pageInfo.getRecords());
