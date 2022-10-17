@@ -12,7 +12,7 @@ public class IndexConfig {
     @EventListener({ApplicationReadyEvent.class})
     void applicationReadyEvent() {
         System.out.println("应用已经准备就绪 ... 启动浏览器");
-        String url = "http://localhost:8080/";
+        String url = "http://localhost:8089/";
         Runtime runtime = Runtime.getRuntime();
         System.out.println(url);
 //        try {

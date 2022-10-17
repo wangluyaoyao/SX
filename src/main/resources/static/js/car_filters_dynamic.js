@@ -1,46 +1,85 @@
 
-//根据页数查询
+
+
+getByPage(1);//默认查询第一页
+//根据页数查询到数据
 function getByPage(pageNum){
-    $(".shopsInFor").html(" ")
-    var url = "${pageContext.request.contextPath}/getByPage/"+pageNum;
-    $.get(url,function (shops) {
-        console.log(shops.data)
-        var pageInfo =  shops.data;
-        var shopArray =  shops.data.records;
-        console.log(shopArray.length)
-        console.log(shopArray.shopName)
-        for (var i =0 ; i<shopArray.length;i++){
-            var shop = shopArray[i];
-            console.log(shop);
-            var shopName = shop.shopName;
-            var shopScore = shop.shopScore;
-            var shopAddress = shop.shopAddrProvince+shop.shopAddrCity+shop.shopAddrArea+shop.shopAddrDetail;
-            var shopTelno = shop.shopTelno;
-            var tel =
-            $(".shopsInFor").html($(".shopsInFor").html()+tel)
+     $(".pro-product").html(" ")
+    var url = "/Car/getCarById/"+pageNum;
+    $.get(url,function (response) {
+        console.log(response.data)
+        var result =  response.data
+        var CarArray =  result.records;
+        for (var i =0 ; i<CarArray.length;i++){
+            var car = CarArray[i];
+            console.log(car);
+            var ele ="<div class=\"pro-rearly\">"+ "   <div class=\"img\">\n" +
+                "                            <img src=\""+car.carImg+"\" alt=\"\">\n" +
+                "                        </div>\n" +
+                "                        <!-- 车辆信息 -->\n" +
+                "                        <div class=\"information\">\n" +
+                "                            <li><a class=\"car-name\">"+car.carName+"</a></li>\n" +
+                "                            <li class=\"info\">\n" +
+                "                                <a>"+car.carDisp+"</a><span>|</span>\n" +
+                "                                <a>"+car.carCase+"</a><span>|</span>\n" +
+                "                                <a>"+car.carSeat+"</a><span>|</span>\n" +
+                "                                <a href=\"../details/details_of_cars.html\">车辆详情></a>\n" +
+                "                            </li>\n" +
+                "                            <li class=\"lable\">\n" +
+                "                                <a>省油</a>\n" +
+                "                                <a>舒适</a>\n" +
+                "                                <a>新能源</a>\n" +
+                "                            </li>\n" +
+                "                        </div>\n" +
+                "                        <!-- 价格 -->\n" +
+                "                        <div class=\"pro-price\">\n" +
+                "                            <a>¥</a>\n" +
+                "                            <a>"+car.carPrice+"</a>\n" +
+                "                            <span>/每日</span>\n" +
+                "                        </div>\n" +
+                "                        <!-- 预定按钮 -->\n" +
+                "                        <div class=\"bottom\">\n" +
+                "                            <a href=\"../order/order_drop.html\">预购</a>\n" +
+                "                        </div>"+"</div>"
+            $(".pro-product").append(ele);
         }
-        $(".shopsInFor").show();
-        //页码信息
-        var pageInformation = " <div class=\"page-information\">\n" ;
-        var prePage = pageInfo.current-1;
-        var nextPage = pageInfo.current+1;
-        // var hrefStr = "javascript:getByPage("+prePage+")";
+        //页码信息;
 
-        if(pageInfo.size == 0){
-            getByPage(pageInfo.pageNum-1)
+        var prePage = result.current-1;//上一页
+        var nextPage = result.current+1; //下一页
+        var hrefStr = "javascript:getByPage("+prePage+")";
+        var pageEle = "<div class=\"page-select\">"+"<span>共</span>\n" +
+            "                 <a>"+result.pages+"</a>\n" +
+            "                 <span>页 | </span>\n" +
+            "                 <a>"+result.total+"</a>\n" +
+            "                 <span>条数据</span>\n" +
+            "                 <a href= 'javascript:getByPage("+prePage+")' class=\"upper\">上一页</a>\n" +
+            "                 <span>\n" +
+            "                 当前是第\n" +
+            "                 </span>\n" +
+            "                 <a>"+result.current+"</a>\n" +
+            "                 <span>\n" +
+            "                 页\n" +
+            "                 </span>\n" +
+            "                 <a href='javascript:getByPage("+nextPage+")' class=\"down\">下一页</a>"+"</div>"
+        $(".pro-product").append(pageEle);
+        if(result.current===1){
+        $(".upper").removeAttr("href");
+            // $(".upper").attr("pointer-events","none")
+       }
+        if(result.current===result.pages){
+            $(".down").removeAttr("href");
+            // $(".upper").attr("pointer-events","none")
         }
-        if(pageInfo.current > 1)
-            pageInformation+= "  <a href= 'javascript:getByPage("+prePage+")'>上一页</a>\n" ;
-        pageInformation+= "  当前是<span>"+pageInfo.current +" </span>页\n" ;
-        if(pageInfo.total>3 )
-            pageInformation+= " <a href='javascript:getByPage("+nextPage+")'>下一页</a>\n" ;
-        pageInformation +="  共有<span>"+pageInfo.total +"</span>条记录，共有<span>"+pageInfo.pages +"</span>页\n" +
-            "   </div>";
-
-        $(".shopsInFor").append(pageInformation);
     })
 }
-
+//上一页，下一页按钮监听
+$(".upper").click(function () {
+    console.log("上一页")
+})
+$(".down").click(function () {
+    console.log("下一页")
+})
 // 删除指定ID
 // $(".deleteById").click(function (){
 //     deleteById
