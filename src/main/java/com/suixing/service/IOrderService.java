@@ -16,9 +16,9 @@ import javax.xml.transform.Result;
  */
 public interface IOrderService  {
 
-    ServerResponse selectOrderAll();
-    ServerResponse selectbyOrdSatus(String ordSatus);
-    ServerResponse selectByOrderNum(Long ordNumber);
+    ServerResponse getById(Integer ordId);
+    ServerResponse getByOrderNum(Long ordNumber);
+    ServerResponse getOrderAll();
     ServerResponse saveOrder(Order order);
 
 
