@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
 }
-.e-day{
+.e-day1,.e-day2,.e-day3,.e-day4{
     width: 50%;
     height: 350px;
     float: left;

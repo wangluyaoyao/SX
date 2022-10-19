@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("order")
+@TableName("myorder")
 @ApiModel(value = "SxOrder对象", description = "")
 public class Order implements Serializable {
 
@@ -43,7 +44,7 @@ public class Order implements Serializable {
     private LocalDateTime ordUpdateTime;
 
     @ApiModelProperty("创建订单时间")
-    private LocalDateTime ordCreateTime;
+    private Date ordCreateTime;
 
     @ApiModelProperty("下单时间")
     private LocalDateTime ordStarttime;
@@ -139,11 +140,11 @@ public class Order implements Serializable {
     public void setOrdUpdateTime(LocalDateTime ordUpdateTime) {
         this.ordUpdateTime = ordUpdateTime;
     }
-    public LocalDateTime getOrdCreateTime() {
+    public Date getOrdCreateTime() {
         return ordCreateTime;
     }
 
-    public void setOrdCreateTime(LocalDateTime ordCreateTime) {
+    public void setOrdCreateTime(Date ordCreateTime) {
         this.ordCreateTime = ordCreateTime;
     }
     public LocalDateTime getOrdStarttime() {
