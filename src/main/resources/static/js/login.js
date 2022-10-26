@@ -1,9 +1,9 @@
 //验证用户名
-$(".username").blur(checkUsername)
+$(".userTel").blur(checkUsername)
 
 //验证用户名
 function checkUsername(){
-    var username = $(".username").val()
+    var username = $(".userTel").val()
 
     if(username === "" || username == null){
         $(".usernameTip").text("手机号不能为空")
@@ -19,15 +19,15 @@ function checkUsername(){
 }
 
 //验证密码
-$(".password").blur(checkuserpwd);
+$(".userPsd").blur(checkuserpwd);
 
 function checkuserpwd(){
-    var userpwd = $(".password").val()
+    var userPsd = $(".userPsd").val()
 
-    if(userpwd === "" || userpwd == null){
+    if(userPsd === "" || userPsd == null){
         $(".psdTip").text("密码不能为空")
         return false;
-    }else if( !/^[a-zA-Z0-9]\w{5,100}$/.test(userpwd)){
+    }else if( !/^[a-zA-Z0-9]\w{5,100}$/.test(userPsd)){
         $(".psdTip").text("密码格式错误")
         return false;
     }else{
@@ -55,8 +55,8 @@ function checkPhoneNo(){
 }
 
 function getLoginValue(){
-    var userTel = document.querySelector(".username").value;
-    var userPwd = document.querySelector(".password").value;
+    var userTel = document.querySelector(".userTel").value;
+    var userPwd = document.querySelector(".userPsd").value;
     var box = document.querySelector("input[type = checkbox]").checked;
     console.log("userTel:"+userTel);
     console.log("userPwd:"+userPwd);
@@ -85,8 +85,8 @@ function login(){
             type:"post",
             url:"../customer/login",
             data:{
-                username:$(".username").val(),
-                password:$(".password").val()
+                userTel:$(".userTel").val(),
+                userPsd:$(".userPsd").val()
             },
             success:function (result) {
                 console.log("result:"+result);
