@@ -13,4 +13,5 @@ import com.suixing.entity.Coupon;
  */
 public interface CouponMapper extends BaseMapper<Coupon> {
 
+
 }

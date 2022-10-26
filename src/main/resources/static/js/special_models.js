@@ -153,7 +153,7 @@ function moveAnimation2(ele, target) {
                 if (count === viewpage.children.length) {
                     // 拉回到left=0
                     viewpage.style.left = 0;
-                    console.log('拉回');
+                    // console.log('拉回');
                     // 设置count为1,这样就可以看到第二张图片了
                     count = 1;
                 };

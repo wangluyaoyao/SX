@@ -28,6 +28,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
 //分页查询
     @Override
     public ServerResponse getPage(int page) {
+
         Page<Car> curret = new Page<>(page,5);
         Page<Car> pageInfo = CarMapper.selectPage(curret,null);
 //        List<Car> list = pageInfo.getRecords();
@@ -45,5 +46,12 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
     @Override
     public Car selectId(int carId) {
         return CarMapper.selectByCarId(1);
+    }
+
+    @Override
+    public ServerResponse updateCarImg(Car car) {
+        if (CarMapper.updateById(car) > 0)
+            return ServerResponse.success("插入成功", car);
+        return ServerResponse.fail("插入失败",null);
     }
 }
