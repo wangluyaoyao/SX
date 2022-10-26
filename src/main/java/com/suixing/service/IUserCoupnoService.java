@@ -1,6 +1,7 @@
 package com.suixing.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.suixing.commons.ServerResponse;
 import com.suixing.entity.UserCoupno;
 
 /**
@@ -12,5 +13,6 @@ import com.suixing.entity.UserCoupno;
  * @since 2022-10-03
  */
 public interface IUserCoupnoService extends IService<UserCoupno> {
+    public ServerResponse userRecCou(Integer userId,Integer couId);
 
 }

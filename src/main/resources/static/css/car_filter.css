@@ -258,6 +258,40 @@
     font-weight: bolder;
     background-color: #37c4ca ;
 }
+/*p排序*/
+.pro-sort{
+    margin-top: 15px;
+    border:  1px solid #bdb7b7;
+    width: 900px;
+    float: left;
+    height: 24px;
+}
+.pro-sort .rg{
+    font-size: 13px;
+    text-align: center;
+    float: right;
+    border: none;
+    width: 25%;
+    line-height: 24px;
+}
+.pro-sort .sort-bot img{
+    margin-top: -2px;
+    height: 13px;
+    width: 13px;
+}
+.pro-sort .sort-bot{
+
+    border-right:  1px solid #bdb7b7;
+    float: left;
+    font-size: 13px;
+    line-height: 24px;
+    text-align: center;
+    width: 18%;
+    height: 24px;
+}
+.sort-active{
+    background-color: #80f3ff;
+}
 
 /* -------条件筛选区域 */
 .pro-condition{
@@ -265,6 +299,7 @@
     width: 900px;
     margin-top: 14px;
 }
+
 .pro-condition .car-model{
     border-top: 1px solid #a0a0a0;
     border-left: 1px solid #a0a0a0;
@@ -282,6 +317,7 @@
     width: 9%;
 }
 .car-model li{
+    margin-left: 3px;
     border-left: 1px solid #ececec;
     width: 10%;
     height: 100%;
@@ -366,7 +402,6 @@
     float: left;
     width: 94%;
 }
-
 /* 价格筛选 */
 .pro-condition .car-price{
     border: 1px solid #a0a0a0;
@@ -387,10 +422,11 @@
     margin-left: 8px;
     display: block;
     width: 80%;
-    height: 24px;    
+    height: 24px;
     color: #787474;
-   
+
 }
+
 
 
 
@@ -422,40 +458,24 @@
     border: none;
     width: 25%;
 }
-/* 商品展示区 */
-.pro-rearly{
-    margin-top: 14px;
-   float: left;
-    height: 160px;
+/* 商品展示 */
+.pro-product .pro-rearly{
+    border-bottom: 1px solid silver;
     width: 100%;
-    border-bottom: 1px solid #dadada;;
-    /* background-color: #fde6f0; */
-}
-.pro-rearly .img img{ 
-    height: 150px;
-    width: 200px;
-}
-.pro-rearly div{
+    height: 154px;
     float: left;
 }
-.pro-rearly .information li{
-    width: 300px;
+.pro-rearly .img img{
+    margin-top: 18px;
+    width: 190px;
+    height: 100%;
+    float: left;
 }
 .pro-rearly .information{
-    margin-left: 30px;
-    color: #4c4a4a;
-    margin-top: 20px;
-    width: 420px;
+    margin-left: 27px;
+    width: 200px;
     height: 100%;
-}
-.pro-rearly .information li{
     float: left;
-    font-size: 15px;
-   text-decoration: none;
-    margin-top: 10px;
-}
-.pro-rearly .information .info span{
-    margin-left: 5px;
 }
 /*  车辆详情 */
 .information .car-name{
@@ -464,11 +484,54 @@
     float: left;
     font-weight: bolder;
 }
+.information .in-top,.information .in-middle,.information .in-bottom{
+    width: 100%;
+    height: 21%;
+
+}
+.information .in-top{
+    margin-top: 32px;
+}
 .pro-rearly .information .info a{
     font-size: 13px;
     text-decoration: none;
+    margin-left: 3px;
+}.pro-rearly .information .info span{
+     margin-left: 3px;
+ }
+/* 车辆价格 */
+.pro-price{
+    float: left;
+    height: 100%;
+    width: 130px;
+    margin-left: 260px;
 }
-/* 车辆标签 */
+.pro-price .pro-text{
+    width: 100%;
+    height: 30px;
+    font-size: 16px;
+    color: #22c4d6;
+    margin-top: 60px;
+}
+.info .info-detalis{
+    color:#22c4d6;
+}
+.pro-bottom{
+    float: left;
+    width: 7%;
+    height: 100%;
+}
+.pro-bottom .pro-order{
+    color: #fef9f9;
+    border-radius: 2px;
+    margin-top: 60px;
+    text-align: center;
+    line-height: 28px;
+    width: 64px;
+    height: 28px;
+    background-color: rgb(68 215 222);
+}
+/*车辆标签*/
 .pro-rearly .information .lable a{
     text-align: center;
     font-size: 13px;
@@ -479,36 +542,6 @@
     width: 50px;
     border-radius: 2px;
     background-color: #fcf4f0;
-}
-/*  ---价格---- */
-.pro-rearly .pro-price{
-    width: 100px;
-    height: 100%;
-    text-align: center;
-    line-height: 160px;
-}
-.pro-rearly .pro-price a{
-    color: #ff911c;
-    font-size: 20px;
-    font-weight: bolder;
-}
-.pro-rearly .bottom{
-   height: 100%;
-   width:147px;
-   line-height: 100%;
-}
-.pro-rearly .bottom a{
-    display: block;
-    border-radius:4px;
-    text-align: center;
-    line-height: 30px;
-    text-decoration: none;
-    color: whitesmoke;
-    width: 80px;
-    height: 30px;
-    background-color:  #ff911c;
-    margin-left: 35px;
-    margin-top: 63px;
 }
 /* 翻页 */
 .car-pro .page-select{

@@ -12,32 +12,32 @@
 
 }
 .coupno-real{
-    margin-left: 15px;
+    margin-left: 42px;
     margin-top: 30px;
     float: left;
-    height: 138px;
-    width: 380px;
+    height: 127px;
+    width: 350px;
 
     /*border: 1px solid #f2f2f2;*/
 }
 .coupno-real .coupno-img img{
-    height: 86%;
-    width: 140px;
-    margin-top: 5px;
+    height: 78%;
+    width: 119px;
+    margin-top: 15px;
 }
 .coupno-real .coupno-img{
     float: left;
-    background-color: rgb(231,231,231);
+    background-color:rgb(129,207,254,0.62);
     height: 100%;
-    width: 140px;
+    width: 119px;
 }
 .coupno-left{
     height: 100%;
     width: 85%;
     float: left;
 /*  缺角  */
-    background:     radial-gradient(circle at top right, transparent 10px,rgb(231,231,231) 0) top right,
-    radial-gradient(circle at bottom right, transparent 10px,rgb(231,231,231) 0) bottom right;
+    background:     radial-gradient(circle at top right, transparent 10px,rgb(129,207,254,0.62) 0) top right,
+    radial-gradient(circle at bottom right, transparent 10px,rgb(129,207,254,0.62) 0) bottom right;
     /*border: 1px solid chartreuse ;*/
     background-size: 60% 50%;
     background-repeat: no-repeat;
@@ -54,11 +54,12 @@
 /*    background-position: 0 -9px;*/
 /*}*/
 .coupno-right{
-    width: 15%;
+    width: 14%;
+    margin-left: 0.5px;
     height: 100%;
     float: left;
-    background:     radial-gradient(circle at top left, transparent 10px, #ff5a5a 0) top left,
-    radial-gradient(circle at bottom left, transparent 10px, #ff5a5a 0) bottom left;
+    background:     radial-gradient(circle at top left, transparent 10px,rgb(129,207,254,0.62) 0) top left,
+    radial-gradient(circle at bottom left, transparent 10px, rgb(129,207,254,0.62) 0) bottom left;
     background-size: 100% 50%;
     background-repeat: no-repeat;
 
@@ -66,7 +67,7 @@
 
 
 .coupno-left .coupno-price{
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: 10px;
     /*width: 160px;*/
     height: 60px;

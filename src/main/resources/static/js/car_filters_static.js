@@ -59,7 +59,7 @@ document.querySelector(".car-model").onclick = function(event){
  }
   element.className = "hot-active"
 }
-//事件冒泡：事件作用在那个元素，那个元素就出现 ;事件：event
+//品牌事件冒泡
 document.querySelector(".car-name").onclick = function(event){
   var element = event.target;
  var typeName =  element.nodeName;//标签名称
@@ -69,11 +69,11 @@ document.querySelector(".car-name").onclick = function(event){
 //     console.log(element);
  var workArray = document.querySelector(".car-name").children;
  var temp = workArray[1].children[0].className
- console.log(temp)
- for(var i = 0;i<workArray.length;i++){
-
-  workArray[i].children[0].className = " "
- }
+ // console.log(temp)
+    $(".all").attr("class"," ")
+ // for(var i = 0;i<workArray.length;i++){
+ //  workArray[i].children[0].className = " "
+ // }
   element.className = "active"
 }
 //价格事件冒泡
@@ -91,7 +91,17 @@ document.querySelector(".car-select").onclick = function(event){
  }
   element.className = "active"
 }
-
+//排序冒泡
+document.querySelector(".pro-sort").onclick = function(event) {
+    var element = event.target;
+    var sortArray = document.querySelector(".pro-sort").children;
+    console.log(sortArray)
+    for (var i = 0; i < 3; i++) {
+         console.log(sortArray[i].children[0].children[0].className)
+        sortArray[i].children[0].children[0].className = "sort-bot"
+    }
+     element.className += " sort-active"
+}
 document.querySelector(".area").onclick = function showall(){
   var e = document.getElementById("showAll")
   console.log(e)
