@@ -2,11 +2,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.suixing.mapper.BussinessMapper">
 
-    <resultMap id="MapList" type="com.suixing.entity.User">
 
-    </resultMap>
-<!--&lt;!&ndash;    登陆&ndash;&gt;-->
-<!--    <select id="login" resultMap="com.suixing.entity.User">-->
-<!--        SELECT *FROM user WHERE userTel = #{userTel} AND userPsd = #{userPsd}-->
-<!--    </select>-->
 </mapper>

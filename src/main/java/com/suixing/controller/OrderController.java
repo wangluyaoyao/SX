@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.xml.transform.Result;
+import java.util.Date;
 
 /**
  * <p>
@@ -19,30 +19,44 @@ import javax.xml.transform.Result;
  * @author baomidou
  * @since 2022-10-03
  */
-@Controller
+@RestController
 @RequestMapping("/sx-order")
 public class OrderController {
     @Autowired
     private IOrderService iOrderService;
 
-    @GetMapping("order")
-    @ResponseBody
-    public ServerResponse selectOrderAll(){
-        ServerResponse result = iOrderService.selectOrderAll();
+    //订单确认页面绑定
+    @GetMapping("/order_confirm/{ordNumber}")
+    public ModelAndView selectByOrderNum(@PathVariable("ordNumber") Long ordNumber){
+        ServerResponse result = iOrderService.getByOrderNum(ordNumber);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("result",result);
+        mav.setViewName("order/order_confirm");
+        return mav;
+    }
+
+    //下订单页面绑定
+    @GetMapping("/order_drop/{ordId}")
+    public ModelAndView selectById(@PathVariable("ordId") Integer ordId){
+        ServerResponse result = iOrderService.getById(ordId);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("result",result);
+        mav.setViewName("order/order_drop");
+        return mav;
+    }
+
+    @GetMapping("myorder")
+    public ServerResponse getOrder(){
+        ServerResponse result = iOrderService.getOrderAll();
         return result;
     }
 
-    @GetMapping("order/{ordNumber}")
-    @ResponseBody
-    public ServerResponse selectByOrderNum(Long ordNumber){
-        ServerResponse result = iOrderService.selectByOrderNum(ordNumber);
-        return result;
-    }
-
-    @PostMapping("order")
-    @ResponseBody
-    public ServerResponse saveOrder(Order order){
-        return null;
-    }
+//    @PostMapping("tomyorder")
+//    public ServerResponse save(Order order){
+//        order.setOrdCreateTime(new Date());
+//        ServerResponse result = iOrderService.saveOrder(order);
+//        return result;
+//
+//    }
 
 }

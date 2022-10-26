@@ -57,6 +57,10 @@ public class User implements Serializable {
     @ApiModelProperty("备用")
     private String backupPlus;
 
+
+    public User(Integer userId, Long userTel) {
+    }
+
     public Integer getUserId() {
         return userId;
     }

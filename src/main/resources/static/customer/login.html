@@ -34,7 +34,7 @@
                    <li class="active"><a href="#d1" data-toggle="tab">快速登录</a></li>
                     <li><a href="#d2" data-toggle="tab">普通登录</a></li>
                 </ul>
-                <div class="popup-loginbox tab-content">
+                <div class="popup-loginbox tab-content" >
                     <div id="d1" class="popup-login-quick tab-pane active">
                         <div class="form-wrapper">
                             <input type="text"  placeholder="手机号" class="input-info phoneNo" id="loginPhone" maxlength="15">
@@ -44,9 +44,9 @@
                             <p class="msgTip"></p>
                         </div>
                     </div>
-                    <div class=" tab-pane popup-login-quick" id="d2">
+                    <div class=" tab-pane popup-login-quick" id="d2" >
                         <div class="form-wrapper">
-                            <input type="text" name="username" placeholder="手机号" class="input-item username">
+                            <input type="text" name="userTel" placeholder="手机号" class="input-item username">
                             <p class="usernameTip ">  </p>
                             <input type="password" name="password" placeholder="密码" class="input-item password">
                             <p class="psdTip"></p>
@@ -54,15 +54,19 @@
 
                     </div>
 
+                    <div class="error">
+
+                    </div>
                     <div class="login-text">
                         <p class="remember-no">
                             <input type="checkbox" id="remember">14天免登录
                         </p>
                         <p class="popup-agreement">
-                            <input type="checkbox" id="loginAgree">
+                            <input type="checkbox" id="loginAgree" >
                             未注册一嗨租车账号的手机号，登录时将自动注册，且代表您已同意
                         </p>
-                        <div class="btn"><a href="">登录</a> </div>
+                        <div class="no-agree"></div>
+                        <a href="javascript:void(0)" class="btn" onclick="getLoginValue();">登录</a>
                         <div class="regist">
                             <label >没有注册？<a href="regist.html">>去注册</a></label>
                         </div>
@@ -81,5 +85,6 @@
     </div>
 </footer>
 <script src="../js/login.js"></script>
+
 </body>
 </html>

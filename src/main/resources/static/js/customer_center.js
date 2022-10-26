@@ -25,20 +25,18 @@ $(".sub-nav").click(function (event){
     }
 });
 //点击个人中心-用户信息中的修改跳到修改信息
-$(".update-info").click(function (){
+$(".update-info").click(function(){
     //侧栏样式
     $(".cc-change").each(function (){
         this.className = "cc-change";
     })
-
-
     $("#exchange-info3").attr("class","cc-change ck");
     //内容切换
     $(".information").each(function (){
         this.className = "information hide";
     });
     $("#info3").attr("class","information");
-
+    console.log("4111")
 });
 
 
@@ -74,74 +72,8 @@ $("#Submit").click(function(){
 
 
 });
-//验证用户名
-$(".username").blur(checkUsername);
-function checkUsername(){
-    var username = $(".username").val();
-    //console.log(username);
-    if(username=="" || username ==null){
-        $(".usernameTip").text("用户名不能为空");
-        return false;
-    }else if(!/^[a-zA-Z]\w{5,11}$/.test(username)){
-        $(".usernameTip").text("用户名只能有字母、数字、下划线组成，长度为6-12个字符");
-        return false;
-    }else{
-        $(".usernameTip").text("");
-        return true;
-    }
-}
 
 
-
-//验证邮箱
-$(".useremail").blur(checkUseremail);
-function checkUseremail(){
-    var useremail = $(".useremail").val();
-    if(useremail==""||useremail==null){
-        $(".useremailTip").text("邮箱不能为空");
-        return false;
-    }else if(!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(useremail)){
-        $(".useremailTip").text("邮箱格式不对");
-        return false;
-    }else{
-        $(".useremailTip").text("");
-        return true;
-    }
-}
-
-//验证手机号
-$(".usertel").blur(checkUsertel);
-function checkUsertel(){
-    var usertel = $(".usertel").val();
-    var usertel =  $(".usertel").val();
-    if(usertel==""||usertel==null){
-        $(".useretelTip").text("手机号不能为空");
-        return false;
-    }else if(!/^[1][3,4,5,7,8][0-9]{9}$/.test(usertel)){
-        $(".useretelTip").text("手机号格式不对");
-        return false;
-    }else{
-        $(".useretelTip").text("");
-        return true;
-    }
-}
-
-//修改密码
-//验证密码
-$(".userpassword").blur(checkUserpassword);
-function checkUserpassword(){
-    var userpassword =  $(".userpassword").val();
-    if(userpassword==""||userpassword==null){
-        $(".userpasswordTip").text("密码不能为空");
-        return false;
-    }else if(!/^[a-zA-Z]\w{5,17}$/.test(userpassword)){
-        $(".userpasswordTip").text("密码只能是字母、数字、下划线组成，长度我6-18个字符");
-        return false;
-    }else{
-        $(".userpasswordTip").text("");
-        return true;
-    }
-}
 
 //切换订单界面
 $(function () {
@@ -157,21 +89,17 @@ showUser();
 function showUser(){
     var url = "/usercenter/user";
     $.get(url,function (user){
-
-        console.log(user.data);
         var user = user.data;
+        console.log(user);
         userId = user.userId;
         userTel = user.userTel;
         userPsd = user.userPsd;
         userGender = user.userGender;
         if (userGender === "0"){
             userGender = '男';
-            console.log("0")
         }else{
             userGender = '女';
-            console.log("1")
         }
-
         userIdcard = user.userIdcard;
         userName = user.userName;
         userEmail = user.userEmail;
@@ -247,9 +175,110 @@ function showUser(){
             "                </div>";
         $("#info1").append(userEle);
 
-
+        $(".userId").val(userId);
+        $("#userTel").val(userTel) ;
+        $("#userPsd").val(userPsd) ;
+        $("#userGender").val(userGender) ;
+        $("#userIdcard").val(userIdcard) ;
+        $("#userName").val(userName) ;
+        $("#userEmail").val(userEmail) ;
+        $("#userBir").val(userBir) ;
+        $("#userPetname").val(userPetname) ;
     })
+}
+//修改
+function updateUser(){
+    var userDate = $("#myinfo").serialize();
+    console.log(userDate)
+    var url = "/usercenter/user/update";
+    var gender = $(".gerderBtn:checked").val();
+    $.ajax({
+        type:"post",
+        url:url,
+        data:{
+            userTel:$("#userTel").val(),
+            userPsd:$("#ConfirmPassword").val(),
+            userGender:gender,
+            userIdcard:$("#userIdcard").val(),
+            userName:$("#userName").val(),
+            userEmail:$("#userEmail").val(),
+            userBir:$("#userBir").val(),
+            userPetname:$("#userPetname").val()
+        },
+        success:function (result){
+            console.log("result"+result);
+            //window.location.href = "/customer/customer_center.html";
+            console.log("122345")
+        }
+    })
+}
+//修改个人中心
+$("#Submit").click(function (){
+    console.log(1);
+    updateUser();
+});
 
+//验证用户名
+if ($(".userPetname").val() != null){
+    $(".userPetname").focus(checkUsername);
+}
+
+function checkUsername(){
+    var userPetname = $(".userPetname").val();
+    //console.log(username);
+    if(!/^[\u4E00-\u9FA5A-Za-z0-9]+$/.test(userPetname)){
+        $(".userPetnameTip").text("用户名只能有中文、英文、数字但不包括下划线等符号");
+        return false;
+    }else{
+        $(".userPetnameTip").text("");
+        return true;
+    }
+}
+
+//验证手机号
+
+if ($(".usertel").val() != null){
+    $(".usertel").focus(checkUsertel);
+}
+function checkUsertel(){
+    var usertel = $(".usertel").val();
+    if(!/^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/.test(usertel)){
+        $(".useretelTip").text("手机号格式不对");
+        return false;
+    }else{
+        $(".useretelTip").text("");
+        return true;
+    }
+}
+
+//验证邮箱
+if ($(".useremail").val() != null){
+    $(".useremail").focus(checkUseremail);
+}
+
+function checkUseremail(){
+    var useremail = $(".useremail").val();
+    if(!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(useremail)){
+        $(".useremailTip").text("邮箱格式不对");
+        return false;
+    }else{
+        $(".useremailTip").text("");
+        return true;
+    }
+}
+//验证身份证
+if($(".useridcardIpt").val() != null){
+    $(".useridcardIpt").focus(checkUserIdCard);
+}
+function checkUserIdCard(){
+    var useridcardIpt = $(".useridcardIpt").val();
+    if(!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(useridcardIpt)){
+        $(".userIdcardTip").text("身份证格式不对");
+        return false;
+    }else{
+        $(".userIdcardTip").text("");
+        return true;
+    }
 }
 
 
@@ -257,3 +286,50 @@ function showUser(){
 
 
 
+//修改密码
+$("#btnSubmit").click(function (){
+    console.log(2);
+    console.log(checkUserNewpassword());
+    console.log(checkUserpassword());
+    if(checkUserNewpassword() && checkUserpassword()){
+        updateUser();
+    }
+});
+//验证新密码
+$("#NewPassword").blur(checkUserpassword);
+function checkUserpassword(){
+    var NewPassword =  $("#NewPassword").val();
+    var Password = $("#userPsd").val();
+    if(NewPassword===""||NewPassword==null){
+        $(".NewPasswordwordTip").text("密码不能为空");
+        return false;
+    }else if(!/^[a-zA-Z]\w{5,17}$/.test(NewPassword)){
+        $(".NewPasswordwordTip").text("密码只能是字母、数字、下划线组成，长度为6-18个字符");
+        return false;
+    }else if(Password === NewPassword) {
+        $(".NewPasswordwordTip").text("密码与原密码一致");
+        return false;
+    }else{
+        $(".NewPasswordwordTip").text("");
+        return true;
+    }
+}
+//验证新密码
+$("#ConfirmPassword").blur(checkUserNewpassword);
+function checkUserNewpassword(){
+    var ConfirmPassword =  $("#ConfirmPassword").val();
+    var NewPassword =  $("#NewPassword").val();
+    if(ConfirmPassword===""||ConfirmPassword==null){
+        $(".ConfirmPasswordwordTip").text("密码不能为空");
+        return false;
+    }else if(!/^[a-zA-Z]\w{5,17}$/.test(ConfirmPassword)){
+        $(".ConfirmPasswordwordTip").text("密码只能是字母、数字、下划线组成，长度为6-18个字符");
+        return false;
+    }else if(ConfirmPassword !== NewPassword) {
+        $(".ConfirmPasswordwordTip").text("密码与上一个不一致");
+        return false;
+    }else{
+        $(".ConfirmPasswordwordTip").text("");
+        return true;
+    }
+}

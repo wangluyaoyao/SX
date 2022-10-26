@@ -169,30 +169,29 @@
                 <h2>修改密码</h2>
                 <div class="mod information-changepassword">
                     <form id="myForm" method="post">
+                        <!--<input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" value="" class="userId" name="userId" ><br>-->
                         <table width="100%">
                             <tr>
                                 <td class="cell-title" width="35%">原密码：</td>
                                 <td width="65%" style="position:relative">
-                                    <input data-val="true" data-val-required="请输入原始密码" id="OldPassword" maxlength="18" name="OldPassword" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" placeholder="请输入原密码" type="password" />
-                                    <em>*</em><span></span>
-
+                                    <input data-val="true" data-val-required="请输入原始密码" id="userPsd" maxlength="18" name="OldPassword"  placeholder="请输入原密码" type="password" value=""/>
+                                    <em></em><span></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="cell-title">新密码：</td>
                                 <td style="position:relative">
-                                    <input data-disable-default="True" data-val="true" data-val-required="请输入新密码" id="NewPassword" maxlength="18" name="NewPassword" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" placeholder="密码需6到18位，且要包含大小写字母及数字" type="password" />
-                                    <em>*</em><span></span>
-
+                                    <input data-disable-default="True" data-val="true" data-val-required="请输入新密码" id="NewPassword" maxlength="18" name="NewPassword"  placeholder="密码需6到18位，且要包含大小写字母及数字" type="password" />
+                                    <em class="NewPasswordwordTip">*</em><span></span>
                                     <div class="pwd-prompt"></div>
-
                                 </td>
                             </tr>
                             <tr>
                                 <td class="cell-title">确认密码：</td>
                                 <td style="position:relative">
-                                    <input data-val="true" data-val-equalto="“确认密码”和“新密码”不匹配。" data-val-equalto-other="*.NewPassword" data-val-required="请输入确认密码" id="ConfirmPassword" maxlength="18" name="ConfirmPassword" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" placeholder="请再次输入新密码" type="password" />
-                                    <em>*</em><span></span>
+                                    <input data-val="true" data-val-equalto="“确认密码”和“新密码”不匹配。" data-val-equalto-other="*.NewPassword" data-val-required="请输入确认密码" id="ConfirmPassword" maxlength="18" name="userPsd" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" placeholder="请再次输入新密码" type="password"  value=""/>
+                                    <em class="ConfirmPasswordwordTip">*</em><span></span>
 
                                 </td>
                             </tr>
@@ -214,22 +213,24 @@
             <div class="information  hide" id="info3">
                 <h2>修改信息</h2>
                 <div class="mod information-changeuser">
-                    <form id="myinfo">
+                    <form id="myinfo" method="post">
+                        <input type="hidden" name="_method" value="PUT">
                         <table width="100%">
                             <tbody>
+                            <input type="hidden" value="" class="userId" name="userId"><br>
                             <tr>
                                 <td class="cell-title" width="35%">用户名：</td>
                                 <td style="position:relative">
-                                    <input type="text" class="username"/>
+                                    <input type="text" class="userPetname" name="userPetname" id="userPetname" value=""/>
                                     <em></em>
-                                    <span class="usernameTip msgTip"></span>
+                                    <span class="userPetnameTip msgTip"></span>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td class="cell-title" width="35%">手机号：</td>
                                 <td style="position:relative">
-                                    <input type="text" class="usertel"/>
+                                    <input type="text" class="usertel" name="userTel" id="userTel" value=""/>
                                     <em></em>
                                     <span class="useretelTip msgTip"></span>
                                 </td>
@@ -238,7 +239,7 @@
                             <tr>
                                 <td class="cell-title" width="35%">邮箱：</td>
                                 <td style="position:relative">
-                                    <input type="text" class="useremail"/>
+                                    <input type="text" class="useremail" name="userEmail" id="userEmail" value=""/>
                                     <em></em>
                                     <span class="useremailTip msgTip"></span>
                                 </td>
@@ -247,40 +248,36 @@
                             <tr>
                                 <td class="cell-title" width="35%">真实姓名：</td>
                                 <td style="position:relative">
-                                    <input type="text" class="usernamezx"/>
+                                    <input type="text" class="usernamezx" name="userName" id="userName" value=""/>
                                     <em></em>
                                     <span></span>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td class="cell-title" width="35%">身份证号码：</td>
                                 <td style="position:relative">
-                                    <input type="text" class="useridcardIpt"/>
+                                    <input type="text" class="useridcardIpt" name="userIdcard" id="userIdcard" value=""/>
                                     <em></em>
-                                    <span></span>
+                                    <span class="userIdcardTip msgTip" ></span>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td class="cell-title" width="35%">性别：</td>
                                 <td style="position:relative">
                                     <input type="radio" name="gender" value="M" checked class="gerderBtn"><label class="gerderTip">男性</label>
-                                    <input type="radio" name="gender" value="F" class="radioBtn gerderBtn"><label class="gerderTip">女性</label>
+                                    <input type="radio" name="gender" value="F" class="gerderBtn"><label class="gerderTip">女性</label>
                                     <em></em>
                                     <span></span>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td class="cell-title" width="35%">出生日期：</td>
                                 <td style="position:relative">
-                                    <input type="date" class="userdate" />
+                                    <input type="date" class="userdate" id="userBir" name="userBir1" value=""/>
                                     <em></em>
                                     <span></span>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td class="cell-title"></td>
                                 <td>
@@ -289,8 +286,6 @@
                                     </div>
                                 </td>
                             </tr>
-
-
                             </tbody>
                         </table>
                     </form>

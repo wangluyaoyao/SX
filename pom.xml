@@ -18,12 +18,12 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-        <!--   SpringBoot依赖    -->
+    <!--   SpringBoot依赖    -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--     内置tomcat        -->
+   <!--     内置tomcat        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -57,20 +57,20 @@
             <artifactId>mybatis-plus-boot-starter-test</artifactId>
             <version>3.5.2</version>
         </dependency>
-        <!--    实体类名注解    -->
+<!--    实体类名注解    -->
         <dependency>
             <groupId> io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.7.0</version>
         </dependency>
-        <!--   自动资源管理、自动生成getter、setter、equals、hashCode和toString等等！     -->
+<!--   自动资源管理、自动生成getter、setter、equals、hashCode和toString等等！     -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.14</version>
             <scope>provided</scope>
         </dependency>
-        <!--    分页插件     -->
+<!--    分页插件     -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -99,17 +99,34 @@
         </dependency>
         <!--   兄弟姐妹们，新增依赖一定记得注释是用来干嘛的！！！！！！！！！！    -->
 
-        <!--        解决io报红-->
-        <dependency>
-            <groupId> io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
-        </dependency>
 
+
+
+
+<!--        JWT-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.28</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.10.3</version>
+        </dependency>
 
     </dependencies>
 
+
+
+
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -138,6 +155,18 @@
                 </executions>
             </plugin>
         </plugins>
+        <!--xml配置，此是为了将来整合Hibernate或者mybatis
+          默认没有需要配置
+      -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>

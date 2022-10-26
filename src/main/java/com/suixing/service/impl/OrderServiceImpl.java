@@ -25,29 +25,28 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Autowired
     private OrderMapper orderMapper;
 
-
     @Override
-    public ServerResponse selectOrderAll() {
-        List<Order> orderList = orderMapper.selectList(null);
-        if (orderList != null){
-            return ServerResponse.success("查询成功",orderList);
+    public ServerResponse getById(Integer ordId) {
+        Order order = orderMapper.selectById(ordId);
+        if (order == null){
+            return  ServerResponse.fail("查询失败",null);
         }
-        return ServerResponse.fail("查询失败",null);
+        return ServerResponse.success("查询成功",order);
     }
 
     @Override
-    public ServerResponse selectbyOrdSatus(String ordSatus) {
-        return null;
-    }
-
-
-    @Override
-    public ServerResponse selectByOrderNum(Long ordNumber) {
+    public ServerResponse getByOrderNum(Long ordNumber) {
         Order order = orderMapper.selectById(ordNumber);
         if (order == null){
             return  ServerResponse.fail("查询失败",null);
         }
             return ServerResponse.success("查询成功",order);
+    }
+
+    @Override
+    public ServerResponse getOrderAll() {
+        List<Order> orderlist = orderMapper.selectList(null);
+        return ServerResponse.success("查询成功",orderlist);
     }
 
     @Override

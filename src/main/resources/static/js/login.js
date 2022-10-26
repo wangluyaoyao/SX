@@ -53,3 +53,50 @@ function checkPhoneNo(){
         return true;
     }
 }
+
+function getLoginValue(){
+    var userTel = document.querySelector(".username").value;
+    var userPwd = document.querySelector(".password").value;
+    var box = document.querySelector("input[type = checkbox]").checked;
+    console.log("userTel:"+userTel);
+    console.log("userPwd:"+userPwd);
+    if (userTel!=null &&  userPwd!= null && box!= null){
+        console.log("no null")
+        document.querySelector(".error").innerText="";
+        login();
+    }else if (!userTel || !userPwd){
+        console.log("no password or telNo id error")
+        document.querySelector(".error").innerText="登陆账号或者密码错误！"
+        return false;
+    }else if (!box){
+        console.log("no box!");
+        document.querySelector(".no-agree").innerText="请勾选服务！";
+        return false;
+    }else {
+        console.log("all none")
+        login();
+    }
+}
+
+
+function login(){
+    $(".btn").click(function (){
+        $.ajax({
+            type:"post",
+            url:"../customer/login",
+            data:{
+                username:$(".username").val(),
+                password:$(".password").val()
+            },
+            success:function (result) {
+                console.log("result:"+result);
+
+                var token = result.data;
+                console.log("token:"+token);
+
+                localStorage.setItem("token",token);
+                window.location.href = "../index.html";
+            }
+        })
+    })
+}
