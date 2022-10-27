@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2022-10-03
  */
 
-@Controller
+@RestController
 @RequestMapping("/customer")
 public class UserController {
 
@@ -35,7 +35,7 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping("login")
-    @ResponseBody
+
     public ServerResponse login(User user,HttpServletRequest request,HttpServletResponse response){
         ServerResponse result = userService.login(user);
         System.out.println("controller login response:"+request);
