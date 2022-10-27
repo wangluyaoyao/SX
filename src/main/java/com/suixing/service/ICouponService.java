@@ -15,4 +15,5 @@ import com.suixing.entity.Coupon;
 public interface ICouponService extends IService<Coupon> {
     ServerResponse getCouponAll();
 
+
 }
