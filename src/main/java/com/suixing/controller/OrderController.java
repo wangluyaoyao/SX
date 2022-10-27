@@ -69,7 +69,7 @@ public class OrderController {
     @PostMapping("dropOrder")
     public ModelAndView saveOrder(Integer carId,Integer busId,Integer userCouId,Float ordFees,Float ordServiceTip){
         //1.车辆图片、名字、日租价格
-//        Car car = carService.getCarWithFewInfo(carId);
+        Car car = carService.getCarWithFewInfo(carId);
 
         //2.租车日期、还车日期、租期
 
