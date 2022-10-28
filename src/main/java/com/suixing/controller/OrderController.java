@@ -66,7 +66,7 @@ public class OrderController {
 //        return result;
 //    }
 
-    @PostMapping("dropOrder")
+    @GetMapping("dropOrder")
     public ModelAndView saveOrder(Integer carId,Integer busId,Integer userCouId,Float ordFees,Float ordServiceTip){
         //1.车辆图片、名字、日租价格
         Car car = carService.getCarWithFewInfo(carId);
@@ -81,13 +81,13 @@ public class OrderController {
 
         //5.其它服务
         ModelAndView mav = new ModelAndView("dropOrder");
-//        mav.addObject("car",car);
+        mav.addObject("car",car);
         mav.addObject("bussiness",bussiness);
         mav.addObject("userCoupno",userCoupno);
         mav.addObject("ordFees",ordFees);
         mav.addObject("ordServiceTip",ordServiceTip);
 
-
+        mav.setViewName("order/order_drop");
         return mav;
     }
 
