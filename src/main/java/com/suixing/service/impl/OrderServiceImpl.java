@@ -58,5 +58,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             return ServerResponse.fail("添加失败",null);
     }
 
+    @Override
+    public Integer updateOrderStatus(Order order) {
+        return orderMapper.updateById(order);
+    }
+
 
 }
