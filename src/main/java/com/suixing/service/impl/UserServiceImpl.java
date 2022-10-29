@@ -31,6 +31,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public ServerResponse login(User user) {
+        System.out.println(user);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("user_tel",user.getUserTel());
         wrapper.eq("user_psd",user.getUserPsd());

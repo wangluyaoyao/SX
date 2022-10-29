@@ -7,4 +7,6 @@ public interface IUserCenterService {
     ServerResponse getUserById(Integer userId);
     User getUserUpdateById(Integer userId);
     ServerResponse updateUser(User user);
+
+    ServerResponse getUserCoupon(Integer userId);
 }

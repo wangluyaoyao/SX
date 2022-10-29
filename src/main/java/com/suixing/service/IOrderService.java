@@ -21,6 +21,8 @@ public interface IOrderService  {
     ServerResponse getOrderAll();
     ServerResponse saveOrder(Order order);
 
+    Integer updateOrderStatus(Order order);
+
 
 
 

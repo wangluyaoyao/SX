@@ -1,6 +1,7 @@
 package com.suixing.service;
 
 import com.suixing.commons.ServerResponse;
+import com.suixing.entity.Bussiness;
 
 /**
  * <p>
@@ -12,4 +13,6 @@ import com.suixing.commons.ServerResponse;
  */
 public interface IBussinessService {
     ServerResponse getAll();
+    //查询网点部分信息
+    Bussiness getBussinessWithInfo(int busId);
 }

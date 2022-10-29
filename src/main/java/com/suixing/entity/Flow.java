@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -37,8 +38,8 @@ public class Flow implements Serializable {
 
     @ApiModelProperty("订单id")
     private Integer ordId;
-
-    private String backup;
+    @ApiModelProperty("流水生成时间")
+    private LocalDateTime flowCreatetime;
 
     private String backupPlus;
 
@@ -77,12 +78,12 @@ public class Flow implements Serializable {
     public void setOrdId(Integer ordId) {
         this.ordId = ordId;
     }
-    public String getBackup() {
-        return backup;
+    public LocalDateTime getFlowCreatetime() {
+        return flowCreatetime;
     }
 
-    public void setBackup(String backup) {
-        this.backup = backup;
+    public void setFlowCreatetime(LocalDateTime flowCreatetime) {
+        this.flowCreatetime = flowCreatetime;
     }
     public String getBackupPlus() {
         return backupPlus;
@@ -100,7 +101,7 @@ public class Flow implements Serializable {
             ", carId=" + carId +
             ", flowPayment=" + flowPayment +
             ", ordId=" + ordId +
-            ", backup=" + backup +
+            ", flowCreatetime=" + flowCreatetime +
             ", backupPlus=" + backupPlus +
         "}";
     }

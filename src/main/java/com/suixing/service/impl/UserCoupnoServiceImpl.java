@@ -31,6 +31,8 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
     private UserCoupnoMapper userCoupno;
     @Autowired
     private CouponMapper couponMapper;
+    @Autowired
+    private UserCoupnoMapper userCoupnoMapper;
 
 
     @Override
@@ -56,6 +58,16 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
        if (userCoupno.insert(coupon)>0)
            return ServerResponse.success("领取成功",coupon);
         return ServerResponse.fail("领取失败",null);
+    }
+
+    @Override
+    public UserCoupno getCoupnoOwn(int userCouId) {
+        //获取优惠券部分信息
+        QueryWrapper<UserCoupno> userCoupnoQueryWrapper = new QueryWrapper<>();
+        userCoupnoQueryWrapper.select("user_cou_id","cou_price","cou_explain","cou_end");
+        userCoupnoQueryWrapper.eq("user_cou_id",userCouId);
+        UserCoupno userCoupno = userCoupnoMapper.selectOne(userCoupnoQueryWrapper);
+        return userCoupno;
     }
 
 }

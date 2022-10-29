@@ -3,6 +3,7 @@ package com.suixing.controller;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.User;
 import com.suixing.service.IUserCenterService;
+import com.suixing.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,13 @@ public class UserCenterController {
     //个人中心中用户信息的显示
     @GetMapping("/user")
     @ResponseBody
-    public ServerResponse getUserId(){
-        ServerResponse user = userCenterService.getUserById(6);
-        return user;
+    public ServerResponse getUserId(HttpServletRequest request){
+        //从请求头部获得token
+        String token = request.getHeader("token");//get token
+        System.out.println(token);
+
+        Integer userId = TokenUtil.parseToken(token).getUserId();
+        return userCenterService.getUserById(userId);
     }
 
     //个人中心中修改密码和修改用户信息
@@ -39,7 +44,11 @@ public class UserCenterController {
         String userEmail =request.getParameter("userEmail");
         LocalDate userBir = LocalDate.parse(request.getParameter("userBir"));
         String userPetname =request.getParameter("userPetname");
-        User user = userCenterService.getUserUpdateById(6);
+        //从请求头部获得token
+        String token = request.getHeader("token");//get token
+        System.out.println(token);
+        Integer userId = TokenUtil.parseToken(token).getUserId();
+        User user = userCenterService.getUserUpdateById(userId);
         user.setUserBir(userBir);
         user.setUserEmail(userEmail);
         user.setUserGender(userGender);
@@ -51,6 +60,16 @@ public class UserCenterController {
         ServerResponse result = userCenterService.updateUser(user);
 
         return result;
+    }
+
+    //个人中心中我的优惠券显示
+    @GetMapping("/usercoupon")
+    @ResponseBody
+    public ServerResponse getCouponByUserId(HttpServletRequest request){
+        //从请求头部获得token
+        String token = request.getHeader("token");//get token
+        Integer userId = TokenUtil.parseToken(token).getUserId();
+        return userCenterService.getUserCoupon(userId);
     }
 
 

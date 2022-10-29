@@ -55,5 +55,3 @@ function validate() {
     }
 }
 
-//验证手机验证码
-$(".smsTip").click()

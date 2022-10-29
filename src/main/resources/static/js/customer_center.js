@@ -7,7 +7,7 @@ $(".sub-nav").click(function (event){
     })
     element.className = "cc-change ck";
     var eId = element.id;
-    console.log(eId);
+    //console.log(eId);
     //内容切换
     $(".information").each(function (){
         this.className = "information hide";
@@ -24,56 +24,29 @@ $(".sub-nav").click(function (event){
         $("#info5").attr("class","information");
     }
 });
-//点击个人中心-用户信息中的修改跳到修改信息
-$(".update-info").click(function(){
-    //侧栏样式
-    $(".cc-change").each(function (){
-        this.className = "cc-change";
-    })
-    $("#exchange-info3").attr("class","cc-change ck");
-    //内容切换
-    $(".information").each(function (){
-        this.className = "information hide";
-    });
-    $("#info3").attr("class","information");
-    console.log("4111")
-});
-
-
 
 $(".order_exchange").click(function (){
-    console.log("1a");
+    //console.log("1a");
     $(".information").each(function (){
         this.className = "information hide";
     });
     $("#info6").attr("class","information");
 });
-
-
 //获取修改个人信息的值
 $("#Submit").click(function(){
     var username = $(".username").val();
-    console.log(username);
-
+    //console.log(username);
     var usertel = $(".usertel").val();
-    console.log(usertel);
-
+   // console.log(usertel);
     var useremail = $(".useremail").val();
-    console.log(useremail);
-
+    //console.log(useremail);
     var useridcardIpt = $(".useridcardIpt").val();
-    console.log(useridcardIpt);
-
+    //console.log(useridcardIpt);
     var gender = $(".gerderBtn:checked").val();//单选按钮 radio
-    console.log(gender);
-
+    //console.log(gender);
     var userdate = $(".userdate").val();
-    console.log(userdate);
-
-
+    //console.log(userdate);
 });
-
-
 
 //切换订单界面
 $(function () {
@@ -88,113 +61,140 @@ $('#myTab a').click(function (e) {
 showUser();
 function showUser(){
     var url = "/usercenter/user";
-    $.get(url,function (user){
-        var user = user.data;
-        console.log(user);
-        userId = user.userId;
-        userTel = user.userTel;
-        userPsd = user.userPsd;
-        userGender = user.userGender;
-        if (userGender === "0"){
-            userGender = '男';
-        }else{
-            userGender = '女';
-        }
-        userIdcard = user.userIdcard;
-        userName = user.userName;
-        userEmail = user.userEmail;
-        userBir = user.userBir;
-        userPetname = user.userPetname;
-        var userEle = "<h2>用户信息</h2>\n" +
-            "                <div class=\"mod information-index\">\n" +
-            "                    <div class=\"ui-bfc information-index-panel\">\n" +
-            "                        <!--头像暂定-->\n" +
-            "                        <div class=\"ui-bfc-hd hd\">\n" +
-            "                            <img src=\"../images/customer_photo.png\" width=\"99\" height=\"99\">\n" +
-            "                        </div>\n" +
-            "                        <!-- 个人信息-->\n" +
-            "                        <div class=\"ui-bfc-bd bd\">\n" +
-            "                            <table width=\"100%\">\n" +
-            "                                <tbody>\n" +
-            "                                <tr>\n" +
-            "                                    <td class=\"cell-title\">用户名：</td>\n" +
-            "                                    <td>\n" +
-            "                                        <p>"+userPetname+"</p>\n" +
-            "                                    </td>\n" +
-            "                                </tr>\n" +
-            "                                    <tr>\n" +
-            "                                        <td class=\"cell-title\">电子邮箱：</td>\n" +
-            "                                        <td>\n" +
-            "                                            <p>"+userEmail+"</p>\n" +
-            "                                            <span class=\"gray\">(未验证)</span>\n" +
-            "                                            <a class=\"update-info\">修改</a>\n" +
-            "                                        </td>\n" +
-            "\n" +
-            "                                    </tr>\n" +
-            "                                    <tr>\n" +
-            "                                        <td class=\"cell-title\">手机号码：</td>\n" +
-            "                                        <td>\n" +
-            "                                            <p>"+userTel+"</p>\n" +
-            "                                            <span class=\"gray\">(未验证)</span>\n" +
-            "                                            <a class=\"update-info\">修改</a>\n" +
-            "                                        </td>\n" +
-            "                                    </tr>\n" +
-            "                                <tr>\n" +
-            "                                    <td class=\"cell-title\">身份证：</td>\n" +
-            "                                    <td>\n" +
-            "                                        <p>"+userIdcard+"</p>\n" +
-            "                                        <span class=\"gray\">(未验证)</span>\n" +
-            "                                        <a class=\"update-info\">立即认证</a>\n" +
-            "                                    </td>\n" +
-            "                                </tr>\n" +
-            "                                <tr>\n" +
-            "                                    <td class=\"cell-title\">真实姓名：</td>\n" +
-            "                                    <td>\n" +
-            "                                        <p>"+userName+"</p>\n" +
-            "                                    </td>\n" +
-            "                                </tr>\n" +
-            "                                <tr>\n" +
-            "                                    <td class=\"cell-title\">生日：</td>\n" +
-            "                                    <td>\n" +
-            "                                        <p>"+userBir+" </p>\n" +
-            "                                    </td>\n" +
-            "                                </tr>\n" +
-            "                                <tr>\n" +
-            "                                    <td class=\"cell-title\">性别：</td>\n" +
-            "                                    <td>\n" +
-            "                                        <p>"+userGender+" </p>\n" +
-            "                                    </td>\n" +
-            "                                </tr>\n" +
-            "                                </tbody>\n" +
-            "                            </table>\n" +
-            "                        </div>\n" +
-            "                    </div>\n" +
-            "                    <div class=\"operate-panel\">\n" +
-            "                        <a class=\"ui-btn ui-btn-white-l update-info\">修改信息</a>\n" +
-            "                    </div>\n" +
-            "                </div>";
-        $("#info1").append(userEle);
+    var token = localStorage.getItem("token");
 
-        $(".userId").val(userId);
-        $("#userTel").val(userTel) ;
-        $("#userPsd").val(userPsd) ;
-        $("#userGender").val(userGender) ;
-        $("#userIdcard").val(userIdcard) ;
-        $("#userName").val(userName) ;
-        $("#userEmail").val(userEmail) ;
-        $("#userBir").val(userBir) ;
-        $("#userPetname").val(userPetname) ;
+    //console.log(token);
+    $.ajax({
+        type: "get",
+        url:url,
+        headers:{'token':token},
+        success:function (result){
+            var user = result.data;
+            //console.log(user);
+            userId = user.userId;
+            userTel = user.userTel;
+            userPsd = user.userPsd;
+            userGender = user.userGender;
+            if (userGender === "0"){
+                userGender = '男';
+            }else{
+                userGender = '女';
+            }
+            userIdcard = user.userIdcard;
+            userName = user.userName;
+            userEmail = user.userEmail;
+            userBir = user.userBir;
+            userPetname = user.userPetname;
+            var userEle = "<h2>用户信息</h2>\n" +
+                "                <div class=\"mod information-index\">\n" +
+                "                    <div class=\"ui-bfc information-index-panel\">\n" +
+                "                        <!--头像暂定-->\n" +
+                "                        <div class=\"ui-bfc-hd hd\">\n" +
+                "                            <img src=\"../images/customer_photo.png\" width=\"99\" height=\"99\">\n" +
+                "                        </div>\n" +
+                "                        <!-- 个人信息-->\n" +
+                "                        <div class=\"ui-bfc-bd bd\">\n" +
+                "                            <table width=\"100%\">\n" +
+                "                                <tbody>\n" +
+                "                                <tr>\n" +
+                "                                    <td class=\"cell-title\">用户名：</td>\n" +
+                "                                    <td>\n" +
+                "                                        <p>"+userPetname+"</p>\n" +
+                "                                    </td>\n" +
+                "                                </tr>\n" +
+                "                                    <tr>\n" +
+                "                                        <td class=\"cell-title\">电子邮箱：</td>\n" +
+                "                                        <td>\n" +
+                "                                            <p>"+userEmail+"</p>\n" +
+                // "                                            <span class=\"gray\">(未验证)</span>\n" +
+                "                                            <a class=\"update-info\"  onclick=\"jump()\">修改</a>\n" +
+                "                                        </td>\n" +
+                "\n" +
+                "                                    </tr>\n" +
+                "                                    <tr>\n" +
+                "                                        <td class=\"cell-title\">手机号码：</td>\n" +
+                "                                        <td>\n" +
+                "                                            <p>"+userTel+"</p>\n" +
+                // "                                            <span class=\"gray\">(未验证)</span>\n" +
+                "                                            <a class=\"update-info\"  onclick=\"jump()\">修改</a>\n" +
+                "                                        </td>\n" +
+                "                                    </tr>\n" +
+                "                                <tr>\n" +
+                "                                    <td class=\"cell-title\">身份证：</td>\n" +
+                "                                    <td>\n" +
+                "                                        <p>"+userIdcard+"</p>\n" +
+                //"                                        <span class=\"gray\">(未验证)</span>\n" +
+                "                                        <a class=\"update-info\"  onclick=\"jump()\">修改</a>\n" +
+                "                                    </td>\n" +
+                "                                </tr>\n" +
+                "                                <tr>\n" +
+                "                                    <td class=\"cell-title\">真实姓名：</td>\n" +
+                "                                    <td>\n" +
+                "                                        <p>"+userName+"</p>\n" +
+                "                                    </td>\n" +
+                "                                </tr>\n" +
+                "                                <tr>\n" +
+                "                                    <td class=\"cell-title\">生日：</td>\n" +
+                "                                    <td>\n" +
+                "                                        <p>"+userBir+" </p>\n" +
+                "                                    </td>\n" +
+                "                                </tr>\n" +
+                "                                <tr>\n" +
+                "                                    <td class=\"cell-title\">性别：</td>\n" +
+                "                                    <td>\n" +
+                "                                        <p>"+userGender+" </p>\n" +
+                "                                    </td>\n" +
+                "                                </tr>\n" +
+                "                                </tbody>\n" +
+                "                            </table>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "                    <div class=\"operate-panel\">\n" +
+                "                        <a class=\"ui-btn ui-btn-white-l update-info\"  onclick=\"jump()\">修改信息</a>\n" +
+                "                    </div>\n" +
+                "                </div>";
+            $("#info1").append(userEle);
+            $(".userId").val(userId);
+            $("#userTel").val(userTel) ;
+            $("#userPsd").val(userPsd) ;
+            $("#userGender").val(userGender) ;
+            $("#userIdcard").val(userIdcard) ;
+            $("#userName").val(userName) ;
+            $("#userEmail").val(userEmail) ;
+            $("#userBir").val(userBir) ;
+            $("#userPetname").val(userPetname) ;
+        }
     })
 }
+//点击个人中心-用户信息中的修改跳到修改信息
+function jump(){
+    //侧栏样式
+    $(".cc-change").each(function (){
+        this.className = "cc-change";
+    })
+    $("#exchange-info3").attr("class","cc-change ck");
+    //内容切换
+    $(".information").each(function (){
+        this.className = "information hide";
+    });
+    $("#info3").attr("class","information");
+    //console.log("4111")
+};
+
 //修改
 function updateUser(){
     var userDate = $("#myinfo").serialize();
-    console.log(userDate)
+    //console.log(userDate)
     var url = "/usercenter/user/update";
     var gender = $(".gerderBtn:checked").val();
+    var token = localStorage.getItem("token");
+
+    //console.log(token);
+
     $.ajax({
         type:"post",
         url:url,
+        headers:{'token':token},
         data:{
             userTel:$("#userTel").val(),
             userPsd:$("#ConfirmPassword").val(),
@@ -206,15 +206,23 @@ function updateUser(){
             userPetname:$("#userPetname").val()
         },
         success:function (result){
-            console.log("result"+result);
+            //console.log("result"+result);
             //window.location.href = "/customer/customer_center.html";
-            console.log("122345")
+            //console.log("122345");
+            layer.open({
+                title: '个人中心',
+                content: '保存信息成功',
+                yes:function (){
+                    location.reload();
+                }
+            });
+
         }
     })
 }
 //修改个人中心
 $("#Submit").click(function (){
-    console.log(1);
+    //console.log(1);
     updateUser();
 });
 
@@ -222,7 +230,6 @@ $("#Submit").click(function (){
 if ($(".userPetname").val() != null){
     $(".userPetname").focus(checkUsername);
 }
-
 function checkUsername(){
     var userPetname = $(".userPetname").val();
     //console.log(username);
@@ -234,9 +241,7 @@ function checkUsername(){
         return true;
     }
 }
-
 //验证手机号
-
 if ($(".usertel").val() != null){
     $(".usertel").focus(checkUsertel);
 }
@@ -281,16 +286,11 @@ function checkUserIdCard(){
     }
 }
 
-
-
-
-
-
 //修改密码
 $("#btnSubmit").click(function (){
-    console.log(2);
-    console.log(checkUserNewpassword());
-    console.log(checkUserpassword());
+    //console.log(2);
+    //console.log(checkUserNewpassword());
+    //console.log(checkUserpassword());
     if(checkUserNewpassword() && checkUserpassword()){
         updateUser();
     }
@@ -333,3 +333,64 @@ function checkUserNewpassword(){
         return true;
     }
 }
+
+//优惠券显示
+showCoupon();
+function showCoupon(){
+    var url = "/usercenter/usercoupon";
+    var token = localStorage.getItem("token");
+    $.ajax({
+        type: "get",
+        url: url,
+        headers: {'token': token},
+        success:function (result){
+            var coupon = result.data;
+            //console.log(coupon);
+            for (var i=0; i<coupon.length;i++){
+
+                var couponUser = coupon[i];
+                //console.log(couponUser);
+                var couponusercounum = couponUser['couponUserCouNum'];
+                var couponexplain = couponUser['couponExplain'];
+                var coupontimeend = couponUser['couponTimeEnd'];
+                //console.log(coupontimeend);
+                var couponstate = couponUser['couponState'];
+                if (couponstate === "0"){
+                    couponstate = "未使用";
+                }else if (couponstate === "1"){
+                    couponstate = "已使用";
+                }
+
+                var couponEle = "<tr>\n" +
+                    "                                    <td class=\"row-first-cell\" >"+couponusercounum+"</td>\n" +
+                    "                                    <td>"+coupontimeend+"</td>\n" +
+                    "                                    <td>\n" +
+                    "                                        <span class=\"green bold\">"+couponstate+"</span>\n" +
+                    "                                    </td>\n" +
+                    "                                    <td class=\"btn-show-rules\">\n" +
+                    "                                        <a data-toggle=\"modal\" data-target=\"#myModal\">"+couponexplain+"</a>\n" +
+                    "                                    </td>\n" +
+                    "                                </tr>";
+                $(".coupon-text").append(couponEle);
+
+            }
+        }
+
+    })
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
