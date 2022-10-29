@@ -87,13 +87,15 @@ a{
     margin-left: 10px;
 }
 
-#main .order_details .car_describe .car_name .fanhui{
+#main .order_details .car_describe .car_name .layui-btn-normal{
     display: block;
     float: right;
     font-size: 12px;
-    color: #31b0d5;
+    color: white;
+
     margin-right: 20px;
     margin-top: 10px;
+    background-color: #00a5cb;
 }
 
 #main .order_details .car_describe .car_address{
@@ -306,7 +308,7 @@ hr{
 }
 
 #main .order_confirm .expense_statement ul li p .price{
-    margin-left: 90px;
+    margin-left: 110px;
 }
 
 #main .order_confirm .expense_statement ul li .exp_add{
@@ -357,11 +359,11 @@ hr{
     width: 100%;
     height: 60px;
     /*background: #31b0d5;*/
-    border-bottom: 1px dashed gray;
+    /*border-bottom: 1px dashed gray;*/
 }
 
 #main .order_confirm .expense_statement ul .border .price{
-    margin-left: 155px;
+    margin-left: 165px;
 }
 
 #main .order_confirm .expense_statement ul .border p{
@@ -369,7 +371,7 @@ hr{
 }
 
 #main .order_confirm .expense_statement .service_price{
-    margin-left: 195px;
+    margin-left: 200px;
 }
 
 #main .order_confirm .expense_statement .service_price img{
@@ -427,11 +429,11 @@ hr{
 }
 
 #main .order_confirm .expense_statement ul li .deposit .price{
-    margin-left: 138px;
+    margin-left: 153px;
 }
 
 #main .order_confirm .expense_statement ul li .deposit .price1{
-    margin-left: 154px;
+    margin-left: 167px;
 }
 
 #main .order_confirm .expense_statement ul li .total_price{
@@ -457,5 +459,10 @@ hr{
     line-height: 50px;
     margin-left: 184px;
     font-size: 20px;
+
+}
+
+#main .order_confirm .expense_statement ul li .total_price .a_ a{
+    color: white;
 }
 

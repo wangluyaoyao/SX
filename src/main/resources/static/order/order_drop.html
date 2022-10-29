@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/common.css">
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../layui/layui.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
 
 
 
@@ -63,7 +64,9 @@
             <div class="car_name">
                 <p>大众迈腾</p>
                 <a href="../details/details_of_cars.html" class="details">车辆详情></a>
-                <a href="../car_rental/car_filter.html" class="fanhui">返回修改</a>
+                <div class="site-demo-button" id="layerDemo" >
+                    <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">日期地址选择/修改</button>
+                </div>
             </div>
             <div class="car_address">
                 <table >
@@ -183,11 +186,11 @@
                         </p>
                         <p class="exp_add">基本保障服务费*<span class="day">2</span>天</p>
                     </div>
+                    <hr class="hr1">
                     <div class="other">
                         <p>其它服务费
                             <span class="service_price">￥<span class="expenses_p">20</span></span>
                         </p>
-                        <hr class="hr1">
 
                     </div>
                     <hr class="hr3">
@@ -195,7 +198,6 @@
                         <p>车辆保证金<span class="tui">(可退)</span><span class="price">￥3000</span></p>
                         <p>违章押金<span class="tui">(可退)</span><span  class="price1">￥2000</span></p>
                     </div>
-                    <hr class="hr2">
                     <div class="total_price">
                         总计：<span>￥<span class="t_price">790</span></span><br>
                         <div class="a_">
@@ -212,6 +214,39 @@
 
 </div>
 <script src="../js/order_drop.js"></script>
+
+<script>
+    layui.use('layer', function(){ //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+
+        //触发事件
+        var active = {
+            offset: function (othis) {
+                var type = othis.data('type')
+                    , text = othis.text();
+
+                layer.open({
+                    type: 1
+                    , offset: type //具体配置参考：http://doc/modules/layer.html#offset
+                    , id: 'layerDemo' + type //防止重复弹出
+                    , content: '<div style="padding: 150px 150px;">' + text + '</div>'
+                    , btn: '关闭全部'
+                    , btnAlign: 'c' //按钮居中
+                    , shade: 0 //不显示遮罩
+                    , yes: function () {
+                        layer.closeAll();
+                    }
+                });
+            }
+        };
+        $('#layerDemo .layui-btn').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+    })
+
+</script>
+
 
 </body>
 </html>
