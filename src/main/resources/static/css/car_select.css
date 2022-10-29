@@ -19,37 +19,34 @@
 .pro-way .pro-withdraw-select{
     float: left;
     margin-top: 32px;
-    width: 900px;
+    width: 100%;
     height: 100px;
 }
 
 /* 取车 */
 .pro-withdraw-qick{
+
     float: left;
-    width: 86%;
+    width: 73%;
     height: 85px;
-    margin-left: 13px;
+    margin-left: 33px;
 }
-
-.pro-withdraw-qick li {
-    height: 40px;
-    list-style: none;
-}
-.pro-withdraw-qick li div{
-    float: left;
-}
-
-.pro-withdraw-qick label,.pro-time-select label{
+.pro-withdraw-qick label{
+    padding-top: 4px;
+    margin-left: 50px;
     float: left;
     font-weight: bolder;
-    width: 75px;
-    font-size: 14px;
+    width: 175px;
+    font-size: 18px;
 }
-
-.pro-withdraw-qick .left,.pro-withdraw-qick .left1{
-    float: left;
-    width: 260px;
-    padding-left: 18px;
+.pro-withdraw-qick .car-search{
+    margin-left: 50px;
+    padding-left: 25px;
+    height: 33px;
+    width: 460px;
+    border-width:0;
+    border:1px solid #82ccd0;
+    border-radius: 3px
 
 }
 
@@ -172,16 +169,19 @@
     background-color: #37c4ca ;
 }
 
+
 /* -------条件筛选区域 */
 .pro-condition{
     float: left;
     width: 100%;
     margin-top: 14px;
 }
+
 .pro-condition .car-model{
     border-top: 1px solid #a0a0a0;
     border-left: 1px solid #a0a0a0;
     border-right: 1px solid #a0a0a0;
+
     float: left;
     width: 100%;
     height: 80px;
@@ -195,8 +195,9 @@
     width: 9%;
 }
 .car-model li{
+    margin-left: 3px;
     border-left: 1px solid #ececec;
-    width: 10%;
+    width: 90px;
     height: 100%;
     float: left;
     text-align: center;
@@ -209,7 +210,7 @@
 }
 
 .car-model li a {
-    
+
     font-size: 13px;
     color: #787474;
     display: block;
@@ -237,25 +238,24 @@
 .pro-condition .car-brand{
     float: left;
     width: 100%;
-    border-top: 1px solid #a0a0a0;
-    border-left: 1px solid #a0a0a0;
-    border-right: 1px solid #a0a0a0;
+    border: 1px solid #a0a0a0;
+
 }
 .car-brand li {
-    
+
     text-align: center;
     line-height: 23px;
     float: left;
     height: 40px;
     width: 70px;
 }
-.car-brand li a { 
+.car-brand li a {
     font-size: 12.5px;
     margin-top: 9px;
     margin-left: 8px;
     display: block;
     width: 80%;
-    height: 24px;    
+    height: 24px;
     color: #787474;
 }
 .car-brand li a:hover,.car-price li a:hover{
@@ -266,7 +266,7 @@
     color: #1d1d1d;
     background-color:  #37c4ca;
 }
- .car-lable{
+.car-lable{
     margin-left: 12px;
     float: left;
     width: 34px;
@@ -279,32 +279,6 @@
     float: left;
     width: 94%;
 }
-
-/* 价格筛选 */
-.pro-condition .car-price{
-    border: 1px solid #a0a0a0;
-    float: left;
-    width: 100%;
-    height: 50px;
-}
-.car-price li{
-    text-align: center;
-    line-height: 23px;
-    float: left;
-    height: 40px;
-    width: 74px;
-}
-.car-price li a{
-    font-size: 12.5px;
-    margin-top: 9px;
-    margin-left: 8px;
-    display: block;
-    width: 80%;
-    height: 24px;    
-    color: #787474;
-   
-}
-
 
 
 
@@ -335,40 +309,26 @@
     border: none;
     width: 25%;
 }
-/* 商品展示区 */
-.pro-rearly{
-    margin-top: 14px;
-   float: left;
-    height: 160px;
-    width: 100%;
-    border-bottom: 1px solid #bdb7b7;;
-    /* background-color: #fde6f0; */
-}
-.pro-rearly .img img{ 
-    height: 150px;
-    width: 200px;
-}
-.pro-rearly div{
+/* 商品展示 */
+.pro-product .pro-rearly{
+    margin-top: 1px;
+    border: 1px solid #e1e1e1;
+    width: 297px;
+    margin-right: 0.8px;
+    height: 200px;
     float: left;
 }
-.pro-rearly .information li{
-    width: 300px;
+.pro-rearly .img img{
+    margin-left: 36px;
+    width: 216px;
+    height: 100%;
+    float: left;
 }
 .pro-rearly .information{
-    margin-left: 30px;
-    color: #4c4a4a;
-    margin-top: 20px;
-    width: 420px;
-    height: 100%;
-}
-.pro-rearly .information li{
+    margin-left: 27px;
+    width: 200px;
+    height: 68px;
     float: left;
-    font-size: 15px;
-   text-decoration: none;
-    margin-top: 10px;
-}
-.pro-rearly .information .info span{
-    margin-left: 5px;
 }
 /*  车辆详情 */
 .information .car-name{
@@ -377,11 +337,47 @@
     float: left;
     font-weight: bolder;
 }
+.information .in-top,.information .in-middle,.information .in-bottom{
+    width: 100%;
+    height: 30px;
+
+}
 .pro-rearly .information .info a{
     font-size: 13px;
     text-decoration: none;
 }
-/* 车辆标签 */
+/* 车辆价格 */
+.pro-price{
+    margin-top: 20px;
+    float: left;
+    height: 50px;
+    width: 70px;
+}
+.pro-price .pro-text{
+    width: 100%;
+    height: 30px;
+    font-size: 16px;
+    color: #22c4d6;
+}
+.info .info-detalis{
+    color:#22c4d6;
+}
+.pro-bottom{
+    float: left;
+    width: 7%;
+    height: 100%;
+}
+.pro-bottom .pro-order{
+    color: #fef9f9;
+    border-radius: 2px;
+    margin-top: 60px;
+    text-align: center;
+    line-height: 28px;
+    width: 64px;
+    height: 28px;
+    background-color: rgb(68 215 222);
+}
+/*车辆标签*/
 .pro-rearly .information .lable a{
     text-align: center;
     font-size: 13px;
@@ -392,60 +388,4 @@
     width: 50px;
     border-radius: 2px;
     background-color: #fcf4f0;
-}
-/*  ---价格---- */
-.pro-rearly .pro-price{
-    width: 100px;
-    height: 100%;
-    text-align: center;
-    line-height: 160px;
-}
-.pro-rearly .pro-price a{
-    color: #ff911c;
-    font-size: 20px;
-    font-weight: bolder;
-}
-.pro-rearly .bottom{
-   height: 100%;
-   width:147px;
-   line-height: 100%;
-}
-.pro-rearly .bottom a{
-    display: block;
-    border-radius:4px;
-    text-align: center;
-    line-height: 30px;
-    text-decoration: none;
-    color: whitesmoke;
-    width: 80px;
-    height: 30px;
-    background-color:  #ff911c;
-    margin-left: 35px;
-    margin-top: 63px;
-}
-/* 翻页 */
-.car-pro .page-select{
-    border-bottom: 1px solid #9a9494;
-    border-top: 1px solid #9a9494;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-    float:left;
-    width: 100%;
-    height: 30px;
-    color: #ff911c;
-    background-color: #fef9f9;
-}
-
-.page-select span{
-    font-size: 13px;
-    color: #1d1d1d;
-}
-.page-select a{
-    font-size: 15px;
-    text-decoration: none;
-    color: #ff911c;
-}
-.page-select .sel,.page-select a{
-    border-bottom: 1px solid #9a9494;
 }
