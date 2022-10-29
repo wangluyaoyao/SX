@@ -31,7 +31,7 @@ a{
     display: block;
     float: left;
     width: 68%;
-    height: 900px;
+    height: 750px;
     border: 1px solid gray;
     /*background-color: #31b0d5;*/
 
@@ -87,13 +87,15 @@ a{
     margin-left: 10px;
 }
 
-#main .order_details .car_describe .car_name .fanhui{
+#main .order_details .car_describe .car_name .layui-btn-normal{
     display: block;
     float: right;
     font-size: 12px;
-    color: #31b0d5;
+    color: white;
+
     margin-right: 20px;
     margin-top: 10px;
+    background-color: #00a5cb;
 }
 
 #main .order_details .car_describe .car_address{
@@ -191,78 +193,85 @@ a{
 
 /*============其他服务=================*/
 #main .service .ser_content{
-    width: 100%;
-    height: 300px;
-    /*background: gold;*/
+    width: 95%;
+    height: 150px;
+    margin: 10px;
+    /*background: orange;*/
+    color: #00a5cb;
+    line-height: 25px;
 }
 
-#main .service .ser_content input{
-    margin-top: 30px;
-    margin-left: 20px;
-    margin-right: 20px;
-    display: block;
-    float: left;
-}
-
-#main .service .ser_content .protection{
-    display: block;
-    float: left;
-    width: 93.5%;
-    height: 70px;
-    /*background-color: #31b0d5;*/
-}
-
-#main .service .ser_content .protection ul{
-    list-style: none;
-}
-#main .service .ser_content .protection ul li{
-    float: left;
-    margin-top: 20px;
-}
-
-#main .service .ser_content .protection ul li .name{
-    font-weight: bolder;
+#main .service .ser_content p{
     font-size: 14px;
 }
 
-#main .service .ser_content .protection ul li .introduce{
-    font-size: 12px;
-    color: gray;
-}
+/*#main .service .ser_content input{*/
+/*    margin-top: 30px;*/
+/*    margin-left: 20px;*/
+/*    margin-right: 20px;*/
+/*    display: block;*/
+/*    float: left;*/
+/*}*/
 
-#main .service .ser_content .protection ul li .limited{
-    width: 55px;
-    text-align: center;
-    font-size: 12px;
-    color: white;
-    background-color: #31b0d5;
+/*#main .service .ser_content .protection{*/
+/*    display: block;*/
+/*    float: left;*/
+/*    width: 93.5%;*/
+/*    height: 70px;*/
+/*    !*background-color: #31b0d5;*!*/
+/*}*/
 
-}
+/*#main .service .ser_content .protection ul{*/
+/*    list-style: none;*/
+/*}*/
+/*#main .service .ser_content .protection ul li{*/
+/*    float: left;*/
+/*    margin-top: 20px;*/
+/*}*/
 
-#main .service .ser_content .protection ul .center{
-    margin-left: 150px;
-    margin-top: 35px;
-    font-size: 12px;
-    color: gray;
-}
+/*#main .service .ser_content .protection ul li .name{*/
+/*    font-weight: bolder;*/
+/*    font-size: 14px;*/
+/*}*/
 
-#main .service .ser_content .protection ul .center1{
-    margin-left: 143px;
-}
+/*#main .service .ser_content .protection ul li .introduce{*/
+/*    font-size: 12px;*/
+/*    color: gray;*/
+/*}*/
 
-#main .service .ser_content .protection ul .right{
-    margin-left: 150px;
-    margin-top: 28px;
-    color:#31b0d5;
-    font-size: 15px;
-}
+/*#main .service .ser_content .protection ul li .limited{*/
+/*    width: 55px;*/
+/*    text-align: center;*/
+/*    font-size: 12px;*/
+/*    color: white;*/
+/*    background-color: #31b0d5;*/
 
-#main .service .ser_content .protection ul .right .original{
-    font-size: 12px;
-    color: gray;
-    font-weight: bolder;
-    text-decoration: line-through;
-}
+/*}*/
+
+/*#main .service .ser_content .protection ul .center{*/
+/*    margin-left: 150px;*/
+/*    margin-top: 35px;*/
+/*    font-size: 12px;*/
+/*    color: gray;*/
+/*}*/
+
+/*#main .service .ser_content .protection ul .center1{*/
+/*    margin-left: 143px;*/
+/*}*/
+
+/*#main .service .ser_content .protection ul .right{*/
+/*    margin-left: 150px;*/
+/*    margin-top: 28px;*/
+/*    color:#31b0d5;*/
+/*    font-size: 15px;*/
+/*}*/
+
+/*#main .service .ser_content .protection ul .right .original{*/
+/*    font-size: 12px;*/
+/*    color: gray;*/
+/*    font-weight: bolder;*/
+/*    text-decoration: line-through;*/
+/*}*/
 
 
 
@@ -299,7 +308,7 @@ hr{
 }
 
 #main .order_confirm .expense_statement ul li p .price{
-    margin-left: 90px;
+    margin-left: 110px;
 }
 
 #main .order_confirm .expense_statement ul li .exp_add{
@@ -350,11 +359,11 @@ hr{
     width: 100%;
     height: 60px;
     /*background: #31b0d5;*/
-    border-bottom: 1px dashed gray;
+    /*border-bottom: 1px dashed gray;*/
 }
 
 #main .order_confirm .expense_statement ul .border .price{
-    margin-left: 155px;
+    margin-left: 165px;
 }
 
 #main .order_confirm .expense_statement ul .border p{
@@ -362,7 +371,7 @@ hr{
 }
 
 #main .order_confirm .expense_statement .service_price{
-    margin-left: 195px;
+    margin-left: 200px;
 }
 
 #main .order_confirm .expense_statement .service_price img{
@@ -420,11 +429,11 @@ hr{
 }
 
 #main .order_confirm .expense_statement ul li .deposit .price{
-    margin-left: 138px;
+    margin-left: 153px;
 }
 
 #main .order_confirm .expense_statement ul li .deposit .price1{
-    margin-left: 154px;
+    margin-left: 167px;
 }
 
 #main .order_confirm .expense_statement ul li .total_price{
@@ -450,5 +459,10 @@ hr{
     line-height: 50px;
     margin-left: 184px;
     font-size: 20px;
+
+}
+
+#main .order_confirm .expense_statement ul li .total_price .a_ a{
+    color: white;
 }
 
