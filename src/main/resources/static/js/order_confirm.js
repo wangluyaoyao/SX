@@ -14,8 +14,3 @@ function CountDown() {
 }
 timer = setInterval("CountDown()", 1000);
 
-$(".jixuzhifu").click(function () {
-    location.href = "../order/order_payment.html"
-
-
-})

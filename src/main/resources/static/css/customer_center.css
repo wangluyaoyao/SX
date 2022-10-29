@@ -275,19 +275,19 @@ fieldset, img, input, button {
     font-feature-settings: "tnum";
 }
 .information-changeuser td {
-    padding: 10px 8px;
+    padding: 5px 8px;
 }
 .information-changeuser .cell-title {
     font-weight: 700;
     text-align: right;
     font-size: 14px;
-    line-height: 38px;
+    line-height: 34px;
     vertical-align: top;
 }
 .information-changeuser input {
     float: left;
     width: 270px;
-    height: 36px;
+    height: 30px;
     line-height: 36px;
     border: 1px solid #e7e7e7;
 }
