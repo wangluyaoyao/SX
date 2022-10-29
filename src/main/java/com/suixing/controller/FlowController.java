@@ -149,7 +149,7 @@ public class FlowController {
             mv.addObject("out_trade_no", out_trade_no);
             mv.addObject("trade_no", trade_no);
             mv.addObject("total_amount", total_amount);
-            mv.addObject("cartName",carName);
+            mv.addObject("carName",carName);
         }
         return mv;
     }
