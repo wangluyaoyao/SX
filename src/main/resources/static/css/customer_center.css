@@ -230,7 +230,8 @@ fieldset, img, input, button {
     width: 270px;
     height: 36px;
     line-height: 36px;
-    border: 1px solid #e7e7e7;
+    border:none;
+    /*border: 1px solid #e7e7e7;*/
 }
 .information-changepassword em {
     float: left;
