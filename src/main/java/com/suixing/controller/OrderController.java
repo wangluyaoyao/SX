@@ -42,9 +42,9 @@ public class OrderController {
     private IUserCoupnoService userCoupnoService;
 
     //订单确认页面绑定
-//    @GetMapping("/order_confirm/{ordNumber}")
-//    public ModelAndView selectByOrderNum(@PathVariable("ordNumber") Long ordNumber){
-//        ServerResponse result = iOrderService.getByOrderNum(ordNumber);
+//    @GetMapping("/order_confirm/{ordId}")
+//    public ModelAndView selectByOrderNum(@PathVariable("ordId") Integer ordId){
+//        ServerResponse result = orderService.getById(ordId);
 //        ModelAndView mav = new ModelAndView();
 //        mav.addObject("result",result);
 //        mav.setViewName("order/order_confirm");
@@ -52,14 +52,14 @@ public class OrderController {
 //    }
 
     //确认订单页面绑定
-    @GetMapping("/order_drop/{ordId}")
-    public ModelAndView selectById(@PathVariable("ordId") Integer ordId){
-        ServerResponse result = orderService.getById(ordId);
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("result",result);
-        mav.setViewName("order/order_drop");
-        return mav;
-    }
+//    @GetMapping("/order_drop/{ordId}")
+//    public ModelAndView selectById(@PathVariable("ordId") Integer ordId){
+//        ServerResponse result = orderService.getById(ordId);
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject("result",result);
+//        mav.setViewName("order/order_drop");
+//        return mav;
+//    }
 
 //    @GetMapping("myorder")
 //    public ServerResponse getOrder(){
@@ -69,23 +69,23 @@ public class OrderController {
 
     //确认订单页面获取车辆订单信息
     @GetMapping("dropOrder")
-    public ModelAndView getInstance(Integer carId,
-                                    Integer userCouId,
-                                    String ordPickup,
-                                    String ordDropoff,
-                                    Float ordFees,
-                                    LocalDateTime ordPicTime,
-                                    LocalDateTime ordDroTime){
+    public ModelAndView getInstance(@PathVariable("carId") Integer carId,
+                                    @PathVariable("userCouId") Integer userCouId,
+                                    @PathVariable("ordFees") Float ordFees,
+                                    @PathVariable("ordPicTime") LocalDateTime ordPicTime,
+                                    @PathVariable("ordDroTime") LocalDateTime ordDroTime){
         //1.车辆图片、名字、日租价格
         Car car = carService.getCarWithFewInfo(carId);
         //2.租车日期、还车日期、租期
 
         //3.租车网点、地址
+        ServerResponse bussiness = carService.getBussiness(carId);
         //4.优惠券
         UserCoupno userCoupno = userCoupnoService.getCoupnoOwn(userCouId);
         //5.其它服务
-        ModelAndView mav = new ModelAndView("dropOrder");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("car",car);
+        mav.addObject("bussiness",bussiness);
         mav.addObject("userCoupno",userCoupno);
         mav.addObject("ordFees",ordFees);
         mav.setViewName("order/order_drop");
