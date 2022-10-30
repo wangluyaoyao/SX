@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * <p>
@@ -52,10 +54,18 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public ServerResponse saveOrder(Order order) {
         int rows = orderMapper.insert(order);
+        Long ordNumber = UUID.randomUUID().getMostSignificantBits();
+        String ordSatus = "预约中";
+        Date ordCreateTime = new Date();
         if(rows >0)
             return ServerResponse.success("添加成功",order);
         else
             return ServerResponse.fail("添加失败",null);
+    }
+
+    @Override
+    public Integer updateOrderStatus(Order order) {
+        return orderMapper.updateById(order);
     }
 
 

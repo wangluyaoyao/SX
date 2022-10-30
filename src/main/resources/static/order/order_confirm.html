@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>确认订单</title>
     <link rel="stylesheet" href="../css/order_confirm.css">
     <link rel="stylesheet" href="../css/common.css">
     <script src="../js/jquery-3.6.0.min.js"></script>
-
 </head>
 <body>
 <!-- 头部导航 -->
@@ -61,30 +60,33 @@
                 <span class="pic_two">取车时请务必携带<span class="pic_three">本人二代有效身份证，本人有效地方驾驶证正副本</span></span>
             </p>
         </div>
-        <div class="order_id">
-            <table>
-                <tr>
-                    <td>订单号：<span>1252354321</span></td>
-                    <td>支付方式：在线支付</td>
-                    <td>订单总价：<span>￥<span class="price_color">590.00</span></span></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>已支付：￥0.00 &emsp;&emsp;
-                        未支付：<span>￥<span class="price_color">590.00</span></span></td>
-                </tr>
-            </table>
-        </div>
-        <div class="order_pay">
-            <button class="jixuzhifu">继续支付</button>
-            <a href="../index.html">返回首页</a>
-            <a href="../index.html">查看订单</a>
 
 
-        </div>
+        <form id="payForm" action="/alipay" method="post">
+            <div class="form-p">
+                <label class="form-lable">订单编号:</label><input class="formcss" name="orderNum" th:value="187" value="187" /><br>
+            </div>
+            <div class="form-p">
+                <label class="form-lable">支付方式: <em>在线支付</em></label><br>
+            </div>
+            <div class="form-p">
+                <label class="form-lable">订单总价: ￥</label><input class="formcss" name="orderPrice" th:value="60.00" value="60.00"/><br>
+            </div>
+            <div class="form-p">
+                <label class="form-lable">订单车辆:</label><input class="formcss" name="carName" th:value="大众辉腾" value="大众辉腾"/><br>
+            </div>
+                    <input class="submitBtn" type="submit" value="支付订单">
+
+        </form>
+
+
 
     </div>
+
+
+
+
+
 
 </div>
 <script src="../js/order_confirm.js"></script>

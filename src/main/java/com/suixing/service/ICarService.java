@@ -17,4 +17,6 @@ public interface ICarService extends IService<Car> {
     ServerResponse getCarAll();
     Car selectId(int carId);
     ServerResponse updateCarImg(Car car);
+
+    Car getCarWithFewInfo(int carId);
 }

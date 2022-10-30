@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>付款</title>
@@ -50,10 +50,17 @@
 
 <div class="word">
     <h1>支付成功</h1>
-    <p>订单编号：<span>111111111111111111</span></p>
-    <p>支付宝交易号：<span>11111111111111111111</span></p>
-    <p>实付金额：<span>1111111</span></p>
-    <p>下单车辆：<span>1111111</span></p>
+    <p>订单编号：
+        <span class="orderNum" th:text="${out_trade_no}"></span>
+    </p>
+    <p>支付宝交易号：
+        <span class="flowNum" th:text="${trade_no}"></span>
+
+    </p>
+    <p>实付金额：<span class="payPrice" th:text="${total_amount}"></span></p>
+    <p>下单车辆：<span class="carName" th:text="${carName}"></span></p>
+
+
 
 
 </div>
