@@ -57,6 +57,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
         return ServerResponse.fail("插入失败",null);
     }
 
+    //车辆信息查询
     @Override
     public Car getCarWithFewInfo(int carId) {
         QueryWrapper<Car> carQueryWrapper = new QueryWrapper<>();
@@ -65,5 +66,11 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
         Car car = CarMapper.selectOne(carQueryWrapper);
         return car;
 
+    }
+
+    //网点地址
+    @Override
+    public ServerResponse getBussiness(int carId) {
+        return CarMapper.getBussiness(carId);
     }
 }

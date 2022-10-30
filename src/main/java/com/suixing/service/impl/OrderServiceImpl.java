@@ -36,14 +36,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         return ServerResponse.success("查询成功",order);
     }
 
-    @Override
-    public ServerResponse getByOrderNum(Long ordNumber) {
-        Order order = orderMapper.selectById(ordNumber);
-        if (order == null){
-            return  ServerResponse.fail("查询失败",null);
-        }
-            return ServerResponse.success("查询成功",order);
-    }
 
     @Override
     public ServerResponse getOrderAll() {
@@ -57,6 +49,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Long ordNumber = UUID.randomUUID().getMostSignificantBits();
         String ordSatus = "预约中";
         Date ordCreateTime = new Date();
+        order.setOrdNumber(ordNumber);
+        order.setOrdSatus(ordSatus);
+        order.setOrdCreateTime(ordCreateTime);
         if(rows >0)
             return ServerResponse.success("添加成功",order);
         else

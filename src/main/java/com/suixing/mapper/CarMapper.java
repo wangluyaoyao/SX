@@ -1,6 +1,7 @@
 package com.suixing.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Car;
 
 /**
@@ -13,4 +14,5 @@ import com.suixing.entity.Car;
  */
 public interface CarMapper extends BaseMapper<Car> {
     public Car selectByCarId(int carId);
+    public ServerResponse getBussiness(int carId);
 }
