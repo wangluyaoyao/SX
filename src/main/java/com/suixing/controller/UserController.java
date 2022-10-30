@@ -4,6 +4,7 @@ package com.suixing.controller;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.User;
 import com.suixing.service.IUserService;
+import com.suixing.util.PhoneSendCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import springfox.documentation.schema.Model;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -45,6 +48,15 @@ public class UserController {
         }
         return result;
     }
+
+
+    @PostMapping("regist")
+    public ServerResponse regist(User user,HttpServletRequest request,HttpServletResponse response){
+
+        return userService.regist(user);
+    }
+
+
 
 
 

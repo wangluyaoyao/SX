@@ -11,3 +11,4 @@ spring:
     view:
       prefix: /
       suffix: .html
+
