@@ -7,7 +7,8 @@ spring:
     password: root
 
   #    掐头去尾
-  mvc:  #静态资源配置
+  #    掐头去尾
+  mvc: #静态资源配置
     view:
       prefix: /
       suffix: .html
@@ -15,9 +16,11 @@ spring:
         filter:
           enabled: true
 
-
   #模板引擎
   thymeleaf:
     prefix: classpath:static/
     suffix: .html
     cache: false
+
+server:
+  port: 8089

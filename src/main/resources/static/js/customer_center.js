@@ -60,7 +60,7 @@ $('#myTab a').click(function (e) {
 //显示当前用户信息
 showUser();
 function showUser(){
-    var url = "/usercenter/user";
+    var url = "/user";
     var token = localStorage.getItem("token");
 
     //console.log(token);
@@ -185,7 +185,7 @@ function jump(){
 function updateUser(){
     var userDate = $("#myinfo").serialize();
     //console.log(userDate)
-    var url = "/usercenter/user/update";
+    var url = "/user/update";
     var gender = $(".gerderBtn:checked").val();
     var token = localStorage.getItem("token");
 
@@ -216,7 +216,6 @@ function updateUser(){
                     location.reload();
                 }
             });
-
         }
     })
 }
@@ -337,7 +336,7 @@ function checkUserNewpassword(){
 //优惠券显示
 showCoupon();
 function showCoupon(){
-    var url = "/usercenter/usercoupon";
+    var url = "/usercoupon";
     var token = localStorage.getItem("token");
     $.ajax({
         type: "get",
@@ -347,7 +346,6 @@ function showCoupon(){
             var coupon = result.data;
             //console.log(coupon);
             for (var i=0; i<coupon.length;i++){
-
                 var couponUser = coupon[i];
                 //console.log(couponUser);
                 var couponusercounum = couponUser['couponUserCouNum'];
@@ -360,7 +358,6 @@ function showCoupon(){
                 }else if (couponstate === "1"){
                     couponstate = "已使用";
                 }
-
                 var couponEle = "<tr>\n" +
                     "                                    <td class=\"row-first-cell\" >"+couponusercounum+"</td>\n" +
                     "                                    <td>"+coupontimeend+"</td>\n" +
@@ -380,8 +377,40 @@ function showCoupon(){
 
 }
 
-
-
+//全部订单显示
+showOrderAll();
+function showOrderAll(){
+    var url = "/userorder";
+    var token = localStorage.getItem("token");
+    $.ajax({
+        type: "get",
+        url: url,
+        headers: {'token': token},
+        success:function (result) {
+            var orderUser = result.data;
+            for (var i=0; i<orderUser.length;i++){
+                var order = orderUser[i];
+                var ordId = order['ordId'];
+                var ordNumber = order['ordNumber'];
+                var ordSatus = order['ordSatus'];
+                var ordPicTime = order['ordPicTime'];
+                var ordDroTime = order['ordDroTime'];
+                var carName = order['carName'];
+                var carModel = order['carModel'];
+                var carCase = order['carCase'];
+                var carDisp = order['carDisp'];
+                var orderEle = "<tr>\n" +
+                    "          <td><a class=\"order_exchange\" href=\"/orderdetail/"+ordNumber+"\">"+ordNumber+"</a></td>\n" +
+                    "          <td>"+carName+"/"+carModel+"/"+carCase+" /"+carDisp+"</td>\n" +
+                    "          <td>"+ordPicTime+"</td>\n" +
+                    "          <td>"+ordDroTime+"</td>\n" +
+                    "          <td>"+ordSatus+"</td>\n" +
+                    "          </tr>";
+                $(".order-text1").append(orderEle);
+            }
+        }
+    })
+}
 
 
 
