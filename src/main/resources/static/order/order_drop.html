@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>下订单</title>
     <link rel="stylesheet" href="../css/order_drop.css">
     <link rel="stylesheet" href="../css/common.css">
@@ -61,7 +65,7 @@
         </div>
         <div class="car_describe">
             <div class="car_name">
-                <p>${car.carName}</p>
+                <p th:text="${car.carName}"></p>
                 <a href="../details/details_of_cars.html" class="details">车辆详情></a>
                 <div class="site-demo-button" id="layerDemo" >
                     <a href="../car_rental/car_filter.html" class="layui-btn-normal">返回修改</a>
@@ -74,16 +78,16 @@
                         <td class="address_a">还车地点</td>
                     </tr>
                     <tr>
-                        <td>取车门店:<span>八万人体育场店</span></td>
-                        <td>还车门店:<span>八万人体育场店</span></td>
+                        <td>取车门店:<span th:text="${business.busName}"></span></td>
+                        <td>还车门店:<span th:text="${business.busName}"></span></td>
                     </tr>
                     <tr>
                         <td>取车时间：<span>2022-08-27 09:00</span></td>
                         <td>还车时间:<span>2022-08-29 09:00</span></td>
                     </tr>
                     <tr>
-                        <td>取车地址：<span>上海上海市徐汇区斜土路2899号</span></td>
-                        <td>还车地址：<span>上海上海市徐汇区斜土路2899号</span></td>
+                        <td>取车地址：<span th:text="${business.busAddress}"></span></td>
+                        <td>还车地址：<span th:text="${business.busAddress}"></span></td>
                     </tr>
                     <tr>
                         <td colspan="2"><p>订单说明</p></td>

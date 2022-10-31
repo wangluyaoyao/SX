@@ -71,7 +71,7 @@ public class Order implements Serializable {
     private String ordPicAddress;
 
     @ApiModelProperty("租期")
-    private String ordLease;
+    private Integer ordLease;
 
     @ApiModelProperty("取车人电话")
     private Long ordPicTelno;
@@ -203,11 +203,11 @@ public class Order implements Serializable {
     public void setOrdPicAddress(String ordPicAddress) {
         this.ordPicAddress = ordPicAddress;
     }
-    public String getOrdLease() {
+    public Integer getOrdLease() {
         return ordLease;
     }
 
-    public void setOrdLease(String ordLease) {
+    public void setOrdLease(Integer ordLease) {
         this.ordLease = ordLease;
     }
     public Long getOrdPicTelno() {
