@@ -57,7 +57,7 @@
             <div class="div-myshowbox" style="width: 1180px; height: 450px;">
                 <div class="common-modalBox">
                     <div class="current-carname">
-                        <h3 >BYD</h3>
+                        <h3 th:text="${car.carName}"></h3>
                     </div>
                 </div>
                 <div class="current-carbox">
@@ -68,39 +68,39 @@
                                 <img src="../images/benchic.jpg" alt="">
                                 <span class="video-playbtn video-li" data-cartypeids="421" id="carInfoVideo"></span>
                             </div>
-                            <p>比亚迪   </p><p><span>100</span>元/每天起</p>
+                            <p th:text="${car.carName}">   </p><p><span th:text="${car.carPrice}"></span>元/每天起</p>
                         </div>
                         <ul class="current-carconfigure clear_float">
                             <c:if test="${!empty serverResponse.data.carTankCapacity}">
                                 <li id="li-first-child">
                                     <p class="configure-name"><span class="configure-icon">
                                     <img src="../images/details/pinpai.png" alt=""></span></p>
-                                    <p>品牌:<span>BYD</span></p>
+                                    <p>品牌:<span th:text="${car.carBrand}"></span></p>
                                 </li>
                                 <li>
                                     <p class="configure-name"><span class="configure-icon">
                                     <img src="../images/details/biansu.png" alt=""></span></p>
-                                    <p>变速箱:<span>XXX</span></p>
+                                    <p>变速箱:<span th:text="${car.carCase}"></span></p>
                                 </li>
                                 <li>
 
                                     <p class="configure-name"><span class="configure-icon">
                                         <img src="../images/details/youxiang.png" alt=""></span></p>
-                                    <p>油箱:<span>100L</span></p>
+                                    <p>油箱:<span th:text="${car.carTank}"></span></p>
                                 </li>
                                 <li>
                                     <p class="configure-name"><span class="configure-icon"><img src="../images/details/pailiang.png" alt=""></span></p>
-                                    <p>排量:<span>10</span>T</p>
+                                    <p>排量:<span th:text="${car.carDisp}"></span>T</p>
                                 </li>
                             </c:if>
                             <li>
                                 <p class="configure-name"><span class="configure-icon"><img src="../images/details/zuowei.png" alt=""></span></p>
-                                <p>座位数:<span>3</span></p>
+                                <p>座位数:<span th:text="${car.carSeat}"></span></p>
                             </li>
                             <c:if test="${!empty serverResponse.data.carTankCapacity}">
                                 <li>
                                     <p class="configure-name"><span class="configure-icon"><img src="../images/details/jinqi.png" alt=""></span></p>
-                                    <p>进气:<span>10L</span></p>
+                                    <p>进气:<span th:text="${car.carExhaust}"></span></p>
                                 </li>
                             </c:if>
                         </ul>
@@ -122,7 +122,7 @@
                     <p>车辆颜色请以门店为准，图片仅为车型示意图。</p>
                 </div>
                 <div class="msg-car">
-                    <p>取车地点：<span>苏州市虎丘区松泽1区</span></p>
+                    <p>取车地点：<span>wd aw adddd</span></p>
                     <p>网点电话：<span>123456789</span></p>
                 </div>
                 </div>
@@ -193,6 +193,15 @@
            flag = true;
        }
    }
+
+
+   $(function (){
+      var sxDetails = "${requestScope.sx-details}";
+      sxDetails = eval("("+sx-details+")");
+      $.each(sx-details,function (i,result){
+          item =
+       });
+   })
 </script>
 </body>
 </html>
