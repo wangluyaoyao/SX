@@ -198,6 +198,19 @@
                     </div>
                     <div class="total_price">
                         总计：<span>￥<span class="t_price" th:text="${car.carPrice} * 2 + 50 * 2 + 20"></span></span><br>
+
+                        <form method="post" action="">
+                            <input type="text" name="custId" value="${custId}" style="display: none">
+                            <input type="text" name="carId" value="${carId}" style="display: none">
+                            <input type="text" name="borrowStoreId" value="${borrowStoreId}" style="display: none">
+                            <input type="text" name="couponId" id="couponId" style="display: none" >
+                            <input type="text" name="returnStoreId" value="${returnStoreId}" style="display: none">
+                            <input type="text" name="getCarTime" value="${getCarTime}" style="display: none">
+                            <input type="text" name="returnCarTime" value="${returnCarTime}" style="display: none">
+                            <input type="text" name="myOrderLeaseDays" value="${days}" style="display: none">
+                            <input type="text" name="myOrderPrice" class="order_price" style="display: none">
+                            <input type="submit" value="提交订单" class="a_" onclick="createOrder()">
+                        </form>
                         <div class="a_">
                             <a href="order_update.html">提交订单</a>
                         </div>
@@ -212,7 +225,7 @@
 </div>
 <script src="../js/order_drop.js"></script>
 <script>
-    $.ajax()
+
 </script>
 
 

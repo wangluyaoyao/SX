@@ -46,6 +46,23 @@
         });
     })
 
+showDropOrder();
+    function showDropOrder() {
+        var url = "/dropOrder/{carId}";
+        var token = localStorage.getItem("token");
+        console.log(token);
+
+        $.ajax({
+            type:"get",
+            url:url,
+            headers:{'token':token},
+            success:function (result) {
+                var user = result.data;
+                userId = user.userId;
+            }
+        })
+
+    }
 
 
 
