@@ -60,6 +60,11 @@ public class UserController {
         System.out.println("loginUserName:"+loginUserName);
         return ServerResponse.success("查询成功",loginCustomer);
     }
+    @PostMapping("regist")
+    public ServerResponse regist(User user,HttpServletRequest request,HttpServletResponse response){
+
+        return userService.regist(user);
+    }
 
 
 
