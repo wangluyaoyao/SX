@@ -41,4 +41,10 @@ public class BussinessServiceImpl  implements IBussinessService {
         Bussiness bussiness = bussinessMapper.selectOne(bussinessQueryWrapper);
         return bussiness;
     }
+
+    @Override
+    public ServerResponse getBussiness(int busId) {
+        Bussiness bussiness = bussinessMapper.selectById(busId);
+        return ServerResponse.success("ok",bussiness);
+    }
 }

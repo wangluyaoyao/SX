@@ -6,8 +6,6 @@
         select * from car where car_id =#{carId}
     </select>
 
-    <select id="getBussiness" resultType="com.suixing.entity.Car">
-        select bus_name,bus_address from car car,business bussiness where car.bus_id=business.bus_id =#{busId}
-    </select>
+
 
 </mapper>

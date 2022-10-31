@@ -51,4 +51,145 @@ public class Car implements Serializable {
     private String carTank;
     private String backup;
     private String backuPlus;
+
+    public Integer getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Integer carId) {
+        this.carId = carId;
+    }
+
+    public String getCarName() {
+        return carName;
+    }
+
+    public void setCarName(String carName) {
+        this.carName = carName;
+    }
+
+    public String getCarBrand() {
+        return carBrand;
+    }
+
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
+    }
+
+    public Float getCarPrice() {
+        return carPrice;
+    }
+
+    public void setCarPrice(Float carPrice) {
+        this.carPrice = carPrice;
+    }
+
+    public Integer getBusId() {
+        return busId;
+    }
+
+    public void setBusId(Integer busId) {
+        this.busId = busId;
+    }
+
+    public String getCarStatus() {
+        return carStatus;
+    }
+
+    public void setCarStatus(String carStatus) {
+        this.carStatus = carStatus;
+    }
+
+    public String getCarImg() {
+        return carImg;
+    }
+
+    public void setCarImg(String carImg) {
+        this.carImg = carImg;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
+
+    public String getCarDisp() {
+        return carDisp;
+    }
+
+    public void setCarDisp(String carDisp) {
+        this.carDisp = carDisp;
+    }
+
+    public String getCarSeat() {
+        return carSeat;
+    }
+
+    public void setCarSeat(String carSeat) {
+        this.carSeat = carSeat;
+    }
+
+    public String getCarCase() {
+        return carCase;
+    }
+
+    public void setCarCase(String carCase) {
+        this.carCase = carCase;
+    }
+
+    public String getCarExhaust() {
+        return carExhaust;
+    }
+
+    public void setCarExhaust(String carExhaust) {
+        this.carExhaust = carExhaust;
+    }
+
+    public String getCarTank() {
+        return carTank;
+    }
+
+    public void setCarTank(String carTank) {
+        this.carTank = carTank;
+    }
+
+    public String getBackup() {
+        return backup;
+    }
+
+    public void setBackup(String backup) {
+        this.backup = backup;
+    }
+
+    public String getBackuPlus() {
+        return backuPlus;
+    }
+
+    public void setBackuPlus(String backuPlus) {
+        this.backuPlus = backuPlus;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "carId=" + carId +
+                ", carName='" + carName + '\'' +
+                ", carBrand='" + carBrand + '\'' +
+                ", carPrice=" + carPrice +
+                ", busId=" + busId +
+                ", carStatus='" + carStatus + '\'' +
+                ", carImg='" + carImg + '\'' +
+                ", carModel='" + carModel + '\'' +
+                ", carDisp='" + carDisp + '\'' +
+                ", carSeat='" + carSeat + '\'' +
+                ", carCase='" + carCase + '\'' +
+                ", carExhaust='" + carExhaust + '\'' +
+                ", carTank='" + carTank + '\'' +
+                ", backup='" + backup + '\'' +
+                ", backuPlus='" + backuPlus + '\'' +
+                '}';
+    }
 }

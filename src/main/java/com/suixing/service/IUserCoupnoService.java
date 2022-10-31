@@ -15,7 +15,6 @@ import com.suixing.entity.UserCoupno;
 public interface IUserCoupnoService extends IService<UserCoupno> {
     public ServerResponse userRecCou(Integer userId,Integer couId);
 
-    //查询用户优惠券
-    UserCoupno getCoupnoOwn(int userCouId);
+    ServerResponse getById(int userId);
 
 }

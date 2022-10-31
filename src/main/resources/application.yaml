@@ -11,3 +11,13 @@ spring:
     view:
       prefix: /
       suffix: .html
+      hiddenmethod:
+        filter:
+          enabled: true
+
+
+  #模板引擎
+  thymeleaf:
+    prefix: classpath:static/
+    suffix: .html
+    cache: false
