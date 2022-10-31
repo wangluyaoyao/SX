@@ -69,11 +69,11 @@ public class OrderController {
 
     //确认订单页面获取车辆订单信息
     @GetMapping("dropOrder")
-    public ModelAndView getInstance(@PathVariable("carId") Integer carId,
-                                    @PathVariable("userCouId") Integer userCouId,
-                                    @PathVariable("ordFees") Float ordFees,
-                                    @PathVariable("ordPicTime") LocalDateTime ordPicTime,
-                                    @PathVariable("ordDroTime") LocalDateTime ordDroTime){
+    public ModelAndView getInstance(Integer carId,
+                                    Integer userCouId,
+                                    Float ordFees,
+                                    LocalDateTime ordPicTime,
+                                    LocalDateTime ordDroTime){
         //1.车辆图片、名字、日租价格
         Car car = carService.getCarWithFewInfo(carId);
         //2.租车日期、还车日期、租期
@@ -83,7 +83,7 @@ public class OrderController {
         //4.优惠券
         UserCoupno userCoupno = userCoupnoService.getCoupnoOwn(userCouId);
         //5.其它服务
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("order/drop_order");
         mav.addObject("car",car);
         mav.addObject("bussiness",bussiness);
         mav.addObject("userCoupno",userCoupno);
@@ -94,8 +94,25 @@ public class OrderController {
 
     //创建订单
     @PostMapping("saveOrder")
-    public ModelAndView saveOrder(Integer carId,Integer busId,Integer userCouId,Float ordFees,Float ordServiceTip){
-        return null;
+    public ModelAndView saveOrder(Integer carId,
+                                  Integer userCouId,
+                                  Float ordFees,
+                                  Float ordServiceTip,
+                                  LocalDateTime ordPicTime,
+                                  LocalDateTime ordDroTime,
+                                  Integer ordLease,
+                                  Float ordPrice){
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("carId",carId);
+        mav.addObject("userCouId",userCouId);
+        mav.addObject("ordFees",ordFees);
+        mav.addObject("ordServiceTip",ordServiceTip);
+        mav.addObject("ordPicTime",ordPicTime);
+        mav.addObject("ordDroTime",ordDroTime);
+        mav.addObject("ordLease",ordLease);
+        mav.addObject("ordPrice",ordPrice);
+        mav.setViewName("order/order_update");
+        return mav;
     }
 
 }
