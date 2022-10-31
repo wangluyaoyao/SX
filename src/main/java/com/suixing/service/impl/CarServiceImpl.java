@@ -32,10 +32,8 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
 //分页查询
     @Override
     public ServerResponse getPage(int page) {
-
         list.clear();   // 查询全部时清空筛选集合
         Page<Car> curret = new Page<>(page,5);
-
         Page<Car> pageInfo = carMapper.selectPage(curret,null);
 //        List<Car> list = pageInfo.getRecords();
         System.out.println(pageInfo.getRecords());
@@ -92,5 +90,15 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
 
         return ServerResponse.success("查询成功",pageMap);
     }
+
+    @Override
+    public Car getCarWithFewInfo(int carId) {
+        QueryWrapper<Car> carQueryWrapper = new QueryWrapper<>();
+        carQueryWrapper.select("car_id","car_img","car_price");
+        carQueryWrapper.eq("car_id",carId);
+        Car car = carMapper.selectOne(carQueryWrapper);
+        return car;
+    }
+
 
 }

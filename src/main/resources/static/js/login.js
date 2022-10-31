@@ -78,9 +78,10 @@ function getLoginValue(){
     }
 }
 
-
+$(".btn").click(function (){
+    login()
+})
 function login(){
-    $(".btn").click(function (){
         $.ajax({
             type:"post",
             url:"../customer/login",
@@ -98,5 +99,4 @@ function login(){
                 window.location.href = "../index.html";
             }
         })
-    })
 }
