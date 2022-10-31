@@ -1,6 +1,8 @@
 package com.suixing.controller;
 
 import com.suixing.commons.ServerResponse;
+import com.suixing.entity.Car;
+import com.suixing.entity.Order;
 import com.suixing.entity.User;
 import com.suixing.service.IUserCenterService;
 import com.suixing.util.TokenUtil;
@@ -14,7 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
 @Controller
-@RequestMapping("/usercenter")
+//@RequestMapping("/usercenter")
 public class UserCenterController {
     @Autowired
     private IUserCenterService userCenterService;
@@ -72,6 +74,31 @@ public class UserCenterController {
         return userCenterService.getUserCoupon(userId);
     }
 
+    //个人中心中订单管理显示
+    @GetMapping("/userorder")
+    @ResponseBody
+    public ServerResponse getOrderAllByUserId(HttpServletRequest request){
+        //从请求头部获得token
+        String token = request.getHeader("token");//get token
+        Integer userId = TokenUtil.parseToken(token).getUserId();
+        return userCenterService.getUserOrderAll(userId);
+    }
 
+    @GetMapping("/orderdetail/{orderNum}")
+
+    public ModelAndView getOrderDetail(@PathVariable("orderNum") Long orderNum){
+        Order order = userCenterService.getOrderByOrderNum(orderNum);
+        Car car = userCenterService.getCarOrderNum(order.getCarId());
+        User user = userCenterService.getUserUpdateById(order.getUserId());
+
+        ModelAndView mav = new ModelAndView("/order/order_details");
+
+        mav.addObject("order",order);
+        mav.addObject("car",car);
+        mav.addObject("user",user);
+
+
+        return mav;
+    }
 
 }
