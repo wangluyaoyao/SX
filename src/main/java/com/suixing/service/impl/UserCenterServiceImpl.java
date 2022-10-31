@@ -50,7 +50,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
 
     @Override
     public ServerResponse getUserCoupon(Integer userId) {
-        QueryWrapper wrapper = new QueryWrapper<>();
+        QueryWrapper<UserCoupno> wrapper = new QueryWrapper<>();
         wrapper.eq("user_id",userId);
         List<UserCoupno> userCoupnoList = userCoupnoMapper.selectList(wrapper);
         //userCoupnoList.forEach(System.out::println);
@@ -61,6 +61,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
             //日期格式转换
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String time = sdf.format(userCoupno.getUserCouEnd());
+
 
             mapCoupon.put("couponUserCouNum",userCoupno.getUserCouNum());
             mapCoupon.put("couponExplain",coupon.getCouExplain());

@@ -43,7 +43,7 @@ function getByPageNum(pageNum) {
                     var oneLiEle = '<li class="comment-li ' + evaluateId + '">\n' +
                         '                        <div class="comment-customer">\n' +
                         '                            <div class="customer-img">\n' +
-                        '                                <img src="http://r1nxp2i0y.hn-bkt.clouddn.com/images/customer3.png">\n' +
+                        '                                <img src="../images/details/用户.png">\n' +
                         '                            </div>\n' +
                         '                            <div class="a-link">\n' +
                         '                                <h5 class="customer-name">' + custName + '</h5>\n' +
@@ -87,7 +87,7 @@ function getByPageNum(pageNum) {
                                     var praisedId = "#praisedStatus" + evaluateId;
                                     var status = result.data.status;
                                     if (status == 0) {
-                                        document.querySelector(praisedId).style.background = "url(http://r1nxp2i0y.hn-bkt.clouddn.com/images/praised_icon-act.svg)"
+                                        document.querySelector(praisedId).style.background = "url(../images/details/用户.png)"
                                         document.querySelector(praisedId).parentElement.children[1].innerText = 1;
                                     }
                                 }
@@ -120,7 +120,7 @@ function getByPageNum(pageNum) {
                         var twoLiEle = ' <li>\n' +
                             '                                <div class="replay-customer">\n' +
                             '                                    <div class="replay-img">\n' +
-                            '                                        <img src="http://r1nxp2i0y.hn-bkt.clouddn.com/images/customer3.png">\n' +
+                            '                                        <img src="../images/details/用户.png">\n' +
                             '                                    </div>\n' +
                             '                                    <h6 class="replay-customer-name">' + replyCustName + '</h6>\n' +
                             '                                    <!--                            <h6>Smith</h6>-->\n' +

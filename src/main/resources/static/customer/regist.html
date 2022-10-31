@@ -31,19 +31,18 @@
                     <ul>
                         <li>
 
-
-                            <input type="text" placeholder="手机号码" class="input-regist phoneNo">
+                            <input type="text" placeholder="手机号码" class="input-regist phoneNo userTel" id="phone" name="userTel">
                             <p class="phoneTip"></p>
                         </li>
                         <li>
-                            <input type="text" placeholder="验证码" class="input-regist1" maxlength="6">
+                            <input type="text" placeholder="验证码" class="input-regist1" maxlength="6" id="code" >
                             <input type="button" id="btn" class="btn btn-info btn-lg" value="获得验证码" >
                             <p class="smsTip"></p>
                         </li>
                         <li>
 
 
-                            <input type="password" id="password" placeholder="登陆密码" class="input-regist password" >
+                            <input type="password" id="password" placeholder="登陆密码" class="input-regist password userPsd" name="userPsd" >
                             <p class="pasdTip"></p>
                         </li>
                         <li>
@@ -63,7 +62,9 @@
                     </ul>
 
             </div>
-            <div class="registBtn"><a href="">立即注册</a> </div>
+            <div class="registBtn">
+            <input type="button" class="registBtn" value="立即注册">
+            </div>
             <div class="login">
                 <label >已有账号？<a href="login.html">>去登录</a></label>
             </div>
@@ -75,28 +76,7 @@
 
 </form>
 <script type="text/javascript">
-    // //验证手机验证码
-    // var IntervalObj; //timer变量，控制时间
-    // var count = 60; //间隔函数，1秒执行
-    // var curCount; //当前剩余秒数
-    // function sendMessage(){
-    //     curCount = count;
-    //     $("#btn").attr("disabled","true");//发送验证码
-    //     $("#btn").val(curCount+"秒后可重新发送");
-    //     IntervalObj = window.setInterval(SetRemainTime,1000);//启动计时器，1秒执行一次请求后台发送验证码 TODO
-    //
-    // }
-    // //timer处理函数
-    // function SetRemainTime(){
-    //     if (curCount === 0){
-    //         window.clearInterval(IntervalObj); //停止计时器
-    //         $("#btn").removeAttr("disabled"); //启用按钮
-    //         $("#btn").val("重新发送验证码");
-    //     }else {
-    //         curCount--;
-    //         $("#loginCodeBtn").val(curCount+"秒后可重新发送");
-    //     }
-    // }
+
     var button = document.getElementById('btn');
     button.onclick = function() {
         button.disabled = 'disabled';
@@ -116,6 +96,42 @@
     var sms = "";
     //发送验证码
     $(document).on('click',".btn",function (){
+
+        var phone = $("#phone").val();
+        if (phone != ""){
+            sendMessage();
+            $.ajax({
+                url : "sendSmS",
+                type : "post",
+                dataType : "json",
+                data: {
+                    "phone" : phone
+                },
+                success : function (result) {
+                    console.log("............");
+                    alert("发送成功");
+                    sms = result.data;
+                }
+            });
+        }else {
+            alert("请输入手机号");
+            return false;
+        }
+    });
+    //点击登录
+    $(document).on('click','.registBtn',function(){
+        console.log("sms:"+sms);
+        var code = $("#code").val();
+        if (code == "") {
+            alert("请输入验证码");
+        } else {
+            if (sms == code) {
+                window.location.href = "login.html";
+            } else {
+                alert("验证码错误");
+            }
+
+        }
 
     });
 </script>

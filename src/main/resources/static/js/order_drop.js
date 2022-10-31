@@ -1,4 +1,3 @@
-
 //  优惠活动
     $(".select").click(function () {
         $(".coupon").show();

@@ -23,8 +23,8 @@
                 <p href="javascript:void()">微信</p>
             </ul>
            <ul class="left">
-              <a href="customer/login.html">登陆</a><span>|</span>
-              <a href="customer/regist.html">注册</a><span>|</span>
+              <a href="customer/login.html" class="loginAfter">登陆</a><span>|</span>
+              <a href="customer/regist.html" class="bye">注册</a><span>|</span>
               <p class="name" >我的随行</p>
            </ul>
         </div>
@@ -113,7 +113,7 @@
                           <div class="layui-inline">
                             <div class="layui-inline" id="test6">
                               <div class="layui-input-inline">
-                                <input type="text" autocomplete="off" id="test-startDate-1" class="layui-input" placeholder="开始日期">
+                                <input type="text" autocomplete="off" id="test-startDate-1" class="layui-input input-start" placeholder="开始日期">
                               </div>
                             </div>
                           </div>
@@ -123,7 +123,7 @@
 
                     <div class="layui-inline">
                         <div class="layui-input-inline time">
-                        <input type="text" class="layui-input" id="test-limit3" placeholder="HH:mm:ss">
+                        <input type="text" class="layui-input" id="test-limit3" placeholder="HH:mm:ss" value="12:00:00">
                         </div>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                           <div class="layui-inline">
                             <div class="layui-inline" id="test6">
                               <div class="layui-input-inline">
-                                <input type="text" autocomplete="off" id="test-endDate-1" class="layui-input" placeholder="结束日期">
+                                <input type="text" autocomplete="off" id="test-endDate-1" class="layui-input " placeholder="结束日期">
                               </div>
                             </div>
                           </div>
@@ -143,7 +143,7 @@
                       <!-- 时间 -->
                   <div class="layui-inline">
                     <div class="layui-input-inline time">
-                    <input type="text" class="layui-input" id="test-limit3" placeholder="HH:mm:ss">
+                    <input type="text" class="layui-input" id="test-limit3" placeholder="HH:mm:ss" value="12:00:00">
                     </div>
                 </div>
                 </div>
@@ -340,6 +340,7 @@
     <script src="js/common.js"></script>
     <script src="layui/layui.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/common.js"></script>
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c329c0cfa9d945232b82ccb74441adfb&plugin=AMap.AdvancedInfoWindow">
     </script>
     <script type="text/javascript" src="js/map.js"></script>

@@ -46,7 +46,7 @@ function validate() {
     var pw1 = document.getElementById("password").value;
     var pw2 = document.getElementById("checkPassword").value;
     if(pw1 === pw2) {
-        document.getElementById("checkTip").innerText="两次密码相同";
+        document.getElementById("checkTip").innerText="";
 
     }
     else {
