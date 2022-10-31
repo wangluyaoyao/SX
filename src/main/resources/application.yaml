@@ -4,10 +4,12 @@ spring:
     #url: jdbc:mysql://127.0.0.1:3306/suixing?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     url: jdbc:mysql://localhost:3306/suixing?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
-    password: root
+    password: 12345678
 
   #    掐头去尾
   mvc:  #静态资源配置
     view:
       prefix: /
       suffix: .html
+server:
+  port: 8089
