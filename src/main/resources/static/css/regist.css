@@ -132,6 +132,14 @@ fieldset, img, input, button {
 /*注册按钮*/
 .registBtn {
 
+
+    /*background-color: #FF7E00;*/
+    /*color: white;*/
+
+
+
+}
+.registBtn input {
     text-align: center;
     padding: 10px;
     width: 60%;
@@ -139,13 +147,8 @@ fieldset, img, input, button {
     margin-left: 80px;
     background-color: #FF7E00;
     color: white;
-
-    border-radius: 20px;
-
-}
-.registBtn a {
     text-decoration-line: none;
-    color: white;
+    border-radius: 20px;
 }
 .phoneTip,.pasdTip{
     font-size: 8px;

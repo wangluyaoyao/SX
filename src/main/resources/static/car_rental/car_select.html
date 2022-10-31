@@ -24,10 +24,9 @@
                 <p href="javascript:void()">微信</p>
             </ul>
            <ul class="left">
-               <a href="../customer/login.html" class="loginAfter">登陆</a>
-               <span>|</span>
-               <a href="../customer/regist.html" class="bye">注册</a><span>|</span>
-               <p class="name" >我的随行</p>
+              <a href="customer/login.html">登陆</a><span>|</span>
+              <a href="customer/regist.html">注册</a><span>|</span>
+              <p class="name" >我的随行</p>
            </ul>
         </div>
         </div>
@@ -36,7 +35,7 @@
             <div class="middle">
                 <!-- log -->
                 <div class="header-img">
-                    <img src="../images/header-logo.png" alt="">
+                    <img src="../images/header-logo.PNG" alt="">
                 </div>
                 <div class="header-nav">
                     <li><a href="../index.html" class="header-word">首页<span></span> </a></li>
@@ -55,14 +54,62 @@
     <div class="car-pro">
         <div class="middle">
 
-            <!-- 搜索 -->
+            <!-- 取车时间和地点 -->
         <div class="pro-way">
           <div class="pro-withdraw-select" >
               <!-- 地点选择 -->
               <div class="pro-withdraw-qick">
                   <!-- 取车 -->
-                  <label>请输入车辆关键字:</label>
-                  <input class="car-search" value="宝马">
+                  <label>取车门店:</label>
+                  <li class="left">
+
+                      <div>
+                          <input type="text" value="苏州" class="layui-input area" >
+                      </div>
+                      <div class="showAll" id="showAll" style="display: none;">
+                        <div class="select">
+                            <span>请选择还车地点:</span>
+                            <div class="select-city" id="select-city">
+
+                            </div>
+                            <div class="select-area" id="select-area">
+
+                            </div>
+                             <div class="select-store" id="select-store">
+
+                            </div>
+                            <div></div>
+                           </div>
+                      </div>
+                      <div>
+                          <input type="text" placeholder="请选择取车门店" class="layui-input in-store">
+                      </div>
+                  </li>
+                  <!-- 还车 -->
+                  <label>还车门店:</label>
+                  <li class="left1">
+                      <div>
+                          <input type="text" value="苏州" class="layui-input area1">
+                      </div>
+                      <div class="showAll1" id="showAll1" style="display: none;">
+                        <div class="select">
+                            <span>请选择还车地点:</span>
+                            <div class="select-city1" name="select-city1" id="select-city1">
+
+                            </div>
+                            <div class="select-area1" id="select-area1">
+
+                            </div>
+                            <div class="select-store1" id="select-store1">
+
+                            </div>
+                        </div>
+                </div>
+                      <div>
+                          <input type="text" placeholder="请选择还车门店" class="layui-input in-store1">
+                      </div>
+
+                  </li>
               </div>
               <div class="pro-sumbit">
 
@@ -73,212 +120,173 @@
           </div>
             </div>
             <!-- 条件筛选 -->
-        <div class="pro-condition">
-                <!-- 品牌 -->
-                <div class="car-brand">
-                    <div class="car-lable">品牌:</div>
-                    <div class="car-name">
-                        <li><a href="javascript:void(0)" class="active all">全部</a></li>
-                        <li><a href="javascript:void(0)">雪弗兰</a></li>
-                        <li><a href="javascript:void(0)">大众</a></li>
-                        <li><a href="javascript:void(0)">福特</a></li>
-                        <li><a href="javascript:void(0)">本田</a></li>
-                        <li><a href="javascript:void(0)">丰田</a></li>
-                        <li><a href="javascript:void(0)">马自达</a></li>
-                        <li><a href="javascript:void(0)">保时捷</a></li>
-                        <li><a href="javascript:void(0)">雪弗兰</a></li>
-                        <li><a href="javascript:void(0)">大众</a></li>
-                        <li><a href="javascript:void(0)">福特</a></li>
-                        <li><a href="javascript:void(0)">本田</a></li>
-                        <li><a href="javascript:void(0)">丰田</a></li>
-                        <li><a href="javascript:void(0)">马自达</a></li>
-                        <li><a href="javascript:void(0)">保时捷</a></li>
-                        <li><a href="javascript:void(0)">雪弗兰</a></li>
-                        <li><a href="javascript:void(0)">大众</a></li>
-                        <li><a href="javascript:void(0)">福特</a></li>
-                        <li><a href="javascript:void(0)">本田</a></li>
-                        <li><a href="javascript:void(0)">丰田</a></li>
-                        <li><a href="javascript:void(0)">马自达</a></li>
-                        <li><a href="javascript:void(0)">保时捷</a></li>
-                        <li><a href="javascript:void(0)">雪弗兰</a></li>
-                        <li><a href="javascript:void(0)">大众</a></li>
-                        <li><a href="javascript:void(0)">福特</a></li>
-                        <li><a href="javascript:void(0)">本田</a></li>
-                        <li><a href="javascript:void(0)">丰田</a></li>
-                        <li><a href="javascript:void(0)">马自达</a></li>
-                        <li><a href="javascript:void(0)">保时捷</a></li>
-                        <li><a href="javascript:void(0)">雪弗兰</a></li>
-                        <li><a href="javascript:void(0)">大众</a></li>
-                        <li><a href="javascript:void(0)">福特</a></li>
-                        <li><a href="javascript:void(0)">本田</a></li>
-                        <li><a href="javascript:void(0)">丰田</a></li>
-                        <li><a href="javascript:void(0)">马自达</a></li>
-                        <li><a href="javascript:void(0)">保时捷</a></li>
-                    </div>
+            <div class="pro-condition">
+                <!-- 热销车型 -->
+             <div class="car-model">
+                <div class="hot-car-model">
+                    <img src="../images/index_img/hot.png" style="margin-top: 15px;">
                 </div>
+                <!-- 展示9个 -->
+                <li>
+                    <a href="javascript:void(0)" class="hot-active">
+                     <img src="../images/index_img/car-c1.png" alt="">
+                     经济型
+                  </a>
+                 </li>
+                 <li>
+                    <a href="javascript:void(0)">
+                     <img src="../images/index_img/car-c1.png" alt="">
+                     经济型
+                  </a>
+                 </li>
+                 <li>
+                    <a href="javascript:void(0)">
+                     <img src="../images/index_img/car-c1.png" alt="">
+                     经济型
+                  </a>
+                 </li>
+                 <li>
+                    <a href="javascript:void(0)">
+                     <img src="../images/index_img/car-c1.png" alt="">
+                     经济型
+                  </a>
+                 </li>
+                 <li>
+                    <a href="javascript:void(0)">
+                     <img src="../images/index_img/car-c1.png" alt="">
+                     经济型
+                  </a>
+                 </li>
+                 <li>
+                    <a href="javascript:void(0)">
+                     <img src="../images/index_img/car-c1.png" alt="">
+                     经济型
+                  </a>
+                 </li>
+                 <li>
+                    <a href="javascript:void(0)">
+                     <img src="../images/index_img/car-c1.png" alt="">
+                     经济型
+                  </a>
+                 </li>
+                 <li>
+                    <a href="javascript:void(0)">
+                     <img src="../images/index_img/car-c1.png" alt="">
+                     经济型
+                  </a>
+                 </li>
+                 <li>
+                    <a href="javascript:void(0)">
+                     <img src="../images/index_img/car-c1.png" alt="">
+                     经济型
+                  </a>
+                 </li>
 
 
-
-
-        </div>
+             </div>
+             <!-- 品牌 -->
+             <div class="car-brand">
+                <div class="car-lable">品牌:</div>
+               <div class="car-name">
+                <li><a href="javascript:void(0)" class="active">全部</a></li>
+                <li><a href="javascript:void(0)">雪弗兰</a></li>
+                <li><a href="javascript:void(0)">大众</a></li>
+                <li><a href="javascript:void(0)">福特</a></li>
+                <li><a href="javascript:void(0)">本田</a></li>
+                <li><a href="javascript:void(0)">丰田</a></li>
+                <li><a href="javascript:void(0)">马自达</a></li>
+                <li><a href="javascript:void(0)">保时捷</a></li>
+                <li><a href="javascript:void(0)">雪弗兰</a></li>
+                <li><a href="javascript:void(0)">大众</a></li>
+                <li><a href="javascript:void(0)">福特</a></li>
+                <li><a href="javascript:void(0)">本田</a></li>
+                <li><a href="javascript:void(0)">丰田</a></li>
+                <li><a href="javascript:void(0)">马自达</a></li>
+                <li><a href="javascript:void(0)">保时捷</a></li>
+                <li><a href="javascript:void(0)">雪弗兰</a></li>
+                <li><a href="javascript:void(0)">大众</a></li>
+                <li><a href="javascript:void(0)">福特</a></li>
+                <li><a href="javascript:void(0)">本田</a></li>
+                <li><a href="javascript:void(0)">丰田</a></li>
+                <li><a href="javascript:void(0)">马自达</a></li>
+                <li><a href="javascript:void(0)">保时捷</a></li>
+                <li><a href="javascript:void(0)">雪弗兰</a></li>
+                <li><a href="javascript:void(0)">大众</a></li>
+                <li><a href="javascript:void(0)">福特</a></li>
+                <li><a href="javascript:void(0)">本田</a></li>
+                <li><a href="javascript:void(0)">丰田</a></li>
+                <li><a href="javascript:void(0)">马自达</a></li>
+                <li><a href="javascript:void(0)">保时捷</a></li>
+                <li><a href="javascript:void(0)">雪弗兰</a></li>
+                <li><a href="javascript:void(0)">大众</a></li>
+                <li><a href="javascript:void(0)">福特</a></li>
+                <li><a href="javascript:void(0)">本田</a></li>
+                <li><a href="javascript:void(0)">丰田</a></li>
+                <li><a href="javascript:void(0)">马自达</a></li>
+                <li><a href="javascript:void(0)">保时捷</a></li>
+               </div>
+             </div>
+            </div>
             <!-- 商品展示区 -->
             <div class="pro-product">
-                <!-- 商品1 -->
-                <div class="pro-rearly">
-                    <a href="javascript:void(0)">
-                    <div class="img">
-                        <img src="../images/index_img/car-c1.png" alt="">
+                    <!-- 排序 -->
+                    <div class="pro-sort">
+                        <li><a>默认排序</a></li>
+                        <li><a>按价格</a></li>
+                        <li><a>按排量</a></li>
+                        <li class="rg">*共有<a>
+                            24
+                        </a>种车型可以选择
+                        </li>
                     </div>
-                    <!-- 车辆信息 -->
-                    <div class="information">
-                        <div class="in-top">
-                            <li><a class="car-name">荣威Ei6沪牌</a></li>
+                    <!-- 商品1 -->
+                    <div class="pro-rearly">
+                        <div class="img">
+                            <img src="../images/index_img/car-c1.png" alt="">
                         </div>
-                        <div class="in-middle">
+                        <!-- 车辆信息 -->
+                        <div class="information">
+                            <li><a class="car-name">荣威Ei6沪牌</a></li>
                             <li class="info">
-                                <a>自动 1.5T</a>
-                                <a>三箱</a>
-                                <a>5座</a>
+                                <a>自动 1.5T</a><span>|</spana>
+                                <a>三箱</a><span>|</span>
+                                <a>5座</a><span>|</span>
+                                <a href="../details/datails_of_cars.html">车辆详情></a>
+                            </li>
+                            <li class="lable">
+                                <a>省油</a>
+                                <a>舒适</a>
+                                <a>新能源</a>
                             </li>
                         </div>
-
-                    </div>
-                    <!-- 价格 -->
-                    <div class="pro-price">
-                        <div class="pro-text">
+                        <!-- 价格 -->
+                        <div class="pro-price">
                             <a>¥</a>
                             <a>120</a>
-                            <span>/日</span>
+                            <span>/每日</span>
                         </div>
-
+                        <!-- 预定按钮 -->
+                        <div class="bottom">
+                            <a href="../order/order_drop.html">预购</a>
+                        </div>
                     </div>
-                    </a>
-                </div>
-                <!-- 商品1 -->
-                <div class="pro-rearly">
-                    <a href="javascript:void(0)">
-                        <div class="img">
-                            <img src="../images/index_img/car-c1.png" alt="">
-                        </div>
-                        <!-- 车辆信息 -->
-                        <div class="information">
-                            <div class="in-top">
-                                <li><a class="car-name">荣威Ei6沪牌</a></li>
-                            </div>
-                            <div class="in-middle">
-                                <li class="info">
-                                    <a>自动 1.5T</a>
-                                    <a>三箱</a>
-                                    <a>5座</a>
-                                </li>
-                            </div>
 
-                        </div>
-                        <!-- 价格 -->
-                        <div class="pro-price">
-                            <div class="pro-text">
-                                <a>¥</a>
-                                <a>120</a>
-                                <span>/日</span>
-                            </div>
-
-                        </div>
-                    </a>
-                </div>
-                <!-- 商品1 -->
-                <div class="pro-rearly">
-                    <a href="javascript:void(0)">
-                        <div class="img">
-                            <img src="../images/index_img/car-c1.png" alt="">
-                        </div>
-                        <!-- 车辆信息 -->
-                        <div class="information">
-                            <div class="in-top">
-                                <li><a class="car-name">荣威Ei6沪牌</a></li>
-                            </div>
-                            <div class="in-middle">
-                                <li class="info">
-                                    <a>自动 1.5T</a>
-                                    <a>三箱</a>
-                                    <a>5座</a>
-                                </li>
-                            </div>
-
-                        </div>
-                        <!-- 价格 -->
-                        <div class="pro-price">
-                            <div class="pro-text">
-                                <a>¥</a>
-                                <a>120</a>
-                                <span>/日</span>
-                            </div>
-
-                        </div>
-                    </a>
-                </div>
-                <!-- 商品1 -->
-                <div class="pro-rearly">
-                    <a href="javascript:void(0)">
-                        <div class="img">
-                            <img src="../images/index_img/car-c1.png" alt="">
-                        </div>
-                        <!-- 车辆信息 -->
-                        <div class="information">
-                            <div class="in-top">
-                                <li><a class="car-name">荣威Ei6沪牌</a></li>
-                            </div>
-                            <div class="in-middle">
-                                <li class="info">
-                                    <a>自动 1.5T</a>
-                                    <a>三箱</a>
-                                    <a>5座</a>
-                                </li>
-                            </div>
-
-                        </div>
-                        <!-- 价格 -->
-                        <div class="pro-price">
-                            <div class="pro-text">
-                                <a>¥</a>
-                                <a>120</a>
-                                <span>/日</span>
-                            </div>
-
-                        </div>
-                    </a>
-                </div>
-                <!-- 商品1 -->
-                <div class="pro-rearly">
-                    <a href="javascript:void(0)">
-                        <div class="img">
-                            <img src="../images/index_img/car-c1.png" alt="">
-                        </div>
-                        <!-- 车辆信息 -->
-                        <div class="information">
-                            <div class="in-top">
-                                <li><a class="car-name">荣威Ei6沪牌</a></li>
-                            </div>
-                            <div class="in-middle">
-                                <li class="info">
-                                    <a>自动 1.5T</a>
-                                    <a>三箱</a>
-                                    <a>5座</a>
-                                </li>
-                            </div>
-
-                        </div>
-                        <!-- 价格 -->
-                        <div class="pro-price">
-                            <div class="pro-text">
-                                <a>¥</a>
-                                <a>120</a>
-                                <span>/日</span>
-                            </div>
-
-                        </div>
-                    </a>
-                </div>
-
+            <!-- 这故事继续翻页再翻页——翻页区 -->
+            <div class="page-select">
+                 <span>分页:共</span>
+                 <a>9</a>
+                 <span>页 / </span>
+                 <a>100</a>
+                 <span>条</span>
+                 <a href="" class="sel">上一页</a>
+                 <span>
+                 当前是第
+                 </span>
+                 <a>9</a>
+                 <span>
+                 页
+                 </span>
+                 <a href="" class="sel">下一页</a>
             </div>
         </div>
     </div>
@@ -348,6 +356,5 @@
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c329c0cfa9d945232b82ccb74441adfb&plugin=AMap.AdvancedInfoWindow">
     </script>
     <script type="text/javascript" src="../js/map.js"></script>
-    <script src="../js/common.js"></script>
 </body>
 </html>

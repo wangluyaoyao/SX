@@ -6,6 +6,7 @@ import com.suixing.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -24,4 +25,9 @@ public interface IUserService extends IService<User> {
 //    public User selectUserById(int userId);
 
     public ServerResponse  login(User user);
+
+    public ServerResponse regist(User user);
+
+
+//    Boolean sendPhoneCode(Map<String, Object> map, String phone);
 }

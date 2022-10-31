@@ -120,7 +120,7 @@
  }
 
  .current-carpic img {
-     width: 100%;
+     width: 280px;
  }
  fieldset, img {
      border: 0;
@@ -130,6 +130,11 @@
      font-size: 16px;
      font-weight: bold;
      color: #000;
+ }
+ .current-carinfo span{
+     font-size:17px ;
+     font-weight: bold;
+     color: #FF7E00;
  }
  ul{
      list-style: none;
@@ -165,10 +170,14 @@
      color: #333;
      font-weight: bold;
      padding: 3px 0;
+
  }
 
  .current-carintro {
-     padding: 20px 30px;
+     padding: 10px 30px;
+     width: 40%;
+     display: block;
+     float: left;
  }
 
  .current-carintro h3 {
@@ -181,11 +190,12 @@
      font-size: 14px;
      line-height: 24px;
      color: #7b7b7b;
-     padding-bottom: 20px;
+     /*padding-bottom: 20px;*/
      text-align: justify;
  }
 
  /*=============================评论=============================*/
+
  .comment-box .comment-li .comment-title{
      width: 1180px;
      height: 30px;
@@ -253,7 +263,7 @@
      top: 3px;
      width: 22px;
      height: 22px;
-     background: url(http://r1nxp2i0y.hn-bkt.clouddn.com/images/praise_icon_act.svg);
+     background: url(../images/details/zan.png);
  }
 
 
@@ -438,4 +448,23 @@
     background-color: white;
     color: #f13409;
 }
-/*评论*/
+
+/*网点信息*/
+.msg-car p{
+    font-size: 16px;
+    line-height: 24px;
+    color: #5b5b5b;
+    /*padding-bottom: 20px;*/
+    text-align: justify;
+}
+
+.msg-car{
+    padding: 10px 30px;
+    width: 40%;
+    display: block;
+    float: right;
+}
+
+.msg-car span{
+
+}

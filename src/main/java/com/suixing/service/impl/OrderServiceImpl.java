@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * <p>
@@ -34,14 +36,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         return ServerResponse.success("查询成功",order);
     }
 
-    @Override
-    public ServerResponse getByOrderNum(Long ordNumber) {
-        Order order = orderMapper.selectById(ordNumber);
-        if (order == null){
-            return  ServerResponse.fail("查询失败",null);
-        }
-            return ServerResponse.success("查询成功",order);
-    }
 
     @Override
     public ServerResponse getOrderAll() {
@@ -52,6 +46,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public ServerResponse saveOrder(Order order) {
         int rows = orderMapper.insert(order);
+        Long ordNumber = UUID.randomUUID().getMostSignificantBits();
+        String ordSatus = "预约中";
+        Date ordCreateTime = new Date();
+        order.setOrdNumber(ordNumber);
+        order.setOrdSatus(ordSatus);
+        order.setOrdCreateTime(ordCreateTime);
         if(rows >0)
             return ServerResponse.success("添加成功",order);
         else
