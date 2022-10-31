@@ -84,6 +84,7 @@ public class UserCenterController {
         return userCenterService.getUserOrderAll(userId);
     }
 
+    //订单详情查询
     @GetMapping("/orderdetail/{orderNum}")
 
     public ModelAndView getOrderDetail(@PathVariable("orderNum") Long orderNum){
