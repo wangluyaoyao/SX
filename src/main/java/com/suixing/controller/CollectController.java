@@ -1,8 +1,14 @@
 package com.suixing.controller;
 
 
+import com.suixing.commons.ServerResponse;
+import com.suixing.service.ICollectService;
+import com.suixing.util.TokenUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -15,5 +21,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/sx-collect")
 public class CollectController {
+    @Autowired
+    private ICollectService collectService;
+    //查询所有收藏的商品
+    @GetMapping("collectAll")
+    @ResponseBody
+    private ServerResponse getAllCollectByUserId(HttpServletRequest request){
+        //从请求头部获得token
+        String token = request.getHeader("token");//get token
+        Integer userId = TokenUtil.parseToken(token).getUserId();
+
+        return collectService.getAllByUserId(userId);
+    }
+
+    //取消收藏
+    @PostMapping("collectEsc")
+    @ResponseBody
+    private ServerResponse updateCollect(Integer collectId){
+
+        return ServerResponse.success("ok",collectService.updateCollect(collectId));
+    }
 
 }
