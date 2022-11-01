@@ -46,9 +46,10 @@
         });
     })
 
-showDropOrder();
-    function showDropOrder() {
-        var url = "/dropOrder/{carId}";
+
+select();
+    function select() {
+        var url = "/coupon";
         var token = localStorage.getItem("token");
         console.log(token);
 
@@ -57,8 +58,22 @@ showDropOrder();
             url:url,
             headers:{'token':token},
             success:function (result) {
-                var user = result.data;
-                userId = user.userId;
+                var coupon1 = result.data;
+                for (var i=0; i<coupon.length;i++){
+                    var coupon = coupon[i];
+                    var couPrice = coupon["couPrice"];
+                    var couponTimeEnd = coupon["couponTimeEnd"];
+                    var couExplain = coupon["couExplain"];
+                }
+                var couponEle = "<div class=\"coupon1\">\n" +
+                    "                        <h1>￥<span class=\"cou_money\">"+couPrice+"</span></h1>\n" +
+                    "                        <p>有效期至<span>"+couponTimeEnd+"</span></p>\n" +
+                    "                        <div class=\"part_coupon1\">\n" +
+                    "                            <h5>"+couExplain+"</h5>\n" +
+                    "                        </div>\n" +
+                    "                    </div>"
+                $(".coupon").append(couponEle);
+
             }
         })
 

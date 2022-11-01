@@ -29,17 +29,15 @@ import java.util.Date;
 public class OrderController {
     @Autowired
     private IOrderService orderService;
-
     @Autowired
     private ICarService carService;
-
     @Autowired
     private IBussinessService bussinessService;
-
     @Autowired
-    private IUserCoupnoService userCoupnoService;
+    private IUserCenterService userCenterService;
 
-    @Autowired
+
+    //订单确认页面绑定
 //    @GetMapping("/order_confirm/{ordId}")
 //    public ModelAndView selectByOrderNum(@PathVariable("ordId") Integer ordId){
 //        ServerResponse result = orderService.getById(ordId);
@@ -47,36 +45,39 @@ public class OrderController {
 //        mav.addObject("result",result);
 //        mav.setViewName("order/order_confirm");
 //        return mav;
-    private ICouponService couponService;
 
-    //订单确认页面绑定
-//    }
+// }
+
 
     //确认订单页面获取车辆订单信息
     @GetMapping("/dropOrder/{carId}")
-    public ModelAndView getInstance(@PathVariable("carId") Integer carId, HttpServletRequest request,
+    public ModelAndView getInstance(@PathVariable("carId") Integer carId,
                                     LocalDateTime ordPicTime,LocalDateTime ordDroTime){
         //1.车辆图片、名字、日租价格
         Car car = carService.getById(carId);
         //2.租车日期、还车日期、租期
 
-
         //3.租车网点、地址
         ServerResponse bussiness = bussinessService.getBussiness(car.getBusId());
-
-        //4.优惠券
-//        Integer userId =Integer.parseInt(request.getHeader("token"));
-//        UserCoupno userCoupno = userCoupnoService.getById(userId);
-//        ServerResponse coupon = couponService.getCouponOwn(userCoupno.getCouId()) ;
-//        System.out.println(coupon);
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("car",car);
         mav.addObject("bussiness",bussiness.getData());
-//        mav.addObject("coupon",coupon.getData());
         mav.setViewName("order/order_drop");
         System.out.println(car);
         return mav;
+    }
+
+    //优惠券
+    @GetMapping("/coupon")
+    @ResponseBody
+    public ServerResponse getCouponByUserId(HttpServletRequest request){
+        String token = request.getHeader("token");//get token
+        Integer userId = TokenUtil.parseToken(token).getUserId();
+        System.out.println("用户id："+userId);
+        System.out.println("优惠券："+userCenterService.getUserCoupon(userId));
+        return userCenterService.getUserCoupon(userId);
+
     }
 
 
