@@ -62,7 +62,7 @@
         <div class="car_describe">
             <div class="car_name">
                 <p th:text="${car.carName}"></p>
-                <a href="../details/details_of_cars.html" class="details">车辆详情></a>
+<!--                <a href="../details/details_of_cars.html" class="details">车辆详情></a>-->
                 <div class="site-demo-button" id="layerDemo" >
                     <a href="../car_rental/car_filter.html" class="layui-btn-normal">返回修改</a>
                 </div>
@@ -102,9 +102,10 @@
             <div class="pre_content">
                 <input type="radio" class="select" name="pre" value="c_1"> 使用优惠券<br>
                 <div class="coupon">
+
 <!--                    <div class="coupon1">-->
 <!--                        <h1>￥<span class="cou_money" th:text="${coupon.couPrice}"></span></h1>-->
-<!--                        <p>有效期至<span th:text="${coupon.userCouEnd}"></span></p>-->
+<!--                        <p>有效期至<span th:text="${coupon.couponTimeEnd}"></span></p>-->
 <!--                        <div class="part_coupon1">-->
 <!--                            <h5 th:text="${coupon.couExplain}"></h5>-->
 <!--                        </div>-->

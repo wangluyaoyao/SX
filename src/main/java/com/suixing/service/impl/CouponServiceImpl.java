@@ -43,9 +43,4 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
 
     }
 
-    @Override
-    public ServerResponse getCouponOwn(int couId) {
-        Coupon mycoupon = couponMapper.selectById(couId);
-        return ServerResponse.success("ok",mycoupon);
-    }
 }
