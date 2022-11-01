@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration  //当前类市配置类  @Componet 将当前注入到Spring容器中
-@MapperScan("com.example.mapper")
+@MapperScan("com.suixing.mapper")
 public class MybatisplusConfig {
 
     @Bean

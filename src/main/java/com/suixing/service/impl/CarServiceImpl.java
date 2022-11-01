@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.suixing.commons.ServerResponse;
+import com.suixing.entity.Bussiness;
 import com.suixing.entity.Car;
 import com.suixing.entity.UserCoupno;
+import com.suixing.mapper.BussinessMapper;
 import com.suixing.mapper.CarMapper;
 import com.suixing.service.ICarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ import java.util.stream.Collectors;
 public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarService {
     @Autowired
     private CarMapper carMapper;
+
 
     List<Car> list = new ArrayList<>();  // 筛选出来的数据
 //分页查询
@@ -63,20 +66,6 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
         return ServerResponse.fail("插入失败",null);
     }
 
-    @Override
-    public Car getCarWithFewInfo(int carId) {
-        QueryWrapper<Car> carQueryWrapper = new QueryWrapper<>();
-        carQueryWrapper.select("car_id","car_img","car_price");
-        carQueryWrapper.eq("car_id",carId);
-        Car car = carMapper.selectOne(carQueryWrapper);
-        return car;
-
-    }
-
-    @Override
-    public ServerResponse getBussiness(int carId) {
-        return null;
-    }
 
     //车辆信息查询
     @Override
@@ -109,6 +98,14 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
         pageMap.put("total",total);
 
         return ServerResponse.success("查询成功",pageMap);
+    }
+
+    @Override
+    public ServerResponse getById(int carId) {
+        Car car = carMapper.selectById(carId);
+        if (car!=null)
+            return ServerResponse.success("查询成功",car);
+        return ServerResponse.fail("查询失败",null);
     }
 
 }

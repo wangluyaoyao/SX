@@ -27,6 +27,12 @@
 
 //优惠券
     $(document).ready(function () {
+        if ($(".oth").click(function () {
+            document.querySelector(".t_price").innerText =
+                parseFloat(document.querySelector(".price_one").innerText) +
+                parseFloat(document.querySelector(".price_two").innerText) +
+                parseFloat(document.querySelector(".expenses_p").innerText) ;
+        }))
         $(".coupon1").click(function () {
             $(".coupon1").css({"background": "lightgrey"});
 
@@ -38,9 +44,25 @@
                 parseFloat(document.querySelector(".expenses_p").innerText) -
                 cou_money;
         });
-
     })
 
+showDropOrder();
+    function showDropOrder() {
+        var url = "/dropOrder/{carId}";
+        var token = localStorage.getItem("token");
+        console.log(token);
+
+        $.ajax({
+            type:"get",
+            url:url,
+            headers:{'token':token},
+            success:function (result) {
+                var user = result.data;
+                userId = user.userId;
+            }
+        })
+
+    }
 
 
 

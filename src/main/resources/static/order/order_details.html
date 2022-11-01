@@ -56,7 +56,7 @@
 
         <!--左侧导航-->
         <div class="con-left">
-            <div class="sub-nav">
+            <!--<div class="sub-nav">
                 <dt>个人中心</dt>
                 <dd>
                     <a class="ck cc-change" id="exchange-info1">用户信息</a>
@@ -74,7 +74,7 @@
                 <dd>
                     <a class="cc-change">订单管理</a>
                 </dd>
-            </div>
+            </div>-->
         </div>
 
         <!--右侧内容-->
@@ -82,22 +82,25 @@
             <!--订单信息-->
             <div class="information">
                 <div class="order_information">
-                    <h1>已取消</h1>
+                    <h1 th:text="${order.ordSatus}">已取消</h1>
                     <hr>
                     <p>
-                        订单号 ：<span>1234567890</span> &ensp; | &ensp;
-                        租车人：<span>王璐瑶</span> &ensp; | &ensp;
+                        订单号 ：<span th:text="${order.ordNumber}">1234567890</span> &ensp; | &ensp;
+                        租车人：<span th:text="${user.userName}">王璐瑶</span> &ensp; | &ensp;
                         支付方式：<span>在线支付</span> &ensp; |
                     </p>
                 </div>
                 <div class="order_car_details">
                     <div class="car_picture">
-                        <img src="../images/order_img/car_dazhong.png">
-                        <p>租期：<span class="day">2</span>天</p>
+                        <img th:src="${car.carImg}" >
+                        <p>租期：<span class="day" th:text="${order.ordLease}">2</span>天</p>
                     </div>
                     <div class="order_car_describe">
                         <div class="car_name">
-                            <p>大众/自动/三厢/1.0T</p>
+                            <p th:text="${car.carName}">大众</p>
+                            <p th:text="${car.carModel}">大众</p>
+                            <p th:text="${car.carCase}">大众</p>
+                            <p th:text="${car.carDisp}">大众</p>
 
                         </div>
                         <div class="car_address">
@@ -107,16 +110,16 @@
                                     <td class="address_a">还车地点</td>
                                 </tr>
                                 <tr>
-                                    <td>取车门店:<span>八万人体育场店</span></td>
-                                    <td>还车门店:<span>八万人体育场店</span></td>
+                                    <td>取车门店:<span th:text="${order.ordPickup}">八万人体育场店</span></td>
+                                    <td>还车门店:<span th:text="${order.ordDropoff}">八万人体育场店</span></td>
                                 </tr>
                                 <tr>
-                                    <td>取车时间：<span>2022-08-27 09:00</span></td>
-                                    <td>还车时间:<span>2022-08-29 09:00</span></td>
+                                    <td>取车时间:<span th:text="${order.ordPicTime}">2022-08-27 09:00</span></td>
+                                    <td>还车时间:<span th:text="${order.ordDroTime}">2022-08-29 09:00</span></td>
                                 </tr>
                                 <tr>
-                                    <td>取车地址：<span>上海上海市徐汇区斜土路2899号</span></td>
-                                    <td>还车地址：<span>上海上海市徐汇区斜土路2899号</span></td>
+                                    <td>取车地址：<span th:text="${order.ordDroAddress}">上海上海市徐汇区斜土路2899号</span></td>
+                                    <td>还车地址：<span th:text="${order.ordPicAddress}">上海上海市徐汇区斜土路2899号</span></td>
                                 </tr>
 
                             </table>
@@ -132,35 +135,31 @@
                 <div class="order_pay_">
                     <ul>
                         <li>
-                            <p>车辆租赁费及门店服务费 (原价：276.00元，折扣优惠：0.00元)
-                                <span class="price1">¥<span>276.00</span></span>
+                            <p>车辆租赁费及门店服务费 (原价：<span th:text="${car.carPrice}">276.00元</span>，折扣优惠：0.00元)
+                                <span class="price1">¥<span th:text="${car.carPrice}">276.00</span></span>
                             </p>
                         </li>
-                        <li>
-                            <p>基本保障服务费 (原价：100.00元，折扣优惠：0.00元)
-                                <span class="price2">¥<span>100.00</span></span>
-                            </p>
-                        </li>
+
                         <li>
                             <p>其它服务费
-                                <span class="price3">¥<span>20.00</span></span>
+                                <span class="price3">¥<span th:text="${order.ordServiceTip}">20.00</span></span>
                             </p>
                         </li>
                         <li>
                             <p>手续费
-                                <span class="price4">¥<span>20.00</span></span>
+                                <span class="price4">¥<span th:text="${order.ordFees}">20.00</span></span>
                             </p>
                         </li>
                         <li>
                             <p>优惠折扣
-                                <span class="price5">¥<span>-0.00</span></span>
+                                <span class="price5">¥-<span th:text="${order.ordCouMoney}">0.00</span></span>
                             </p>
                         </li>
                         <li>
-                            <h3>总计：<span>￥<span>396.0</span></span></h3>
+                            <h3>总计：<span>￥<span th:text="${order.ordPrice}">396.0</span></span></h3>
                         </li>
                         <li>
-                            <h4>已支付：<span>￥<span>0.0</span></span></h4>
+                            <h4>已支付：<span>￥<span th:text="${order.ordPrice}">0.0</span></span></h4>
                         </li>
                     </ul>
                 </div>

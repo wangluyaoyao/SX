@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -13,12 +12,8 @@
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../layui/layui.js"></script>
 
-
-
 </head>
 <body>
-
-
 
 <!-- 头部导航 -->
 <div class="header">
@@ -61,7 +56,7 @@
 <div id="main">
     <div class="order_details">
         <div class="car_picture">
-            <img src="../images/order_img/car_dazhong.png">
+            <img th:src="@{car.carImg}">
             <p>租期：<span class="day">2</span>天</p>
         </div>
         <div class="car_describe">
@@ -79,16 +74,16 @@
                         <td class="address_a">还车地点</td>
                     </tr>
                     <tr>
-                        <td>取车门店:<span th:text="${business.busName}"></span></td>
-                        <td>还车门店:<span th:text="${business.busName}"></span></td>
+                        <td>取车门店:<span th:text="${bussiness.busName}"></span></td>
+                        <td>还车门店:<span th:text="${bussiness.busName}"></span></td>
                     </tr>
                     <tr>
                         <td>取车时间：<span>2022-08-27 09:00</span></td>
                         <td>还车时间:<span>2022-08-29 09:00</span></td>
                     </tr>
                     <tr>
-                        <td>取车地址：<span th:text="${business.busAddress}"></span></td>
-                        <td>还车地址：<span th:text="${business.busAddress}"></span></td>
+                        <td>取车地址：<span th:text="${bussiness.busAddress}"></span></td>
+                        <td>还车地址：<span th:text="${bussiness.busAddress}"></span></td>
                     </tr>
                     <tr>
                         <td colspan="2"><p>订单说明</p></td>
@@ -107,29 +102,29 @@
             <div class="pre_content">
                 <input type="radio" class="select" name="pre" value="c_1"> 使用优惠券<br>
                 <div class="coupon">
-                    <div class="coupon1">
-                        <h1>￥<span class="cou_money">100</span></h1>
-                        <p>有效期至<span>2022/8/28</span></p>
-                        <div class="part_coupon1">
-                            <h5>满800减100优惠券</h5>
-                        </div>
-                    </div>
+<!--                    <div class="coupon1">-->
+<!--                        <h1>￥<span class="cou_money" th:text="${coupon.couPrice}"></span></h1>-->
+<!--                        <p>有效期至<span th:text="${coupon.userCouEnd}"></span></p>-->
+<!--                        <div class="part_coupon1">-->
+<!--                            <h5 th:text="${coupon.couExplain}"></h5>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="coupon1">
-                        <h1>￥<span class="cou_money">105</span></h1>
-                        <p>有效期至<span>2022/8/28</span></p>
-                        <div class="part_coupon1">
-                            <h5>满850减105优惠券</h5>
-                        </div>
-                    </div>
+<!--                    <div class="coupon1">-->
+<!--                        <h1>￥<span class="cou_money" th:text="${coupon.couPrice}"></span></h1>-->
+<!--                        <p>有效期至<span th:text="${coupon.userCouEnd}"></span></p>-->
+<!--                        <div class="part_coupon1">-->
+<!--                            <h5 th:text="${coupon.couExplain}"></h5>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="coupon1">
-                        <h1>￥<span class="cou_money">110</span></h1>
-                        <p>有效期至<span>2022/8/28</span></p>
-                        <div class="part_coupon1">
-                            <h5>满900减110优惠券</h5>
-                        </div>
-                    </div>
+<!--                    <div class="coupon1">-->
+<!--                        <h1>￥<span class="cou_money" th:text="${coupon.couPrice}"></span></h1>-->
+<!--                        <p>有效期至<span th:text="${coupon.userCouEnd}"></span></p>-->
+<!--                        <div class="part_coupon1">-->
+<!--                            <h5 th:text="${coupon.couExplain}"></h5>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                 </div>
                 <input type="radio" name="pre" class="other_select" value="c_2"> 新用户特惠<br>
@@ -177,7 +172,7 @@
             <ul>
                 <li>
                     <p>车辆租赁费及门店服务费
-                        <span class="price">￥<span class="price_one">570</span></span>
+                        <span class="price">￥<span class="price_one" th:text="${car.carPrice} * 2"></span></span>
                     </p>
                     <p class="exp_add">现付价</p>
                     <hr class="hr1">
@@ -186,9 +181,9 @@
                 <li>
                     <div class="border">
                         <p>基本保障服务费
-                            <span class="price">￥<span class="price_two">100</span></span>
+                            <span class="price">￥<span class="price_two" >100</span></span>
                         </p>
-                        <p class="exp_add">基本保障服务费*<span class="day">2</span>天</p>
+                        <p class="exp_add">基本保障服务费*天数</p>
                     </div>
                     <hr class="hr1">
                     <div class="other">
@@ -203,11 +198,23 @@
                         <p>违章押金<span class="tui">(可退)</span><span  class="price1">￥2000</span></p>
                     </div>
                     <div class="total_price">
-                        总计：<span>￥<span class="t_price">790</span></span><br>
+                        总计：<span>￥<span class="t_price" th:text="${car.carPrice} * 2 + 50 * 2 + 20"></span></span><br>
+
+                        <form method="post" action="">
+                            <input type="text" name="custId" value="${custId}" style="display: none">
+                            <input type="text" name="carId" value="${carId}" style="display: none">
+                            <input type="text" name="borrowStoreId" value="${borrowStoreId}" style="display: none">
+                            <input type="text" name="couponId" id="couponId" style="display: none" >
+                            <input type="text" name="returnStoreId" value="${returnStoreId}" style="display: none">
+                            <input type="text" name="getCarTime" value="${getCarTime}" style="display: none">
+                            <input type="text" name="returnCarTime" value="${returnCarTime}" style="display: none">
+                            <input type="text" name="myOrderLeaseDays" value="${days}" style="display: none">
+                            <input type="text" name="myOrderPrice" class="order_price" style="display: none">
+                            <input type="submit" value="提交订单" class="a_" onclick="createOrder()">
+                        </form>
                         <div class="a_">
                             <a href="order_update.html">提交订单</a>
                         </div>
-
 
                     </div>
                 </li>
@@ -218,7 +225,9 @@
 
 </div>
 <script src="../js/order_drop.js"></script>
+<script>
 
+</script>
 
 
 
