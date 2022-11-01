@@ -14,11 +14,14 @@ import com.suixing.entity.Car;
  */
 public interface ICarService extends IService<Car> {
     ServerResponse getPage(int page);
+    ServerResponse getPageCarModelCarNameCarPrice(int page,String carModel,String carBrand,String carPrice);
     ServerResponse getCarAll();
     Car selectId(int carId);
     ServerResponse updateCarImg(Car car);
     ServerResponse getCarListByBrand(String brand);
+    public Car getCarWithFewInfo(int carId);
+    public ServerResponse getBussiness(int carId);
     ServerResponse scerrenPage(int page);
-
+    ServerResponse getCarFilter(String carName);
     ServerResponse getById(int carId);
 }

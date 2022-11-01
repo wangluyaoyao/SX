@@ -58,6 +58,15 @@ document.querySelector(".car-model").onclick = function(event){
       workArray[i].children[0].className = " "
  }
   element.className = "hot-active"
+    //清空品牌名
+    var carArray = document.querySelector(".car-name").children;
+    var temp = carArray[1].children[0].className
+    // console.log(temp)
+    $(".all").attr("class"," ")
+    for(var i = 0;i<carArray.length;i++){
+        carArray[i].children[0].className = " "
+    }
+
 }
 //品牌事件冒泡
 document.querySelector(".car-name").onclick = function(event){
