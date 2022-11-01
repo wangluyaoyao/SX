@@ -46,6 +46,7 @@ public class CarDetailController {
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("car",car);
+        mav.addObject("bussiness",bussiness);
         //mav.addObject("bussiness",bussiness.getData());
         //mav.addObject("userCoupno",userCoupno);
         //mav.addObject("ordFees",ordFees);
