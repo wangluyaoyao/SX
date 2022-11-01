@@ -140,6 +140,7 @@
      list-style: none;
  }
  .current-carconfigure li {
+     height: 95px;
      width: 122px;
      float: left;
      text-align: center;
@@ -171,6 +172,9 @@
      font-weight: bold;
      padding: 3px 0;
 
+ }
+ .current-carconfigure li span{
+     margin-top: 5px;
  }
 
  .current-carintro {

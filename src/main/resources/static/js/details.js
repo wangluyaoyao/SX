@@ -199,3 +199,22 @@ function getByPageNum(pageNum) {
     })
 
 }
+
+showUser();
+function showUser() {
+
+    var url = "/details/user";
+    var token = localStorage.getItem("token");
+    console.log(token);
+
+    $.ajax({
+        type:"get",
+        url:url,
+        headers:{'token':token},
+        success:function (result) {
+            var user = result.data;
+
+        }
+    })
+
+}

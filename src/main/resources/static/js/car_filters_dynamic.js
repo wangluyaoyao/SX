@@ -133,7 +133,7 @@ function showCar(carArray){
             "                                <a>"+car.carDisp+"</a><span>|</span>\n" +
             "                                <a>"+car.carCase+"</a><span>|</span>\n" +
             "                                <a>"+car.carSeat+"座"+"</a><span>|</span>\n" +
-            "                                <a href=\"../details/datails_of_cars.html\" class=\"info-detalis\">车辆详情></a>\n" +
+            "                                <a href=\"/details/"+car.carId+"\" class=\"info-detalis\">车辆详情></a>\n" +
             "                            </li>\n" +
             "                        </div>\n" +
             "                        <div class=\"in-bottom\">\n" +

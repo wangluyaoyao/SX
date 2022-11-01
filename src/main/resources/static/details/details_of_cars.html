@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>车辆详情</title>
@@ -71,36 +71,36 @@
                             <p th:text="${car.carName}">   </p><p><span th:text="${car.carPrice}"></span>元/每天起</p>
                         </div>
                         <ul class="current-carconfigure clear_float">
-                            <c:if test="${!empty serverResponse.data.carTankCapacity}">
+
                                 <li id="li-first-child">
                                     <p class="configure-name"><span class="configure-icon">
                                     <img src="../images/details/pinpai.png" alt=""></span></p>
-                                    <p>品牌:<span th:text="${car.carBrand}"></span></p>
+                                    <p>品牌:<br><span th:text="${car.carBrand}"></span></p>
                                 </li>
                                 <li>
                                     <p class="configure-name"><span class="configure-icon">
                                     <img src="../images/details/biansu.png" alt=""></span></p>
-                                    <p>变速箱:<span th:text="${car.carCase}"></span></p>
+                                    <p>变速箱:<br><span th:text="${car.carCase}"></span></p>
                                 </li>
                                 <li>
 
                                     <p class="configure-name"><span class="configure-icon">
                                         <img src="../images/details/youxiang.png" alt=""></span></p>
-                                    <p>油箱:<span th:text="${car.carTank}"></span></p>
+                                    <p>油箱:<br><span th:text="${car.carTank}"></span></p>
                                 </li>
                                 <li>
                                     <p class="configure-name"><span class="configure-icon"><img src="../images/details/pailiang.png" alt=""></span></p>
-                                    <p>排量:<span th:text="${car.carDisp}"></span>T</p>
+                                    <p>排量:<br><span th:text="${car.carDisp}"></span></p>
                                 </li>
-                            </c:if>
+
                             <li>
                                 <p class="configure-name"><span class="configure-icon"><img src="../images/details/zuowei.png" alt=""></span></p>
-                                <p>座位数:<span th:text="${car.carSeat}"></span></p>
+                                <p>座位数:<br><span th:text="${car.carSeat}"></span></p>
                             </li>
                             <c:if test="${!empty serverResponse.data.carTankCapacity}">
                                 <li>
                                     <p class="configure-name"><span class="configure-icon"><img src="../images/details/jinqi.png" alt=""></span></p>
-                                    <p>进气:<span th:text="${car.carExhaust}"></span></p>
+                                    <p>进气:<br><span th:text="${car.carExhaust}"></span></p>
                                 </li>
                             </c:if>
                         </ul>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="msg-car">
                     <p>取车地点：<span th:text="${bussiness.busAddress}"></span></p>
-                    <p>网点电话：<span>123456789</span></p>
+                    <p>网点电话：<span th:text="${bussiness.busTel}"></span></p>
                 </div>
                 </div>
             </div>
@@ -195,13 +195,7 @@
    }
 
 
-   $(function (){
-      var sxDetails = "${requestScope.sx-details}";
-      sxDetails = eval("("+sx-details+")");
-      $.each(sx-details,function (i,result){
-          item =
-       });
-   })
+
 </script>
 </body>
 </html>
