@@ -9,7 +9,6 @@ $(".comment-title").click(function (){
         $(".comment-title").text("显示评论");
         $(".replay-show-hiden").hide();
     }
-
 });
 function getByPageNum(pageNum) {
     var url;
