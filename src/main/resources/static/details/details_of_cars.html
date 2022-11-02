@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>车辆详情</title>
@@ -71,38 +71,42 @@
                             <p th:text="${car.carName}">   </p><p><span th:text="${car.carPrice}"></span>元/每天起</p>
                         </div>
                         <ul class="current-carconfigure clear_float">
-                            <c:if test="${!empty serverResponse.data.carTankCapacity}">
+
                                 <li id="li-first-child">
                                     <p class="configure-name"><span class="configure-icon">
                                     <img src="../images/details/pinpai.png" alt=""></span></p>
-                                    <p>品牌:<span th:text="${car.carBrand}"></span></p>
+                                    <p>品牌:<br><span th:text="${car.carBrand}"></span></p>
                                 </li>
+                            <li>
+                                <p class="configure-name"><span class="configure-icon">
+                                    <img src="../images/details/chexing.png" alt=""></span></p>
+                                <p>型号:<br><span th:text="${car.carModel}"></span></p>
+                            </li>
                                 <li>
                                     <p class="configure-name"><span class="configure-icon">
                                     <img src="../images/details/biansu.png" alt=""></span></p>
-                                    <p>变速箱:<span th:text="${car.carCase}"></span></p>
+                                    <p>变速箱:<br><span th:text="${car.carCase}"></span></p>
                                 </li>
                                 <li>
 
                                     <p class="configure-name"><span class="configure-icon">
                                         <img src="../images/details/youxiang.png" alt=""></span></p>
-                                    <p>油箱:<span th:text="${car.carTank}"></span></p>
+                                    <p>油箱:<br><span th:text="${car.carTank}"></span></p>
                                 </li>
                                 <li>
                                     <p class="configure-name"><span class="configure-icon"><img src="../images/details/pailiang.png" alt=""></span></p>
-                                    <p>排量:<span th:text="${car.carDisp}"></span>T</p>
+                                    <p>排量:<br><span th:text="${car.carDisp}"></span></p>
                                 </li>
-                            </c:if>
+
                             <li>
                                 <p class="configure-name"><span class="configure-icon"><img src="../images/details/zuowei.png" alt=""></span></p>
-                                <p>座位数:<span th:text="${car.carSeat}"></span></p>
+                                <p>座位数:<br><span th:text="${car.carSeat}"></span></p>
                             </li>
-                            <c:if test="${!empty serverResponse.data.carTankCapacity}">
                                 <li>
                                     <p class="configure-name"><span class="configure-icon"><img src="../images/details/jinqi.png" alt=""></span></p>
-                                    <p>进气:<span th:text="${car.carExhaust}"></span></p>
+                                    <p>进气:<br><span th:text="${car.carExhaust}"></span></p>
                                 </li>
-                            </c:if>
+
                         </ul>
                     </div>
 
@@ -122,8 +126,8 @@
                     <p>车辆颜色请以门店为准，图片仅为车型示意图。</p>
                 </div>
                 <div class="msg-car">
-                    <p>取车地点：<span>wd aw adddd</span></p>
-                    <p>网点电话：<span>123456789</span></p>
+                    <p>取车地点：<span th:text="${bussiness.busAddress}"></span></p>
+                    <p>网点电话：<span th:text="${bussiness.busTel}"></span></p>
                 </div>
                 </div>
             </div>
@@ -140,7 +144,7 @@
                                                         </div>
                                                     <div class="a-link">
                                                             <h5 class="customer-name">LiHua</h5>
-                                                           <span class="type-text">车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice</span>
+                                                           <span class="type-text">nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice</span>
                                                             <div class="comment-handle">
                                                                     <span class="evaluate-time">2021/9/3 12:20:33</span>
                                                                     <a class="replay-handle" href="">回复</a>
@@ -162,7 +166,7 @@
                                                                     <h6 class="replay-customer-name">Smith</h6>
 
 
-                                                                   <span class="replay-text">这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。</span>
+                                                                   <span class="replay-text">这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。</span>
                                                                     <span class="replay-time">2021-9-9 10:20:11</span>
                                                                 </div>
                                                       </li>
@@ -180,7 +184,10 @@
 
 <script src="../js/details.js"></script>
 <script src="../layui/layui.js"></script>
+<script src="../js/common.js"></script>
 <script>
+
+<!--    收藏按钮-->
    var btn = document.getElementById("btn_collect_icon")
    var flag = false;
 
@@ -195,13 +202,7 @@
    }
 
 
-   $(function (){
-      var sxDetails = "${requestScope.sx-details}";
-      sxDetails = eval("("+sx-details+")");
-      $.each(sx-details,function (i,result){
-          item =
-       });
-   })
+
 </script>
 </body>
 </html>

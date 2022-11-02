@@ -15,4 +15,5 @@ public interface IBussinessService {
     ServerResponse getAll();
     //查询网点部分信息
     Bussiness getBussinessWithInfo(int busId);
+    ServerResponse getBussiness(int busId);
 }

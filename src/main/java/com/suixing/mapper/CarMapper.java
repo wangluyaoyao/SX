@@ -14,5 +14,4 @@ import com.suixing.entity.Car;
  */
 public interface CarMapper extends BaseMapper<Car> {
     public Car selectByCarId(int carId);
-    public ServerResponse getBussiness(int carId);
 }

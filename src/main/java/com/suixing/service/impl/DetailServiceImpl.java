@@ -26,4 +26,9 @@ public class DetailServiceImpl implements IDetailService {
     public Car getCarById(Integer carId) {
         return carMapper.selectByCarId(carId);
     }
+
+    @Override
+    public ServerResponse getCommentsByCarId(Integer carId, Integer pageNum) {
+        return null;
+    }
 }

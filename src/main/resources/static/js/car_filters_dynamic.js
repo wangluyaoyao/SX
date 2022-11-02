@@ -14,139 +14,106 @@
     } else var seco = now.getSeconds()
     $(".satrt-hour").val(hour + ":" + minu + ":" + seco)
 }
-var te
 
-getByPage(1);//默认查询第一页
+//车辆品牌冒泡
+
+$(".car-model a").click(function (){
+    var carModel = $(this).text().replace(/\s*/g,"");
+    console.log(carModel)
+    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
+    var carBrand = $(".car-brand .active").text()
+    getByPage(1,carModel,carBrand,carPrice)
+})
+
+
+
+//价格冒泡
+$(".car-price a").click(function() {
+    var temp = $(this);
+    var price = temp.text().replace(/[\u4e00-\u9fa5]/g,"");
+    console.log(price);
+
+    var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
+    var carBrand = $(".car-brand .active").text()
+    getByPage(1,carModel,carBrand,price)
+})
+
+ getByPage(1);//默认查询第一页
 //根据页数查询到数据
-function getByPage(pageNum){
-     $(".pro-product").html(" ")
-    var url = "/Car/getCarById/"+pageNum;
-    $.get(url,function (response) {
-        console.log(response.data)
-        var result =  response.data
-        var CarArray =  result.records;
-        showCar(CarArray)
-        //页码信息;
-        {
-            var prePage = result.current - 1;//上一页
-            var nextPage = result.current + 1; //下一页
-            var hrefStr = "javascript:getByPage(" + prePage + ")";
-            var pageEle = "<div class=\"page-select\">" + "<span>共</span>\n" +
-                "                 <a>" + result.pages + "</a>\n" +
-                "                 <span>页 | </span>\n" +
-                "                 <a>" + result.total + "</a>\n" +
-                "                 <span>条数据</span>\n" +
-                "                 <a href= 'javascript:getByPage(" + prePage + ")' class=\"upper\">上一页</a>\n" +
-                "                 <span>\n" +
-                "                 当前是第\n" +
-                "                 </span>\n" +
-                "                 <a>" + result.current + "</a>\n" +
-                "                 <span>\n" +
-                "                 页\n" +
-                "                 </span>\n" +
-                "                 <a href='javascript:getByPage(" + nextPage + ")' class=\"down\">下一页</a>" + "</div>"
-            $(".pro-product").append(pageEle);
+function getByPage(pageNum,carModel,carName,carPrice){
+    $(".pro-product").html(" ");
+       if(carPrice == ""||carPrice==undefined)
+           carPrice = "no";
+       if(carModel == ""||carModel==undefined)
+           carModel = "no";
+       if(carName == ""||carName==undefined)
+           carName = "no";
+       var url = "/Car/getCarByPage/"+pageNum +"/" +carModel+"/" +carName +"/" +carPrice;
+       console.log(url)
+       carSelect(url);
 
+}
+$(".car-name a").click(function() {
+    var text = $(this);
+    if(text.attr('class')==='active'){
+        return
+    }
+    // console.log(text.text());
+    var carName = text.text();
+    var carBrand = $(".car-name .active").text()+carName
+    var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
+    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
+    console.log(carBrand)
+    getByPage(1,carModel,carBrand,carPrice)
+})
 
+//数据查询
+function carSelect(url){
+    $.ajax({
+        url:url,
+        type:"get",
+        success:function (response){
+            console.log(response.data)
+            var result = response.data;
+            var CarArray =  response.data.records;
+            console.log(CarArray)
+            showCar(CarArray)
+            //页码信息;
+            {
+                $(".page-select .pages").text(result.pages)
+                $(".page-select .total").text(result.total)
+                $(".page-select .current").text(result.current)
+            }
         }
     })
 }
 //上一页，下一页按钮监听
 $(".upper").click(function () {
+    if ($(".current").text()==1){
+        layer.msg('已经是第一页了')
+        return
+    }
+
+    var carBrand = $(".car-name .active").text()
+    var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
+    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
+    var page = parseInt($(".page-select .current").text())-1
+    getByPage(page,carModel,carBrand,carPrice)
     console.log("上一页")
 })
+
 $(".down").click(function () {
+    if ($(".current").text()==$(".pages").text()){
+        layer.msg('已经是最后一页了')
+    }
+    var carBrand = $(".car-name .active").text()
+    var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
+    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
+    var page = parseInt($(".page-select .current").text()) + 1
+    getByPage(page,carModel,carBrand,carPrice)
     console.log("下一页")
 })
 
-/*
-* 多条件筛选
-* */
-
-// $(".special_coupno").on('click',"#cou_receive",function(event){
-$(".car-name a").click(function() {
-
-
-    var text = $(this);
-    if(text.attr('class')==='active'){
-        return
-    };
-    console.log(text.text());
-    var carName = text.text();
-    getByCarName(carName);
-
-})
-
-//根据姓名查询
-function getByCarName(carName){
-        $(".pro-product").html(" ");
-    console.log("条件查询");
-    if (carName ==="全部"){
-        getByPage(1);
-    }else {
-        $.ajax({
-            url:"/Car/getCarListByBrand",
-            type:"get",
-            data:{brand:carName,
-                  page: 1
-            },
-            success:function (response){
-                var result =  response.data
-                sereenCar = result.pageList;
-                // var carArray =  result.records;
-                //   console.log(carArray)
-                //    $(".pro-product").html(result)
-                showCar(sereenCar)
-                // 页码信息;
-                buttonLimit(result);
-
-            }
-        })
-    }
-}
-//分页
-function getCarBrandPage(page){
-    $(".pro-product").html(" ")
-    $.ajax({
-        url:"/Car/getCarBrandPage/"+page,
-        type:"get",
-        success:function (response){
-            var result = response.data;
-            var sereenCar =  response.data.pageList;
-            showCar(sereenCar);
-            // 页码信息;
-            buttonLimit(result);
-        }
-    })
-}
-//分页按钮限制
-function buttonLimit(result){
-    var prePage = result.pageNo - 1;//上一页
-    var nextPage = result.pageNo + 1; //下一页
-    var pageEle = "<div class=\"page-select\">" + "<span>共</span>\n" +
-        "                 <a>" + result.pageSum + "</a>\n" +
-        "                 <span>页 | </span>\n" +
-        "                 <a>" + result.total + "</a>\n" +
-        "                 <span>条数据</span>\n" +
-        "                 <a href= 'javascript:getCarBrandPage(" + prePage + ")' class=\"upper\">上一页</a>\n" +
-        "                 <span>\n" +
-        "                 当前是第\n" +
-        "                 </span>\n" +
-        "                 <a>" + result.pageNo + "</a>\n" +
-        "                 <span>\n" +
-        "                 页\n" +
-        "                 </span>\n" +
-        "                 <a href='javascript:getCarBrandPage(" + nextPage + ")' class=\"down\">下一页</a>" + "</div>"
-    $(".pro-product").append(pageEle);
-    if (result.pageNo === 1) {
-        $(".upper").removeAttr("href");
-        // $(".upper").attr("pointer-events","none")
-    }
-    if (result.pageNo === result.pageSum) {
-        $(".down").removeAttr("href");
-        // $(".upper").attr("pointer-events","none")
-    }
-}
 //商品渲染
 function showCar(carArray){
     for (var i =0 ; i<carArray.length;i++){
@@ -166,7 +133,7 @@ function showCar(carArray){
             "                                <a>"+car.carDisp+"</a><span>|</span>\n" +
             "                                <a>"+car.carCase+"</a><span>|</span>\n" +
             "                                <a>"+car.carSeat+"座"+"</a><span>|</span>\n" +
-            "                                <a href=\"../details/datails_of_cars.html\" class=\"info-detalis\">车辆详情></a>\n" +
+            "                                <a href=\"/details/"+car.carId+"\" class=\"info-detalis\">车辆详情></a>\n" +
             "                            </li>\n" +
             "                        </div>\n" +
             "                        <div class=\"in-bottom\">\n" +

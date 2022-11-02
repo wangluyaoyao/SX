@@ -12,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -31,12 +29,12 @@ import java.util.stream.Collectors;
 public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarService {
     @Autowired
     private CarMapper carMapper;
-
     List<Car> list = new ArrayList<>();  // 筛选出来的数据
+    int connt = 0;
 //分页查询
     @Override
     public ServerResponse getPage(int page) {
-
+        System.out.println("要查询的页数"+page);
         Page<Car> curret = new Page<>(page,5);
         Page<Car> pageInfo = carMapper.selectPage(curret,null);
 //        List<Car> list = pageInfo.getRecords();
@@ -46,6 +44,60 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
         else
             return ServerResponse.fail("查询失败",null);
     }
+
+
+    @Override
+    public ServerResponse getPageCarModelCarNameCarPrice(int page, String carModel, String carBrand, String carPrice) {
+        QueryWrapper<Car> queryWrapper = new QueryWrapper<>();
+        if (!carModel.equals("no")){
+            queryWrapper.eq("car_model",carModel);
+        }
+        if (!carBrand.equals("no")){
+            String [] brandArray  = carBrand.split(" ");
+            System.out.println(Arrays.toString(brandArray));
+
+            queryWrapper.and(wrapper -> {
+                    for (int i = 0; i < brandArray.length; i++) {
+                       wrapper.or().eq("car_brand",brandArray[i].trim());
+                       System.out.println(brandArray[i].trim());
+                 }
+            });
+        }
+
+
+        if (!carPrice.equals("no")){
+
+            System.out.println(carPrice.length());
+            if (carPrice.length()==5){
+                int max = Integer.parseInt(carPrice.substring(carPrice.length()-3));
+                queryWrapper.lt("car_price",max);
+            }else if (carPrice.length() == 3){
+                int min = Integer.parseInt(carPrice.substring(0,3));
+                queryWrapper.gt("car_price",min);
+            }else {
+                int min = Integer.parseInt(carPrice.substring(0,3));
+                int max = Integer.parseInt(carPrice.substring(carPrice.length()-3));
+                queryWrapper.between("car_price",min,max);
+                System.out.println("min:"+min);
+                System.out.println("max"+max);
+            }
+        }
+
+
+
+
+        Page<Car> curret = new Page<>(page,5);
+        Page<Car> pageInfo = carMapper.selectPage(curret,queryWrapper);
+//        List<Car> list = pageInfo.getRecords();
+        System.out.println(pageInfo.getRecords());
+        if (pageInfo.getRecords() != null)
+            return ServerResponse.success("查询成功",pageInfo);
+        else
+            return ServerResponse.fail("查询失败",null);
+    }
+
+
+    //方法重载
     @Override
     public ServerResponse getCarAll() {
         return ServerResponse.success("查询成功",carMapper.selectList(null));
@@ -109,6 +161,26 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
         pageMap.put("total",total);
 
         return ServerResponse.success("查询成功",pageMap);
+    }
+
+
+    @Override
+    public ServerResponse getCarFilter(String carName) {
+        if (carName == null)
+           return ServerResponse.success("查询成功",carMapper.selectList(null));
+        QueryWrapper<Car> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("car_name",carName);
+        queryWrapper.select("car_name","car_price","car_model","car_disp","car_seat","car_img");
+
+        List<Car> carList =   carMapper.selectList(queryWrapper);
+        if (carList!=null)
+            return ServerResponse.success("查询成功",carList);
+        return ServerResponse.fail("查询失败",null);
+    }
+
+    @Override
+    public ServerResponse getById(int carId) {
+        return null;
     }
 
 }

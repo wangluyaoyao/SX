@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Coupon;
 import com.suixing.mapper.CouponMapper;
+import com.suixing.mapper.UserCoupnoMapper;
 import com.suixing.service.ICouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.util.List;
 public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> implements ICouponService {
     @Autowired
     private CouponMapper couponMapper;
+
     @Override
     public ServerResponse getCouponAll() {
         List<Coupon> allList = couponMapper.selectList(null);
@@ -40,4 +42,5 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
         return ServerResponse.fail("查询失败",null);
 
     }
+
 }

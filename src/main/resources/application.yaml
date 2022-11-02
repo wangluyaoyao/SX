@@ -7,7 +7,6 @@ spring:
     password: root
 
   #    掐头去尾
-  #    掐头去尾
   mvc: #静态资源配置
     view:
       prefix: /
