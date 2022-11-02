@@ -34,4 +34,75 @@ public class Coupon implements Serializable {
     private Integer couPrice;
     private String backupPlus;
 
+    public Integer getCouId() {
+        return couId;
+    }
+
+    public void setCouId(Integer couId) {
+        this.couId = couId;
+    }
+
+    public String getCouExplain() {
+        return couExplain;
+    }
+
+    public void setCouExplain(String couExplain) {
+        this.couExplain = couExplain;
+    }
+
+    public String getCouType() {
+        return couType;
+    }
+
+    public void setCouType(String couType) {
+        this.couType = couType;
+    }
+
+    public String getCouCycle() {
+        return couCycle;
+    }
+
+    public void setCouCycle(String couCycle) {
+        this.couCycle = couCycle;
+    }
+
+    public LocalDate getCouStart() {
+        return couStart;
+    }
+
+    public void setCouStart(LocalDate couStart) {
+        this.couStart = couStart;
+    }
+
+    public LocalDate getCouEnd() {
+        return couEnd;
+    }
+
+    public void setCouEnd(LocalDate couEnd) {
+        this.couEnd = couEnd;
+    }
+
+    public Integer getCouAmount() {
+        return couAmount;
+    }
+
+    public void setCouAmount(Integer couAmount) {
+        this.couAmount = couAmount;
+    }
+
+    public Integer getCouPrice() {
+        return couPrice;
+    }
+
+    public void setCouPrice(Integer couPrice) {
+        this.couPrice = couPrice;
+    }
+
+    public String getBackupPlus() {
+        return backupPlus;
+    }
+
+    public void setBackupPlus(String backupPlus) {
+        this.backupPlus = backupPlus;
+    }
 }

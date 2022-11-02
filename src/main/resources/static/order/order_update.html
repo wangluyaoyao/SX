@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>支付</title>
@@ -56,7 +56,7 @@
 
                 <form  method="post" enctype="multipart/form-data" class="imageForm1">
                     <label for="myimage" id="lab-file">上传身份证</label>
-                    <input type="file" name="myimage" onchange="changepic1(this)" class="myimage" id="myimage">
+                    <input type="file" name="myimage" class="myimage" id="myimage">
                     <input type="button" value="确认上传"  data-value="1" class="submitBtn1"  accept="image/jpg,image/jpeg,image/gif,image/png">
                 </form>
 
@@ -93,7 +93,7 @@
 
                 <form  method="post" enctype="multipart/form-data" class="imageForm2">
                     <label for="carimage" id="lab-file2">上传驾驶证</label>
-                    <input type="file" name="carimage" onchange="changepic2(this)" class="carimage"  id="carimage">
+                    <input type="file" name="carimage" class="carimage"  id="carimage">
                     <input type="button" value="确认上传" data-value="2" class="submitBtn2" accept="image/jpg,image/jpeg,image/gif,image/png">
                 </form>
 

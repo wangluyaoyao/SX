@@ -129,5 +129,29 @@ public class UserCenterServiceImpl implements IUserCenterService {
         return car;
     }
 
+    //下订单页面优惠券
+    @Override
+    public ServerResponse getCoupon(Integer userId) {
+        QueryWrapper<UserCoupno> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id",userId);
+        List<UserCoupno> userCoupnoList = userCoupnoMapper.selectList(wrapper);
+        List<Map<String,Object>> listCoupon = new ArrayList<>();
+        for (UserCoupno userCoupno: userCoupnoList){
+            Map<String,Object> mapCoupon = new HashMap<>();
+            Coupon coupon = couponMapper.selectById(userCoupno.getCouId());
+            //日期格式转换
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            mapCoupon.put("couPrice",coupon.getCouPrice());
+            mapCoupon.put("couExplain",coupon.getCouExplain());
+            mapCoupon.put("couEnd",coupon.getCouEnd());
+            mapCoupon.put("couponState",userCoupno.getUserCouState());
+            mapCoupon.put("userId",userCoupno.getUserId());
+            mapCoupon.put("couId",userCoupno.getCouId());
+
+            listCoupon.add(mapCoupon);
+        }
+        return ServerResponse.success("ok",listCoupon);
+    }
+
 
 }
