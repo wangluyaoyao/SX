@@ -14,9 +14,9 @@ public class AlipayConfig {
             "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApP1MPHibFl4RfJ+SaIA8GtRJlYJudsSDfCaQWLM4ClM+YMYiSpAQg6f0CrY2DqSuk0EWVobD3XP9RnlYHPqFce3k11ppyn0+4ARTJMRN0768Qzgl6Ne/bbWm6X+q8D8Jt7WAAtC4MMKe2VIRpyWhMrRtFb1rveZkFpVwxECzi3xpXyQtZXJMgWS8hei8xAYwLzsEXdkxPWttBjnmso/HWkdGRtCeQK/P8MmZq1+1il9+c0J6sMM+ZW4tp/gmVTTnpfL9UIsjxdWu7Z26bGCV1OpYBKUvqeY5jzy58VSi6OFcJ9HgsfHX5dGnLoESSO4LxElObyGY1INGPFYqzSf8TwIDAQAB";
 
     //支付宝异步通知路径,付款完毕后会异步调用本项目的方法,必须为公网地址
-    public static String notify_url = "http://localhost:8080/alipayNotifyNotice";
+    public static String notify_url = "http://localhost:8089/alipayNotifyNotice";
     //支付宝同步通知路径,也就是当付款完毕后跳转本项目的页面,可以不是公网地址
-    public static String return_url = "http://localhost:8080/alipayReturnNotice";
+    public static String return_url = "http://localhost:8089/alipayReturnNotice";
     //签名方式
     public static String sign_type = "RSA2";
     public static String charset = "utf-8";

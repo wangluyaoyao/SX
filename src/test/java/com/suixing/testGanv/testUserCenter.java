@@ -1,14 +1,13 @@
 package com.suixing.testGanv;
 
 import com.suixing.commons.ServerResponse;
-import com.suixing.service.IBussinessService;
-import com.suixing.service.IFlowService;
-import com.suixing.service.IOrderService;
-import com.suixing.service.IUserCenterService;
+import com.suixing.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
@@ -23,6 +22,8 @@ public class testUserCenter {
     private IFlowService flowService;
     @Autowired
     private IOrderService orderService;
+    @Autowired
+    private ICollectService collectService;
 
 
     @Test
@@ -71,6 +72,13 @@ public class testUserCenter {
         System.out.println(response.getData());
     }
 
+    @Test
+    public void getAllCollect(){
+        ServerResponse response = collectService.getAllByUserId(6);
+        List<Map<String,Object>> list = (List<Map<String, Object>>) response.getData();
+        list.forEach(System.out::println);
+        //System.out.println(response.getData());
+    }
 
 
 }

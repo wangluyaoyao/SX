@@ -1,6 +1,7 @@
 package com.suixing.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Collect;
 
 /**
@@ -12,5 +13,10 @@ import com.suixing.entity.Collect;
  * @since 2022-10-03
  */
 public interface ICollectService extends IService<Collect> {
+    //查询所有收藏的商品
+    ServerResponse getAllByUserId(Integer userId);
+    //取消收藏
+    ServerResponse updateCollect(Integer collectId);
+
 
 }

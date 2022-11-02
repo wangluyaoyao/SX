@@ -1,47 +1,96 @@
-//添加到收藏界面
-$(".bt1").click(function (){
-    //获得ul
-     $(".collcet-ul").append('<li>'+
-         '<div className="collect-car-box">'+
-         '<div className="car-img">'+
-         '<img src="../images/collect/collectcar1.png">'+
-         '</div>'+
-         '<div className="car-info">'+
-         '<div className="car-name">荣威550混动沪牌</div>'+
-         '<div className="car-des">'+
-         '<p>车辆类型：三厢</p>'+
-         '<p>座位：五座</p>'+
-         '<a href="javascript:;" className="view-car-para">车辆详情></a>'+
-         '</div>'+
-         '</div>'+
-         '<div className="car-a">'+
-         '<button className="esc">取消收藏</button>'+
-         ' <div className="car-des">'+
-         '<p>变速箱：6档自动</p>'+
-         '<p>能源消耗：汽油</p>'+
-         '<p>排量：1.5L</p>'+
-         '<p>进气:自然进气</p>'+
-         '</div>'+
-         +'</div>'+
-         +'</div>'+
-         +'</li>');
-});
+//显示用户的收藏
+showCollect();
+function showCollect(){
+     var url = "/sx-collect/collectAll";
+     var token = localStorage.getItem("token");
+     $.ajax({
+          type: "get",
+          url: url,
+          headers: {'token': token},
+          success:function (result){
+               console.log(result);
+               var data = result.data;
+               for (var i=0; i<data.length;i++){
+                    var dataele = data[i];
+                    var car = dataele['car'];
+                    var collect = dataele['collect'];
+                    collectId = collect.collectId;
+                    carName = car.carName;
+                    carImg = car.carImg;
+                    carModel = car.carModel;
+                    carDisp = car.carDisp;
+                    carSeat = car.carSeat;
+                    carCase = car.carCase;
+                    carExhaust = car.carExhaust;
+                    carTank = car.carTank;
+                    var collectEle = "<li>\n" +
+                        "                <div class=\"collect-car-box\">\n" +
+                        "                    <div class=\"car-img\">\n" +
+                        "                        <img src=\""+carImg+"\">\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"car-esc\">\n" +
+                        "                        <button class=\"esc\" value=\""+collectId+"\">取消收藏</button>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"car-tittle\">\n" +
+                        "                        <div class=\"car-name\">"+carName+"</div>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"car-info\">\n" +
+                        "                        <div class=\"car-des\">\n" +
+                        "                            <ul>\n" +
+                        "                                <li>车辆类型:<span>"+carModel+"</span></li>\n" +
+                        "                                <li>座位:<span>"+carSeat+"</span></li>\n" +
+                        "                                <li>排量:<span>"+carDisp+"</span></li>\n" +
+                        "                            </ul>\n" +
+                        "                        </div>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"car-infoother\">\n" +
+                        "                        <div class=\"car-des\">\n" +
+                        "                            <ul>\n" +
+                        "                                <li>变速箱:<span>"+carCase+"</span></li>\n" +
+                        "                                <li> 进气:<span>"+carExhaust+"</span></li>\n" +
+                        "                                <li>油箱:<span>"+carTank+"</span></li>\n" +
+                        "                                <li><a href=\"javascript:(0);\" class=\"view-car-para\">车辆详情></a></li>\n" +
+                        "                            </ul>\n" +
+                        "\n" +
+                        "                        </div>\n" +
+                        "\n" +
+                        "                    </div>\n" +
+                        "\n" +
+                        "                </div>\n" +
+                        "            </li>";
+                    $(".collcet-ul").append(collectEle);
+               }
+          }
+     })
+}
 
 //取消收藏
-$(".esc").click(function(){
-
+$(document).on( 'click',".esc",function(event){
      layer.alert('确定提交吗？', {
           skin: 'layui-layer-molv' //样式类名 自定义样式
           , closeBtn: 1 // 是否显示关闭按钮
           , title : '提示！！' //标题
           , anim: 1 //动画类型
           , btn: ['确定', '取消'] //按钮
-          , yes: function() {　　　　　　　　　 //这里也可以写响应的ajax请求
+          , yes: function() {//这里也可以写响应的ajax请求
+               var ele=event.target;
+               var collectId = ele.value;
+               var url = "/sx-collect/collectEsc";
+               $.ajax({
+                    type: "post",
+                    url: url,
+                    data:{
+                         "collectId":collectId
+                    },
+                    success:function (result){
+                         console.log("成功");
+                         location.reload();
+                    }
+               })　　　　　
           }
           , btn2: function () {
                layer.msg('已取消');
           }
      })
-     var delectEle = $(".esc").parent().parent().parent();
-     console.log(delectEle.html());
+
 });

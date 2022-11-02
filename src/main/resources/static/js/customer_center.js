@@ -188,9 +188,7 @@ function updateUser(){
     var url = "/user/update";
     var gender = $(".gerderBtn:checked").val();
     var token = localStorage.getItem("token");
-
     //console.log(token);
-
     $.ajax({
         type:"post",
         url:url,
