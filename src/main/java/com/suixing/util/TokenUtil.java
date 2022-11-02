@@ -28,7 +28,7 @@ public class TokenUtil {
      * @return 生成的token中不带有过期时间，token的过期时间由redis进行管理
      */
     public static String getToken(LoginCustomer loginCustomer){
-        System.out.println("sign customer:" + loginCustomer);
+    //    System.out.println("sign customer:" + loginCustomer);
         String token=null;
         try {
             Map<String, Object> header = new HashMap<>(2);

@@ -75,15 +75,15 @@ a{
     margin-top: 8px;
     float: left;
     padding-left: 15px;
-    /*padding-right: 15px;*/
+    /*padding-right:15px;*/
 }
 
 .collect-car-box .car-info .car-des {
     font-size: 16px;
 
 }
-.collect-car-box .car-info .car-des p{
-    margin-top: 8px;
+.collect-car-box .car-info .car-des li{
+    border: none;
 }
 .collect-car-box .car-infoother {
     width: 130px;
@@ -91,14 +91,13 @@ a{
     margin-top: 8px;
     float: left;
     padding-left: 30px;
-
 }
 .collect-car-box .car-infoother .car-des {
     font-size: 16px;
     margin-top: 5px;
 }
-.collect-car-box .car-infoother p{
-    margin-top: 8px;
+.collect-car-box .car-infoother li{
+    border: none;
 }
 .collect-car-box .car-infoother .view-car-para {
     color: #23b7b7;
@@ -106,6 +105,6 @@ a{
     font-weight: bolder;
     display: inline-block;
     vertical-align: middle;
-    margin-top: 15px;
+    /*margin-top: 15px;*/
 }
 

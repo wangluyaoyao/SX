@@ -27,7 +27,6 @@ function getCoupno(){
             $(".coupno-receive").append(ele);
 
         }
-
     })
 }
 // $("middle").on('click','#cou_receive',function (event){
@@ -40,9 +39,26 @@ function getCoupno(){
 //          console.log(tel)
 // }
 $(".special_coupno").on('click',"#cou_receive",function(event){
-    var tel = event.target.previousElementSibling.value;
-    console.log(tel)  //prev()前一个元素
-    layer.msg('领取成功')
+    var couid = event.target.previousElementSibling.value;
+  //  console.log(tel)  //prev()前一个元素
+
+    var userId =  $(".userId").val()
+    // var couid =  $(".couId").prev().val()
+    console.log(couid)
+    if (userId == null)
+        layer.msg("请先登陆")
+    $.ajax({
+        url:"/userRecCoupno",
+        type:"get",
+        data:{
+            userId:userId,
+            couId:couid
+        },
+        success:function (result){
+            console.log(result)
+            layer.msg(result.reason)
+        }
+    })
 })
 
 //为领取优惠卷按钮添加点击事件

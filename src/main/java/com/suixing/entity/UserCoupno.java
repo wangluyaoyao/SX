@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -35,7 +36,7 @@ public class UserCoupno implements Serializable {
     @ApiModelProperty("优惠卷")
     private Integer couId;
     @ApiModelProperty("优惠劵编号")
-    private Integer userCouNum;
+    private String userCouNum;
     @ApiModelProperty("领取时间")
     private Date userCouTime;
     @ApiModelProperty("有效开始")

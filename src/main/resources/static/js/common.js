@@ -14,6 +14,7 @@ function userShow(){
                 //更新页面
                 console.log(user)
                 $(".loginAfter").text("欢迎回来!"+user.userName);
+                $(".userId").val(user.userId)
                 $(".bye").text("");
                 //  }
             }

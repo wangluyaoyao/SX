@@ -12,9 +12,9 @@ public class NumGeneration {
         return Integer.parseInt(orderNum);
     }
     //优惠卷编号生成
-    public static Integer creatCoupnoNum(){
+    public static String creatCoupnoNum(){
         String coupnoNum = "20015"+ UUID.randomUUID().toString().replace("-","").replaceAll("[a-zA-Z]","" );
-        return Integer.parseInt(coupnoNum);
+        return coupnoNum;
     }
 
 
