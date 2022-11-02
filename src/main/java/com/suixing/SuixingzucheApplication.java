@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableCaching
 @SpringBootApplication
-@MapperScan("com.suixing.mapper")//加上你项目的dao或service所在文件位置即可
+@MapperScan("com.suixing.mapper")
 public class SuixingzucheApplication {
 
     public static void main(String[] args) {
