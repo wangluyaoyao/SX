@@ -217,19 +217,20 @@
      width: 1180px;
  }
 
- .comment-box .comment-li .customer-img {
-     width: 50px;
-     float: left;
- }
- .comment-box .comment-ul .comment-li .customer-img img {
-     height: 36px;
-     width: 36px;
-     border-radius: 40px;
- }
-
- .comment-box .comment-ul .comment-li .customer-name{
-     display: inline-block;
-     float: left;
+ /*.comment-box .comment-li .customer-img {*/
+ /*    width: 50px;*/
+ /*    float: left;*/
+ /*}*/
+ /*.comment-box .comment-ul .comment-li .customer-img img {*/
+ /*    height: 36px;*/
+ /*    width: 36px;*/
+ /*    border-radius: 40px;*/
+ /*}*/
+ .customer-name{
+     /*display: inline-block;*/
+     /*float: left;*/
+     margin-left: 10px;
+     color: #1b6d85;
  }
 
  .comment-box .comment-ul .comment-li  .type-text{
@@ -296,6 +297,7 @@
      float: left;
      left: 10px;
      display: inline-block;
+     color: #2b669a;
  }
  .comment-box .stars-show {
      display: inline-block;
@@ -474,4 +476,5 @@
 }
 .car-comment{
     color: #1E9FFF;
+    margin-top: 50px;
 }

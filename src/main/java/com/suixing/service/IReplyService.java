@@ -1,7 +1,9 @@
 package com.suixing.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Reply;
+import com.suixing.entity.User;
 
 /**
  * <p>
@@ -13,4 +15,7 @@ import com.suixing.entity.Reply;
  */
 public interface IReplyService extends IService<Reply> {
 
+    public Reply getReplyByCommId(Integer carId);
+
+    public User getUserByReplyId(Integer carId);
 }
