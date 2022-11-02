@@ -13,4 +13,8 @@ public interface IUserCenterService {
     ServerResponse getUserOrderAll(Integer userId);
     Order getOrderByOrderNum(Long orderNum);
     Car getCarOrderNum(Integer carId);
+
+    //下订单获取优惠券
+    ServerResponse getCoupon(Integer userId);
+
 }

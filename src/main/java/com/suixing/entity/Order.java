@@ -62,7 +62,6 @@ public class Order implements Serializable {
     private LocalDateTime ordPicTime;
 
     @ApiModelProperty("还车时间")
-
     private LocalDateTime ordDroTime;
 
     @ApiModelProperty("取车地址")

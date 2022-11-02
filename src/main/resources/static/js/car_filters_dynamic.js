@@ -157,7 +157,7 @@ function showCar(carArray){
             "                    <!-- 预定按钮 -->\n" +
             "                    <div class=\"pro-bottom\">\n" +
             "\n" +
-            "                        <a href=\"../order/order_drop.html\">\n" +
+            "                        <a href=\"../dropOrder/"+car.carId+"\">\n" +
             "                            <div class=\"pro-order\">\n" +
             "                                预购\n" +
             "                            </div>\n" +

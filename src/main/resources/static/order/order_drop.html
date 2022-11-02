@@ -56,7 +56,7 @@
 <div id="main">
     <div class="order_details">
         <div class="car_picture">
-            <img th:src="@{car.carImg}">
+            <img th:src="${car.carImg}">
             <p>租期：<span class="day">2</span>天</p>
         </div>
         <div class="car_describe">
@@ -88,6 +88,7 @@
                     <tr>
                         <td colspan="2"><p>订单说明</p></td>
                     </tr>
+
                     <tr>
                         <td colspan="2">不限公里数，超时费按车辆租赁费及门店服务费均价/6收取实际超期小时费 (部分0元活动订单，按照40元/小时进行收取)。</td>
                     </tr>
@@ -182,7 +183,7 @@
                 <li>
                     <div class="border">
                         <p>基本保障服务费
-                            <span class="price">￥<span class="price_two" >100</span></span>
+                            <span class="price">￥<span class="price_two" th:text="50 * 2"></span></span>
                         </p>
                         <p class="exp_add">基本保障服务费*天数</p>
                     </div>
@@ -201,21 +202,25 @@
                     <div class="total_price">
                         总计：<span>￥<span class="t_price" th:text="${car.carPrice} * 2 + 50 * 2 + 20"></span></span><br>
 
-                        <form method="post" action="">
-                            <input type="text" name="custId" value="${custId}" style="display: none">
-                            <input type="text" name="carId" value="${carId}" style="display: none">
-                            <input type="text" name="borrowStoreId" value="${borrowStoreId}" style="display: none">
-                            <input type="text" name="couponId" id="couponId" style="display: none" >
-                            <input type="text" name="returnStoreId" value="${returnStoreId}" style="display: none">
-                            <input type="text" name="getCarTime" value="${getCarTime}" style="display: none">
-                            <input type="text" name="returnCarTime" value="${returnCarTime}" style="display: none">
-                            <input type="text" name="myOrderLeaseDays" value="${days}" style="display: none">
-                            <input type="text" name="myOrderPrice" class="order_price" style="display: none">
-                            <input type="submit" value="提交订单" class="a_" onclick="createOrder()">
-                        </form>
-                        <div class="a_">
-                            <a href="order_update.html">提交订单</a>
+                        <div class="jump">
+                            <form method="post" action="/saveOrder">
+                                <input type="text" name="carId" th:value="*{carId}" style="display: none">
+                                <input type="text" name="userId" id="userId"  value="" style="display: none">
+                                <input type="text" name="couId" id="couId" value="" style="display: none">
+                                <input type="text" name="ordPickup" th:value="*{bussiness.busName}" style="display: none">
+                                <input type="text" name="ordDropoff" th:value="*{bussiness.busName}" style="display: none">
+                                <input type="text" name="ordDroAddress" th:value="*{bussiness.busAddress}" style="display: none">
+                                <input type="text" name="ordPicAddress" th:value="*{bussiness.busAddress}" style="display: none">
+                                <input type="text" name="couPrice" th:value="*{couPrice}" style="display: none">
+<!--                                <input type="text" name="ordPicTime" th:field="*{getCarTime}" style="display: none">-->
+<!--                                <input type="text" name="ordDroTime" th:field="*{returnCarTime}" style="display: none">-->
+<!--                                <input type="text" name="myOrderLeaseDays" value="${days}" style="display: none">-->
+                                <input type="text" name="ordPrice" class="t_price" th:value="${car.carPrice} * 2 + 50 * 2 + 20" style="display: none">
+                                <input class="a_" type="submit" value="提交订单">
+                            </form>
+
                         </div>
+
 
                     </div>
                 </li>
@@ -226,10 +231,6 @@
 
 </div>
 <script src="../js/order_drop.js"></script>
-<script>
-
-</script>
-
 
 
 </body>

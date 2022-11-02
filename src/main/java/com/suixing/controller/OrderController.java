@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * <p>
@@ -24,7 +28,7 @@ import java.util.Date;
  * @author baomidou
  * @since 2022-10-03
  */
-@RestController
+@Controller
 //@RequestMapping("/sx-order")
 public class OrderController {
     @Autowired
@@ -59,7 +63,6 @@ public class OrderController {
 
         //3.租车网点、地址
         ServerResponse bussiness = bussinessService.getBussiness(car.getBusId());
-
         ModelAndView mav = new ModelAndView();
         mav.addObject("car",car);
         mav.addObject("bussiness",bussiness.getData());
@@ -74,35 +77,50 @@ public class OrderController {
     public ServerResponse getCouponByUserId(HttpServletRequest request){
         String token = request.getHeader("token");//get token
         Integer userId = TokenUtil.parseToken(token).getUserId();
-        System.out.println("用户id："+userId);
-        System.out.println("优惠券："+userCenterService.getUserCoupon(userId));
-        return userCenterService.getUserCoupon(userId);
-
+        return userCenterService.getCoupon(userId);
     }
 
-
     //创建订单
-    @PostMapping("saveOrder")
-    public ModelAndView saveOrder(Integer carId,
-                                  Integer userCouId,
-                                  Float ordFees,
-                                  Float ordServiceTip,
-                                  LocalDateTime ordPicTime,
-                                  LocalDateTime ordDroTime,
-                                  Integer ordLease,
-                                  Float ordPrice){
+    @RequestMapping(value = "/saveOrder", method = {RequestMethod.POST})
+    @ResponseBody
+    public ModelAndView saveOrder(Integer carId, Order order,Integer userId,Integer couId){
+        //用户id
+        System.out.println(1);
+        /*String token = request.getHeader("token");//get token
+        Integer userId = TokenUtil.parseToken(token).getUserId();*/
+
+        System.out.println("用户id:"+userId);
+        System.out.println("优惠券id"+couId);
+        //订单编号
+        Long ordNumber = UUID.randomUUID().getMostSignificantBits();
+        if(ordNumber<0){
+            ordNumber = -ordNumber;
+        }
+        //订单状态
+        String ordSatus = "预约中";
+        //创建订单时间
+        Date ordCreateTime = new Date();
+        //服务费
+        Float ordServiceTip = 20f;
+        order.setCarId(carId);
+        order.setOrdNumber(ordNumber);
+        order.setOrdSatus(ordSatus);
+        order.setOrdCreateTime(ordCreateTime);
+        order.setOrdServiceTip(ordServiceTip);
+        order.setUserId(userId);
+        if (couId !=null){
+            order.setCouId(couId);
+        }
+
+        ServerResponse result = orderService.saveOrder(order);
 
         ModelAndView mav = new ModelAndView();
-        mav.addObject("carId",carId);
-        mav.addObject("userCouId",userCouId);
-        mav.addObject("ordFees",ordFees);
-        mav.addObject("ordServiceTip",ordServiceTip);
-        mav.addObject("ordPicTime",ordPicTime);
-        mav.addObject("ordDroTime",ordDroTime);
-        mav.addObject("ordLease",ordLease);
-        mav.addObject("ordPrice",ordPrice);
+        System.out.println(222);
+        mav.addObject(result);
         mav.setViewName("order/order_update");
+        System.out.println(222333);
         return mav;
+
     }
 
 }

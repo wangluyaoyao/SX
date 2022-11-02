@@ -46,15 +46,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public ServerResponse saveOrder(Order order) {
         int rows = orderMapper.insert(order);
-        Long ordNumber = UUID.randomUUID().getMostSignificantBits();
-        String ordSatus = "预约中";
-        Date ordCreateTime = new Date();
-        order.setOrdNumber(ordNumber);
-        order.setOrdSatus(ordSatus);
-        order.setOrdCreateTime(ordCreateTime);
-        if(rows >0)
+        if(rows >0){
+            System.out.println("添加成功");
             return ServerResponse.success("添加成功",order);
+        }
         else
+            System.out.println("添加失败");
             return ServerResponse.fail("添加失败",null);
     }
 
