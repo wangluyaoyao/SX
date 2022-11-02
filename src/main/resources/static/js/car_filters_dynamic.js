@@ -91,7 +91,7 @@ function carSelect(url){
 $(".upper").click(function () {
     if ($(".current").text()==1){
         layer.msg('已经是第一页了')
-        return
+        return;
     }
 
     var carBrand = $(".car-name .active").text()
@@ -105,6 +105,7 @@ $(".upper").click(function () {
 $(".down").click(function () {
     if ($(".current").text()==$(".pages").text()){
         layer.msg('已经是最后一页了')
+        return;
     }
     var carBrand = $(".car-name .active").text()
     var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
@@ -157,7 +158,7 @@ function showCar(carArray){
             "                    <!-- 预定按钮 -->\n" +
             "                    <div class=\"pro-bottom\">\n" +
             "\n" +
-            "                        <a href=\"../order/order_drop.html\">\n" +
+            "                       <a href=\"../dropOrder/"+car.carId+"\">\n" +
             "                            <div class=\"pro-order\">\n" +
             "                                预购\n" +
             "                            </div>\n" +

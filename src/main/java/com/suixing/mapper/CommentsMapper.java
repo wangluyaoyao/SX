@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author smith
  * @since 2022-10-31
  */
-@Mapper
+//@Mapper
 public interface CommentsMapper extends BaseMapper<Comments> {
 
 }

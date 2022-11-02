@@ -50,14 +50,14 @@ public class UserController {
     //    页面验证显示用户名
     @PostMapping("userVerification/{token}")
     public ServerResponse userVerification(@PathVariable("token") String token){
-        System.out.println("token:"+token);
+    //    System.out.println("token:"+token);
         LoginCustomer loginCustomer = null;
         String loginUserName = null;
         if (token!=null){
             loginCustomer = TokenUtil.parseToken(token);
             loginUserName =   loginCustomer.getUserName();
         }
-        System.out.println("loginUserName:"+loginUserName);
+       // System.out.println("loginUserName:"+loginUserName);
         return ServerResponse.success("查询成功",loginCustomer);
     }
     @PostMapping("regist")
