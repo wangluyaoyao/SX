@@ -65,7 +65,8 @@
                         <div class="current-carinfo">
 
                             <div class="current-carpic">
-                                <img src="../images/benchic.jpg" alt="">
+<!--                                <img src="../images/benchic.jpg" alt="">-->
+                                <img th:src="${car.carImg}" alt="">
                                 <span class="video-playbtn video-li" data-cartypeids="421" id="carInfoVideo"></span>
                             </div>
                             <p th:text="${car.carName}">   </p><p><span th:text="${car.carPrice}"></span>元/每天起</p>
@@ -133,9 +134,12 @@
             </div>
         </div>
 
-        <div class="comment-box"style="margin-top: 50px">
-            <h3 style="cursor: pointer ;margin-top: 20px;border-top: 1px solid gray" class="comment-title">显示评论</h3>
-            <div style="display: none;margin-top: 10px" class="replay-show-hiden">
+        <div class="car-comment">
+            <h3>车辆评价</h3>
+        </div>
+        <div class="comment-box" style="margin-top: 50px">
+<!--            <h3 style="cursor: pointer ;margin-top: 20px;border-top: 1px solid gray" class="comment-title">显示评论</h3>-->
+<!--            <div style="display: none;margin-top: 10px" class="replay-show-hiden">-->
                 <ul class="comment-ul">
                                         <li class="comment-li">
                                             <div class="comment-customer">
@@ -176,7 +180,7 @@
             </div>
         </div>
     </div>
-    </div>
+<!--    </div>-->
 
 
 
