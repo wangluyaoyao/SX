@@ -15,7 +15,8 @@ function userShow(){
                 console.log(user)
                 $(".loginAfter").text("欢迎回来!");
                 $(".userId").val(user.userId)
-                $(".loginAfter").attr("href", "")
+                $(".loginAfter").attr("href", "../customer/customer_center.html")
+                $(".registAfter").attr("href", "../customer/customer_center.html")
                 $(".registAfter").text(user.userName);
                 $(".bye").attr("href", "../index.html")
                 $(".bye").attr("class", "bye")

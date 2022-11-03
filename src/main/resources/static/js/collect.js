@@ -93,3 +93,47 @@ $(document).on( 'click',".esc",function(event){
           }
      })
 });
+
+//判断是否收藏了
+decideCollect();
+function decideCollect(){
+     var url = "/sx-collect/collect";
+     var token = localStorage.getItem("token");
+     var carId = $(".carId").val();
+     $.ajax({
+          type: "get",
+          url: url,
+          data: {
+               "carId":carId
+          },
+          headers: {'token': token},
+          success:function (result){
+               if (result != null){
+                    $(".collect_sucess_text").text("已收藏!");
+                    $(".collect_img").attr("src","../images/collect/collectsuccess.png");
+                    $(".collect_img").attr("class","collect_sucess");
+               }
+
+          }
+     })
+}
+//收藏车辆
+$(".collect_img").click(function (){
+     var url = "/sx-collect/collectSave";
+     var token = localStorage.getItem("token");
+     var carId = $(".carId").val();
+     $.ajax({
+              type: "post",
+              url: url,
+              data: {
+                   "carId": carId
+              },
+              headers: {'token': token},
+              success: function (result) {
+                   console.log("成功!")
+              }
+         })
+});
+
+
+
