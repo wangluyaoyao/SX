@@ -41,5 +41,25 @@ public class CollectController {
 
         return ServerResponse.success("ok",collectService.updateCollect(collectId));
     }
+    //添加收藏
+    @PostMapping("collectSave")
+    @ResponseBody
+    private ServerResponse saveCollect(Integer collectId){
+
+        return ServerResponse.success("ok",collectService.updateCollect(collectId));
+    }
+
+    //查询当前车辆是否收藏
+    @GetMapping("collect")
+    @ResponseBody
+    private ServerResponse getCollect(Integer carId,HttpServletRequest request){
+        //从请求头部获得token
+        String token = request.getHeader("token");//get token
+        Integer userId = TokenUtil.parseToken(token).getUserId();
+
+        return collectService.getCollect(carId,userId);
+    }
+
+
 
 }

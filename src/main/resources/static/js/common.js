@@ -15,16 +15,21 @@ function userShow(){
                 console.log(user)
                 $(".loginAfter").text("欢迎回来!"+user.userName);
                 $(".userId").val(user.userId)
-                $(".bye").text("");
+                $(".loginAfter").attr("href", "")
+                $(".bye").text("退出");
+                $(".bye").attr("href", "../index.html")
                 //  }
             }
         })
     }
-
-
-
 }
 userShow();
+
+$(".bye").click(function (){
+
+    localStorage.removeItem("token");
+});
+
 
 //关闭窗口后自动清楚token
 // window.onload = function () {
