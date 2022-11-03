@@ -40,10 +40,11 @@ public class UserController {
 
     public ServerResponse login(User user,HttpServletRequest request,HttpServletResponse response){
         ServerResponse result = userService.login(user);
-        System.out.println("controller login response:"+request);
+        System.out.println("controller login response:"+result);
         if (result.getResultcode() == 200){
             String token = (String) result.getData();
             System.out.println("customer controller 登陆成功");
+            System.out.println(token);
         }
         return result;
     }
