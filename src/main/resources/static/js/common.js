@@ -13,11 +13,12 @@ function userShow(){
                 // if (userName!=null){
                 //更新页面
                 console.log(user)
-                $(".loginAfter").text("欢迎回来!"+user.userName);
+                $(".loginAfter").text("欢迎回来!");
                 $(".userId").val(user.userId)
                 $(".loginAfter").attr("href", "")
-                $(".bye").text("退出");
+                $(".registAfter").text(user.userName);
                 $(".bye").attr("href", "../index.html")
+                $(".bye").attr("class", "bye")
                 //  }
             }
         })
@@ -26,8 +27,11 @@ function userShow(){
 userShow();
 
 $(".bye").click(function (){
-
     localStorage.removeItem("token");
+    $.ajax({
+        type: "get",
+        url:"/customer/logout"
+    })
 });
 
 
