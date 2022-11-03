@@ -92,6 +92,7 @@ public class UserCenterController {
         User user = userCenterService.getUserUpdateById(order.getUserId());
 
         ModelAndView mav = new ModelAndView("/order/order_details");
+        System.out.println(car);
 
         mav.addObject("order",order);
         mav.addObject("car",car);

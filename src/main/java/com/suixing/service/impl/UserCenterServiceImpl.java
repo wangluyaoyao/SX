@@ -124,7 +124,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
     public Car getCarOrderNum(Integer carId) {
         QueryWrapper<Car> carWrapper = new QueryWrapper<>();
         carWrapper.eq("car_id",carId);
-        carWrapper.select("car_name","car_model","car_case","car_disp","car_img");
+        carWrapper.select("car_name","car_model","car_case","car_disp","car_img","car_price");
         Car car = carMapper.selectOne(carWrapper);
         return car;
     }
