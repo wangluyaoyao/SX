@@ -28,6 +28,12 @@ public interface IUserService extends IService<User> {
 
     public ServerResponse regist(User user);
 
+    Boolean sendMessage(String phone, String code, Map<String, Object> codeMap);
 
+//    String authcode_get(String u_phone);
+
+//    boolean sendSms(String phone,String code);
+
+//    Boolean sendPhoneCode(Map<String, Object> map, String phone);
 //    Boolean sendPhoneCode(Map<String, Object> map, String phone);
 }

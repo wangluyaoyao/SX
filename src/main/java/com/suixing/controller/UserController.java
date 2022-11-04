@@ -1,21 +1,22 @@
 package com.suixing.controller;
 
 
+import com.aliyuncs.utils.StringUtils;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.LoginCustomer;
 import com.suixing.entity.User;
 import com.suixing.service.IUserService;
 import com.suixing.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import springfox.documentation.schema.Model;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2022-10-03
  */
 
+//@Slf4j
 @RestController
 @RequestMapping("/customer")
 public class UserController {
@@ -35,6 +37,9 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     @PostMapping("login")
 
@@ -68,5 +73,37 @@ public class UserController {
     }
 
 
+    @GetMapping("/send")
+    public ServerResponse sendCode(@RequestParam("phone")String phone){
+
+        System.out.println("controller:"+phone);
+        // 根据手机号从redis中拿验证码
+        String code = redisTemplate.opsForValue().get(phone);
+        System.out.println("11code:"+code);
+        if (!StringUtils.isEmpty(code)) {
+            return ServerResponse.success("发送成功",code);
+        }
+        // 如果redis 中根据手机号拿不到验证码，则生成6位随机验证码
+        code = String.valueOf(UUID.randomUUID().toString().hashCode()).replaceAll("-","").substring(0,6);
+
+        System.out.println("code:"+code);
+        // 验证码存入codeMap
+        Map<String, Object> codeMap = new HashMap<>();
+        codeMap.put("code", code);
+        // 调用aliyunSendSmsService发送短信
+        Boolean bool = userService.sendMessage(phone, code, codeMap);
+        System.out.println(code);
+        if (bool) {
+            // 如果发送成功，则将生成的4位随机验证码存入redis缓存,5分钟后过期
+            redisTemplate.opsForValue().set(phone, code, 1000, TimeUnit.MINUTES);
+            return ServerResponse.success("发送成功",code);
+        } else {
+            return ServerResponse.fail("发送失败 ",null);
+        }
+    }
 
 }
+
+
+
+

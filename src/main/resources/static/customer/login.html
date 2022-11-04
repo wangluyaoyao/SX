@@ -43,6 +43,24 @@
                             <input id="loginCodeBtn" class="smscode" value="获得验证码" readonly>
                             <p class="msgTip"></p>
                         </div>
+                        <div class="error">
+                            <p id="loginfail1"></p>
+                        </div>
+                        <div class="login-text">
+                            <p class="popup-agreement">
+                                <input type="checkbox" id="loginAgree1" >
+                                未注册一嗨租车账号的手机号，登录时将自动注册，且代表您已同意
+                            </p>
+                            <p class="remember-no">
+                                <input type="checkbox" id="remember1">14天免登录
+                            </p>
+
+                            <!--                        <div class="no-agree"></div>-->
+                            <a href="javascript:void(0)" class="codebtn">登录</a>
+                            <div class="regist">
+                                <label >没有注册？<a href="regist.html">>去注册</a></label>
+                            </div>
+                        </div>
                     </div>
                     <div class=" tab-pane popup-login-quick" id="d2" >
                         <div class="form-wrapper">
@@ -52,26 +70,27 @@
                             <p class="psdTip"></p>
                         </div>
 
-                    </div>
+                        <div class="error">
+                            <p id="loginfail"></p>
+                        </div>
+                        <div class="login-text">
+                            <p class="popup-agreement">
+                                <input type="checkbox" id="loginAgree" >
+                                请您确认您已同意
+                            </p>
+                            <p class="remember-no">
+                                <input type="checkbox" id="remember">14天免登录
+                            </p>
 
-                    <div class="error">
-                        <p id="loginfail"></p>
-                    </div>
-                    <div class="login-text">
-                        <p class="popup-agreement">
-                            <input type="checkbox" id="loginAgree" >
-                            未注册一嗨租车账号的手机号，登录时将自动注册，且代表您已同意
-                        </p>
-                        <p class="remember-no">
-                            <input type="checkbox" id="remember">14天免登录
-                        </p>
-
-<!--                        <div class="no-agree"></div>-->
-                        <a href="javascript:void(0)" class="btn">登录</a>
-                        <div class="regist">
-                            <label >没有注册？<a href="regist.html">>去注册</a></label>
+                            <!--                        <div class="no-agree"></div>-->
+                            <a href="javascript:void(0)" class="btn">登录</a>
+                            <div class="regist">
+                                <label >没有注册？<a href="regist.html">>去注册</a></label>
+                            </div>
                         </div>
                     </div>
+
+
 
                 </div>
             </div>
@@ -86,6 +105,8 @@
     </div>
 </footer>
 <script src="../js/login.js"></script>
+<script type="text/javascript">
 
+</script>
 </body>
 </html>

@@ -170,7 +170,7 @@ fieldset, img, input, button {
     background: #fff;
     text-align: center;
     border: none;
-    font-size: 14px;
+    font-size: 12px;
 
 }
 
@@ -207,6 +207,36 @@ fieldset, img, input, button {
 .input-item:placeholder {
     text-transform: uppercase;
 }
+.codebtn{
+    text-align: center;
+    /*padding: 10px;*/
+    width: 60%;
+    margin-top: 20px;
+
+    background-color: #FF7E00;
+    color: white;
+    margin-left: 80px;
+    /*border-radius: 20px;*/
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    /*text-align: center;*/
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    /*border: 1px solid transparent;*/
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 /*登录按钮*/
 .btn {
 
@@ -217,7 +247,7 @@ fieldset, img, input, button {
 
     background-color: #FF7E00;
     color: white;
-    margin-left: 110px;
+    margin-left: 80px;
     border-radius: 20px;
 
 }
