@@ -8,7 +8,7 @@ function showCollect(){
           url: url,
           headers: {'token': token},
           success:function (result){
-               console.log(result);
+               //console.log(result);
                var data = result.data;
                for (var i=0; i<data.length;i++){
                     var dataele = data[i];
@@ -134,6 +134,64 @@ $(".collect_img").click(function (){
               }
          })
 });
+
+
+//推荐其他车辆
+showRecommend();
+function showRecommend(){
+     var url = "/recommend/recommendByUser";
+     var token = localStorage.getItem("token");
+     console.log(token)
+     $.ajax({
+          type: "get",
+          url: url,
+          headers: {'token': token},
+          success:function (result){
+               console.log(result);
+               if (result !=null){
+                    var recomendEleText = "<div class=\"recommend-main-box\">\n" +
+                        "        <p class=\"recommend-title\">精品推荐</p>\n" +
+                        "        <div class=\"recommend\">\n" +
+                        "            <ul class=\"recommend-ul-text\">\n" +
+                        "\n" +
+                        "\n" +
+                        "            </ul>\n" +
+                        "\n" +
+                        "        </div>\n" +
+                        "\n" +
+                        "    </div>";
+                    $(".collect").append(recomendEleText);
+                    for (var i=0; i<result.length;i++){
+                         var data = result[i];
+                         carName = data.carName;
+                         carId = data.carId;
+                         carImg = data.carImg;
+                         carSeat = data.carSeat;
+                         carModel = data.carModel;
+                         carPrice = data.carPrice;
+                         var recomendEle = "<li>\n" +
+                             "                    <div class=\"recommend-img\">\n" +
+                             "                        <a href=\"/details/"+carId+"\"><img src=\""+carImg+"\"></a>\n" +
+                             "                    </div>\n" +
+                             "                    <div class=\"recommend-text\">\n" +
+                             "                            <span>"+carName+"</span>\n" +
+                             "                            <span>"+carModel+"</span>\n" +
+                             "                            <span>"+carSeat+"</span>座\n" +
+                             "                    </div>\n" +
+                             "                    <div class=\"recommend-price\">\n" +
+                             "                        <span>"+carPrice+"</span>￥\n" +
+                             "                    </div>\n" +
+                             "                </li>";
+                         $(".recommend-ul-text").append(recomendEle);
+                    }
+
+               }
+
+          }
+
+     })
+
+}
 
 
 

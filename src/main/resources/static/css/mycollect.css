@@ -12,11 +12,14 @@ a{
     /*background-color: wheat;*/
 }
 .collect-main-box {
-    width: 1180px;
+    width: 1350px;
     zoom: 1;
     /*border: 1px solid #ccc;*/
     margin: 20px auto;
 }
+/*.collect-main-box ul{
+    margin-left: 8px;
+}*/
 .collect-main-box li{
     float: left;
     border: 1px solid #ccc;
@@ -106,5 +109,49 @@ a{
     display: inline-block;
     vertical-align: middle;
     /*margin-top: 15px;*/
+}
+
+/*推荐车辆*/
+.recommend-main-box{
+    width: 260px;
+    float: right;
+    position: absolute;
+    border: 1px solid #ccc;
+    margin-left: 1260px;
+    margin-top: 5px;
+
+}
+.recommend-main-box .recommend-title{
+    margin-top: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1em;
+    color: #23b7b7;
+
+}
+.recommend-main-box .recommend{
+    width: 250px;
+    height: 710px;
+    border: #b2dba1;
+}
+.recommend-main-box .recommend .recommend-img{
+    width: 240px;
+    height: 174px;
+}
+.recommend-main-box .recommend .recommend-img img{
+    width: 240px;
+    height: 174px;
+}
+.recommend-main-box .recommend .recommend-text{
+    text-align: center;
+}
+.recommend-main-box .recommend .recommend-text span{
+    /*margin-left: 5px;*/
+}
+.recommend-main-box .recommend .recommend-price{
+    text-align: center;
+    font-size: 16px;
+    color: #d32323;
 }
 
