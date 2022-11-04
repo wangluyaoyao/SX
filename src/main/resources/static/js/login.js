@@ -179,10 +179,7 @@ function sendCode(){
                 console.log("code:"+ sms);
                 //    console.log("sms:"+sms)
                 alert("发送成功");
-
-
             }
-
         });
 
         return sms;
