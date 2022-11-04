@@ -93,7 +93,6 @@ function login(){
             success:function (result) {
                 console.log("result:"+result);
                 var box = document.querySelector("input[type = checkbox]").checked;
-                var phoneNo = $(".phoneNo").val()
                 var username = $(".userTel").val()
 
 
@@ -197,20 +196,51 @@ function sendCode(){
 //
 // });
 //点击登录
-$(document).on('click','.codebtn',function(){
+// $(document).on('click','.codebtn',function(){
+//
+//
+//     // var sms = sendCode();
+//     console.log("sms:"+sms)
+//     // console.log("sms:"+sms);
+//     var code = $("#loginCode").val();
+//     console.log("code:"+code)
+//     if (code == "") {
+//         $("#loginfail1").text("请输入验证码！")
+//     }else if ( sms != code){
+//         $("#loginfail1").text("验证码错误！")
+//     }else {
+//         window.location.href = "../index.html";
+//     }
+//
+// });
+//根据手机号快速登陆
+$(".codebtn").click(function (){
+    loginByTel()
+})
+function loginByTel(){
+    $.ajax({
+        type:"post",
+        url:"../customer/loginByTel",
+        data:{
+            userTel: $(".phoneNo").val()
+        },
+        success:function (responseTel){
+            console.log("responseTel:"+responseTel);
+            var phoneNo = $(".phoneNo")
+            var code = $("#loginCode").val();
 
-
-    // var sms = sendCode();
-    console.log("sms:"+sms)
-    // console.log("sms:"+sms);
-    var code = $("#loginCode").val();
-    console.log("code:"+code)
-    if (code == "") {
-        $("#loginfail1").text("请输入验证码！")
-    }else if ( sms != code){
-        $("#loginfail1").text("验证码错误！")
-    }else {
-        window.location.href = "../index.html";
-    }
-
-});
+            if (responseTel.resultcode !=200){
+                console.log("手机号还没有注册，请先注册")
+            } else if (code == "") {
+                $("#loginfail1").text("请输入验证码！")
+            }else if ( sms != code){
+                $("#loginfail1").text("验证码错误！")
+            }else {
+                var token = responseTel.data;
+                console.log("token:"+token);
+                localStorage.setItem("token",token);
+                window.location.href = "../index.html";
+            }
+        }
+    })
+}

@@ -51,7 +51,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         System.out.println("查询到的登录账户："+loginUser);
 
         if (loginUser != null){
-            LoginCustomer loginCustomer = new LoginCustomer(loginUser.getUserId(),loginUser.getUserName());
+            LoginCustomer loginCustomer = new LoginCustomer(loginUser.getUserId(),loginUser.getUserName(),loginUser.getUserTel());
             String token = TokenUtil.getToken(loginCustomer);
             System.out.println("service token:"+token);
             return ServerResponse.success("登陆成功",token);
@@ -70,7 +70,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
            return ServerResponse.fail("注册失败",null);
     }
 
-
+    @Override
+    public ServerResponse loginByPhone(User user) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_tel",user.getUserTel());
+        User loginTel = userMapper.selectOne(wrapper);
+        if (loginTel !=null){
+            LoginCustomer loginUserTel = new LoginCustomer(loginTel.getUserId(),loginTel.getUserName(),loginTel.getUserTel());
+            String token = TokenUtil.getToken(loginUserTel);
+            System.out.println("service token:"+token);
+            return ServerResponse.success("登陆成功",token);
+        }else {
+            return ServerResponse.fail("登陆失败",null);
+        }
+    }
     @Override
     public Boolean sendMessage(String phone, String code, Map<String, Object> codeMap) {
         /**
@@ -108,6 +121,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         return false;
     }
+
+
 }
 
 

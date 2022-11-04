@@ -30,6 +30,7 @@ public interface IUserService extends IService<User> {
 
     Boolean sendMessage(String phone, String code, Map<String, Object> codeMap);
 
+    public ServerResponse loginByPhone(User user);
 //    String authcode_get(String u_phone);
 
 //    boolean sendSms(String phone,String code);

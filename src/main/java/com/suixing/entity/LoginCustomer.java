@@ -6,15 +6,25 @@ public class LoginCustomer {
     private Integer userId;
     private String userName;
 
+    private Long userTel;
+
+    public LoginCustomer(Integer userId, String userName, Long userTel) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userTel = userTel;
+    }
+
     public LoginCustomer(){
     }
 
-    public LoginCustomer(Integer userId, String userName) {
-        this.userId = userId;
-        this.userName = userName;
+
+    public Long getUserTel() {
+        return userTel;
     }
 
-
+    public void setUserTel(Long userTel) {
+        this.userTel = userTel;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -35,9 +45,9 @@ public class LoginCustomer {
     @Override
     public String toString() {
         return "LoginCustomer{" +
-
-                "userId='" + userId + '\'' +
+                "userId=" + userId +
                 ", userName='" + userName + '\'' +
+                ", userTel=" + userTel +
                 '}';
     }
 }

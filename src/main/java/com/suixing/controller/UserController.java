@@ -42,7 +42,6 @@ public class UserController {
     private RedisTemplate<String, String> redisTemplate;
 
     @PostMapping("login")
-
     public ServerResponse login(User user,HttpServletRequest request,HttpServletResponse response){
         ServerResponse result = userService.login(user);
         System.out.println("controller login response:"+result);
@@ -52,6 +51,18 @@ public class UserController {
             System.out.println(token);
         }
         return result;
+    }
+
+    @PostMapping("loginByTel")
+    public ServerResponse loginByTel(User user,HttpServletRequest request,HttpServletResponse response){
+        ServerResponse responseTel = userService.loginByPhone(user);
+        System.out.println("controller login Tel response:"+responseTel);
+        if (responseTel.getResultcode() ==200){
+            String token = (String) responseTel.getData();
+            System.out.println("user by tel 登陆成功");
+            System.out.println(token);
+        }
+        return responseTel;
     }
     //    页面验证显示用户名
     @PostMapping("userVerification/{token}")
@@ -66,10 +77,15 @@ public class UserController {
        // System.out.println("loginUserName:"+loginUserName);
         return ServerResponse.success("查询成功",loginCustomer);
     }
-    @PostMapping("regist")
+    @PostMapping("register")
     public ServerResponse regist(User user,HttpServletRequest request,HttpServletResponse response){
-
-        return userService.regist(user);
+        ServerResponse registResponse = userService.regist(user);
+        System.out.println("注册的账号为："+registResponse);
+        if (registResponse.getResultcode()==200){
+            return ServerResponse.success("注册成功",registResponse);
+        }else {
+            return ServerResponse.fail("注册失败",null);
+        }
     }
 
 

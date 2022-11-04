@@ -55,7 +55,7 @@
                         <li class="regist-text">
 
                             <input type="checkbox">
-                            <label>我已阅读并同意 </label><a href=""> 《当当交易条款》</a> 和 <a href="">《当当社区条款》</a>
+                            <label>我已阅读并同意 </label><a href=""> 《随行租车条款》</a> 和 <a href="">《阿伟爱旭旭条款》</a>
 
                         </li>
 
@@ -77,63 +77,6 @@
 </form>
 <script type="text/javascript">
 
-    var button = document.getElementById('btn');
-    button.onclick = function() {
-        button.disabled = 'disabled';
-        var time = 60;
-        var timer = setInterval(function() {
-            if (time == -1) {
-                clearInterval(timer)
-                button.disabled = '';
-                button.value = '获取验证码';
-            } else {
-                button.value = time + '秒后重新获取';
-                time--;
-            }
-        }, 1000)
-    }
-
-    var sms = "";
-    //发送验证码
-    $(document).on('click',".btn",function (){
-
-        var phone = $("#phone").val();
-        if (phone != ""){
-            sendMessage();
-            $.ajax({
-                url : "sendSmS",
-                type : "post",
-                dataType : "json",
-                data: {
-                    "phone" : phone
-                },
-                success : function (result) {
-                    console.log("............");
-                    alert("发送成功");
-                    sms = result.data;
-                }
-            });
-        }else {
-            alert("请输入手机号");
-            return false;
-        }
-    });
-    //点击登录
-    $(document).on('click','.registBtn',function(){
-        console.log("sms:"+sms);
-        var code = $("#code").val();
-        if (code == "") {
-            alert("请输入验证码");
-        } else {
-            if (sms == code) {
-                window.location.href = "login.html";
-            } else {
-                alert("验证码错误");
-            }
-
-        }
-
-    });
 </script>
 <script src="../js/regist.js"></script>
 </body>
