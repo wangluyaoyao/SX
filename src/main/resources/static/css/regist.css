@@ -180,3 +180,8 @@ fieldset, img, input, button {
 .regist-text{
     font-size: 10px;
 }
+
+.errorMsg{
+    color: #c9302c;
+    font-size: 15px;
+}

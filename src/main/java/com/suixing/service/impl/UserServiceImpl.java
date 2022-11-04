@@ -64,6 +64,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public ServerResponse regist(User user) {
        int rows = userMapper.insert(user);
+
        if (rows > 0)
            return ServerResponse.success("注册成功",user);
        else
@@ -84,6 +85,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return ServerResponse.fail("登陆失败",null);
         }
     }
+
+//    @Override
+//    public ServerResponse selectUserTel(String phone) {
+//        QueryWrapper<User> wrapper = new QueryWrapper<>();
+//        wrapper.eq("user_tel",phone);
+//        User loginTel = userMapper.selectOne(wrapper);
+//        if (loginTel == null){
+//            return ServerResponse.success("不重复",loginTel);
+//        }else {
+//            return ServerResponse.fail("重复",null);
+//        }
+//    }
+
     @Override
     public Boolean sendMessage(String phone, String code, Map<String, Object> codeMap) {
         /**
@@ -94,6 +108,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
          * accessKeyId 自己的用户accessKeyId
          * accessSecret 自己的用户accessSecret
          */
+
         DefaultProfile profile = DefaultProfile.getProfile(
                 "cn-hangzhou", "LTAI5tAuf9NzKcXVeVdf5m7K", "FkwGJUt85vXGyXCiVTPV82IUTJXYnW");
         IAcsClient client = new DefaultAcsClient(profile);

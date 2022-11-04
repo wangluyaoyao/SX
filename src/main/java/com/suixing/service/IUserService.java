@@ -3,9 +3,7 @@ package com.suixing.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.User;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,6 +19,7 @@ import java.util.Map;
 public interface IUserService extends IService<User> {
 
 
+
     //登录
 //    public User selectUserById(int userId);
 
@@ -31,6 +30,8 @@ public interface IUserService extends IService<User> {
     Boolean sendMessage(String phone, String code, Map<String, Object> codeMap);
 
     public ServerResponse loginByPhone(User user);
+
+//    public ServerResponse selectUserTel(String phone);
 //    String authcode_get(String u_phone);
 
 //    boolean sendSms(String phone,String code);

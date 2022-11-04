@@ -157,7 +157,7 @@ function sendCode(){
     if (phone != ""){
 
         $.ajax({
-            url : "../customer/send",
+            url : "../customer/loginSend",
             type : "get",
             dataType : "text",
             async:false,

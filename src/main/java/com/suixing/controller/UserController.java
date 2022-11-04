@@ -5,6 +5,7 @@ import com.aliyuncs.utils.StringUtils;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.LoginCustomer;
 import com.suixing.entity.User;
+import com.suixing.mapper.UserMapper;
 import com.suixing.service.IUserService;
 import com.suixing.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ import java.util.concurrent.TimeUnit;
 public class UserController {
 
 //    植入对象
-
-
+    @Autowired
+    private UserMapper userMapper;
     @Autowired
     private IUserService userService;
 
@@ -81,16 +82,19 @@ public class UserController {
     public ServerResponse regist(User user,HttpServletRequest request,HttpServletResponse response){
         ServerResponse registResponse = userService.regist(user);
         System.out.println("注册的账号为："+registResponse);
+
+
         if (registResponse.getResultcode()==200){
             return ServerResponse.success("注册成功",registResponse);
-        }else {
+        }else{
             return ServerResponse.fail("注册失败",null);
         }
     }
 
 
-    @GetMapping("/send")
+    @GetMapping("/loginSend")
     public ServerResponse sendCode(@RequestParam("phone")String phone){
+
 
         System.out.println("controller:"+phone);
         // 根据手机号从redis中拿验证码
@@ -98,6 +102,8 @@ public class UserController {
         if (!StringUtils.isEmpty(code)) {
             return ServerResponse.success("发送成功",code);
         }
+
+
         // 如果redis 中根据手机号拿不到验证码，则生成6位随机验证码
         code = String.valueOf(UUID.randomUUID().toString().hashCode()).replaceAll("-","").substring(0,6);
 
@@ -109,10 +115,44 @@ public class UserController {
         Boolean bool = userService.sendMessage(phone, code, codeMap);
         System.out.println(code);
         if (bool) {
-            // 如果发送成功，则将生成的4位随机验证码存入redis缓存,5分钟后过期
+            // 如果发送成功，则将生成的6位随机验证码存入redis缓存,5分钟后过期
             redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
             return ServerResponse.success("发送成功",code);
-        } else {
+        } else{
+            return ServerResponse.fail("发送失败 ",null);
+        }
+    }
+
+    @GetMapping("/registerSend")
+    public ServerResponse registerSendCode(@RequestParam("phone")String phone){
+
+
+        System.out.println("controller:"+phone);
+        // 根据手机号从redis中拿验证码
+        String code = redisTemplate.opsForValue().get(phone);
+        if (!StringUtils.isEmpty(code)) {
+            return ServerResponse.success("发送成功",code);
+        }
+
+        // 如果redis 中根据手机号拿不到验证码，则生成6位随机验证码
+        code = String.valueOf(UUID.randomUUID().toString().hashCode()).replaceAll("-","").substring(0,6);
+
+        System.out.println("code:"+code);
+        // 验证码存入codeMap
+        Map<String, Object> codeMap = new HashMap<>();
+        codeMap.put("code", code);
+        // 调用aliyunSendSmsService发送短信
+
+        Boolean bool = userService.sendMessage(phone, code, codeMap);
+        System.out.println(code);
+
+//        ServerResponse serverResponse = userService.selectUserTel(phone);
+
+        if (bool) {
+            // 如果发送成功，则将生成的6位随机验证码存入redis缓存,5分钟后过期
+            redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
+            return ServerResponse.success("发送成功",code);
+        } else{
             return ServerResponse.fail("发送失败 ",null);
         }
     }

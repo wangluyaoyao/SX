@@ -73,12 +73,11 @@ button.onclick = function() {
 }
 
 var sms = "";
-var phoneNo = ""
+
 //发送验证码
 $(".btn").click(function (){
     sendCode()
 })
-
 function sendCode(){
 
     // var sms = "";
@@ -87,7 +86,7 @@ function sendCode(){
     if (phone != ""){
 
         $.ajax({
-            url : "../customer/send",
+            url : "../customer/registerSend",
             type : "get",
             dataType : "text",
             async:false,
@@ -97,11 +96,8 @@ function sendCode(){
             success:function (result) {
                 console.log("............");
                 console.log(result)
-
                 console.log(typeof result)
-
                 sms = JSON.stringify(result).slice(52,58);
-                phoneNo = result
                 // console.log(typeof sms[2]);
                 console.log(sms)
                 console.log("code:"+ sms);
@@ -109,21 +105,16 @@ function sendCode(){
                 alert("发送成功");
             }
         });
-
         return sms;
         // console.log("sms:"+sms);
     }else {
         $("#loginfail1").text("请输入手机号")
         return false;
     }
-
 }
 
 //点击注册
-$(".registBtn").click(function (){
-    register()
-})
-function register(){
+$(".registBtn").off("click").on("click",function (e){
     $.ajax({
         type:"post",
         url:"../customer/register",
@@ -140,23 +131,33 @@ function register(){
             var pw1 = document.getElementById("password").value;
             var pw2 = document.getElementById("checkPassword").value;
             if (/^[0-9]\w{9,10}$/.test(userTel)){
-                alert("格式不正确");
+                $("#errorMsg").text("手机号格式错误！")
+                return false;
             }else if (!box){
-                alert("请同意服务")
+                $("#errorMsg").text("请勾选服务！")
+                return false;
             }else if (code == ""){
-                alert("请输入验证码")
+                $("#errorMsg").text("请输入验证码")
+                return false;
             }else if (sms != code){
-                alert("验证码不正确")
+                $("#errorMsg").text("验证码错误")
+                return false;
             }else if (pw1 !== pw2){
-                alert("两次密码不相同")
+                $("#errorMsg").text("两次密码不一致")
+                return false;
             }else if (userPsd === "" || userPsd == null){
-                alert("密码不能为空")
+                $("#errorMsg").text("请输入密码！")
+                return false;
             }else if (/^[a-zA-Z0-9]\w{5,100}$/.test(userPsd)){
-                alert("密码格式不正确")
+                $("#errorMsg").text("密码格式错误！格式为数字，字母")
+                return false;
             }else {
                 alert("注册成功！")
+                return true;
             }
 
         }
+
     })
-}
+    e.stopPropagation();
+})
