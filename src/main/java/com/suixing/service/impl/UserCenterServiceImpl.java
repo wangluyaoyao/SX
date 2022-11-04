@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -90,15 +91,15 @@ public class UserCenterServiceImpl implements IUserCenterService {
             //将当前日期时间格式化
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             //将日期的时间格式化为字符串
-            String picTime = order.getOrdPicTime().format(formatter);
-            String droTime = order.getOrdPicTime().format(formatter);
+//            String picTime = order.getOrdPicTime().format(formatter);
+//            String droTime = order.getOrdPicTime().format(formatter);
 
             Map<String,Object> mapOrder = new HashMap<>();
             mapOrder.put("ordId",order.getOrdId());
             mapOrder.put("ordNumber",order.getOrdNumber());
             mapOrder.put("ordSatus",order.getOrdSatus());
-            mapOrder.put("ordPicTime",picTime);
-            mapOrder.put("ordDroTime",droTime);
+            mapOrder.put("ordPicTime",order.getOrdPicTime());
+            mapOrder.put("ordDroTime",order.getOrdPicTime());
             mapOrder.put("carName",car.getCarName());
             mapOrder.put("carModel",car.getCarModel());
             mapOrder.put("carCase",car.getCarCase());
@@ -134,21 +135,32 @@ public class UserCenterServiceImpl implements IUserCenterService {
     public ServerResponse getCoupon(Integer userId) {
         QueryWrapper<UserCoupno> wrapper = new QueryWrapper<>();
         wrapper.eq("user_id",userId);
+        wrapper.gt("user_cou_end", LocalDateTime.now());
+        wrapper.lt("user_cou_start",LocalDateTime.now());
+        wrapper.eq("user_cou_state",0);
         List<UserCoupno> userCoupnoList = userCoupnoMapper.selectList(wrapper);
         List<Map<String,Object>> listCoupon = new ArrayList<>();
         for (UserCoupno userCoupno: userCoupnoList){
             Map<String,Object> mapCoupon = new HashMap<>();
+
             Coupon coupon = couponMapper.selectById(userCoupno.getCouId());
             //日期格式转换
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String userCouEnd = sdf.format(userCoupno.getUserCouEnd());
+            String userCouStart = sdf.format(userCoupno.getUserCouStart());
+
             mapCoupon.put("couPrice",coupon.getCouPrice());
             mapCoupon.put("couExplain",coupon.getCouExplain());
-            mapCoupon.put("couEnd",coupon.getCouEnd());
+            //生效时间、失效时间
+            mapCoupon.put("userCouEnd",userCouEnd);
             mapCoupon.put("couponState",userCoupno.getUserCouState());
             mapCoupon.put("userId",userCoupno.getUserId());
             mapCoupon.put("couId",userCoupno.getCouId());
-
+            //使用条件
+            mapCoupon.put("couMax",coupon.getCouMax());
             listCoupon.add(mapCoupon);
+
+
         }
         return ServerResponse.success("ok",listCoupon);
     }

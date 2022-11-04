@@ -32,7 +32,7 @@ public class Coupon implements Serializable {
     @ApiModelProperty("库存数量")
     private Integer couAmount;
     private Integer couPrice;
-    private String backupPlus;
+    private Integer couMax;
 
     public Integer getCouId() {
         return couId;
@@ -98,11 +98,11 @@ public class Coupon implements Serializable {
         this.couPrice = couPrice;
     }
 
-    public String getBackupPlus() {
-        return backupPlus;
+    public Integer getCouMax() {
+        return couMax;
     }
 
-    public void setBackupPlus(String backupPlus) {
-        this.backupPlus = backupPlus;
+    public void setCouMax(Integer couMax) {
+        this.couMax = couMax;
     }
 }

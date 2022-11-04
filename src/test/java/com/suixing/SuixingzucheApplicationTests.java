@@ -24,11 +24,11 @@ class SuixingzucheApplicationTests {
 
     }
 
-    @Test
-    public void selectById(){
-        Car sxCar = service.selectId(1);
-        System.out.println(sxCar);
-    }
+//    @Test
+//    public void selectById(){
+//        Car sxCar = service.selectId(1);
+//        System.out.println(sxCar);
+//    }
 
     @Test
     public void select(){
@@ -36,13 +36,13 @@ class SuixingzucheApplicationTests {
         System.out.println(list.getData());
     }
 
-    @Test
-    public void selectPage(){
-        ServerResponse list = carService.getPage(1);
-        List<Car> carList = (List<Car>) list.getData();
-        carList.forEach(System.out::println);
-        System.out.println();
-    }
+//    @Test
+//    public void selectPage(){
+//        ServerResponse list = carService.getPage(1);
+//        List<Car> carList = (List<Car>) list.getData();
+//        carList.forEach(System.out::println);
+//        System.out.println();
+//    }
 
 
 }

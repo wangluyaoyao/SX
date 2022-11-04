@@ -13,19 +13,21 @@ public class test {
     private ICarService service;
     @Autowired
     private ICouponService copservice;
-    @Test
-    public void getAll(){
-        System.out.println(service.getCarAll().getData());
-    }
-
-    @Test
-    public void getPage(){
-        ServerResponse serverResponse =  service.getPage(1);
-        Object list =serverResponse.getData();
-        System.out.println(list);
-    }
+//    @Test
+//    public void getAll(){
+//        System.out.println(service.getCarAll().getData());
+//    }
+//
+//    @Test
+//    public void getPage(){
+//        ServerResponse serverResponse =  service.getPage(1);
+//        Object list =serverResponse.getData();
+//        System.out.println(list);
+//    }
     @Test
     public void getCoupno(){
         System.out.println(copservice.getCouponAll());
     }
+
+
 }

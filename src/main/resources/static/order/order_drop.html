@@ -57,7 +57,7 @@
     <div class="order_details">
         <div class="car_picture">
             <img th:src="${car.carImg}">
-            <p>租期：<span class="day">2</span>天</p>
+            <p>租期：<span class="day" th:text="${ordLease}"></span>天</p>
         </div>
         <div class="car_describe">
             <div class="car_name">
@@ -78,8 +78,8 @@
                         <td>还车门店:<span th:text="${bussiness.busName}"></span></td>
                     </tr>
                     <tr>
-                        <td>取车时间：<span>2022-08-27 09:00</span></td>
-                        <td>还车时间:<span>2022-08-29 09:00</span></td>
+                        <td>取车时间：<span th:text="${start}"></span></td>
+                        <td>还车时间:<span th:text="${end}"></span></td>
                     </tr>
                     <tr>
                         <td>取车地址：<span th:text="${bussiness.busAddress}"></span></td>
@@ -133,7 +133,7 @@
                 <div class="new_user">
                     <div class="coupon1">
                         <h1>￥<span class="cou_money">100</span></h1>
-                        <p>有效期至<span>2022/8/28</span></p>
+                        <p>有效期至<span>2022/12/28</span></p>
                         <div class="part_coupon1">
                             <h5>新用户首单立减100元</h5>
                         </div>
@@ -174,7 +174,7 @@
             <ul>
                 <li>
                     <p>车辆租赁费及门店服务费
-                        <span class="price">￥<span class="price_one" th:text="${car.carPrice} * 2"></span> </span>
+                        <span class="price">￥<span class="price_one" th:text="${car.carPrice} * ${ordLease}"></span> </span>
                     </p>
                     <p class="exp_add">现付价</p>
                     <hr class="hr1">
@@ -183,7 +183,7 @@
                 <li>
                     <div class="border">
                         <p>基本保障服务费
-                            <span class="price">￥<span class="price_two" th:text="50 * 2"></span></span>
+                            <span class="price">￥<span class="price_two" th:text="50 * ${ordLease}"></span></span>
                         </p>
                         <p class="exp_add">基本保障服务费*天数</p>
                     </div>
@@ -200,11 +200,11 @@
                         <p>违章押金<span class="tui">(可退)</span><span  class="price1">￥2000</span></p>
                     </div>
                     <div class="total_price">
-                        总计：<span>￥<span class="t_price" th:text="${car.carPrice} * 2 + 50 * 2 + 20"></span></span><br>
+                        总计：<span>￥<span class="t_price" th:text="${car.carPrice} * ${ordLease} + 50 * ${ordLease} + 20"></span></span><br>
 
                         <div class="jump">
                             <form method="post" action="/saveOrder">
-                                <input type="text" name="carId" th:value="*{carId}" style="display: none">
+                                <input type="text" name="carId" th:value="*{car.carId}" style="display: none">
                                 <input type="text" name="userId" id="userId"  value="" style="display: none">
                                 <input type="text" name="couId" id="couId" value="" style="display: none">
                                 <input type="text" name="ordPickup" th:value="*{bussiness.busName}" style="display: none">
@@ -212,10 +212,11 @@
                                 <input type="text" name="ordDroAddress" th:value="*{bussiness.busAddress}" style="display: none">
                                 <input type="text" name="ordPicAddress" th:value="*{bussiness.busAddress}" style="display: none">
                                 <input type="text" name="couPrice" th:value="*{couPrice}" style="display: none">
-<!--                                <input type="text" name="ordPicTime" th:field="*{getCarTime}" style="display: none">-->
-<!--                                <input type="text" name="ordDroTime" th:field="*{returnCarTime}" style="display: none">-->
-<!--                                <input type="text" name="myOrderLeaseDays" value="${days}" style="display: none">-->
-                                <input type="text" name="ordPrice" class="t_price" th:value="${car.carPrice} * 2 + 50 * 2 + 20" style="display: none">
+                                <input type="text" name="ordCouMoney" id="ordCouMoney" value="" style="display: none">
+                                <input type="text" name="ordPicTime" th:value="*{start}" style="display: none">
+                                <input type="text" name="ordDroTime" th:value="*{end}" style="display: none">
+                                <input type="text" name="ordLease" th:value="*{ordLease}" style="display: none">
+                                <input type="text" name="ordPrice" class="t_price" th:value="*{car.carPrice} * *{ordLease} + 50 * *{ordLease} + 20" style="display: none">
                                 <input class="a_" type="submit" value="提交订单">
                             </form>
 
@@ -227,6 +228,8 @@
             </ul>
         </div>
     </div>
+
+
 
 
 </div>

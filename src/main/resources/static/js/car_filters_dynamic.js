@@ -117,6 +117,16 @@ $(".down").click(function () {
 
 //商品渲染
 function showCar(carArray){
+
+    var start1 = $(".t1").val();
+    var start2 = $(".t2").val();
+    var start3 = $(".t3").val();
+    var start4 = $(".t4").val();
+    var start = start1+" "+start2;
+    var end = start3+" "+start4;
+    console.log(start+"111111")
+    console.log(end+"22222222")
+
     for (var i =0 ; i<carArray.length;i++){
         var car = carArray[i];
         console.log(car);
@@ -158,8 +168,8 @@ function showCar(carArray){
             "                    <!-- 预定按钮 -->\n" +
             "                    <div class=\"pro-bottom\">\n" +
             "\n" +
-            "                       <a href=\"../dropOrder/"+car.carId+"\">\n" +
-            "                            <div class=\"pro-order\">\n" +
+            "                       <a href=\"../dropOrder?carId="+car.carId+"&start="+start+"&end="+end+"\">\n" +
+            "                            <div class=\"pro-order\" >\n" +
             "                                预购\n" +
             "                            </div>\n" +
             "                        </a>\n" +
