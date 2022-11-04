@@ -63,4 +63,29 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         }
         return ServerResponse.fail("fail",null);
     }
+
+    @Override
+    public ServerResponse saveCollect(Integer carId, Integer userId) {
+        Collect collect = new Collect();
+        collect.setCarId(carId);
+        collect.setUserId(userId);
+        collect.setCollectStatus(0);
+        int row = collectMapper.insert(collect);
+        if (row != 0){
+            return ServerResponse.success("ok",collect);
+        }
+        return ServerResponse.fail("ok",null);
+    }
+
+    @Override
+    public ServerResponse getCollect(Integer carId, Integer userId) {
+        QueryWrapper<Collect> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("car_id",carId);
+        queryWrapper.eq("user_id",userId);
+        queryWrapper.eq("collect_status",0);
+        Collect collect = collectMapper.selectOne(queryWrapper);
+        if (collect != null)
+            return ServerResponse.success("ok",collect);
+        return null;
+    }
 }

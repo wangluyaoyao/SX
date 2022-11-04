@@ -156,7 +156,7 @@ function showUser(){
             $("#info1").append(userEle);
             $(".userId").val(userId);
             $("#userTel").val(userTel) ;
-            $("#userPsd").val(userPsd) ;
+            // $("#userPsd").val(userPsd) ;
             $("#userGender").val(userGender) ;
             $("#userIdcard").val(userIdcard) ;
             $("#userName").val(userName) ;
@@ -386,6 +386,7 @@ function showOrderAll(){
         headers: {'token': token},
         success:function (result) {
             var orderUser = result.data;
+
             for (var i=0; i<orderUser.length;i++){
                 var order = orderUser[i];
                 var ordId = order['ordId'];

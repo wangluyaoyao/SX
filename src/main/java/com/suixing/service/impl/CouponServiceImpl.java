@@ -7,10 +7,12 @@ import com.suixing.mapper.CouponMapper;
 import com.suixing.mapper.UserCoupnoMapper;
 import com.suixing.service.ICouponService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -25,20 +27,25 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
     @Autowired
     private CouponMapper couponMapper;
 
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
+
     @Override
     public ServerResponse getCouponAll() {
         List<Coupon> allList = couponMapper.selectList(null);
         if (allList != null) {
+            //加载优惠券，同时加载到rediss数据库中
             List<Coupon> couponList = new ArrayList<>();
             for (Coupon coupon : allList) {
                 if (coupon.getCouAmount()>0){
-                    System.out.println(coupon);
+                    String key = "coupon_"+coupon.getCouId();
+                    redisTemplate.opsForValue().set(key,coupon,12, TimeUnit.HOURS);
+                   // System.out.println(coupon);
                     couponList.add(coupon);
                 }
             }
             return ServerResponse.success("查询成功",couponList);
         }
-
         return ServerResponse.fail("查询失败",null);
 
     }

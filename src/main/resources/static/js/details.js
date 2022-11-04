@@ -1,15 +1,15 @@
-$(".comment-title").click(function (){
-    var commentTitle = $(".comment-title").text();
-    if(commentTitle == "显示评论"){
-        $(".comment-title").text("关闭评论");
-        getByPageNum(1);
-        $(".replay-show-hiden").show();
-
-    }else{
-        $(".comment-title").text("显示评论");
-        $(".replay-show-hiden").hide();
-    }
-});
+// $(".comment-title").click(function (){
+//     var commentTitle = $(".comment-title").text();
+//     if(commentTitle == "显示评论"){
+//         $(".comment-title").text("关闭评论");
+//         getByPageNum(1);
+//         $(".replay-show-hiden").show();
+//
+//     }else{
+//         $(".comment-title").text("显示评论");
+//         $(".replay-show-hiden").hide();
+//     }
+// });
 function getByPageNum(pageNum) {
     var url;
     if(typeof(pageNum) == "number")

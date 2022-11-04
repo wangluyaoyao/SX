@@ -16,6 +16,7 @@ function showCollect(){
                     var collect = dataele['collect'];
                     collectId = collect.collectId;
                     carName = car.carName;
+                    carId = car.carId;
                     carImg = car.carImg;
                     carModel = car.carModel;
                     carDisp = car.carDisp;
@@ -26,7 +27,7 @@ function showCollect(){
                     var collectEle = "<li>\n" +
                         "                <div class=\"collect-car-box\">\n" +
                         "                    <div class=\"car-img\">\n" +
-                        "                        <img src=\""+carImg+"\">\n" +
+                        "                        <a href=\"/details/"+carId+"\"><img src=\""+carImg+"\"></a>\n" +
                         "                    </div>\n" +
                         "                    <div class=\"car-esc\">\n" +
                         "                        <button class=\"esc\" value=\""+collectId+"\">取消收藏</button>\n" +
@@ -49,7 +50,6 @@ function showCollect(){
                         "                                <li>变速箱:<span>"+carCase+"</span></li>\n" +
                         "                                <li> 进气:<span>"+carExhaust+"</span></li>\n" +
                         "                                <li>油箱:<span>"+carTank+"</span></li>\n" +
-                        "                                <li><a href=\"javascript:(0);\" class=\"view-car-para\">车辆详情></a></li>\n" +
                         "                            </ul>\n" +
                         "\n" +
                         "                        </div>\n" +
@@ -92,5 +92,48 @@ $(document).on( 'click',".esc",function(event){
                layer.msg('已取消');
           }
      })
-
 });
+
+//判断是否收藏了
+decideCollect();
+function decideCollect(){
+     var url = "/sx-collect/collect";
+     var token = localStorage.getItem("token");
+     var carId = $(".carId").val();
+     $.ajax({
+          type: "get",
+          url: url,
+          data: {
+               "carId":carId
+          },
+          headers: {'token': token},
+          success:function (result){
+               if (result != null){
+                    $(".collect_sucess_text").text("已收藏!");
+                    $(".collect_img").attr("src","../images/collect/collectsuccess.png");
+                    $(".collect_img").attr("class","collect_sucess");
+               }
+
+          }
+     })
+}
+//收藏车辆
+$(".collect_img").click(function (){
+     var url = "/sx-collect/collectSave";
+     var token = localStorage.getItem("token");
+     var carId = $(".carId").val();
+     $.ajax({
+              type: "post",
+              url: url,
+              data: {
+                   "carId": carId
+              },
+              headers: {'token': token},
+              success: function (result) {
+                   console.log("成功!")
+              }
+         })
+});
+
+
+

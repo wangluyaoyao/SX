@@ -16,6 +16,7 @@ import springfox.documentation.schema.Model;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * <p>
@@ -38,13 +39,19 @@ public class UserController {
 
     @PostMapping("login")
 
-    public ServerResponse login(User user,HttpServletRequest request,HttpServletResponse response){
+    public ServerResponse login(User user, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession){
         ServerResponse result = userService.login(user);
-        System.out.println("controller login response:"+request);
+        System.out.println("controller login response:"+result);
         if (result.getResultcode() == 200){
             String token = (String) result.getData();
             System.out.println("customer controller 登陆成功");
+            System.out.println(token);
         }
+
+       httpSession.setAttribute("loginUser",result.getData());
+
+
+
         return result;
     }
     //    页面验证显示用户名
@@ -64,6 +71,13 @@ public class UserController {
     public ServerResponse regist(User user,HttpServletRequest request,HttpServletResponse response){
 
         return userService.regist(user);
+    }
+
+    @GetMapping("logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("loginUser");
+        System.out.println("执行clearSession");
+        return "redirect:/";
     }
 
 

@@ -57,6 +57,7 @@
             <div class="div-myshowbox" style="width: 1180px; height: 450px;">
                 <div class="common-modalBox">
                     <div class="current-carname">
+                        <input type="hidden" th:value="${car.carId}" class="carId">
                         <h3 th:text="${car.carName}"></h3>
                     </div>
                 </div>
@@ -115,7 +116,7 @@
                 <div class="container">
 
                     <button type="button" class="btn btn-default" id="btn_collect" style="border: 0">
-                        <img alt="" src="../images/collect/collect.png" class="collect_img" id="btn_collect_icon"><span>收藏吧！</span>
+                        <img alt="" src="../images/collect/collect.png" class="collect_img" id="btn_collect_icon"><span class="collect_sucess_text">收藏吧！</span>
                     </button>
                     <button type="button" class="order_btn" id="to_order">
                         立即购买！
@@ -143,14 +144,12 @@
                 <ul class="comment-ul">
                                         <li class="comment-li">
                                             <div class="comment-customer">
-                                                   <div class="customer-img">
-                                                            <img src="../images/details/用户.png">
-                                                        </div>
+
                                                     <div class="a-link">
-                                                            <h5 class="customer-name">LiHua</h5>
-                                                           <span class="type-text">nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice</span>
+                                                            <h5 class="customer-name" th:text="${commuser.userName}"><span>:</span></h5>
+                                                           <span class="type-text" th:text="${comments.commContent}"></span>
                                                             <div class="comment-handle">
-                                                                    <span class="evaluate-time">2021/9/3 12:20:33</span>
+                                                                    <span class="evaluate-time" th:text="${comments.commTime}"></span>
                                                                     <a class="replay-handle" href="">回复</a>
                                                                     <span>|</span>
                                                                    <a href="">
@@ -164,14 +163,11 @@
                                           <ul class="replay-ul">
                                                    <li>
                                                             <div class="replay-customer">
-                                                                       <div class="replay-img">
-                                                                            <img src="../images/details/用户.png">
-                                                                       </div>
-                                                                    <h6 class="replay-customer-name">Smith</h6>
 
+                                                                    <h6 class="replay-customer-name" th:text="${replyuser.userName}"><span>:</span></h6>
 
-                                                                   <span class="replay-text">这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。</span>
-                                                                    <span class="replay-time">2021-9-9 10:20:11</span>
+                                                                    <span class="replay-text" th:text="${reply.replyContent}"></span>
+                                                                    <span class="replay-time" th:text="${reply.replyTime}"></span>
                                                                 </div>
                                                       </li>
                                                </ul>
@@ -190,7 +186,6 @@
 <script src="../layui/layui.js"></script>
 <script src="../js/common.js"></script>
 <script>
-
 <!--    收藏按钮-->
    var btn = document.getElementById("btn_collect_icon")
    var flag = false;
@@ -201,12 +196,11 @@
            flag=false;
        }else{
            btn.src= "../images/collect/collectsuccess.png"
+           btn.style="collect_sucess"
            flag = true;
        }
    }
-
-
-
 </script>
+<script src="../js/collect.js"></script>
 </body>
 </html>

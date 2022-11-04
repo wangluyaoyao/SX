@@ -79,6 +79,16 @@ public class testUserCenter {
         list.forEach(System.out::println);
         //System.out.println(response.getData());
     }
+    @Test
+    public void saveCollect(){
+        ServerResponse response = collectService.saveCollect(103,6);
+        System.out.println(response.getData());
+    }
+    @Test
+    public void getCollect(){
+        ServerResponse response = collectService.getCollect(102,6);
+        System.out.println("response::"+response);
+    }
 
 
 }

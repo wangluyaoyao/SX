@@ -17,6 +17,11 @@ public interface ICollectService extends IService<Collect> {
     ServerResponse getAllByUserId(Integer userId);
     //取消收藏
     ServerResponse updateCollect(Integer collectId);
+    //添加收藏
+    ServerResponse saveCollect(Integer carId,Integer userId);
+
+    //检查是否收藏
+    ServerResponse getCollect(Integer carId,Integer userId);
 
 
 }

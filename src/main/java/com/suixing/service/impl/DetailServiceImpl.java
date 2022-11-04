@@ -1,7 +1,11 @@
 package com.suixing.service.impl;
 
+//import com.github.pagehelper.Page;
+//import com.github.pagehelper.PageHelper;
+//import com.github.pagehelper.PageInfo;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Car;
+import com.suixing.entity.Comments;
 import com.suixing.mapper.CarMapper;
 import com.suixing.service.IDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,9 @@ public class DetailServiceImpl implements IDetailService {
 
     @Override
     public ServerResponse getCommentsByCarId(Integer carId, Integer pageNum) {
+
+
+
         return null;
     }
 }

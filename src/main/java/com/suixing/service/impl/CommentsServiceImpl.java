@@ -1,14 +1,22 @@
 package com.suixing.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+//import com.github.pagehelper.Page;
+//import com.github.pagehelper.PageHelper;
+//import com.github.pagehelper.PageInfo;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Comments;
+import com.suixing.entity.Reply;
+import com.suixing.entity.User;
 import com.suixing.mapper.CommentsMapper;
 import com.suixing.mapper.ReplyMapper;
 import com.suixing.mapper.UserMapper;
 import com.suixing.service.ICommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +44,27 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
 
 
     @Override
-    public ServerResponse getCommentsByCarId(Integer carId, Integer pageNum) {
-        Sort sort = Sort.by(Sort.Direction.DESC,"DEVID").and(Sort.by(Sort.Direction.DESC,"comm_time"));
-        return null;
+    public Comments getCommentsByCarId(Integer carId) {
+//        Page<Comments> page = PageHelper.startPage(pageNum,5);                // 分页
+//        PageInfo pageInfo = page.toPageInfo();
+//        QueryWrapper<Comments> queryWrapper = new QueryWrapper<>();
+//        Page<Comments> commentsPage = new Page<>(pageNum,5);
+//        Page<Comments> pageInfo = commentsMapper.selectPage(commentsPage,queryWrapper);
+
+        //        Reply replyId = replyMapper.selectById(commId);
+
+
+        return commentsMapper.selectById(carId);
+
     }
+
+    @Override
+    public User getUserByCommId(Integer carId) {
+        Comments comments = commentsMapper.selectById(carId);
+
+        Integer userId = comments.getUserId();
+        return userMapper.selectById(userId);
+    }
+
+
 }
