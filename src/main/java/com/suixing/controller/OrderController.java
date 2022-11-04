@@ -8,6 +8,7 @@ import com.suixing.util.TokenUtil;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,7 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 
@@ -40,7 +43,6 @@ public class OrderController {
     @Autowired
     private IUserCenterService userCenterService;
 
-
     //订单确认页面绑定
 //    @GetMapping("/order_confirm/{ordId}")
 //    public ModelAndView selectByOrderNum(@PathVariable("ordId") Integer ordId){
@@ -54,18 +56,36 @@ public class OrderController {
 
 
     //确认订单页面获取车辆订单信息
-    @GetMapping("/dropOrder/{carId}")
-    public ModelAndView getInstance(@PathVariable("carId") Integer carId,
-                                    LocalDateTime ordPicTime,LocalDateTime ordDroTime){
+    @GetMapping(value ="/dropOrder" )
+    @ResponseBody
+    public ModelAndView getInstance(@RequestParam("carId") Integer carId,
+                                    @RequestParam("start") String start,
+                                    @RequestParam("end") String end){
+
         //1.车辆图片、名字、日租价格
         Car car = carService.getById(carId);
         //2.租车日期、还车日期、租期
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime ordPicTime = LocalDateTime.parse(start,df);
+
+        LocalDateTime ordDroTime = LocalDateTime.parse(end,df);
+        Duration duration = Duration.between(ordPicTime,ordDroTime);
+        Long ordLease = duration.toDays(); //相差的天数
+
+        System.out.println(ordDroTime);
+        System.out.println(ordPicTime);
+        System.out.println(ordLease);
 
         //3.租车网点、地址
         ServerResponse bussiness = bussinessService.getBussiness(car.getBusId());
         ModelAndView mav = new ModelAndView();
         mav.addObject("car",car);
         mav.addObject("bussiness",bussiness.getData());
+        mav.addObject("start",start);
+        mav.addObject("end",end);
+        mav.addObject("ordDroTime",start);
+        mav.addObject("ordPicTime",end);
+        mav.addObject("ordLease",ordLease);
         mav.setViewName("order/order_drop");
         System.out.println(car);
         return mav;
@@ -81,16 +101,17 @@ public class OrderController {
     }
 
     //创建订单
-    @RequestMapping(value = "/saveOrder", method = {RequestMethod.POST})
+    @PostMapping( "/saveOrder")
     @ResponseBody
-    public ModelAndView saveOrder(Integer carId, Order order,Integer userId,Integer couId){
-        //用户id
-        System.out.println(1);
-        /*String token = request.getHeader("token");//get token
-        Integer userId = TokenUtil.parseToken(token).getUserId();*/
+    public ModelAndView saveOrder(Integer carId,Order order,Integer userId,Integer couId,Float ordCouMoney){
 
-        System.out.println("用户id:"+userId);
-        System.out.println("优惠券id"+couId);
+//        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        LocalDateTime start = LocalDateTime.parse(ordPicTime,df);
+//
+//        LocalDateTime end = LocalDateTime.parse(ordDroTime,df);
+
+//        Order order = new Order();
+
         //订单编号
         Long ordNumber = UUID.randomUUID().getMostSignificantBits();
         if(ordNumber<0){
@@ -106,21 +127,25 @@ public class OrderController {
         order.setOrdNumber(ordNumber);
         order.setOrdSatus(ordSatus);
         order.setOrdCreateTime(ordCreateTime);
+        order.setOrdCouMoney(ordCouMoney);
         order.setOrdServiceTip(ordServiceTip);
         order.setUserId(userId);
+//        order.setOrdPicTime(start);
+//        order.setOrdDroTime(end);
+//        order.setOrdLease(ordLease);
         if (couId !=null){
             order.setCouId(couId);
         }
-
         ServerResponse result = orderService.saveOrder(order);
-
+        System.out.println(order);
+        System.out.println(result);
         ModelAndView mav = new ModelAndView();
-        System.out.println(222);
         mav.addObject(result);
         mav.setViewName("order/order_update");
-        System.out.println(222333);
         return mav;
-
     }
+
+
+
 
 }

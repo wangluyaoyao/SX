@@ -8,7 +8,6 @@ import com.suixing.entity.Car;
 import com.suixing.entity.UserCoupno;
 import com.suixing.mapper.CarMapper;
 import com.suixing.service.ICarService;
-import com.sun.xml.internal.ws.resources.UtilMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;

@@ -3,8 +3,10 @@ package com.suixing.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -58,11 +60,16 @@ public class Order implements Serializable {
     @ApiModelProperty("还车门店")
     private String ordDropoff;
 
-    @ApiModelProperty("取车时间")
-    private LocalDateTime ordPicTime;
 
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty("取车时间")
+    private String ordPicTime;
+
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty("还车时间")
-    private LocalDateTime ordDroTime;
+    private String ordDroTime;
 
     @ApiModelProperty("取车地址")
     private String ordDroAddress;
@@ -71,7 +78,7 @@ public class Order implements Serializable {
     private String ordPicAddress;
 
     @ApiModelProperty("租期")
-    private String ordLease;
+    private Long ordLease;
 
     @ApiModelProperty("取车人电话")
     private Long ordPicTelno;
@@ -175,18 +182,18 @@ public class Order implements Serializable {
     public void setOrdDropoff(String ordDropoff) {
         this.ordDropoff = ordDropoff;
     }
-    public LocalDateTime getOrdPicTime() {
+    public String getOrdPicTime() {
         return ordPicTime;
     }
 
-    public void setOrdPicTime(LocalDateTime ordPicTime) {
+    public void setOrdPicTime(String ordPicTime) {
         this.ordPicTime = ordPicTime;
     }
-    public LocalDateTime getOrdDroTime() {
+    public String getOrdDroTime() {
         return ordDroTime;
     }
 
-    public void setOrdDroTime(LocalDateTime ordDroTime) {
+    public void setOrdDroTime(String ordDroTime) {
         this.ordDroTime = ordDroTime;
     }
     public String getOrdDroAddress() {
@@ -203,11 +210,11 @@ public class Order implements Serializable {
     public void setOrdPicAddress(String ordPicAddress) {
         this.ordPicAddress = ordPicAddress;
     }
-    public String getOrdLease() {
+    public Long getOrdLease() {
         return ordLease;
     }
 
-    public void setOrdLease(String ordLease) {
+    public void setOrdLease(Long ordLease) {
         this.ordLease = ordLease;
     }
     public Long getOrdPicTelno() {

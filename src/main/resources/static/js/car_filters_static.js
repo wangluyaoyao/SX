@@ -22,14 +22,17 @@ function selectTime(){
     console.log("aa")
     console.log($("#test11").val())
     console.log( $(".layui-laydate-preview").text())
+    console.log(1)
       //限定可选日期
   var ins22 = laydate.render({
     elem: '#test-limit1'
     ,min: '2019-10-19'
-    ,max: '2080-10-14',
+    ,max: '2080-10-14'
+      
   });
 
 }
+
  document.querySelector(".area").onclick = function showall(){
   var e = document.getElementById("showAll")
   if(e.style.display == 'none'){

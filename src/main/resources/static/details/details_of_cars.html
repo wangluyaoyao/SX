@@ -57,6 +57,7 @@
             <div class="div-myshowbox" style="width: 1180px; height: 450px;">
                 <div class="common-modalBox">
                     <div class="current-carname">
+                        <input type="hidden" th:value="${car.carId}" class="carId">
                         <h3 th:text="${car.carName}"></h3>
                     </div>
                 </div>
@@ -115,7 +116,7 @@
                 <div class="container">
 
                     <button type="button" class="btn btn-default" id="btn_collect" style="border: 0">
-                        <img alt="" src="../images/collect/collect.png" class="collect_img" id="btn_collect_icon"><span>收藏吧！</span>
+                        <img alt="" src="../images/collect/collect.png" class="collect_img" id="btn_collect_icon"><span class="collect_sucess_text">收藏吧！</span>
                     </button>
                     <button type="button" class="order_btn" id="to_order">
                         立即购买！
@@ -185,7 +186,6 @@
 <script src="../layui/layui.js"></script>
 <script src="../js/common.js"></script>
 <script>
-
 <!--    收藏按钮-->
    var btn = document.getElementById("btn_collect_icon")
    var flag = false;
@@ -196,12 +196,11 @@
            flag=false;
        }else{
            btn.src= "../images/collect/collectsuccess.png"
+           btn.style="collect_sucess"
            flag = true;
        }
    }
-
-
-
 </script>
+<script src="../js/collect.js"></script>
 </body>
 </html>
