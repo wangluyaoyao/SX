@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>支付</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/order_update.css">
     <link rel="stylesheet" href="../css/common.css">
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/ajaxfileupload.js"></script>
 </head>
 <body>
 
@@ -56,7 +59,7 @@
 
                 <form  method="post" enctype="multipart/form-data" class="imageForm1">
                     <label for="myimage" id="lab-file">上传身份证</label>
-                    <input type="file" name="myimage" class="myimage" id="myimage">
+                    <input type="file" name="myimage" onchange="changepic1(this)" class="myimage" id="myimage">
                     <input type="button" value="确认上传"  data-value="1" class="submitBtn1"  accept="image/jpg,image/jpeg,image/gif,image/png">
                 </form>
 
@@ -77,7 +80,7 @@
                 </div>
 
                 <div class="contentBtn4">
-                    <span class="nameBrn">*</span>身份证号<input type="text" value="" class="idBtn" id="idCardNum">
+                    <span class="nameBrn">*</span>身份证号<input type="text" value="" class="idBtn" id="ordPicIdcard">
                 </div>
 
                 <div class="contentBtn1">
@@ -93,7 +96,7 @@
 
                 <form  method="post" enctype="multipart/form-data" class="imageForm2">
                     <label for="carimage" id="lab-file2">上传驾驶证</label>
-                    <input type="file" name="carimage" class="carimage"  id="carimage">
+                    <input type="file" name="carimage" onchange="changepic2(this)" class="carimage"  id="carimage">
                     <input type="button" value="确认上传" data-value="2" class="submitBtn2" accept="image/jpg,image/jpeg,image/gif,image/png">
                 </form>
 
@@ -122,7 +125,7 @@
                     <span class="nameBrn">*</span>结束时间<input type="text" value="" class="dateBtn" id="driverEndTime">
                 </div>
                 <div class="contentBtn7">
-                    <span class="nameBrn">*</span>驾驶证号<input type="text" value="" class="carIdBtn" id="driverNum">
+                    <span class="nameBrn">*</span>驾驶证号<input type="text" value="" class="carIdBtn" id="ordPicCard">
                 </div>
                 <div class="contentBtn1">
                     <span class="nameBrn">*</span>地址<input type="text" value="" class="addressBtn" id="driverAddress">
@@ -130,23 +133,11 @@
             </form>
         </div>
         <div class="main_footer">
-            <form method="post" action="${pageContext.request.contextPath}/saveMyOrder">
-                <input type="text" name="custId" value="${custId}" style="display: none">
-                <input type="text" name="carId" value="${carId}" style="display: none">
-                <input type="text" name="borrowStoreId" value="${borrowStoreId}" style="display: none">
-                <input type="text" name="couponId" value="${couponId}" style="display: none">
-                <input type="text" name="returnStoreId" value="${returnStoreId}" style="display: none">
-                <input type="text" name="getCarTime" value="${getCarTime}" style="display: none">
-                <input type="text" name="returnCarTime" value="${returnCarTime}" style="display: none">
-                <input type="text" name="getterName" class="getterName" style="display: none">
-                <input type="text" name="getterIdCard" class="getterIdCard" style="display: none">
-                <input type="text" name="getterDriverStartTime" class="getterDriverStartTime" style="display: none">
-                <input type="text" name="getterDriverEndTime" class="getterDriverEndTime" style="display: none">
-                <input type="text" name="getterDriverType" class="getterDriverType" style="display: none">
-                <input type="text" name="myOrderLeaseDays" value="${myOrderLeaseDays}" style="display: none">
-                <input type="text" name="myOrderPrice" value="${myOrderPrice}" style="display: none">
-                <input type="text" name="custGender" class="custGender" style="display: none">
-                <input type="submit" value="下一步" class="subBtn">
+            <form method="post" action="/updateOrder">
+                <input type="text" name="ordPicIdcard" id="ordPicIdcard1" value="" style="display: none">
+                <input type="text" name="ordId" th:value="*{ordId}" id="ordId" style="display: none">
+                <input type="text" name="ordPicCard"  id="ordPicCard1"   value="" style="display: none">
+                <input type="submit" value="下一步" class="subBtn" >
             </form>
 
         </div>
@@ -154,12 +145,124 @@
     </div>
 </div>
 <script>
-    $(".subBtn").click(function (){
 
-        window.open("order_confirm.html");
+    function changepic1() {
+        var reads = new FileReader();
+        f = $(".myimage").get(0).files[0];
+        reads.readAsDataURL(f);
+        reads.onload = function(e) {
+            $("#preImg1").attr('src',this.result);
+        };
+    }
 
+    function changepic2() {
+        var reads = new FileReader();
+        f = $(".carimage").get(0).files[0];
+        reads.readAsDataURL(f);
+        reads.onload = function(e) {
+            $("#preImg2").attr('src',this.result);
+        };
+    }
+
+    $(".submitBtn1").click(function (){
+
+        var url = "/userIdCard/person";
+
+        var myimage = $(".imageForm1").serialize();
+
+        $.ajaxFileUpload({
+            url:url,
+            dataType:"application/json",
+            secureuri:false,//是否启用安全机制
+            fileElementId:'myimage',
+            success:function (result){
+                result = $.parseJSON(result.replace(/<.*?>/ig,""));
+
+                console.log("result:" + result);
+                // console.log("result"+JSON.stringify(result));
+                console.log("姓名是:"+result.data.name);
+                console.log("性别是:"+result.data.sex);
+                console.log("出生日期是:"+result.data.birth);
+                console.log("身份证号:"+result.data.num);
+                console.log("地址是:"+result.data.address);
+
+                var name=result.data.name;
+                var sex=result.data.sex;
+                var birth=result.data.birth;
+                var num=result.data.num;
+                var address=result.data.address;
+
+                $("#idCardName").val(name);
+                $("#idCardSex").val(sex);
+                $("#idCardBirth").val(birth);
+                $("#ordPicIdcard").val(num);
+                $("#ordPicIdcard1").val(num);
+                $("#idCardAddress").val(address);
+            }
+        } )
+
+    }) ;
+
+    $(".submitBtn2").click(function (){
+        var url = "/carIdCar/car";
+        var carimage = $(".imageForm2").serialize();
+        $.ajaxFileUpload({
+            url:url,
+            dataType:"application/json",
+            secureuri:false,//是否启用安全机制
+            fileElementId:'carimage',
+            success:function (result){
+                result = $.parseJSON(result.replace(/<.*?>/ig,""));
+                console.log(JSON.stringify(result)); //js --> json  结果：{"code":200,"data":20,"reason":"OK"}
+                console.log("姓名是:"+result.data.name);
+                console.log("性别是"+result.data.sex);
+                console.log("国籍是+"+result.data.nation);
+                console.log("类型是"+result.data.vehicle_type);
+                console.log("开始时间"+result.data.start_date);
+                console.log("结束时间是"+result.data.end_date);
+                console.log("驾驶证号"+result.data.num);
+                console.log("地址"+result.data.addr);
+
+                var name = result.data.name;//姓名
+                var num = result.data.num;//身份证号
+                var birth_date = result.data.birth_date;//生日
+                var sex = result.data.sex;//性别
+                var nation = result.data.nation;//国籍
+                var address = result.data.addr;//住址
+                var vehicle_type = result.data.vehicle_type;//准驾车型
+                var issue_date = result.data.issue_date;//初次领证时间
+                var start_date = result.data.start_date;//有效期开始时间
+                var end_date = result.data.end_date;//有效期结束时间
+
+                $("#driverName").val(name);
+                $("#driverSex").val(sex);
+                $("#driverStartTime").val(start_date);
+                $("#driverNation").val(nation);
+                $("#driverType").val(vehicle_type);
+                $("#driverEndTime").val(end_date);
+                $("#ordPicCard").val(num);
+                $("#ordPicCard1").val(num);
+                $("#driverAddress").val(address);
+            }
+        } )
+    }) ;
+
+/*$(".subBtn").click(function (){
+    var ord = $("#ordId").val();
+    $.ajax({
+        url:"/order_confirm",
+        type:"get",
+        dataType:"json",
+        data:{
+            ord:ord
+        }
 
     })
+})*/
+
+
+
+
 
 </script>
 

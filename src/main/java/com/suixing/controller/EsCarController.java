@@ -57,17 +57,6 @@ public class EsCarController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 //    到Elasticsearch中查询
     public List<Car> realCarKeyword(String carKeyword){
         //多个字段满足一个即可

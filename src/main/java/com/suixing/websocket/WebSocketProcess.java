@@ -45,8 +45,8 @@ public class WebSocketProcess {
     public void onClose(Session session, @PathParam("userId") long id ){
         //每建立连接，就把当前客户id为key，this为value存储到map中
         this.session = session;
-        concurrentHashMap.remove(id);
-        log.info("close a wenSocket, concurrentHasMap remove sessionId ={}",id);
+      //  concurrentHashMap.remove(id);
+        //log.info("close a wenSocket, concurrentHasMap remove sessionId ={}",id);
 
     }
     /*
