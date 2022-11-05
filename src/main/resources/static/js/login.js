@@ -177,7 +177,8 @@ function sendCode(){
                 console.log(sms)
                 console.log("code:"+ sms);
                 //    console.log("sms:"+sms)
-                alert("发送成功");
+                layer.msg("验证码已发送");
+
             }
         });
 

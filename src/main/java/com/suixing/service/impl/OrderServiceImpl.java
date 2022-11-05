@@ -64,9 +64,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public ServerResponse orderStatusSccess(Long ordNumber) {
+        System.out.println(ordNumber);
         QueryWrapper queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("ord_number",ordNumber);
         Order order = orderMapper.selectOne(queryWrapper);
+        System.out.println(order);
         order.setOrdSatus("已还车");
         order.setOrdUpdateTime(LocalDateTime.now());
         int row = orderMapper.updateById(order);
