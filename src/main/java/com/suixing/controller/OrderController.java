@@ -153,7 +153,7 @@ public class OrderController {
     //添加身份证、驾驶证信息
     @PostMapping("updateOrder")
     @ResponseBody
-    public ModelAndView updateOrder(Order order){
+    public ModelAndView updateOrder(Order order) {
 
         ServerResponse result = orderService.updateOrder(order);
 
@@ -162,19 +162,19 @@ public class OrderController {
         System.out.println(order1);
 
         Integer carId = order1.getCarId();
-        System.out.println("订单id："+order1.getOrdId());
-        System.out.println("车辆id："+carId);
+        System.out.println("订单id：" + order1.getOrdId());
+        System.out.println("车辆id：" + carId);
         Car car = carService.getById(carId);
         System.out.println(car);
         ModelAndView mav = new ModelAndView();
-        mav.addObject("order",order1);
-        mav.addObject("carName",car.getCarName());
+        mav.addObject("order", order1);
+        mav.addObject("carName", car.getCarName());
 
         mav.addObject(result);
         mav.setViewName("order/order_confirm");
         return mav;
 
-
+    }
 
     /*还车按钮*/
     @PostMapping("/successOrder")
@@ -184,7 +184,7 @@ public class OrderController {
         return response;
     }
 
-    }
+
 
 
 
