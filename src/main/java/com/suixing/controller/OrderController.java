@@ -147,5 +147,18 @@ public class OrderController {
 
 
 
+    /*还车按钮*/
+    @PostMapping("/successOrder")
+    @ResponseBody
+    public ServerResponse successOrder(Long ordNumber){
+        ServerResponse response = orderService.orderStatusSccess(ordNumber);
+        return response;
+    }
+
+
+
+
+
+
 
 }
