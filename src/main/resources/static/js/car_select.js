@@ -1,7 +1,9 @@
 //品牌事件冒泡
 document.querySelector(".car-name").onclick = function(event){
     var element = event.target;
+    var name = element.innerText;
     var typeName =  element.nodeName;//标签名称
+    $(".car-search").val(name);
     var type =  element.type;//标签类型
 //    console.log(typeName);
 //    console.log(type);
@@ -10,12 +12,23 @@ document.querySelector(".car-name").onclick = function(event){
     var temp = workArray[1].children[0].className
     // console.log(temp)
     $(".all").attr("class"," ")
-    // for(var i = 0;i<workArray.length;i++){
-    //  workArray[i].children[0].className = " "
-    // }
+    for(var i = 0;i<workArray.length;i++){
+     workArray[i].children[0].className = " "
+    }
     element.className = "active"
 }
-
+//加载Mysql到Elasticsearch数据库
+LoadingCar()
+function LoadingCar(){
+    console.log("数据库数据加载")
+    $.ajax({
+        url: "/Es/loadCar",
+        type: "get",
+        success:function (result){
+            showCar(result.data)
+        }
+    })
+}
 
 $(".pro-sumbit").click(function (){
     var content =  $(".car-search").val();
@@ -23,18 +36,21 @@ $(".pro-sumbit").click(function (){
     $(".pro-product").html(" ")
 })
 
- getCarFilter(null);  //开始时先查询一次
 
-function getCarFilter(carName){
-    console.log(carName)
+
+function getCarFilter(carKeyword){
     $.ajax({
-        url:"/Car/getCarFilter",
+        url:"/Es/getCar",
         type:"get",
-        data:{carName : carName},
+        data:{carKeyword : carKeyword},
         success:function (result){
-            console.log(result.data)
-             // var carArray =  result.data.records;  //集合转为数组
+            console.log("a"+result.data+"a")
+            if (result.data == ""){
+                layer.msg("没有找到相关数据")
+                return
+            }
             showCar(result.data)
+            layer.msg(result.reason)
         }
 
     })
@@ -50,7 +66,7 @@ function showCar(carArray) {
         var  car = carArray[i];
         console.log(car)
         var ele = "<div class=\"pro-rearly\">\n" +
-            "                <a href=\"javascript:void(0)\">\n" +
+            "                <a href=\"/details/"+car.carId+"\">\n" +
             "                    <div class=\"img\">\n" +
             "                        <img src=\""+car.carImg+"\" alt=\"\">\n" +
             "                    </div>\n" +

@@ -2,6 +2,7 @@ package com.suixing.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rabbitmq.client.Channel;
 import com.suixing.commons.NumGeneration;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Coupon;
@@ -9,6 +10,11 @@ import com.suixing.entity.UserCoupno;
 import com.suixing.mapper.CouponMapper;
 import com.suixing.mapper.UserCoupnoMapper;
 import com.suixing.service.IUserCoupnoService;
+import com.suixing.websocket.WebSocketProcess;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,13 +22,11 @@ import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.scripting.support.ResourceScriptSource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.UUID;
+import java.io.IOException;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,7 +38,7 @@ import java.util.concurrent.TimeUnit;
  * @since 2022-10-03
  */
 @Service
-//@Component  //将对象层(当前类)的对象 注入到IOC容器中
+//@Component//将对象层(当前类)的对象 注入到IOC容器中
 public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCoupno> implements IUserCoupnoService {
     @Autowired
     private UserCoupnoMapper userCoupno;
@@ -46,6 +50,12 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
     private RedisTemplate redisTemplate;
 
     private DefaultRedisScript script;
+
+    @Autowired
+    private WebSocketProcess webSocketProcess;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @PostConstruct
     public void init(){
@@ -63,24 +73,48 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
         return ServerResponse.fail("领取失败",null);
     }
 
-    //抢券高并发处理
+    /*
+     * 消费接收到的消息
+     * */
+    @RabbitHandler
+    @RabbitListener(queues = "delayed-queue")
+    public void processMsg(Channel channel, Message message, Map map) {
+
+        String msg = "俺是客户端："+map.get("userId")+"用户 你领取的优惠券信息为"+map.get("coupon");
+        System.out.println("优惠券信息："+msg);
+        Integer userId = Integer.parseInt(map.get("userId").toString());
+        try {
+            webSocketProcess.sendMessage(userId,msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("消息确认结束");
+    }
+
+
+
+    /*
+    * 优惠券信息查询更新
+    * */
     @Override
     public ServerResponse userRecCou(Integer userId, Integer couId) {
         System.out.println("用户id:"+userId+"优惠卷id:"+couId);
 //      查询优惠卷的优惠周期
-        String result =   setRedis(userId,couId);
-//        if (coupon == null)
-//            ServerResponse.success("优惠券被抢光了",null);
-        QueryWrapper<Coupon> cidition = new QueryWrapper<>();
-        cidition.eq("cou_id",couId);
-//        cidition.select("cou_cycle","cou_amount");
-        Coupon coupon =  couponMapper.selectOne(cidition); //查询对应的优惠卷信息
-        UserCoupno usercoupon = caeatUserCou(coupon,userId); //用户领取的优惠券的信息生成
-        if (userCoupnoMapper.insert(usercoupon)>0){
-            System.out.println("用户优惠券信息添加成功");
-        }
-//        String newUserCou =  getUserPoupno(userId,couId,usercoupon,coupon); //向USER表添加数据
-        return ServerResponse.success(result,usercoupon);
+        String result =  setRedis(userId,couId);  //redis执行优惠券业务
+
+       // QueryWrapper<Coupon> cidition = new QueryWrapper<>();
+     //   cidition.eq("cou_id",couId);
+         Coupon coupon =  couponMapper.selectById(couId); //查询对应的优惠卷信息
+//        UserCoupno usercoupon = caeatUserCou(coupon,userId); //生成用户领取优惠券相关信息添加到UserCoupno
+//        if (userCoupnoMapper.insert(usercoupon)>0){
+//            System.out.println("用户优惠券信息添加成功");
+//        }
+        return ServerResponse.success(result,coupon); //返回领取的优惠券信息
     }
 
 
@@ -92,10 +126,10 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
         String uuid = UUID.randomUUID().toString().replace("-","");
         boolean isLock = redisTemplate.opsForValue().setIfAbsent(key,uuid,100, TimeUnit.SECONDS);
         if (isLock){//某人获得了锁
-            System.out.println(Thread.currentThread().getName()+"抢到了该优惠券");
+         //   System.out.println(Thread.currentThread().getName()+"抢到了该优惠券");
             //查询优惠券信息
             coupon = (Coupon)redisTemplate.opsForValue().get("coupon_"+couId);
-            System.out.println("在redis中查询到优惠券的数据"+coupon);
+         //   System.out.println("在redis中查询到优惠券的数据"+coupon);
             if (coupon == null)
                 return "优惠券被抢光了";
             if (coupon.getCouAmount() == 0) {
@@ -107,7 +141,6 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
                 Long execute = (Long) redisTemplate.execute(script, Arrays.asList(key),uuid);
 
             }
-            updateUserCoupno(coupon);
             return "领取成功";
         }else { //加锁失败，过0.1秒再获得锁
             try {
@@ -124,31 +157,43 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
             }
         }
     }
-    //数据库信息修改
-    public void  updateUserCoupno(Coupon coupon){
-        couponMapper.updateById(coupon);
-        System.out.println("数据库数据修改成功");
-    }
-    //数据库信息修改
-    public String getUserPoupno(int userId,int couId,UserCoupno usercoupon,Coupon coupon){
-        couponMapper.updateById(coupon);
-        QueryWrapper<UserCoupno> queryWrapper  = new QueryWrapper<>();
-        queryWrapper.eq("cou_id",couId);
-        queryWrapper.eq("user_id",userId);
-        queryWrapper.select("user_cou_id");
-//        UserCoupno coupno = userCoupnoMapper.selectOne(queryWrapper);
-//        if (coupno!= null)
-//            return "你已经领取过该优惠券了";
-        if (userCoupnoMapper.insert(usercoupon)>0) {
-            //更新数据库优惠见数量
-            Coupon newAmountCoupno =   new Coupon();
-            newAmountCoupno.setCouAmount(coupon.getCouAmount()-1);
-            if (coupon.getCouAmount()==0)
-                return "该优惠卷已经被领完了";
-            couponMapper.updateById(newAmountCoupno);
-            return "领取成功";
+    //发送消息到RabbiMQ修改数据库
+    @Transactional
+    @RabbitHandler
+    @RabbitListener(queues = "couponDrawDirectQueue")
+    @Override
+    public void sendMsg(Integer couId, Channel channel, Message message) {
+        try {
+            updateCouponForMysql(couId);
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+        } catch (IOException e) {
+            e.printStackTrace();
+            try {
+                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
-        return "数据修改成功";
+    }
+    //排到队时实际执行的方法
+
+    public void updateCouponForMysql(Integer couId){
+        Coupon coupon = couponMapper.selectById(couId);
+        int coupnoNum = coupon.getCouAmount();
+        QueryWrapper<Coupon> couponQW = new QueryWrapper<>();
+        couponQW.eq("cou_amount",coupnoNum);
+        couponQW.eq("cou_id",couId);
+        coupon.setCouAmount(coupnoNum-1);
+         int  result =  couponMapper.update(coupon,couponQW);
+        if (result>0){
+            System.out.println("MySql数据修改成功");
+        }else {
+           // System.out.println("修改失败");
+            updateCouponForMysql(couId);  //重新发消息到队列当中
+        }
+
+
+
     }
     //UserCoupno信息生成
     public UserCoupno caeatUserCou(Coupon coupon,int userId){

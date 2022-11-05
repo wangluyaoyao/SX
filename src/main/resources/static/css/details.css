@@ -115,7 +115,7 @@
      font-size: 14px;
      width: 100%;
      padding: 20px 0;
-     border-bottom: 1px solid #e5e5e5;
+     *border-bottom: 1px solid #ffffff;
      display: table;
  }
 
@@ -478,3 +478,21 @@
     color: #1E9FFF;
     margin-top: 50px;
 }
+
+/*   GGGGGGGGGGG   */
+ .current-carbox{
+     height: 330px;
+ }
+ .car-comment{
+     margin-top: 80px;
+    // border-top: 1px solid silver;
+ }
+ .G-time-choice{
+     margin-top: -184px;
+     margin-right: 108px;
+     float: right;
+     width: 400px;
+     height: 250px;
+     background-color: #00FFFF;
+ }
+

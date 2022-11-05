@@ -45,7 +45,7 @@ public class FlowServiceImpl extends ServiceImpl<FlowMapper, Flow> implements IF
         wrapper.eq("ord_number",out_trade_no);
         Order order = orderMapper.selectOne(wrapper);
         System.out.println(order);
-        order.setOrdSatus("已支付");
+        order.setOrdSatus("待取车");
         order.setOrdUpdateTime(LocalDateTime.now());
         int rows1 = orderMapper.updateById(order);
         System.out.println(rows1);

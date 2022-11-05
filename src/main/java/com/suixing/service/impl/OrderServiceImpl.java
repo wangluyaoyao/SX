@@ -1,5 +1,6 @@
 package com.suixing.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Order;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -58,6 +60,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public Integer updateOrderStatus(Order order) {
         return orderMapper.updateById(order);
+    }
+
+    @Override
+    public ServerResponse orderStatusSccess(Long ordNumber) {
+        QueryWrapper queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("ord_number",ordNumber);
+        Order order = orderMapper.selectOne(queryWrapper);
+        order.setOrdSatus("已还车");
+        order.setOrdUpdateTime(LocalDateTime.now());
+        int row = orderMapper.updateById(order);
+        return ServerResponse.success("ok",order);
     }
 
 

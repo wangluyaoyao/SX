@@ -24,7 +24,6 @@ public class CouponController {
     @GetMapping("getAllCoupon")
     public ServerResponse getAllCoupno(){
         ServerResponse response = iCouponService.getCouponAll();
-
         System.out.println(response);
         return response;
     }

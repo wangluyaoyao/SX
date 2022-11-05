@@ -22,6 +22,8 @@ public interface IOrderService  {
 
     Integer updateOrderStatus(Order order);
 
+    ServerResponse orderStatusSccess(Long ordNumber);
+
 
 
 

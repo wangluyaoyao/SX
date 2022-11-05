@@ -26,7 +26,6 @@ function userShow(){
     }
 }
 userShow();
-
 $(".bye").click(function (){
     localStorage.removeItem("token");
     $.ajax({
@@ -35,6 +34,57 @@ $(".bye").click(function (){
     })
 });
 
+
+var ws;
+var userId ;
+var userName;
+$(function (){
+
+
+    //检查浏览器是否支持
+    if ("WebSocket" in window) {
+        console.log("你的浏览器支持")
+        var token = localStorage.getItem("token");
+        if (token != null) {
+            $.ajax({
+                type: "post",
+                url: "/customer/userVerification/" + token,  //用户验证,
+                // data:{token:token},
+                success: function (result) {
+                    var user = result.data
+                    userId = user.userId;
+                    userName = user.userName;
+                    OpenWebsocket();
+                }
+            })
+        }
+    }else{
+        layer.msg("你的浏览器不支持websocket!garbage")
+    }
+})
+function OpenWebsocket(){
+    //与客户端建立连接
+    ws = new WebSocket("ws://localhost:8089/WebSocket/" + userId);
+    console.log(ws);
+    //    与服务连接时触发
+    console.log(ws)
+    ws.onopen = function (){
+        layer.msg("与服务器连接成功，客户端ID:"+userId);
+        ws.send("你好服务端！！我是客户端"+userId);
+
+    }
+//接受消息时触发
+    ws.onmessage = function (evt){
+        let breakMsg = evt.data;
+        console.log(breakMsg)
+        layer.msg("从客户端接收到消息"+breakMsg);
+    }
+
+    ws.onclose = function (){
+        layer.msg("服务已关闭")
+    }
+
+}
 
 //关闭窗口后自动清楚token
 // window.onload = function () {

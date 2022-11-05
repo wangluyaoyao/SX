@@ -61,6 +61,7 @@ document.querySelector(".car-model").onclick = function(event){
       workArray[i].children[0].className = " "
  }
   element.className = "hot-active"
+    element.parentNode.className = "hot-active"
     //清空品牌名
     var carArray = document.querySelector(".car-name").children;
     var temp = carArray[1].children[0].className
@@ -74,11 +75,7 @@ document.querySelector(".car-model").onclick = function(event){
 //品牌事件冒泡
 document.querySelector(".car-name").onclick = function(event){
   var element = event.target;
- var typeName =  element.nodeName;//标签名称
- var type =  element.type;//标签类型
-//    console.log(typeName);
-//    console.log(type);
-//     console.log(element);
+
  var workArray = document.querySelector(".car-name").children;
  var temp = workArray[1].children[0].className
  // console.log(temp)
@@ -87,6 +84,84 @@ document.querySelector(".car-name").onclick = function(event){
  //  workArray[i].children[0].className = " "
  // }
   element.className = "active"
+}
+// document.querySelector(".upper").onclick = function  upad(event) {
+//     var element = event.target;
+//     var name = document.querySelector("#strat").innerText;
+//     //    修改树枝
+//     var numberArray = document.querySelector(".pagination").children;
+//     if (name > 1) {
+//         for (var i = 1; i < numberArray.length - 1; i++) {
+//             numberArray[i].innerText = parseInt(numberArray[i].innerText) - 1
+//         }
+//         now.className = "active"
+//     }else {
+//         layer.msg("已经是第一页了")
+//     }
+// }
+document.querySelector("#strat").onclick = function (event) {
+    var element = event.target;
+    var name = element.innerText;
+    //    修改树枝
+    var numberArray = document.querySelector(".pagination").children;
+    if (name > 1) {
+        for (var i = 1; i < numberArray.length - 1; i++) {
+            numberArray[i].innerText = parseInt(numberArray[i].innerText) - 1
+            numberArray[i].className = " "
+        }
+        element.nextElementSibling.className = "active"
+    }else {
+        var workArray = document.querySelector(".pagination").children;
+        for (var i = 0; i < workArray.length; i++) {
+            workArray[i].className = " "
+        }
+        element.className = "active"
+    }
+}
+document.querySelector("#end").onclick = function (event) {
+    if (now>$(".page-select .pages").val()) {
+        return;
+    }
+    var element = event.target;
+    var name = element.innerText;
+    //    修改树枝
+    var numberArray = document.querySelector(".pagination").children;
+    var pages = document.querySelector(".page-select .pages").value
+    if (name <pages) {
+        for (var i = 1; i < numberArray.length-1; i++) {
+            numberArray[i].innerText = parseInt(numberArray[i].innerText) + 1
+            numberArray[i].className = " "
+        }
+        element.previousElementSibling.className = "active"
+        return
+    }
+    else {
+        var workArray = document.querySelector(".pagination").children;
+        for (var i = 0; i < workArray.length; i++) {
+            workArray[i].className = " "
+        }
+        element.className = "active"
+    }
+
+}
+//分页事件冒泡
+document.querySelector(".pagination").onclick = function(event){
+   // console.log("aaaa")
+  //  console.log(event.target.innerText)
+    var aaa = document.querySelector("#strat").innerText;
+    var bbb = document.querySelector("#end").innerText;
+    if (event.target.innerText>aaa && event.target.innerText<bbb) {
+        var element = event.target;
+        var name = element.innerText;
+        var typeName = element.nodeName;//标签名称
+        var type = element.type;//标签类型
+    //    console.log(name);
+        var workArray = document.querySelector(".pagination").children;
+        for (var i = 0; i < workArray.length; i++) {
+            workArray[i].className = " "
+        }
+        element.className = "active"
+    }
 }
 //价格事件冒泡
 //事件冒泡：事件作用在那个元素，那个元素就出现 ;事件：event
