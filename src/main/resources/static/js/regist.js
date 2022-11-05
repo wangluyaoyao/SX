@@ -4,8 +4,6 @@
 
 //验证手机号
 $(".phoneNo").blur(checkPhoneNo)
-
-
 function checkPhoneNo(){
     var phoneNo = $(".phoneNo").val()
 
@@ -16,9 +14,23 @@ function checkPhoneNo(){
         $(".phoneTip").text("手机号格式错误")
         return false;
     }else{
-
-        $(".phoneTip").text("");
-        return true;
+        $.ajax({
+            type:"get",
+            url:"../customer/findUserTel",
+            data:{
+                userTel: $(".phoneNo").val()
+            },
+            success:function (findUserTelResponse){
+                console.log("findUserTelResponse:"+findUserTelResponse);
+                if (findUserTelResponse.resultcode !=200){
+                    console.log("手机号重复了！")
+                    alert("重复了！")
+                    window.location.href = "../customer/login.html";
+                }else {
+                    $(".phoneTip").text("手机号可用")
+                }
+            }
+        })
     }
 }
 //验证登陆密码

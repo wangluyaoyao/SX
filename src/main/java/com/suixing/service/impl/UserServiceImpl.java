@@ -40,6 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Autowired
     RedisUtils redisUtils;
 
+    //普通登录
     @Override
     public ServerResponse login(User user) {
         System.out.println(user);
@@ -61,6 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     }
 
+    //注册
     @Override
     public ServerResponse regist(User user) {
        int rows = userMapper.insert(user);
@@ -70,7 +72,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
        else
            return ServerResponse.fail("注册失败",null);
     }
-
+    //手机号快速登陆
     @Override
     public ServerResponse loginByPhone(User user) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
@@ -86,18 +88,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
     }
 
-//    @Override
-//    public ServerResponse selectUserTel(String phone) {
-//        QueryWrapper<User> wrapper = new QueryWrapper<>();
-//        wrapper.eq("user_tel",phone);
-//        User loginTel = userMapper.selectOne(wrapper);
-//        if (loginTel == null){
-//            return ServerResponse.success("不重复",loginTel);
-//        }else {
-//            return ServerResponse.fail("重复",null);
-//        }
-//    }
-
+    //查询用户手机号是否被注册
+    @Override
+    public ServerResponse selectUserTel(String phone) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_tel",phone);
+        User loginTel = userMapper.selectOne(wrapper);
+        if (loginTel == null){
+            return ServerResponse.success("不重复",loginTel);
+        }else {
+            return ServerResponse.fail("重复",null);
+        }
+    }
+    //发送短信
     @Override
     public Boolean sendMessage(String phone, String code, Map<String, Object> codeMap) {
         /**

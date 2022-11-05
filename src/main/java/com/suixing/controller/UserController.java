@@ -91,6 +91,16 @@ public class UserController {
         }
     }
 
+    @GetMapping("findUserTel")
+    public ServerResponse findUserTel(String phone){
+        ServerResponse findUserTelResponse = userService.selectUserTel(phone);
+        System.out.println("findUserTel:"+findUserTelResponse);
+        if (findUserTelResponse.getResultcode() !=200){
+            return ServerResponse.success("不重复",findUserTelResponse);
+        }else {
+            return ServerResponse.fail("重复！",null);
+        }
+    }
 
     @GetMapping("/loginSend")
     public ServerResponse sendCode(@RequestParam("phone")String phone){
@@ -156,6 +166,8 @@ public class UserController {
             return ServerResponse.fail("发送失败 ",null);
         }
     }
+
+
 
 }
 

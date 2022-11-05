@@ -271,6 +271,9 @@ fieldset, img, input, button {
     width: 300px;
     margin-left: 60px;
 }
+.loginAgree1{
+    margin-top: 10px;
+}
 /*记住账号*/
 .remember-no{
     margin-top: 16px;
