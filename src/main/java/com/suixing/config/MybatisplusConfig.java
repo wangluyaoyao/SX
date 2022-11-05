@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @MapperScan("com.suixing.mapper")
 public class MybatisplusConfig {
 
-    @Bean
+    @Bean(value = "mybatisPlusInterceptor")
     public MybatisPlusInterceptor mybatisPlusInterceptor(){
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));

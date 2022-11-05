@@ -54,8 +54,7 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
     @Autowired
     private WebSocketProcess webSocketProcess;
 
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+
 
     @PostConstruct
     public void init(){

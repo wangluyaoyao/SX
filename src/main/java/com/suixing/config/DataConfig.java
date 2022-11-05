@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DataConfig {
-    @Bean
+    @Bean(value = "getMySQlDataModel")
     public DataModel getMySQlDataModel(){
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setServerName("localhost");

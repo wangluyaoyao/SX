@@ -27,9 +27,9 @@ import java.io.Serializable;
 @Data
 public class Car implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+     @Id
     @ApiModelProperty("车辆id")
-    @TableId(value = "car_id", type = IdType.AUTO)
+   @TableId(value = "car_id", type = IdType.AUTO)
     private Integer carId;
 
     @ApiModelProperty("车辆名")

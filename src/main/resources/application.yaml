@@ -10,10 +10,10 @@ spring:
     username: root
     password: 12345678
 # Elasticsearch
-  elasticsearch:
-    uris: localhost:9200
-    connection-timeout: 5s
-    socket-timeout: 30s
+#  elasticsearch:
+#    uris: localhost:9200
+#    connection-timeout: 5s
+#    socket-timeout: 30s
   #    掐头去尾
   mvc: #静态资源配置
     view:
