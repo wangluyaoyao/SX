@@ -1,5 +1,6 @@
 package com.suixing.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Order;
@@ -16,11 +17,10 @@ import javax.xml.transform.Result;
  */
 public interface IOrderService  {
 
-    ServerResponse getById(Integer ordId);
+    Order getById(Integer ordId);
     ServerResponse getOrderAll();
     ServerResponse saveOrder(Order order);
-
-    Integer updateOrderStatus(Order order);
+    ServerResponse updateOrder(Order order);
 
     ServerResponse orderStatusSccess(Long ordNumber);
 

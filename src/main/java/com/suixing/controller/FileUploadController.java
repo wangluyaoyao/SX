@@ -9,15 +9,12 @@ import com.suixing.util.AppCodeDriver;
 import com.suixing.util.AppCodeIdCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
+@RestController
 public class FileUploadController {
     @Autowired
     private IFileUploadService fileUploadService;
@@ -45,14 +42,14 @@ public class FileUploadController {
     }
 
     //身份证
-    @PostMapping("userIdCard/person")
+    @RequestMapping(value = "userIdCard/person",method = RequestMethod.POST)
     public ServerResponse uploadSingleFileAjax(@RequestParam("myimage") MultipartFile multipartFile) throws Exception {
         ServerResponse serverResponse= AppCodeIdCard.personCard(multipartFile);
         return serverResponse;
     }
 
     //驾驶证
-    @PostMapping("carIdCar/car")
+    @RequestMapping(value = "carIdCar/car",method = RequestMethod.POST)
     public ServerResponse uploadCarSingleFileAjax(@RequestParam("carimage") MultipartFile multipartFile) throws Exception {
         ServerResponse serverResponse = AppCodeDriver.driverCard(multipartFile);
         return serverResponse;

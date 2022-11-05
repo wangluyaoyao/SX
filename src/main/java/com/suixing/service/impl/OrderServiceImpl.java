@@ -30,12 +30,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private OrderMapper orderMapper;
 
     @Override
-    public ServerResponse getById(Integer ordId) {
-        Order order = orderMapper.selectById(ordId);
-        if (order == null){
-            return  ServerResponse.fail("查询失败",null);
-        }
-        return ServerResponse.success("查询成功",order);
+    public Order getById(Integer ordId) {
+        return orderMapper.selectById(ordId);
+
     }
 
 
@@ -58,8 +55,18 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public Integer updateOrderStatus(Order order) {
-        return orderMapper.updateById(order);
+    public ServerResponse updateOrder(Order order) {
+        Order order1 = orderMapper.selectById(order.getOrdId());
+        order1.setOrdPicIdcard(order.getOrdPicIdcard());
+        order1.setOrdPicCard(order.getOrdPicCard());
+        int rows = orderMapper.updateById(order1);
+        if(rows >0){
+            System.out.println("修改成功");
+            return ServerResponse.success("修改成功",order1);
+        }
+        else
+            System.out.println("修改失败");
+        return ServerResponse.fail("修改失败",null);
     }
 
     @Override
@@ -74,6 +81,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         int row = orderMapper.updateById(order);
         return ServerResponse.success("ok",order);
     }
+
 
 
 }
