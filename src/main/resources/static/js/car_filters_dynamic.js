@@ -51,7 +51,6 @@ function getByPage(pageNum,carModel,carName,carPrice){
        var url = "/Car/getCarByPage/"+pageNum +"/" +carModel+"/" +carName +"/" +carPrice;
        console.log(url)
        carSelect(url);
-
 }
 $(".car-name a").click(function() {
     var text = $(this);
@@ -80,19 +79,15 @@ function carSelect(url){
             showCar(CarArray)
             //页码信息;
             {
-                $(".page-select .pages").text(result.pages)
-                $(".page-select .total").text(result.total)
-                $(".page-select .current").text(result.current)
+                $(".page-select .pages").val(result.pages)
+               // $(".page-select .total").text(result.total)
+                $(".page-select .current").val(result.current)
             }
         }
     })
 }
 //上一页，下一页按钮监听
 $(".upper").click(function () {
-    if ($(".current").text()==1){
-        layer.msg('已经是第一页了')
-        return;
-    }
 
     var carBrand = $(".car-name .active").text()
     var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
@@ -101,18 +96,38 @@ $(".upper").click(function () {
     getByPage(page,carModel,carBrand,carPrice)
     console.log("上一页")
 })
-
 $(".down").click(function () {
-    if ($(".current").text()==$(".pages").text()){
-        layer.msg('已经是最后一页了')
-        return;
-    }
+
+  //  }
     var carBrand = $(".car-name .active").text()
     var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
     var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
     var page = parseInt($(".page-select .current").text()) + 1
+    if ($(this).attr("id") == "strat"&&$(".pagination .active").text()!=1)
+        now = parseInt(now)-1
+    console.log(now)
     getByPage(page,carModel,carBrand,carPrice)
     console.log("下一页")
+})
+
+$(".pagination a").click(function (){
+    var now =  ($(this).text())
+ //   var now = $(".pagination .active").text())«»
+
+    var carBrand = $(".car-name .active").text()
+    var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
+    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
+    console.log($(this).attr("id"))
+    if ($(this).attr("id") == "strat"&&$(".pagination .active").text()!=1)
+        now = parseInt(now)+1
+    console.log(now)
+    if (now>$(".page-select .pages").val()) {
+        layer.msg('已经是最后一页了')
+        return;
+    }
+    getByPage(now,carModel,carBrand,carPrice)
+
+
 })
 
 //商品渲染

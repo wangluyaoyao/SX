@@ -6,6 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
@@ -17,179 +21,60 @@ import java.io.Serializable;
  * @author baomidou
  * @since 2022-10-03
  */
-@TableName("car")
+//@TableName("car")
 @ApiModel(value = "SxCar对象", description = "")
+@Document(indexName = "suixingcar")
 @Data
 public class Car implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
     @ApiModelProperty("车辆id")
     @TableId(value = "car_id", type = IdType.AUTO)
     private Integer carId;
+
     @ApiModelProperty("车辆名")
+    @Field(type = FieldType.Text,analyzer = "ik_smart",searchAnalyzer = "ik_max_word")  //设置为可分词
     private String carName;
+
+    @Field(type = FieldType.Auto)//手动设置为keyword  但同时也就不能分词
     @ApiModelProperty("品牌名")
     private String carBrand;
+
+    @Field(type = FieldType.Text)
     @ApiModelProperty("日租价格")
     private Float carPrice;
+
     @ApiModelProperty("营业网点id")
     private Integer busId;
+
     @ApiModelProperty("车辆状态")
     private String carStatus;
+
     @ApiModelProperty("车辆图片")
     private String carImg;
+
+    @Field(type = FieldType.Keyword)
     @ApiModelProperty("车型")
     private String carModel;
+
+    @Field(type = FieldType.Auto)
     @ApiModelProperty("排量")
     private String carDisp;
+
+
     @ApiModelProperty("座位数")
     private String carSeat;
+
+
     @ApiModelProperty("变速箱")
     private String carCase;
+
+    @Field(type = FieldType.Auto)
     @ApiModelProperty("进气")
     private String carExhaust;
+
     @ApiModelProperty("邮箱")
     private String carTank;
     private String backup;
     private String backuPlus;
-
-    public Integer getCarId() {
-        return carId;
-    }
-
-    public void setCarId(Integer carId) {
-        this.carId = carId;
-    }
-
-    public String getCarName() {
-        return carName;
-    }
-
-    public void setCarName(String carName) {
-        this.carName = carName;
-    }
-
-    public String getCarBrand() {
-        return carBrand;
-    }
-
-    public void setCarBrand(String carBrand) {
-        this.carBrand = carBrand;
-    }
-
-    public Float getCarPrice() {
-        return carPrice;
-    }
-
-    public void setCarPrice(Float carPrice) {
-        this.carPrice = carPrice;
-    }
-
-    public Integer getBusId() {
-        return busId;
-    }
-
-    public void setBusId(Integer busId) {
-        this.busId = busId;
-    }
-
-    public String getCarStatus() {
-        return carStatus;
-    }
-
-    public void setCarStatus(String carStatus) {
-        this.carStatus = carStatus;
-    }
-
-    public String getCarImg() {
-        return carImg;
-    }
-
-    public void setCarImg(String carImg) {
-        this.carImg = carImg;
-    }
-
-    public String getCarModel() {
-        return carModel;
-    }
-
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
-    }
-
-    public String getCarDisp() {
-        return carDisp;
-    }
-
-    public void setCarDisp(String carDisp) {
-        this.carDisp = carDisp;
-    }
-
-    public String getCarSeat() {
-        return carSeat;
-    }
-
-    public void setCarSeat(String carSeat) {
-        this.carSeat = carSeat;
-    }
-
-    public String getCarCase() {
-        return carCase;
-    }
-
-    public void setCarCase(String carCase) {
-        this.carCase = carCase;
-    }
-
-    public String getCarExhaust() {
-        return carExhaust;
-    }
-
-    public void setCarExhaust(String carExhaust) {
-        this.carExhaust = carExhaust;
-    }
-
-    public String getCarTank() {
-        return carTank;
-    }
-
-    public void setCarTank(String carTank) {
-        this.carTank = carTank;
-    }
-
-    public String getBackup() {
-        return backup;
-    }
-
-    public void setBackup(String backup) {
-        this.backup = backup;
-    }
-
-    public String getBackuPlus() {
-        return backuPlus;
-    }
-
-    public void setBackuPlus(String backuPlus) {
-        this.backuPlus = backuPlus;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "carId=" + carId +
-                ", carName='" + carName + '\'' +
-                ", carBrand='" + carBrand + '\'' +
-                ", carPrice=" + carPrice +
-                ", busId=" + busId +
-                ", carStatus='" + carStatus + '\'' +
-                ", carImg='" + carImg + '\'' +
-                ", carModel='" + carModel + '\'' +
-                ", carDisp='" + carDisp + '\'' +
-                ", carSeat='" + carSeat + '\'' +
-                ", carCase='" + carCase + '\'' +
-                ", carExhaust='" + carExhaust + '\'' +
-                ", carTank='" + carTank + '\'' +
-                ", backup='" + backup + '\'' +
-                ", backuPlus='" + backuPlus + '\'' +
-                '}';
-    }
 }

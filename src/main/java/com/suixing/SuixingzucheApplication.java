@@ -14,7 +14,7 @@ public class SuixingzucheApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SuixingzucheApplication.class, args);
-        System.out.println( "浏览器打开：http://localhost:8089/");
+        System.out.println( "浏览器打开：http://localhost:8089");
     }
 
 }

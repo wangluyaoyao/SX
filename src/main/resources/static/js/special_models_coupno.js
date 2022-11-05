@@ -29,15 +29,6 @@ function getCoupno(){
         }
     })
 }
-// $("middle").on('click','#cou_receive',function (event){
-//     var tel = event.currentTarget;
-//     console.log(tel)
-//
-// })
-// function recCoupno(){
-//         var tel = this.val();
-//          console.log(tel)
-// }
 $(".special_coupno").on('click',"#cou_receive",function(event){
     var couid = event.target.previousElementSibling.value;
   //  console.log(tel)  //prev()前一个元素
@@ -48,7 +39,7 @@ $(".special_coupno").on('click',"#cou_receive",function(event){
     if (userId == null)
         layer.msg("请先登陆")
     $.ajax({
-        url:"/userRecCoupno",
+        url:"/userRecCoupon",
         type:"get",
         data:{
             userId:userId,
