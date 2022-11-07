@@ -191,3 +191,47 @@ function moveAnimation2(ele, target) {
             moveAnimation2(viewpage, target);
         }
             };
+
+/*推荐车辆*/
+showRecommend();
+function showRecommend(){
+    var url = "/recommend/recommendByUser";
+    var token = localStorage.getItem("token");
+    $.ajax({
+        type: "get",
+        url: url,
+        headers: {'token': token},
+        success: function (result) {
+            for (var i=0; i<result.length;i++) {
+                var data = result[i];
+                carName = data.carName;
+                carId = data.carId;
+                carImg = data.carImg;
+                carPrice = data.carPrice;
+                var recomendEle = "<div class=\"fq-car\">\n" +
+                    "                                <div class=\"right-middle\">\n" +
+                    "                                    <a href=\"/details/"+carId+"\">\n" +
+                    "                                        <img src=\""+carImg+"\">\n" +
+                    "                                    </a>\n" +
+                    "                                </div>\n" +
+                    "                                <div class=\"right-under\">\n" +
+                    "                                    <a href=\"javascript:void (0)\" class=\"to-buy\">\n" +
+                    "                                     <div class=\"name\">"+carName+"</div>\n" +
+                    "                                     <div class=\"price\">\n" +
+                    "                                         <div class=\"tejia\">\n" +
+                    "                                             特价卖\n" +
+                    "                                         </div>\n" +
+                    "                                         <div class=\"price-real\">\n" +
+                    "                                             <a>¥</a>\n" +
+                    "                                             <a>"+carPrice+"</a>\n" +
+                    "                                         </div>\n" +
+                    "                                     </div>\n" +
+                    "                                    </a>\n" +
+                    "                                </div>\n" +
+                    "                            </div>";
+                $(".recommend").append(recomendEle);
+
+            }
+        }
+    })
+}
