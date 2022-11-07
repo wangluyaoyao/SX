@@ -156,7 +156,7 @@ function showUser(){
             $("#info1").append(userEle);
             $(".userId").val(userId);
             $("#userTel").val(userTel) ;
-            // $("#userPsd").val(userPsd) ;
+            $("#Psdword").val(userPsd) ;
             $("#userGender").val(userGender) ;
             $("#userIdcard").val(userIdcard) ;
             $("#userName").val(userName) ;
@@ -188,6 +188,11 @@ function updateUser(){
     var url = "/user/update";
     var gender = $(".gerderBtn:checked").val();
     var token = localStorage.getItem("token");
+    var userPsd = $("#ConfirmPassword").val();
+    if (userPsd == null || userPsd === '' || userPsd === 0 ){
+        userPsd = $("#Psdword").val()
+    }
+
     //console.log(token);
     $.ajax({
         type:"post",
@@ -195,7 +200,7 @@ function updateUser(){
         headers:{'token':token},
         data:{
             userTel:$("#userTel").val(),
-            userPsd:$("#ConfirmPassword").val(),
+            userPsd:userPsd,
             userGender:gender,
             userIdcard:$("#userIdcard").val(),
             userName:$("#userName").val(),
