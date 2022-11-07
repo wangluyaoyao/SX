@@ -129,6 +129,32 @@ $(".pagination a").click(function (){
 
 
 })
+$(".pro-sumbit").click(function (){
+
+    var start1 = $(".t1").val();
+    var start2 = $(".t2").val();
+    var start3 = $(".t3").val();
+    var start4 = $(".t4").val();
+
+    var start = start1+" "+start2;
+    var end = start3+" "+start4;
+    if (start1 == null || start2 == null ||start3 == null ||start4 == null){
+        layer.msg("请先选择时间")
+        return
+    }
+    getByPage(1);
+})
+$(".pro-order12").click(function (){
+    var start1 = $(".t1").val();
+    var start2 = $(".t2").val();
+    var start3 = $(".t3").val();
+    var start4 = $(".t4").val();
+    if (start1 == null || start2 == null ||start3 == null ||start4 == null){
+        layer.msg("请先选择时间")
+        return null;
+    }
+})
+
 
 //商品渲染
 function showCar(carArray){
@@ -137,8 +163,13 @@ function showCar(carArray){
     var start2 = $(".t2").val();
     var start3 = $(".t3").val();
     var start4 = $(".t4").val();
+
     var start = start1+" "+start2;
     var end = start3+" "+start4;
+    if (start1 == null || start2 == null ||start3 == null ||start4 == null){
+        layer.msg("请先选择时间")
+        return
+    }
     console.log(start+"111111")
     console.log(end+"22222222")
 
@@ -183,7 +214,7 @@ function showCar(carArray){
             "                    <!-- 预定按钮 -->\n" +
             "                    <div class=\"pro-bottom\">\n" +
             "\n" +
-            "                       <a href=\"../dropOrder?carId="+car.carId+"&start="+start+"&end="+end+"\">\n" +
+            "                       <a class='pro-order12' href=\"../dropOrder?carId="+car.carId+"&start="+start+"&end="+end+"\">\n" +
             "                            <div class=\"pro-order\" >\n" +
             "                                预购\n" +
             "                            </div>\n" +

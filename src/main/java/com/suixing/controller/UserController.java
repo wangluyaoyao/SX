@@ -8,6 +8,7 @@ import com.suixing.entity.User;
 import com.suixing.mapper.UserMapper;
 import com.suixing.service.IUserService;
 import com.suixing.util.TokenUtil;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,8 @@ public class UserController {
     private UserMapper userMapper;
     @Autowired
     private IUserService userService;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
@@ -85,18 +88,23 @@ public class UserController {
 
 
         if (registResponse.getResultcode()==200){
+            //注册成功，发放新用户优惠券
+            Map<String,Object> coupnoUser = new HashMap<>();
+            coupnoUser.put("userId",6);
+            coupnoUser.put("couId",1);
+            rabbitTemplate.convertAndSend("userCouponCreateExchange","userCoupno",coupnoUser);
+
             return ServerResponse.success("注册成功",registResponse);
         }else{
             return ServerResponse.fail("注册失败",null);
         }
     }
 
-    @PostMapping("findUserTel")
-    public ServerResponse findUserTel(String userTel){
-        System.out.println("phone:"+userTel);
-        ServerResponse findUserTelResponse = userService.selectUserTel(userTel);
-        System.out.println("findUserTel:"+findUserTelResponse.getResultcode());
-        if (findUserTelResponse.getResultcode()  == 200){
+    @GetMapping("findUserTel")
+    public ServerResponse findUserTel(String phone){
+        ServerResponse findUserTelResponse = userService.selectUserTel(phone);
+        System.out.println("findUserTel:"+findUserTelResponse);
+        if (findUserTelResponse.getResultcode() !=200){
             return ServerResponse.success("不重复",findUserTelResponse);
         }else {
             return ServerResponse.fail("重复！",null);
@@ -127,7 +135,7 @@ public class UserController {
         System.out.println(code);
         if (bool) {
             // 如果发送成功，则将生成的6位随机验证码存入redis缓存,5分钟后过期
-            redisTemplate.opsForValue().set(phone, code, 50000, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
             return ServerResponse.success("发送成功",code);
         } else{
             return ServerResponse.fail("发送失败 ",null);
@@ -136,6 +144,8 @@ public class UserController {
 
     @GetMapping("/registerSend")
     public ServerResponse registerSendCode(@RequestParam("phone")String phone){
+
+
         System.out.println("controller:"+phone);
         // 根据手机号从redis中拿验证码
         String code = redisTemplate.opsForValue().get(phone);
@@ -156,9 +166,10 @@ public class UserController {
         System.out.println(code);
 
 //        ServerResponse serverResponse = userService.selectUserTel(phone);
+
         if (bool) {
             // 如果发送成功，则将生成的6位随机验证码存入redis缓存,5分钟后过期
-            redisTemplate.opsForValue().set(phone, code, 50000, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(phone, code, 10000, TimeUnit.MINUTES);
             return ServerResponse.success("发送成功",code);
         } else{
             return ServerResponse.fail("发送失败 ",null);

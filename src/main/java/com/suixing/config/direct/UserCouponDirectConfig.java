@@ -9,22 +9,25 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CouponDirectConfig implements BeanPostProcessor {
+public class UserCouponDirectConfig implements BeanPostProcessor {
     //1、创建交换机
-    @Bean
+    @Bean(value = "userCreateExchange")
     public DirectExchange newDirectExchange(){
-        return new DirectExchange("couponDrawDirectExchange",true,false);
+        return new DirectExchange("userCouponCreateExchange",true,false);
 
     }
     //2、创建队列
-    @Bean
+    @Bean(value = "UserCouponDirectQueue")
     public Queue newQueue(){
-        return new Queue("couponDrawDirectQueue",true);
+        return new Queue("UserCouponDirectQueue",true);
+
     }
+
+
     //3、绑定
-    @Bean
+    @Bean(value = "userCoupnobinding")
     public Binding binding(){
-        return BindingBuilder.bind(newQueue()).to(newDirectExchange()).with("qeqe12138");
+        return BindingBuilder.bind(newQueue()).to(newDirectExchange()).with("userCoupno");
     }
 
 }

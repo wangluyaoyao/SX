@@ -22,6 +22,8 @@ $(".sub-nav").click(function (event){
         $("#info4").attr("class","information");
     }else if (eId === "exchange-info5"){
         $("#info5").attr("class","information");
+    }else if (eId === "exchange-info6") {
+        $("#info6").attr("class", "information");
     }
 });
 
@@ -417,6 +419,105 @@ function showOrderAll(){
 }
 
 
+function showMSg() {
+    var token = localStorage.getItem("token");
+    console.log(token)
+    if(token != null) {
+        $.ajax({
+            type: "post",
+            url: "/customer/userVerification/" + token,  //用户验证,
+            success: function (result) {
+                var user = result.data
+                    //更新页面
+              //  console.log(user)
+                $(".userId").val(user.userId)
+                Id  = user.userId;
+                $(".registAfter").text(user.userName);
+                $.ajax({
+                    type:"get",
+                    url:"/getUserMsg",
+                    data: {
+                        userId: Id
+                    },
+                    success:function (result){
+
+                    //    console.log(result.data)
+                        var msgArray = result.data
+                        msgshow(msgArray);
+
+                    }
+
+
+
+
+                })
+
+            }
+        })
+    }
+}
+
+
+//我的消息
+$("#exchange-info6").click(function (){
+    showMSg()
+})
+$(".personal-prent").on('click',"#yidu-botton-rrr",function(event) {
+    var userId = event.target.previousElementSibling.previousElementSibling.value;
+    var msgId = event.target.previousElementSibling.value;
+    console.log(msgId+userId)
+    $.ajax({
+        type:"get",
+        url:"/msgUpdate",
+        data:{
+            userId:userId,
+            msgId:msgId
+        },
+        success:function (result){
+            msgshow(result.data)
+        }
+    })
+})
+
+
+function msgshow(msgArray){
+    $(".personal-prent").html(" ")
+    for (var i = 0; i < msgArray.length; i++) {
+        if (msgArray[i].userMsgType == 0)
+            var msgType = "系统消息"
+        if (msgArray[i].userMsgType == 1)
+            msgType = "商家消息"
+        if (msgArray[i].userMsgType == 2)
+            msgType = "活动消息"
+        var eleplus ;
+
+        if (msgArray[i].userMsgStatus == 0) {
+            eleplus =  "<input type=\"hidden\" class=\"user-id\" value=\""+msgArray[i].userId+"\">\n" +
+                "                            <input type=\"hidden\" class=\"user-msg-id\" value=\""+msgArray[i].userMsgId+"\">\n" +
+                "                            <a href=\"javascript:void (0)\" id=\"yidu-botton-rrr\">已读</a>"
+        }else {
+            eleplus = "";
+        }
+
+        var ele  = " <div class=\"personal\">\n" +
+            "                        <div class=\"fasongzhe\">\n" +
+            "                            <span>"+msgType+"</span>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"msg-text\">\n" +
+            "                            <span>\n" +
+            "                               "+msgArray[i].userMsgContent+"\n" +
+            "                            </span>\n" +
+            "                        </div>\n" +
+            "                        <div class=\"yidu-botton\">\n" +
+            eleplus
+            +
+            "                        </div>\n" +
+            "\n" +
+            "                    </div>"
+        $(".personal-prent").append(ele);
+    }
+
+}
 
 
 

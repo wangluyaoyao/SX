@@ -21,8 +21,9 @@ import java.util.Map;
  * @since 2022-10-03
  */
 public interface IUserCoupnoService extends IService<UserCoupno> {
-    public ServerResponse userRecCou(Integer userId,Integer couId);
+    public ServerResponse userRecCou(Integer userId, Integer couId);
     public void sendMsg(Integer couId, Channel channel, Message message);
     ServerResponse getById(int userId);
+    void caeatUserCou( Channel channel, Message message,HashMap<String,Object> map);
    // public void processMsg(Channel channel, Message message , Map map);
 }
