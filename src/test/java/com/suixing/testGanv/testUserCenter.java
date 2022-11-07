@@ -51,12 +51,12 @@ public class testUserCenter {
         System.out.println(Math.round(v));
     }
 
-    @Test
-    public void getOrder(){
-        ServerResponse response = orderService.getById(5);
-        System.out.println(response.getData());
-
-    }
+//    @Test
+//    public void getOrder(){
+//        ServerResponse response = orderService.getById(5);
+//        System.out.println(response.getData());
+//
+//    }
     @Test
     public void saveFlow(){
         Map<String,Object> map = flowService.saveFlow(953L,"44552211",452.1f);

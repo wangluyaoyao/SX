@@ -43,16 +43,27 @@ public class OrderController {
     @Autowired
     private IUserCenterService userCenterService;
 
-    //订单确认页面绑定
-//    @GetMapping("/order_confirm/{ordId}")
-//    public ModelAndView selectByOrderNum(@PathVariable("ordId") Integer ordId){
-//        ServerResponse result = orderService.getById(ordId);
-//        ModelAndView mav = new ModelAndView();
-//        mav.addObject("result",result);
-//        mav.setViewName("order/order_confirm");
-//        return mav;
+    //订单确认页面
+    @GetMapping("/order_confirm")
+    @ResponseBody
+    public ModelAndView selectById(String ord){
+        Integer ordId = null;
+        if(ord!=null){
+            ordId = Integer.valueOf(ord);
+        }
+        Order order = orderService.getById(ordId);
+        Integer carId = order.getCarId();
+        System.out.println("订单id："+ordId);
+        System.out.println("车辆id："+carId);
+        Car car = carService.getById(carId);
+        System.out.println(car);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("order",order);
+        mav.addObject("carName",car.getCarName());
 
-// }
+        return mav;
+
+ }
 
 
     //确认订单页面获取车辆订单信息
@@ -105,13 +116,6 @@ public class OrderController {
     @ResponseBody
     public ModelAndView saveOrder(Integer carId,Order order,Integer userId,Integer couId,Float ordCouMoney){
 
-//        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        LocalDateTime start = LocalDateTime.parse(ordPicTime,df);
-//
-//        LocalDateTime end = LocalDateTime.parse(ordDroTime,df);
-
-//        Order order = new Order();
-
         //订单编号
         Long ordNumber = UUID.randomUUID().getMostSignificantBits();
         if(ordNumber<0){
@@ -130,9 +134,7 @@ public class OrderController {
         order.setOrdCouMoney(ordCouMoney);
         order.setOrdServiceTip(ordServiceTip);
         order.setUserId(userId);
-//        order.setOrdPicTime(start);
-//        order.setOrdDroTime(end);
-//        order.setOrdLease(ordLease);
+
         if (couId !=null){
             order.setCouId(couId);
         }
@@ -142,10 +144,37 @@ public class OrderController {
         ModelAndView mav = new ModelAndView();
         mav.addObject(result);
         mav.setViewName("order/order_update");
+        Integer ordId = order.getOrdId();
+        mav.addObject("ordId",ordId);
+
         return mav;
     }
 
+    //添加身份证、驾驶证信息
+    @PostMapping("updateOrder")
+    @ResponseBody
+    public ModelAndView updateOrder(Order order) {
 
+        ServerResponse result = orderService.updateOrder(order);
+
+        Order order1 = (Order) result.getData();
+        System.out.println(order);
+        System.out.println(order1);
+
+        Integer carId = order1.getCarId();
+        System.out.println("订单id：" + order1.getOrdId());
+        System.out.println("车辆id：" + carId);
+        Car car = carService.getById(carId);
+        System.out.println(car);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("order", order1);
+        mav.addObject("carName", car.getCarName());
+
+        mav.addObject(result);
+        mav.setViewName("order/order_confirm");
+        return mav;
+
+    }
 
     /*还车按钮*/
     @PostMapping("/successOrder")
@@ -154,6 +183,7 @@ public class OrderController {
         ServerResponse response = orderService.orderStatusSccess(ordNumber);
         return response;
     }
+
 
 
 
