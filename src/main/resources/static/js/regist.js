@@ -15,17 +15,18 @@ function checkPhoneNo(){
         return false;
     }else{
         $.ajax({
-            type:"get",
+            type:"post",
             url:"../customer/findUserTel",
             data:{
                 userTel: $(".phoneNo").val()
             },
             success:function (findUserTelResponse){
-                console.log("findUserTelResponse:"+findUserTelResponse);
-                if (findUserTelResponse.resultcode ==200){
+                console.log("findUserTelResponse:"+findUserTelResponse.resultcode);
+                if (findUserTelResponse.resultcode == 201){
                     console.log("手机号重复了！")
                     alert("重复了！")
-                    window.location.href = "../customer/login.html";
+                    document.getElementById("phone").value="";
+
                 }else {
                     $(".phoneTip").text("手机号可用")
                 }
@@ -127,50 +128,49 @@ function sendCode(){
 
 //点击注册
 $(".registBtn").off("click").on("click",function (e){
-    $.ajax({
-        type:"post",
-        url:"../customer/register",
-        data:{
-            userTel: $(".phoneNo").val(),
-            userPsd: $(".userPsd").val()
-        },
-        success:function (responseTel){
-            console.log("responseTel:"+responseTel);
-            var userPsd = $(".userPsd")
-            var userTel = $(".phoneNo")
-            var code = $("#code").val();
-            var box = document.querySelector("input[type = checkbox]").checked;
-            var pw1 = document.getElementById("password").value;
-            var pw2 = document.getElementById("checkPassword").value;
-            if (/^[0-9]\w{9,10}$/.test(userTel)){
-                $("#errorMsg").text("手机号格式错误！")
-                return false;
-            }else if (!box){
-                $("#errorMsg").text("请勾选服务！")
-                return false;
-            }else if (code == ""){
-                $("#errorMsg").text("请输入验证码")
-                return false;
-            }else if (sms != code){
-                $("#errorMsg").text("验证码错误")
-                return false;
-            }else if (pw1 !== pw2){
-                $("#errorMsg").text("两次密码不一致")
-                return false;
-            }else if (userPsd === "" || userPsd == null){
-                $("#errorMsg").text("请输入密码！")
-                return false;
-            }else if (/^[a-zA-Z0-9]\w{5,100}$/.test(userPsd)){
-                $("#errorMsg").text("密码格式错误！格式为数字，字母")
-                return false;
-            }else {
+    var userPsd = $(".userPsd")
+    var userTel = $(".phoneNo")
+    var code = $("#code").val();
+    var box = document.querySelector("input[type = checkbox]").checked;
+    var pw1 = document.getElementById("password").value;
+    var pw2 = document.getElementById("checkPassword").value;
+    if (/^[0-9]\w{9,10}$/.test(userTel)){
+        $("#errorMsg").text("手机号格式错误！")
+        return false;
+    }else if (!box){
+        $("#errorMsg").text("请勾选服务！")
+        return false;
+    }else if (code == ""){
+        $("#errorMsg").text("请输入验证码")
+        return false;
+    }else if (sms != code){
+        $("#errorMsg").text("验证码错误")
+        return false;
+    }else if (pw1 !== pw2){
+        $("#errorMsg").text("两次密码不一致")
+        return false;
+    }else if (userPsd === "" || userPsd == null){
+        $("#errorMsg").text("请输入密码！")
+        return false;
+    }else if (/^[a-zA-Z0-9]\w{5,100}$/.test(userPsd)){
+        $("#errorMsg").text("密码格式错误！格式为数字，字母")
+        return false;
+    }else {
+        $.ajax({
+            type:"post",
+            url:"../customer/register",
+            data:{
+                userTel: $(".phoneNo").val(),
+                userPsd: $(".userPsd").val()
+            },
+            success:function (responseTel){
+                console.log("responseTel:"+responseTel);
                 alert("注册成功！现在去登陆吧")
                 // return true;
                 window.location.href = "../customer/login.html";
+
             }
-
-        }
-
-    })
+        })
+    }
     e.stopPropagation();
 })

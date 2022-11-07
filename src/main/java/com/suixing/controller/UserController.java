@@ -91,11 +91,12 @@ public class UserController {
         }
     }
 
-    @GetMapping("findUserTel")
-    public ServerResponse findUserTel(String phone){
-        ServerResponse findUserTelResponse = userService.selectUserTel(phone);
-        System.out.println("findUserTel:"+findUserTelResponse);
-        if (findUserTelResponse.getResultcode() !=200){
+    @PostMapping("findUserTel")
+    public ServerResponse findUserTel(String userTel){
+        System.out.println("phone:"+userTel);
+        ServerResponse findUserTelResponse = userService.selectUserTel(userTel);
+        System.out.println("findUserTel:"+findUserTelResponse.getResultcode());
+        if (findUserTelResponse.getResultcode()  == 200){
             return ServerResponse.success("不重复",findUserTelResponse);
         }else {
             return ServerResponse.fail("重复！",null);

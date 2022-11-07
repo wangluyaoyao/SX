@@ -90,14 +90,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     //查询用户手机号是否被注册
     @Override
-    public ServerResponse selectUserTel(String phone) {
+    public ServerResponse selectUserTel(String userTel) {
+        System.out.println("userTel:"+userTel);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("user_tel",phone);
+        wrapper.eq("user_tel",userTel);
         User loginTel = userMapper.selectOne(wrapper);
+        System.out.println("loginTel:"+loginTel);
         if (loginTel == null){
-            return ServerResponse.success("不重复",loginTel);
+            return ServerResponse.success("不重复", null);
         }else {
-            return ServerResponse.fail("重复",null);
+            return ServerResponse.fail("重复",loginTel);
         }
     }
     //发送短信
