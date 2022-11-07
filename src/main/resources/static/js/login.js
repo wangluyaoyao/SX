@@ -168,8 +168,6 @@ function sendCode(){
                 console.log("............");
                 console.log(result)
 
-
-
                 console.log(typeof result)
 
                 sms = JSON.stringify(result).slice(52,58);

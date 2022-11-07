@@ -20,6 +20,7 @@ public interface ICommentsService extends IService<Comments> {
     // 根据汽车id  分页查询评论 用户信息 和 评论信息 和 回复者信息及回复的内容
      Comments getCommentsByCarId(Integer carId);
 
+     ServerResponse getCommentsByCarForPage(Integer pageNum);
      public User getUserByCommId(Integer carId);
     //点赞数量的获取
 //    public ServerResponse Up

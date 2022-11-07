@@ -54,14 +54,28 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         //        Reply replyId = replyMapper.selectById(commId);
 
 
+
         return commentsMapper.selectById(carId);
 
     }
 
     @Override
+    public ServerResponse getCommentsByCarForPage(Integer pageNum) {
+        QueryWrapper<Comments> queryWrapper = new QueryWrapper<>();
+        System.out.println("当前查询的页数"+pageNum);
+        Page<Comments> commentsPage = new Page<>(pageNum,5);
+        Page<Comments> pageInfo = commentsMapper.selectPage(commentsPage,queryWrapper);
+        System.out.println(pageInfo.getRecords());
+        if (pageInfo.getRecords() !=null){
+            return ServerResponse.success("查询成功",pageInfo);
+        }else {
+            return ServerResponse.fail("查询失败",null);
+        }
+    }
+
+    @Override
     public User getUserByCommId(Integer carId) {
         Comments comments = commentsMapper.selectById(carId);
-
         Integer userId = comments.getUserId();
         return userMapper.selectById(userId);
     }

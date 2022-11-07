@@ -14,7 +14,7 @@ public class DataConfig {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setServerName("localhost");
         dataSource.setUser("root");
-        dataSource.setPassword("123456");
+        dataSource.setPassword("root");
         dataSource.setDatabaseName("suixing");
 
         JDBCDataModel dataModel = new MySQLJDBCDataModel(dataSource,"recommend","user_id","car_id","rec_value","rec_time");

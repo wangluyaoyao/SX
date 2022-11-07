@@ -22,7 +22,7 @@ function checkPhoneNo(){
             },
             success:function (findUserTelResponse){
                 console.log("findUserTelResponse:"+findUserTelResponse);
-                if (findUserTelResponse.resultcode !=200){
+                if (findUserTelResponse.resultcode ==200){
                     console.log("手机号重复了！")
                     alert("重复了！")
                     window.location.href = "../customer/login.html";
@@ -164,8 +164,9 @@ $(".registBtn").off("click").on("click",function (e){
                 $("#errorMsg").text("密码格式错误！格式为数字，字母")
                 return false;
             }else {
-                alert("注册成功！")
-                return true;
+                alert("注册成功！现在去登陆吧")
+                // return true;
+                window.location.href = "../customer/login.html";
             }
 
         }

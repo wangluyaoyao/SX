@@ -31,11 +31,5 @@ public class DetailServiceImpl implements IDetailService {
         return carMapper.selectByCarId(carId);
     }
 
-    @Override
-    public ServerResponse getCommentsByCarId(Integer carId, Integer pageNum) {
 
-
-
-        return null;
-    }
 }

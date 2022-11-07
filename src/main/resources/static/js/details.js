@@ -4,16 +4,16 @@
 //         $(".comment-title").text("关闭评论");
 //         getByPageNum(1);
 //         $(".replay-show-hiden").show();
-//
 //     }else{
 //         $(".comment-title").text("显示评论");
 //         $(".replay-show-hiden").hide();
 //     }
 // });
+
 function getByPageNum(pageNum) {
     var url;
     if(typeof(pageNum) == "number")
-        url = "${pageContext.request.contextPath}/evaluate/${serverResponse.data.carId}/page/" + pageNum;
+        url = "details/" + pageNum;
     else {
         url = "${pageContext.request.contextPath}/evaluate/${serverResponse.data.carId}/page";
         pageNum = 1;
@@ -39,32 +39,36 @@ function getByPageNum(pageNum) {
 
 
 
-                    var oneLiEle = '<li class="comment-li ' + evaluateId + '">\n' +
-                        '                        <div class="comment-customer">\n' +
-                        '                            <div class="customer-img">\n' +
-                        '                                <img src="../images/details/用户.png">\n' +
-                        '                            </div>\n' +
-                        '                            <div class="a-link">\n' +
-                        '                                <h5 class="customer-name">' + custName + '</h5>\n' +
-                        '                                <span class="type-text">' + evaluateContent + '</span>\n' +
-                        '                                <span class="stars-show"></span>'+
-                        '                                <div class="comment-handle">\n' +
-                        '                                    <span class="evaluate-time">' + evaluateTime + '</span>\n' +
-                        '                                    <a class="replay-handle" href="">回复</a>\n' +
-                        '                                    <span>|</span>\n' +
-                        '                                    <a href="javascript:void(0)">\n' +
-                        '                                    <span style="display:none;" class="evaluate-id">' + evaluateId + '</span>\n' +
-                        '                                   <span style="display:none;">0</span>' +
-                        '                                        <span id = "praisedStatus' + evaluateId + '" class="icon-act"></span>\n' +
-                        '                                    </a>\n' +
-                        '                                    <span  class="praise-number">' + evaluatePraisedCount + '</span>\n' +
-                        '                                </div>\n' +
-                        '\n' +
-                        '                            </div>\n' +
-                        '                        </div>\n' +
-                        '                        <ul class="replay-ul">\n' +
-                        '                        </ul>\n' +
-                        '                    </li>';
+                    var oneLiEle = "   <li class=\"comment-li\">\n" +
+                        "                                            <div class=\"comment-customer\">\n" +
+                        "\n" +
+                        "                                                    <div class=\"a-link\">\n" +
+                        "                                                            <h5 class=\"customer-name\" th:text=\"${commuser.userName}\"><span>:</span></h5>\n" +
+                        "                                                           <span class=\"type-text\" th:text=\"${comments.commContent}\"></span>\n" +
+                        "                                                            <div class=\"comment-handle\">\n" +
+                        "                                                                    <span class=\"evaluate-time\" th:text=\"${comments.commTime}\"></span>\n" +
+                        "                                                                    <a class=\"replay-handle\" href=\"javascript:void(0)\">回复</a>\n" +
+                        "                                                                    <span>|</span>\n" +
+                        "                                                                   <a href=\"\">\n" +
+                        "                                                                            <span class=\"icon-act\"></span>\n" +
+                        "                                                                        </a>\n" +
+                        "                                                                   <span  class=\"praise-number\">100</span>\n" +
+                        "                                                               </div>\n" +
+                        "\n" +
+                        "                                                        </div>\n" +
+                        "                                                </div>\n" +
+                        "                                          <ul class=\"replay-ul\">\n" +
+                        "                                                   <li>\n" +
+                        "                                                            <div class=\"replay-customer\">\n" +
+                        "\n" +
+                        "                                                                    <h6 class=\"replay-customer-name\" th:text=\"${replyuser.userName}\"><span>:</span></h6>\n" +
+                        "\n" +
+                        "                                                                    <span class=\"replay-text\" th:text=\"${reply.replyContent}\"></span>\n" +
+                        "                                                                    <span class=\"replay-time\" th:text=\"${reply.replyTime}\"></span>\n" +
+                        "                                                                </div>\n" +
+                        "                                                      </li>\n" +
+                        "                                               </ul>\n" +
+                        "                                        </li>"
                     $(".comment-ul").append(oneLiEle);
                     var ulNewClass = "."+evaluateId;
                     var starsPostion = "0 ";

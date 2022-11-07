@@ -126,7 +126,7 @@ public class UserController {
         System.out.println(code);
         if (bool) {
             // 如果发送成功，则将生成的6位随机验证码存入redis缓存,5分钟后过期
-            redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(phone, code, 50000, TimeUnit.MINUTES);
             return ServerResponse.success("发送成功",code);
         } else{
             return ServerResponse.fail("发送失败 ",null);
@@ -135,8 +135,6 @@ public class UserController {
 
     @GetMapping("/registerSend")
     public ServerResponse registerSendCode(@RequestParam("phone")String phone){
-
-
         System.out.println("controller:"+phone);
         // 根据手机号从redis中拿验证码
         String code = redisTemplate.opsForValue().get(phone);
@@ -157,10 +155,9 @@ public class UserController {
         System.out.println(code);
 
 //        ServerResponse serverResponse = userService.selectUserTel(phone);
-
         if (bool) {
             // 如果发送成功，则将生成的6位随机验证码存入redis缓存,5分钟后过期
-            redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(phone, code, 50000, TimeUnit.MINUTES);
             return ServerResponse.success("发送成功",code);
         } else{
             return ServerResponse.fail("发送失败 ",null);
