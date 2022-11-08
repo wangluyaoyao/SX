@@ -49,7 +49,7 @@ public class CollectController {
         String token = request.getHeader("token");//get token
         Integer userId = TokenUtil.parseToken(token).getUserId();
 
-        return ServerResponse.success("ok",collectService.saveCollect(carId,userId));
+        return collectService.saveCollect(carId,userId);
     }
 
     //查询当前车辆是否收藏

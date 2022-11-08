@@ -60,6 +60,7 @@
                 <div class="common-modalBox">
                     <div class="current-carname">
                         <input type="hidden" th:value="${car.carId}" class="carId">
+                        <input type="hidden" value="" class="collectId">
                         <h3 th:text="${car.carName}"></h3>
                     </div>
                 </div>
@@ -256,14 +257,14 @@
                             <span class="type-text" th:text="${comment.comment.commContent}">车子很干净，ce车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车车子很干净，车子很干净，nice，车子很干净，子很干净净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice</span>
                             <div class="comment-handle">
                                 <span class="evaluate-time" th:text="${comment.comment.commTime}">2021/9/3 12:20:33</span>
-                                <a class="replay-handle" href="javascript:void(0)">回复</a>
-                                <div></div>
+                                <a class="replay-handle" href="javascript:(0)">回复</a>
                                 <span>|</span>
-                                <a href="">
+                                <a href="javascript:(0)">
                                     <span class="icon-act"></span>
                                 </a>
                                 <span  class="praise-number" th:text="${comment.comment.commFabulous}"></span>
                             </div>
+
                         </div>
                     </div>
                     <ul class="replay-ul">
@@ -293,7 +294,7 @@
 <script src="../js/common.js"></script>
 <script>
 
-    $(function (){
+   /* $(function (){
         $(".replay-handle").click(function (){
             $(".reply_textarea").remove();
             $(this).parent().append("<div class='reply_textarea'><textarea name='' cols='40' rows='5'></textarea><br/><input type='submit' value='发表' /></div>")
@@ -312,7 +313,7 @@
            btn.style="collect_sucess"
            flag = true;
        }
-   }
+   }*/
 
    function getComments(){
 
