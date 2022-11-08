@@ -20,7 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -75,6 +78,39 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         Comments comments = commentsMapper.selectById(carId);
         Integer userId = comments.getUserId();
         return userMapper.selectById(userId);
+    }
+
+    @Override
+    public List<Map<String,Object>> getCommentReplyByCarId(Integer carId) {
+        List<Map<String,Object>> list = new ArrayList<>();
+        QueryWrapper<Comments> commentsQueryWrapper= new QueryWrapper<>();
+        commentsQueryWrapper.eq("car_id",carId);
+        List<Comments> comments = commentsMapper.selectList(commentsQueryWrapper);
+
+        for (Comments comment:comments){
+            Map<String,Object> map = new HashMap<>();
+            User commentUser = userMapper.selectById(comment.getUserId());
+            QueryWrapper<Reply> replyQueryWrapper = new QueryWrapper<>();
+            replyQueryWrapper.eq("comm_id",comment.getCommId());
+
+            Map<String,Object> mapReply = new HashMap<>();
+            List<Map<String,Object>> replyList = new ArrayList<>();
+            List<Reply> replies = replyMapper.selectList(replyQueryWrapper);
+            for (Reply reply : replies){
+                User replyUser = userMapper.selectById(reply.getUserId());
+                mapReply.put("replyUser",replyUser);
+                mapReply.put("reply",reply);
+                replyList.add(mapReply);
+            }
+
+
+            map.put("comment",comment);
+            map.put("commentUser",commentUser);
+            map.put("reply",replyList);
+            list.add(map);
+        }
+
+        return list;
     }
 
 

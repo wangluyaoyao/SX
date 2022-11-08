@@ -7,6 +7,7 @@ import com.suixing.entity.Comments;
 import com.suixing.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -24,4 +25,7 @@ public interface ICommentsService extends IService<Comments> {
      public User getUserByCommId(Integer carId);
     //点赞数量的获取
 //    public ServerResponse Up
+
+    public List<Map<String,Object>> getCommentReplyByCarId(Integer carId);
+
 }

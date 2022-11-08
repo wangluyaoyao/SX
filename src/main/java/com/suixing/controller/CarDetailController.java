@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 //@RequestMapping("Car")
@@ -39,21 +41,26 @@ public class CarDetailController {
         Bussiness bussiness = bussinessService.getBussinessWithInfo(car.getBusId());
         System.out.println(bussiness);
 
-        ServerResponse serverResponse =commentsService.getCommentsByCarId(carId);
-        System.out.println("评论内容："+serverResponse);
+        //评论
+        List<Map<String,Object>> commentList = commentsService.getCommentReplyByCarId(carId);
 
-        ServerResponse replyResponse = replyService.getReplyByCommId(carId);
-        System.out.println("回复内容"+replyResponse);
 
-        User commuser = commentsService.getUserByCommId(carId);
-        System.out.println("评论人"+commuser);
-        User replyuser = replyService.getUserByReplyId(carId);
-        System.out.println("回复人"+replyuser);
-        System.out.println("carId2:"+carId);
+//        ServerResponse serverResponse =commentsService.getCommentsByCarId(carId);
+//        System.out.println("评论内容："+serverResponse);
+//
+//        ServerResponse replyResponse = replyService.getReplyByCommId(carId);
+//        System.out.println("回复内容"+replyResponse);
+//
+//        User commuser = commentsService.getUserByCommId(carId);
+//        System.out.println("评论人"+commuser);
+//        User replyuser = replyService.getUserByReplyId(carId);
+//        System.out.println("回复人"+replyuser);
+//        System.out.println("carId2:"+carId);
         ModelAndView mav = new ModelAndView();
-        mav.addObject("carList",serverResponse.getData());
+        //mav.addObject("carList",serverResponse.getData());
         mav.addObject("car",car);
         mav.addObject("bussiness",bussiness);
+        mav.addObject("commentList",commentList);
 //        mav.addObject("comments",comments);
 //        mav.addObject("reply",reply);
 //        mav.addObject("replyuser",replyuser);
