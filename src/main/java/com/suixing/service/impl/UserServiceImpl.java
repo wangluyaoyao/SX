@@ -66,7 +66,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     //注册
     @Override
     public ServerResponse regist(User user) {
-        Long custTel = user.getUserTel();
+
         user.setUserPsd(MD5Util.string2MD5(user.getUserPsd()));
        int rows = userMapper.insert(user);
        if (rows > 0)

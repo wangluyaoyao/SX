@@ -83,7 +83,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
     }
 
     @Override
-    public List<Map<String,Object>> getCommentReplyByCarId(Integer carId) {
+    public List<Map<String,Object>> getCommentReplyByCarId(Integer carId,Integer userId) {
         List<Map<String,Object>> list = new ArrayList<>();
         QueryWrapper<Comments> commentsQueryWrapper= new QueryWrapper<>();
         commentsQueryWrapper.eq("car_id",carId);
@@ -96,7 +96,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
             QueryWrapper<Reply> replyQueryWrapper = new QueryWrapper<>();
             replyQueryWrapper.eq("comm_id",comment.getCommId());
             //判断点赞状态
-            int commentStatus = likeService.getLikeStatus(comment.getUserId(),comment.getCommId());
+            int commentStatus = likeService.getLikeStatus(userId,comment.getCommId());
             Long commentLikeCount = likeService.likeCount(comment.getCommId());
 
 
@@ -107,7 +107,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
             for (Reply reply : replies){
                 User replyUser = userMapper.selectById(reply.getUserId());
                 //判断点赞状态
-                int replyStatus = likeService.getLikeStatus(reply.getUserId(),reply.getReplyId());
+                int replyStatus = likeService.getLikeStatus(userId,reply.getReplyId());
                 Long replyLikeCount = likeService.likeCount(reply.getReplyId());
 
                 mapReply.put("replyUser",replyUser);

@@ -55,5 +55,15 @@ public class ReplyServiceImpl extends ServiceImpl<ReplyMapper, Reply> implements
         return userMapper.selectById(userId);
     }
 
+    @Override
+    public ServerResponse saveReply(Reply reply) {
+
+        int rows = replyMapper.insert(reply);
+        if (rows > 0){
+            return ServerResponse.success("保存回复成功",reply);
+        }
+        return ServerResponse.fail("保存评论失败",null);
+    }
+
 
 }

@@ -26,6 +26,6 @@ public interface ICommentsService extends IService<Comments> {
     //点赞数量的获取
 //    public ServerResponse Up
 
-    public List<Map<String,Object>> getCommentReplyByCarId(Integer carId);
+    public List<Map<String,Object>> getCommentReplyByCarId(Integer carId,Integer userId);
 
 }
