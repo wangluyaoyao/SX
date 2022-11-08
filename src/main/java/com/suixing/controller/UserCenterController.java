@@ -56,8 +56,9 @@ public class UserCenterController {
         user.setUserEmail(userEmail);
         user.setUserGender(userGender);
         user.setUserIdcard(userIdcard);
-        //user.setUserPsd(MD5Util.string2MD5(userPsd));
-        user.setUserPsd(userPsd);
+        user.setUserPsd(MD5Util.string2MD5(userPsd));
+        System.out.println(user.getUserPsd());
+        //user.setUserPsd(userPsd);
         user.setUserName(userName);
         user.setUserTel(userTel);
         user.setUserPetname(userPetname);
