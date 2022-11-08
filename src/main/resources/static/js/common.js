@@ -20,12 +20,29 @@ function userShow(){
                 $(".registAfter").text(user.userName);
                 $(".bye").attr("href", "../index.html")
                 $(".bye").attr("class", "bye")
+                var ele ="  <div class=\"login-info\">\n" +
+                    "               <div class=\"head-msg\">\n" +
+                    "                   <a  href=\"javascript:void (0)\" class=\"drop-trigger\">\n" +
+                    "                       <span class=\"msg-top\">我的消息</span>\n" +
+                    "                       <ul class=\"msg-item\">\n" +
+                    "                           <li>新消息</li>\n" +
+                    "                           <li>收藏</li>\n" +
+                    "                           <li>喜欢</li>\n" +
+                    "                       </ul>\n" +
+                    "                   </a>\n" +
+                    "               </div>\n" +
+                    "               <div class=\"head-collect\">\n" +
+                    "\n" +
+                    "               </div>\n" +
+                    "           </div>"
+                 $(".header-top .left .name").html(ele);
                 //  }
             }
         })
     }
 }
 userShow();
+
 $(".bye").click(function (){
     localStorage.removeItem("token");
     $.ajax({
@@ -38,9 +55,8 @@ $(".bye").click(function (){
 var ws;
 var userId ;
 var userName;
-$(function (){
-
-
+websocketShow();
+function websocketShow (){
     //检查浏览器是否支持
     if ("WebSocket" in window) {
         console.log("你的浏览器支持")
@@ -61,7 +77,8 @@ $(function (){
     }else{
         layer.msg("你的浏览器不支持websocket!garbage")
     }
-})
+}
+
 function OpenWebsocket(){
     //与客户端建立连接
     ws = new WebSocket("ws://localhost:8089/WebSocket/" + userId);

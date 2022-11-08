@@ -8,12 +8,12 @@ spring:
     #url: jdbc:mysql://127.0.0.1:3306/suixing?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     url: jdbc:mysql://localhost:3306/suixing?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
-    password: root
+    password: 12345678
 # Elasticsearch
-#  elasticsearch:
-#    uris: localhost:9200
-#    connection-timeout: 5s
-#    socket-timeout: 30s
+  elasticsearch:
+    uris: localhost:9200
+    connection-timeout: 5s
+    socket-timeout: 30s
   #    掐头去尾
   mvc: #静态资源配置
     view:
@@ -45,14 +45,14 @@ spring:
     username: guest
     password: guest
     port: 5672
-    publisher-confirm-type: correlated
+#    publisher-confirm-type: correlated
     publisher-returns: true
     listener:
       simple:
         acknowledge-mode: manual  #消息手动确认
         #削峰限流
-        concurrency: 1 #消费者数量
-        max-concurrency: 3  #消费者最大数量
+        concurrency: 4 #消费者数量
+        max-concurrency: 4  #消费者最大数量
         prefetch: 1  #消费者每次从队列中取几个消息
         default-requeue-rejected: true #消息消费失败后，重新进入消费队列中
         #重试策略

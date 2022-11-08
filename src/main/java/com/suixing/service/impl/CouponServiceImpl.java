@@ -1,5 +1,6 @@
 package com.suixing.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Coupon;
@@ -32,7 +33,9 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
 
     @Override
     public ServerResponse getCouponAll() {
-        List<Coupon> allList = couponMapper.selectList(null);
+        QueryWrapper<Coupon> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("cou_mode","1");
+        List<Coupon> allList = couponMapper.selectList(queryWrapper);
         if (allList != null) {
             //加载优惠券，同时加载到rediss数据库中
             List<Coupon> couponList = new ArrayList<>();

@@ -75,6 +75,9 @@
                 <dd>
                     <a class="cc-change" id="exchange-info3">修改信息</a>
                 </dd>
+                <dd>
+                    <a class="cc-change" id="exchange-info6">消息通知</a>
+                </dd>
                 <dt id="exchange2">我的资产</dt>
                 <dd>
                     <a class="cc-change" id="exchange-info4">我的优惠券</a>
@@ -192,6 +195,7 @@
                             <tr>
                                 <td class="cell-title">确认密码：</td>
                                 <td style="position:relative">
+                                    <input id="Psdword" type="hidden" value="">
                                     <input data-val="true" data-val-equalto="“确认密码”和“新密码”不匹配。" data-val-equalto-other="*.NewPassword" data-val-required="请输入确认密码" id="ConfirmPassword" maxlength="18" name="userPsd" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" placeholder="请再次输入新密码" type="password"  value=""/>
                                     <em class="ConfirmPasswordwordTip">*</em><span></span>
 
@@ -409,7 +413,32 @@
 
                 </div>
             </div>
+            <!--用户信息-->
+            <div class="information hide" id="info6">
+                <div class="personal-msg">
+                    <a>消息通知</a>
+                </div>
+<!--                消息一-->
+                <div class="personal-prent">
+                    <div class="personal" id="personal">
+                        <div class="fasongzhe">
+                            <span>系统消息</span>
+                        </div>
+                        <div class="msg-text">
+                            <span>
+                                无关风月，我题序等你回，快去租一辆车吧
+                            </span>
+                        </div>
+                        <div class="yidu-botton" id="yidu-botton">
+                            <input type="hidden" class="user-id" value="aaa">
+                            <input type="hidden" class="user-msg-id" value="aaa">
+                            <a href="javascript:void (0)" class="yidu-botton-rrr">已读</a>
+                        </div>
 
+                    </div>
+                </div>
+
+            </div>
 
         </div>
 

@@ -6,9 +6,13 @@ import com.rabbitmq.client.Channel;
 import com.suixing.commons.NumGeneration;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Coupon;
+import com.suixing.entity.User;
 import com.suixing.entity.UserCoupno;
+import com.suixing.entity.UserMsg;
 import com.suixing.mapper.CouponMapper;
 import com.suixing.mapper.UserCoupnoMapper;
+import com.suixing.mapper.UserMapper;
+import com.suixing.mapper.UserMsgMapper;
 import com.suixing.service.IUserCoupnoService;
 import com.suixing.websocket.WebSocketProcess;
 import org.springframework.amqp.core.Message;
@@ -38,10 +42,12 @@ import java.util.concurrent.TimeUnit;
  * @since 2022-10-03
  */
 @Service
-//@Component//将对象层(当前类)的对象 注入到IOC容器中
+@Component//将对象层(当前类)的对象 注入到IOC容器中
 public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCoupno> implements IUserCoupnoService {
     @Autowired
     private UserCoupnoMapper userCoupno;
+    @Autowired
+    private UserMapper userMapper;
     @Autowired
     private CouponMapper couponMapper;
     @Autowired
@@ -53,6 +59,8 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
 
     @Autowired
     private WebSocketProcess webSocketProcess;
+    @Autowired
+    private UserMsgMapper userMsgMapper;
 
 
 
@@ -78,11 +86,22 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
     @RabbitHandler
     @RabbitListener(queues = "delayed-queue")
     public void processMsg(Channel channel, Message message, Map map) {
-
-        String msg = "俺是客户端："+map.get("userId")+"用户 你领取的优惠券信息为"+map.get("coupon");
-        System.out.println("优惠券信息："+msg);
         Integer userId = Integer.parseInt(map.get("userId").toString());
+        User user =  userMapper.selectById(userId);
+
+        Coupon coupon = (Coupon) map.get("coupon");
+        String msg = "尊敬的："+user.getUserPetname()+" 你领取的优惠券为"+coupon.getCouExplain()+"优惠周期:"+coupon.getCouCycle()+
+                "天"+"优惠金额:"+coupon.getCouPrice()+"元，请您尽快使用";
+        System.out.println("优惠券信息："+msg);
+
+        UserMsg userMsg = new UserMsg();
+        userMsg.setUserId(userId);
+        userMsg.setUserMsgContent(msg);
+        userMsg.setUserMsgStatus("0");
+        userMsg.setUserMsgTime(new Date());
+        userMsg.setUserMsgType("1");
         try {
+            userMsgMapper.insert(userMsg);
             webSocketProcess.sendMessage(userId,msg);
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,6 +198,9 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
     public void updateCouponForMysql(Integer couId){
         Coupon coupon = couponMapper.selectById(couId);
         int coupnoNum = coupon.getCouAmount();
+
+
+
         QueryWrapper<Coupon> couponQW = new QueryWrapper<>();
         couponQW.eq("cou_amount",coupnoNum);
         couponQW.eq("cou_id",couId);
@@ -190,28 +212,50 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
            // System.out.println("修改失败");
             updateCouponForMysql(couId);  //重新发消息到队列当中
         }
-
-
-
     }
     //UserCoupno信息生成
-    public UserCoupno caeatUserCou(Coupon coupon,int userId){
+    @Transactional
+    @RabbitHandler
+    @RabbitListener(queues = "UserCouponDirectQueue")
+    @Override
+    public void caeatUserCou( Channel channel, Message message,HashMap<String,Object> map) {
+         Integer couId = (Integer) map.get("couId");
+        Integer userId = (Integer) map.get("userId");
         //生成优惠券信息
+        Coupon coupon = couponMapper.selectById(couId);
         UserCoupno usercoupon = new UserCoupno();
-        usercoupon.setUserCouNum(NumGeneration.creatCoupnoNum());
+        {usercoupon.setUserCouNum(NumGeneration.creatCoupnoNum());
         usercoupon.setCouId(coupon.getCouId());
         usercoupon.setUserId(userId);
+        //        日期
         Date date = new Date();
-//        日期
         Calendar calendar = Calendar.getInstance();
+
         calendar.setTime(date);
         usercoupon.setUserCouTime(calendar.getTime());
         usercoupon.setUserCouStart(calendar.getTime());
+
         int day = Integer.parseInt(coupon.getCouCycle()); //获得优惠卷优惠周期天数
-        calendar.add(Calendar.DATE,day);//增加指定天数
+        calendar.add(Calendar.DATE, day);//增加指定天数
+
         usercoupon.setUserCouEnd(calendar.getTime()); //结束时间
         usercoupon.setUserCouState("0"); // 0:未使用
-        return usercoupon;
+    }
+        int result = 0;
+        try {
+            result = userCoupnoMapper.insert(usercoupon);
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+        } catch (IOException e) {
+            e.printStackTrace();
+            try {
+                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+//        if (result>0);
+//           ServerResponse.success("添加成功",usercoupon);
+//        return ServerResponse.fail("添加失败",null);
     }
 
 }
