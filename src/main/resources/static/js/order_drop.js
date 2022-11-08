@@ -56,8 +56,7 @@
                 parseFloat(document.querySelector(".expenses_p").innerText) -
                 $("#ordCouMoney").val();
 
-
-
+            $(".t_price").val(document.querySelector(".t_price").innerText);
         });
 
 

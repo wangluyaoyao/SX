@@ -2,10 +2,16 @@ package com.suixing.controller;
 
 
 import com.suixing.commons.ServerResponse;
+import com.suixing.config.delay.DelayConfig;
 import com.suixing.entity.*;
 import com.suixing.service.*;
 import com.suixing.util.TokenUtil;
 import org.joda.time.DateTime;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessagePostProcessor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,6 +49,8 @@ public class OrderController {
     private IBussinessService bussinessService;
     @Autowired
     private IUserCenterService userCenterService;
+    @Autowired
+    private AmqpTemplate rabbitTemplate;
 
     //订单确认页面
     @GetMapping("/order_confirm")
@@ -147,6 +156,13 @@ public class OrderController {
         Integer ordId = order.getOrdId();
         mav.addObject("ordId",ordId);
 
+        String msg = "超时";
+        rabbitTemplate.convertAndSend("delayed-exchange","key3",msg,message ->{
+            message.getMessageProperties().setDelay(900000);
+            System.out.println(message);
+            return  message;
+        });
+
         return mav;
     }
 
@@ -183,12 +199,6 @@ public class OrderController {
         ServerResponse response = orderService.orderStatusSccess(ordNumber);
         return response;
     }
-
-
-
-
-
-
 
 
 }
