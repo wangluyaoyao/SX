@@ -30,7 +30,7 @@ public class CarDetailController {
 
     @GetMapping("/details/{carId}")
     public ModelAndView getCarDetail(@PathVariable("carId")Integer carId){
-        System.out.println(carId);
+        System.out.println("carId1:"+carId);
         Car car = carService.getById(carId);
         System.out.println("1");
         System.out.println(car.getBusId());
@@ -39,34 +39,33 @@ public class CarDetailController {
         Bussiness bussiness = bussinessService.getBussinessWithInfo(car.getBusId());
         System.out.println(bussiness);
 
-//        Comments comments =commentsService.getCommentsByCarId(carId);
-//        System.out.println(comments);
+        ServerResponse serverResponse =commentsService.getCommentsByCarId(carId);
+        System.out.println("评论内容："+serverResponse);
 
-//        Reply reply = replyService.getReplyByCommId(carId);
-//        System.out.println(reply);
+        ServerResponse replyResponse = replyService.getReplyByCommId(carId);
+        System.out.println("回复内容"+replyResponse);
 
-//        User commuser = commentsService.getUserByCommId(carId);
-//        System.out.println(commuser);
-//        User replyuser = replyService.getUserByReplyId(carId);
-//        System.out.println(replyuser);
-
+        User commuser = commentsService.getUserByCommId(carId);
+        System.out.println("评论人"+commuser);
+        User replyuser = replyService.getUserByReplyId(carId);
+        System.out.println("回复人"+replyuser);
+        System.out.println("carId2:"+carId);
         ModelAndView mav = new ModelAndView();
+        mav.addObject("carList",serverResponse.getData());
         mav.addObject("car",car);
         mav.addObject("bussiness",bussiness);
 //        mav.addObject("comments",comments);
 //        mav.addObject("reply",reply);
 //        mav.addObject("replyuser",replyuser);
 //        mav.addObject("commuser",commuser);
-        //mav.addObject("bussiness",bussiness.getData());
-        //mav.addObject("userCoupno",userCoupno);
-        //mav.addObject("ordFees",ordFees);
         mav.setViewName("details/details_of_cars");
-        System.out.println(car);
+        System.out.println("车"+car);
+
         return mav;
+
     }
     @GetMapping("/details/comments/")
     public ServerResponse getComments(@RequestParam("pageNum")Integer pageNum){
-
 
         return null;
     }

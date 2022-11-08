@@ -150,12 +150,11 @@
                 <ul class="comment-ul">
                                         <li class="comment-li">
                                             <div class="comment-customer">
-
                                                     <div class="a-link">
-                                                            <h5 class="customer-name" th:text="${commuser.userName}"><span>:</span></h5>
-                                                           <span class="type-text" th:text="${comments.commContent}"></span>
+                                                            <h5 class="customer-name" ><span>:</span></h5>
+                                                           <span class="type-text"></span>
                                                             <div class="comment-handle">
-                                                                    <span class="evaluate-time" th:text="${comments.commTime}"></span>
+                                                                    <span class="evaluate-time"></span>
                                                                     <a class="replay-handle" href="javascript:void(0)">回复</a>
                                                                     <span>|</span>
                                                                    <a href="">
@@ -170,10 +169,10 @@
                                                    <li>
                                                             <div class="replay-customer">
 
-                                                                    <h6 class="replay-customer-name" th:text="${replyuser.userName}"><span>:</span></h6>
+                                                                    <h6 class="replay-customer-name" ><span>:</span></h6>
 
-                                                                    <span class="replay-text" th:text="${reply.replyContent}"></span>
-                                                                    <span class="replay-time" th:text="${reply.replyTime}"></span>
+                                                                    <span class="replay-text" ></span>
+                                                                    <span class="replay-time" ></span>
                                                                 </div>
                                                       </li>
                                                </ul>
@@ -182,7 +181,7 @@
             </div>
         </div>
     </div>
-<!--    </div>-->
+
 
 
 
@@ -218,6 +217,8 @@
        var commentId = $()
 
    }
+
+
 </script>
 <script src="../js/collect.js"></script>
 </body>

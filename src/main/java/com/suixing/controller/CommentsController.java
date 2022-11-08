@@ -2,6 +2,7 @@ package com.suixing.controller;
 
 
 import com.suixing.commons.ServerResponse;
+import com.suixing.entity.Comments;
 import com.suixing.service.ICommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,5 +34,10 @@ public class CommentsController {
             pageNum = 1;
 
         return commentsService.getCommentsByCarForPage(pageNum);
+    }
+
+    @GetMapping("/getComments/")
+    public Comments getComments(Integer carId){
+    return null;
     }
 }

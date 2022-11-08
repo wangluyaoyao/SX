@@ -15,7 +15,7 @@ import com.suixing.entity.User;
  */
 public interface IReplyService extends IService<Reply> {
 
-    public Reply getReplyByCommId(Integer carId);
+    public ServerResponse getReplyByCommId(Integer carId);
 
     public User getUserByReplyId(Integer carId);
 }

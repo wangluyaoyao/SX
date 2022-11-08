@@ -16,6 +16,7 @@ import com.suixing.entity.LoginCustomer;
 import com.suixing.entity.User;
 import com.suixing.mapper.UserMapper;
 import com.suixing.service.IUserService;
+import com.suixing.util.MD5Util;
 import com.suixing.util.RedisUtils;
 import com.suixing.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         System.out.println(user);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("user_tel",user.getUserTel());
-        wrapper.eq("user_psd",user.getUserPsd());
+        wrapper.eq("user_psd",MD5Util.string2MD5(user.getUserPsd()));
 
         User loginUser = userMapper.selectOne(wrapper);
         System.out.println("查询到的登录账户："+loginUser);
@@ -65,8 +66,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     //注册
     @Override
     public ServerResponse regist(User user) {
+        Long custTel = user.getUserTel();
+        user.setUserPsd(MD5Util.string2MD5(user.getUserPsd()));
        int rows = userMapper.insert(user);
-
        if (rows > 0)
            return ServerResponse.success("注册成功",user);
        else
@@ -134,8 +136,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             CommonResponse response = client.getCommonResponse(request);
             System.out.println(response.getData());
             return response.getHttpResponse().isSuccess();
-        } catch (ServerException e) {
-            e.printStackTrace();
         } catch (ClientException e) {
             e.printStackTrace();
         }
