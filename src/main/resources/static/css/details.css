@@ -263,12 +263,19 @@ ul{
     margin-left: 79px;
 }
 
-.comment-handle .icon-act {
+.comment-handle .like {
     position: relative;
     top: 3px;
     width: 22px;
     height: 22px;
-    background: url(../images/details/zan.png);
+    background: url(../images/like.png);
+}
+.comment-handle .haslike {
+    position: relative;
+    top: 3px;
+    width: 22px;
+    height: 22px;
+    background: url(../images/haslike.png);
 }
 
 

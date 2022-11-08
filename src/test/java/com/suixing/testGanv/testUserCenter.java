@@ -97,8 +97,9 @@ public class testUserCenter {
 //        ServerResponse serverResponse = commentsService.getCommentsByCarId(4);
 //        System.out.println(serverResponse.getData());
 
-        List<Map<String,Object>> list = commentsService.getCommentReplyByCarId(4);
+        List<Map<String,Object>> list = commentsService.getCommentReplyByCarId(102);
         list.forEach(System.out::println);
+        System.out.println(list.get(0).get("commentStatus"));
 
     }
 
