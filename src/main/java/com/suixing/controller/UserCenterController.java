@@ -5,6 +5,7 @@ import com.suixing.entity.Car;
 import com.suixing.entity.Order;
 import com.suixing.entity.User;
 import com.suixing.service.IUserCenterService;
+import com.suixing.util.MD5Util;
 import com.suixing.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,6 +56,7 @@ public class UserCenterController {
         user.setUserEmail(userEmail);
         user.setUserGender(userGender);
         user.setUserIdcard(userIdcard);
+        //user.setUserPsd(MD5Util.string2MD5(userPsd));
         user.setUserPsd(userPsd);
         user.setUserName(userName);
         user.setUserTel(userTel);

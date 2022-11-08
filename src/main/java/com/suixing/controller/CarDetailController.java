@@ -30,8 +30,8 @@ public class CarDetailController {
     private IUserService userService;
 
 
-    @GetMapping("/details/{carId}")
-    public ModelAndView getCarDetail(@PathVariable("carId")Integer carId){
+    @GetMapping("/details")
+    public ModelAndView getCarDetail(@RequestParam("carId")Integer carId,@RequestParam("userId")Integer userId){
         System.out.println("carId1:"+carId);
         Car car = carService.getById(carId);
         System.out.println("1");
@@ -41,7 +41,7 @@ public class CarDetailController {
         Bussiness bussiness = bussinessService.getBussinessWithInfo(car.getBusId());
         System.out.println(bussiness);
         //评论
-        List<Map<String,Object>> commentList = commentsService.getCommentReplyByCarId(carId);
+        List<Map<String,Object>> commentList = commentsService.getCommentReplyByCarId(carId,userId);
         ModelAndView mav = new ModelAndView();
         //mav.addObject("carList",serverResponse.getData());
         mav.addObject("car",car);

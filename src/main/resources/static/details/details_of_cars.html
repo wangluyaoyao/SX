@@ -262,12 +262,21 @@
                             <span class="type-text" th:text="${comment.comment.commContent}">车子很干净，ce车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车车子很干净，车子很干净，nice，车子很干净，子很干净净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice</span>
                             <div class="comment-handle">
                                 <span class="evaluate-time" th:text="${comment.comment.commTime}">2021/9/3 12:20:33</span>
-                                <a class="replay-handle" href="javascript:(0)">回复</a>
+                                <a class="replay-handle" href="javascript:(0)" th:id="'comment'+${comment.comment.commId} ">回复</a>
                                 <span>|</span>
-                                <a href="javascript:(0)">
-                                    <span class="icon-act"></span>
-                                </a>
-                                <span  class="praise-number" th:text="${comment.comment.commFabulous}"></span>
+                                <span th:if="${comment.commentStatus} le 0 ">
+                                    <a href="javascript:(0)">
+                                        <span class="like" th:id="${comment.comment.commId}"></span>
+                                    </a>
+                                    <span  th:class="'like-comment'+${comment.comment.commId}" th:text="${comment.commentLikeCount}"></span>
+                                </span>
+                                <span th:if="${comment.commentStatus} eq 1 ">
+                                    <a href="javascript:(0)">
+                                        <span class="haslike" th:id="${comment.comment.commId}"></span>
+                                    </a>
+                                    <span  th:class="'like-comment'+${comment.comment.commId} " th:text="${comment.commentLikeCount}"></span>
+                                </span>
+
                             </div>
 
                         </div>
