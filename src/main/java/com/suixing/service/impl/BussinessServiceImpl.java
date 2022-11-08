@@ -36,7 +36,7 @@ public class BussinessServiceImpl  implements IBussinessService {
     @Override
     public Bussiness getBussinessWithInfo(int busId) {
         QueryWrapper<Bussiness> bussinessQueryWrapper = new QueryWrapper<>();
-        bussinessQueryWrapper.select("bus_id","bus_name","bus_address");
+//        bussinessQueryWrapper.select("bus_id","bus_name","bus_address");
         bussinessQueryWrapper.eq("bus_id",busId);
         Bussiness bussiness = bussinessMapper.selectOne(bussinessQueryWrapper);
         return bussiness;

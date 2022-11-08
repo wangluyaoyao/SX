@@ -56,8 +56,12 @@
                 parseFloat(document.querySelector(".expenses_p").innerText) -
                 $("#ordCouMoney").val();
 
-            $(".t_price").val(document.querySelector(".t_price").innerText);
+
         });
+
+        $(".t_price").val(document.querySelector(".t_price").innerText);
+
+
 
 
     })
@@ -113,6 +117,8 @@ select();
     }
 
 console.log($("#couId").val()+"123456")
+
+console.log()
 
 
 
