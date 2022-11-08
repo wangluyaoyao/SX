@@ -19,7 +19,7 @@ function checkPhoneNo(){
             type:"post",
             url:"../customer/findUserTel",
             data:{
-                phone: phoneNo
+                userTel: phoneNo
             },
             success:function (findUserTelResponse){
                 console.log("findUserTelResponse:"+findUserTelResponse.resultcode);
