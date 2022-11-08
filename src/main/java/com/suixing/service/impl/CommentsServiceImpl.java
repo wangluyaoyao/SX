@@ -44,6 +44,8 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private LikeService likeService;
 
 
     @Override
@@ -87,25 +89,39 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         commentsQueryWrapper.eq("car_id",carId);
         List<Comments> comments = commentsMapper.selectList(commentsQueryWrapper);
 
+
         for (Comments comment:comments){
             Map<String,Object> map = new HashMap<>();
             User commentUser = userMapper.selectById(comment.getUserId());
             QueryWrapper<Reply> replyQueryWrapper = new QueryWrapper<>();
             replyQueryWrapper.eq("comm_id",comment.getCommId());
+            //判断点赞状态
+            int commentStatus = likeService.getLikeStatus(comment.getUserId(),comment.getCommId());
+            Long commentLikeCount = likeService.likeCount(comment.getCommId());
+
+
 
             Map<String,Object> mapReply = new HashMap<>();
             List<Map<String,Object>> replyList = new ArrayList<>();
             List<Reply> replies = replyMapper.selectList(replyQueryWrapper);
             for (Reply reply : replies){
                 User replyUser = userMapper.selectById(reply.getUserId());
+                //判断点赞状态
+                int replyStatus = likeService.getLikeStatus(reply.getUserId(),reply.getReplyId());
+                Long replyLikeCount = likeService.likeCount(reply.getReplyId());
+
                 mapReply.put("replyUser",replyUser);
                 mapReply.put("reply",reply);
+                map.put("replyStatus",replyStatus);
+                map.put("replyLikeCount",replyLikeCount);
                 replyList.add(mapReply);
             }
 
 
             map.put("comment",comment);
             map.put("commentUser",commentUser);
+            map.put("commentStatus",commentStatus);
+            map.put("commentLikeCount",commentLikeCount);
             map.put("reply",replyList);
             list.add(map);
         }
