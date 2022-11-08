@@ -216,7 +216,7 @@
                                 <input type="text" name="ordPicTime" th:value="*{start}" style="display: none">
                                 <input type="text" name="ordDroTime" th:value="*{end}" style="display: none">
                                 <input type="text" name="ordLease" th:value="*{ordLease}" style="display: none">
-                                <input type="text" name="ordPrice" class="t_price" th:value="*{car.carPrice} * *{ordLease} + 50 * *{ordLease} + 20" style="display: none">
+                                <input type="text" name="ordPrice" class="t_price" value=" " style="display: none">
                                 <input class="a_" type="submit" value="提交订单">
                             </form>
 
