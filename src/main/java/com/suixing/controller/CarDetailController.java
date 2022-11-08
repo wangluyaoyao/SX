@@ -40,31 +40,13 @@ public class CarDetailController {
         //网点信息
         Bussiness bussiness = bussinessService.getBussinessWithInfo(car.getBusId());
         System.out.println(bussiness);
-
         //评论
         List<Map<String,Object>> commentList = commentsService.getCommentReplyByCarId(carId);
-
-
-//        ServerResponse serverResponse =commentsService.getCommentsByCarId(carId);
-//        System.out.println("评论内容："+serverResponse);
-//
-//        ServerResponse replyResponse = replyService.getReplyByCommId(carId);
-//        System.out.println("回复内容"+replyResponse);
-//
-//        User commuser = commentsService.getUserByCommId(carId);
-//        System.out.println("评论人"+commuser);
-//        User replyuser = replyService.getUserByReplyId(carId);
-//        System.out.println("回复人"+replyuser);
-//        System.out.println("carId2:"+carId);
         ModelAndView mav = new ModelAndView();
         //mav.addObject("carList",serverResponse.getData());
         mav.addObject("car",car);
         mav.addObject("bussiness",bussiness);
         mav.addObject("commentList",commentList);
-//        mav.addObject("comments",comments);
-//        mav.addObject("reply",reply);
-//        mav.addObject("replyuser",replyuser);
-//        mav.addObject("commuser",commuser);
         mav.setViewName("details/details_of_cars");
         System.out.println("车"+car);
 

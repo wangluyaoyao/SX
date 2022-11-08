@@ -1,15 +1,3 @@
-function showComments(){
-
-}
-
-
-
-
-
-
-
-
-
 
 
 // $(".comment-title").click(function (){
