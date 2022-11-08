@@ -20,22 +20,27 @@ function userShow(){
                 $(".registAfter").text(user.userName);
                 $(".bye").attr("href", "../index.html")
                 $(".bye").attr("class", "bye")
-                var ele ="  <div class=\"login-info\">\n" +
-                    "               <div class=\"head-msg\">\n" +
-                    "                   <a  href=\"javascript:void (0)\" class=\"drop-trigger\">\n" +
-                    "                       <span class=\"msg-top\">我的消息</span>\n" +
-                    "                       <ul class=\"msg-item\">\n" +
-                    "                           <li>新消息</li>\n" +
-                    "                           <li>收藏</li>\n" +
-                    "                           <li>喜欢</li>\n" +
-                    "                       </ul>\n" +
-                    "                   </a>\n" +
-                    "               </div>\n" +
-                    "               <div class=\"head-collect\">\n" +
-                    "\n" +
-                    "               </div>\n" +
-                    "           </div>"
+                let ele ="  <span>我的消息</span>\n" ;
                  $(".header-top .left .name").html(ele);
+                $.ajax({
+                    type: "get",
+                    url: "/getUserMsg",
+                    data: {
+                        userId: user.userId
+                    },
+                    success: function (result) {
+                        var msgArray = result.data
+                        var temp =0;
+                        for (var i = 0; i < msgArray.length; i++) {
+                            if (msgArray[i].userMsgStatus==0){
+                                temp++;
+                            }
+                        }
+                        if (temp!=0)
+                            $(".header-top .left .name").append("<a>(您有"+temp+"条新消息)</a>");
+
+                    }
+                })
                 //  }
             }
         })
@@ -86,7 +91,7 @@ function OpenWebsocket(){
     //    与服务连接时触发
     console.log(ws)
     ws.onopen = function (){
-        layer.msg("与服务器连接成功，客户端ID:"+userId);
+      //  layer.msg("与服务器连接成功，客户端ID:"+userId);
         ws.send("你好服务端！！我是客户端"+userId);
 
     }

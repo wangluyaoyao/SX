@@ -366,7 +366,7 @@ fieldset, img, input, button {
     margin-left: 10px;
 }
 .msg-text{
-    width: 75%;
+    width: 73%;
     height: 70px;
     color: #0C0C0C;
     font-size: 13px;
@@ -386,12 +386,12 @@ fieldset, img, input, button {
     border-radius: 3px;
     text-align: center;
     line-height: 22px;
-    color: #464646;
+    color: #ffffff;
     background-color: #4ecece;
     display: block;
     float: left;
     height: 22px;
-    width: 5%;
+    width: 7%;
 }
 
 

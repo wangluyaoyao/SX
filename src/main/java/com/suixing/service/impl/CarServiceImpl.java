@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Car;
-import com.suixing.entity.UserCoupno;
 import com.suixing.mapper.CarMapper;
 import com.suixing.service.ICarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -111,8 +108,6 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
     public ServerResponse getById(int carId) {
         return null;
     }
-
-    //redis存储
     public void setRedis(String key ,Object object){
         //存入redis
         //设置过期时间
@@ -121,6 +116,8 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
         redisTemplate.opsForValue().set(key,object,time, TimeUnit.MINUTES);
 
     }
+
+
     //redis读
     public Object getRedis(String key){
         Object object = redisTemplate.opsForValue().get(key);

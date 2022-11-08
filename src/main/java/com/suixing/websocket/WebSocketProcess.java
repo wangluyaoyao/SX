@@ -1,6 +1,9 @@
 package com.suixing.websocket;
 
+import com.suixing.entity.UserMsg;
+import com.suixing.mapper.UserMsgMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -28,6 +31,8 @@ public class WebSocketProcess {
     * 会话对象
     * */
     private Session session;
+    @Autowired
+    private UserMsgMapper userMsgMapper;
     /*
      * 客户端创建连接时触发
      * */
@@ -67,15 +72,19 @@ public class WebSocketProcess {
     * 发送消息到指定客户端
     *
     * */
-    public void sendMessage(long userId ,String message)throws Exception{
+    public void sendMessage(long userId , String message, UserMsg userMsg)throws Exception{
         //根据id，从map中获取存储的webSocket对象
         WebSocketProcess webSocketProcess = concurrentHashMap.get(userId);
         if (!ObjectUtils.isEmpty(webSocketProcess)){
             //判断状态 open才能发送消息
             if (webSocketProcess.session.isOpen()){
+
+                    userMsg.setUserMsgStatus("1");
+                    userMsgMapper.insert(userMsg);
                 System.out.println("客户端在线发送信息:"+message);
                 webSocketProcess.session.getBasicRemote().sendText(message);
             }else {
+                userMsgMapper.insert(userMsg);
                 log.error("websocket session = {} is closed",userId);
             }
         }else {

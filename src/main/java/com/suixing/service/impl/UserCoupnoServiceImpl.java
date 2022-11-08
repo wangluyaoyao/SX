@@ -100,9 +100,10 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
         userMsg.setUserMsgStatus("0");
         userMsg.setUserMsgTime(new Date());
         userMsg.setUserMsgType("1");
+
+
         try {
-            userMsgMapper.insert(userMsg);
-            webSocketProcess.sendMessage(userId,msg);
+            webSocketProcess.sendMessage(userId,msg,userMsg);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,6 +183,7 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
     @Override
     public void sendMsg(Integer couId, Channel channel, Message message) {
         try {
+
             updateCouponForMysql(couId);
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         } catch (IOException e) {

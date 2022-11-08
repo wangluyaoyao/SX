@@ -18,7 +18,7 @@ public class WebSocketController {
     @PostMapping(value = "sendMsgById")
     public void sendMsgToClientById(@RequestParam long userId,@RequestParam String text){
         try {
-            webSocketProcess.sendMessage(userId,text);
+            webSocketProcess.sendMessage(userId,text,null);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
