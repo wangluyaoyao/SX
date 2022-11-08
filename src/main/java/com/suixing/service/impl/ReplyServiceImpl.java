@@ -1,5 +1,6 @@
 package com.suixing.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Comments;
@@ -11,6 +12,8 @@ import com.suixing.mapper.UserMapper;
 import com.suixing.service.IReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -30,21 +33,25 @@ public class ReplyServiceImpl extends ServiceImpl<ReplyMapper, Reply> implements
     @Autowired
     private UserMapper userMapper;
     @Override
-    public Reply getReplyByCommId(Integer carId) {
+    public ServerResponse getReplyByCommId(Integer carId) {
 
-        Comments comments = commentsMapper.selectById(carId);
-        Integer commId = comments.getCommId();
-        return replyMapper.selectById(commId);
+
+
+
+        QueryWrapper<Reply> queryRely = new QueryWrapper<>();
+        queryRely.eq("comm_id",carId);
+        List<Reply> replieslist = replyMapper.selectList(queryRely);
+
+        System.out.println("service层的回复"+replieslist);
+        if (replieslist!= null)
+            return ServerResponse.success("查询评论成功",replieslist);
+        return ServerResponse.fail("查询评论失败",null);
     }
 
     @Override
     public User getUserByReplyId(Integer carId) {
-
         Comments comments = commentsMapper.selectById(carId);
-
         Integer userId = comments.getUserId();
-
-
         return userMapper.selectById(userId);
     }
 

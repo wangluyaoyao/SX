@@ -248,42 +248,40 @@
         <div class="comment-box" style="margin-top: 10px">
 <!--            <h3 style="cursor: pointer ;margin-top: 20px;border-top: 1px solid gray" class="comment-title">显示评论</h3>-->
 <!--            <div style="display: none;margin-top: 10px" class="replay-show-hiden">-->
-                <ul class="comment-ul">
-                                        <li class="comment-li">
-                                            <div class="comment-customer">
+            <ul class="comment-ul">
+                <li class="comment-li" th:each="comment:${commentList}">
+                    <div class="comment-customer">
+                        <div class="a-link">
+                            <h5 class="customer-name" th:text="${comment.commentUser.userPetname}">LiHua</h5>
+                            <span class="type-text" th:text="${comment.comment.commContent}">车子很干净，ce车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车车子很干净，车子很干净，nice，车子很干净，子很干净净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice</span>
+                            <div class="comment-handle">
+                                <span class="evaluate-time" th:text="${comment.comment.commTime}">2021/9/3 12:20:33</span>
+                                <a class="replay-handle" href="">回复</a>
+                                <span>|</span>
+                                <a href="">
+                                    <span class="icon-act"></span>
+                                </a>
+                                <span  class="praise-number" th:text="${comment.comment.commFabulous}"></span>
+                            </div>
 
-                                                    <div class="a-link">
-                                                            <h5 class="customer-name" th:text="${commuser.userName}"><span>:</span></h5>
-                                                           <span class="type-text" th:text="${comments.commContent}"></span>
-                                                            <div class="comment-handle">
-                                                                    <span class="evaluate-time" th:text="${comments.commTime}"></span>
-                                                                    <a class="replay-handle" href="javascript:void(0)">回复</a>
-                                                                    <span>|</span>
-                                                                   <a href="">
-                                                                            <span class="icon-act"></span>
-                                                                        </a>
-                                                                   <span  class="praise-number">100</span>
-                                                               </div>
+                        </div>
+                    </div>
+                    <ul class="replay-ul">
+                        <li th:each="reply:${comment.reply}">
+                            <div class="replay-customer">
+                                <h6 class="replay-customer-name" th:text="${reply.replyUser.userPetname}">Smith</h6>
+                                <span class="replay-text" th:text="${reply.reply.replyContent}">这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。这么好！我也租几辆玩玩。</span>
+                                <span class="replay-time" th:text="${reply.reply.replyTime}">2021-9-9 10:20:11</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-                                                        </div>
-                                                </div>
-                                          <ul class="replay-ul">
-                                                   <li>
-                                                            <div class="replay-customer">
-
-                                                                    <h6 class="replay-customer-name" th:text="${replyuser.userName}"><span>:</span></h6>
-
-                                                                    <span class="replay-text" th:text="${reply.replyContent}"></span>
-                                                                    <span class="replay-time" th:text="${reply.replyTime}"></span>
-                                                                </div>
-                                                      </li>
-                                               </ul>
-                                        </li>
-                </ul>
+            </ul>
             </div>
         </div>
     </div>
-<!--    </div>-->
+
 
 
 
@@ -317,9 +315,11 @@
    }
 
    function getComments(){
-       var commentId = $()
+
 
    }
+
+
 </script>
 <script src="../js/collect.js"></script>
 <script src="../js/common.js"></script>

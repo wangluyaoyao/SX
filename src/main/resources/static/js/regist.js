@@ -6,6 +6,7 @@
 $(".phoneNo").blur(checkPhoneNo)
 function checkPhoneNo(){
     var phoneNo = $(".phoneNo").val()
+    console.log(phoneNo)
 
     if(phoneNo === "" || phoneNo == null){
         $(".phoneTip").text("手机号不能为空")
@@ -18,7 +19,7 @@ function checkPhoneNo(){
             type:"post",
             url:"../customer/findUserTel",
             data:{
-                userTel: $(".phoneNo").val()
+                userTel: phoneNo
             },
             success:function (findUserTelResponse){
                 console.log("findUserTelResponse:"+findUserTelResponse.resultcode);

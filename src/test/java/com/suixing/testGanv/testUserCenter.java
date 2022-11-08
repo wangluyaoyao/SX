@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class testUserCenter {
     @Autowired
     private IUserCenterService userCenterService;
@@ -24,6 +24,8 @@ public class testUserCenter {
     private IOrderService orderService;
     @Autowired
     private ICollectService collectService;
+    @Autowired
+    private ICommentsService commentsService;
 
 
     @Test
@@ -68,7 +70,7 @@ public class testUserCenter {
 
     @Test
     public void getAllOrder(){
-        ServerResponse response = userCenterService.getUserOrderAll(6);
+        ServerResponse response = userCenterService.getUserOrderAll(1);
         System.out.println(response.getData());
     }
 
@@ -90,5 +92,14 @@ public class testUserCenter {
         System.out.println("response::"+response);
     }
 
+    @Test
+    public void getComm(){
+//        ServerResponse serverResponse = commentsService.getCommentsByCarId(4);
+//        System.out.println(serverResponse.getData());
+
+        List<Map<String,Object>> list = commentsService.getCommentReplyByCarId(4);
+        list.forEach(System.out::println);
+
+    }
 
 }

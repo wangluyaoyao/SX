@@ -20,7 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -44,18 +47,15 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
 
 
     @Override
-    public Comments getCommentsByCarId(Integer carId) {
-//        Page<Comments> page = PageHelper.startPage(pageNum,5);                // 分页
-//        PageInfo pageInfo = page.toPageInfo();
-//        QueryWrapper<Comments> queryWrapper = new QueryWrapper<>();
-//        Page<Comments> commentsPage = new Page<>(pageNum,5);
-//        Page<Comments> pageInfo = commentsMapper.selectPage(commentsPage,queryWrapper);
+    public ServerResponse getCommentsByCarId(Integer carId) {
+        QueryWrapper<Comments> queryW = new QueryWrapper<>();
+        queryW.eq("car_id",carId);
+        List<Comments> list = commentsMapper.selectList(queryW);
 
-        //        Reply replyId = replyMapper.selectById(commId);
-
-
-
-        return commentsMapper.selectById(carId);
+        System.out.println("service层的评论"+list);
+        if (list!= null)
+            return ServerResponse.success("查询评论成功",list);
+        return ServerResponse.fail("查询评论失败",null);
 
     }
 
@@ -78,6 +78,39 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         Comments comments = commentsMapper.selectById(carId);
         Integer userId = comments.getUserId();
         return userMapper.selectById(userId);
+    }
+
+    @Override
+    public List<Map<String,Object>> getCommentReplyByCarId(Integer carId) {
+        List<Map<String,Object>> list = new ArrayList<>();
+        QueryWrapper<Comments> commentsQueryWrapper= new QueryWrapper<>();
+        commentsQueryWrapper.eq("car_id",carId);
+        List<Comments> comments = commentsMapper.selectList(commentsQueryWrapper);
+
+        for (Comments comment:comments){
+            Map<String,Object> map = new HashMap<>();
+            User commentUser = userMapper.selectById(comment.getUserId());
+            QueryWrapper<Reply> replyQueryWrapper = new QueryWrapper<>();
+            replyQueryWrapper.eq("comm_id",comment.getCommId());
+
+            Map<String,Object> mapReply = new HashMap<>();
+            List<Map<String,Object>> replyList = new ArrayList<>();
+            List<Reply> replies = replyMapper.selectList(replyQueryWrapper);
+            for (Reply reply : replies){
+                User replyUser = userMapper.selectById(reply.getUserId());
+                mapReply.put("replyUser",replyUser);
+                mapReply.put("reply",reply);
+                replyList.add(mapReply);
+            }
+
+
+            map.put("comment",comment);
+            map.put("commentUser",commentUser);
+            map.put("reply",replyList);
+            list.add(map);
+        }
+
+        return list;
     }
 
 

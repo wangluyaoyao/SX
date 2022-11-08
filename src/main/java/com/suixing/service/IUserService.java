@@ -36,11 +36,5 @@ public interface IUserService extends IService<User> {
     //快速登陆
     public ServerResponse loginByPhone(User user);
 
-//    public ServerResponse selectUserTel(String phone);
-//    String authcode_get(String u_phone);
 
-//    boolean sendSms(String phone,String code);
-
-//    Boolean sendPhoneCode(Map<String, Object> map, String phone);
-//    Boolean sendPhoneCode(Map<String, Object> map, String phone);
 }

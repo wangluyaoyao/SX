@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 //@RequestMapping("Car")
@@ -30,7 +32,7 @@ public class CarDetailController {
 
     @GetMapping("/details/{carId}")
     public ModelAndView getCarDetail(@PathVariable("carId")Integer carId){
-        System.out.println(carId);
+        System.out.println("carId1:"+carId);
         Car car = carService.getById(carId);
         System.out.println("1");
         System.out.println(car.getBusId());
@@ -38,35 +40,21 @@ public class CarDetailController {
         //网点信息
         Bussiness bussiness = bussinessService.getBussinessWithInfo(car.getBusId());
         System.out.println(bussiness);
-
-//        Comments comments =commentsService.getCommentsByCarId(carId);
-//        System.out.println(comments);
-
-//        Reply reply = replyService.getReplyByCommId(carId);
-//        System.out.println(reply);
-
-//        User commuser = commentsService.getUserByCommId(carId);
-//        System.out.println(commuser);
-//        User replyuser = replyService.getUserByReplyId(carId);
-//        System.out.println(replyuser);
-
+        //评论
+        List<Map<String,Object>> commentList = commentsService.getCommentReplyByCarId(carId);
         ModelAndView mav = new ModelAndView();
+        //mav.addObject("carList",serverResponse.getData());
         mav.addObject("car",car);
         mav.addObject("bussiness",bussiness);
-//        mav.addObject("comments",comments);
-//        mav.addObject("reply",reply);
-//        mav.addObject("replyuser",replyuser);
-//        mav.addObject("commuser",commuser);
-        //mav.addObject("bussiness",bussiness.getData());
-        //mav.addObject("userCoupno",userCoupno);
-        //mav.addObject("ordFees",ordFees);
+        mav.addObject("commentList",commentList);
         mav.setViewName("details/details_of_cars");
-        System.out.println(car);
+        System.out.println("车"+car);
+
         return mav;
+
     }
     @GetMapping("/details/comments/")
     public ServerResponse getComments(@RequestParam("pageNum")Integer pageNum){
-
 
         return null;
     }
