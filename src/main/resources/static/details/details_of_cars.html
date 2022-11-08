@@ -181,7 +181,7 @@
                                         <div class="layui-inline">
                                             <div class="layui-inline" id="test6">
                                                 <div class="layui-input-inline">
-                                                    <input type="text" autocomplete="off" id="test-startDate-1" class="layui-input input-start" placeholder="开始日期">
+                                                    <input type="text" autocomplete="off" id="test-startDate-1"  class="layui-input input-start t1" placeholder="开始日期">
                                                 </div>
                                             </div>
                                         </div>
@@ -191,7 +191,7 @@
 
                                 <div class="layui-inline">
                                     <div class="layui-input-inline time">
-                                        <input type="text" class="layui-input" id="test-limit3" placeholder="HH:mm:ss" value="12:00:00">
+                                        <input type="text" class="layui-input t2" id="test-limit3"  placeholder="HH:mm:ss" value="12:00:00">
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@
                                         <div class="layui-inline">
                                             <div class="layui-inline" id="test6">
                                                 <div class="layui-input-inline">
-                                                    <input type="text" autocomplete="off" id="test-endDate-1" class="layui-input " placeholder="结束日期">
+                                                    <input type="text" autocomplete="off" id="test-endDate-1" class="layui-input t3" placeholder="结束日期">
                                                 </div>
                                             </div>
                                         </div>
@@ -211,7 +211,7 @@
                                 <!-- 时间 -->
                                 <div class="layui-inline">
                                     <div class="layui-input-inline time">
-                                        <input type="text" class="layui-input" id="test-limit3" placeholder="HH:mm:ss" value="12:00:00">
+                                        <input type="text" class="layui-input t4" id="test-limit3" placeholder="HH:mm:ss" value="12:00:00">
                                     </div>
                                 </div>
                             </div>
@@ -229,9 +229,14 @@
                     <button type="button" class="btn btn-default" id="btn_collect" style="border: 0">
                         <img alt="" src="../images/collect/collect.png" class="collect_img" id="btn_collect_icon"><span class="collect_sucess_text">收藏吧！</span>
                     </button>
-                    <button type="button" class="order_btn" id="to_order">
-                        立即购买！
-                    </button>
+                    <form method="post" action="/dropOrder1">
+                        <input type="submit" id="to_order" onmouseenter="btn()"  value="立即购买">
+                        <input type="hidden" id="start" name="start" value="">
+                        <input type="hidden" id="end" name="end" value="">
+                        <input type="hidden" id="carId1" name="carId1" value="">
+                    </form>
+
+
                 </div>
                 <div>
                 <div class="current-carintro">

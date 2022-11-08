@@ -53,26 +53,26 @@ public class OrderController {
     private AmqpTemplate rabbitTemplate;
 
     //订单确认页面
-    @GetMapping("/order_confirm")
-    @ResponseBody
-    public ModelAndView selectById(String ord){
-        Integer ordId = null;
-        if(ord!=null){
-            ordId = Integer.valueOf(ord);
-        }
-        Order order = orderService.getById(ordId);
-        Integer carId = order.getCarId();
-        System.out.println("订单id："+ordId);
-        System.out.println("车辆id："+carId);
-        Car car = carService.getById(carId);
-        System.out.println(car);
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("order",order);
-        mav.addObject("carName",car.getCarName());
-
-        return mav;
-
- }
+//    @GetMapping("/order_confirm")
+//    @ResponseBody
+//    public ModelAndView selectById(String ord){
+//        Integer ordId = null;
+//        if(ord!=null){
+//            ordId = Integer.valueOf(ord);
+//        }
+//        Order order = orderService.getById(ordId);
+//        Integer carId = order.getCarId();
+//        System.out.println("订单id："+ordId);
+//        System.out.println("车辆id："+carId);
+//        Car car = carService.getById(carId);
+//        System.out.println(car);
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject("order",order);
+//        mav.addObject("carName",car.getCarName());
+//
+//        return mav;
+//
+// }
 
 
     //确认订单页面获取车辆订单信息
@@ -126,7 +126,11 @@ public class OrderController {
     public ModelAndView saveOrder(Integer carId,Order order,Integer userId,Integer couId,Float ordCouMoney){
 
         //订单编号
-        Long ordNumber = UUID.randomUUID().getMostSignificantBits();
+        Long number = UUID.randomUUID().getMostSignificantBits();
+        String o = String.valueOf(number);
+        String onum = o.substring(0,16);
+        Long ordNumber = Long.valueOf(onum);
+
         if(ordNumber<0){
             ordNumber = -ordNumber;
         }
@@ -144,6 +148,7 @@ public class OrderController {
         order.setOrdServiceTip(ordServiceTip);
         order.setUserId(userId);
 
+
         if (couId !=null){
             order.setCouId(couId);
         }
@@ -156,9 +161,9 @@ public class OrderController {
         Integer ordId = order.getOrdId();
         mav.addObject("ordId",ordId);
 
-        String msg = "超时";
 
 
+        String msg = "支付超时";
         rabbitTemplate.convertAndSend("delayed-exchange","key3",msg,message ->{
             message.getMessageProperties().setDelay(900000);
             System.out.println(message);
@@ -167,6 +172,8 @@ public class OrderController {
 
         return mav;
     }
+
+
 
     //添加身份证、驾驶证信息
     @PostMapping("updateOrder")
@@ -200,6 +207,45 @@ public class OrderController {
     public ServerResponse successOrder(Long ordNumber){
         ServerResponse response = orderService.orderStatusSccess(ordNumber);
         return response;
+    }
+
+
+    //确认订单页面获取车辆订单信息
+    @PostMapping(value ="/dropOrder1" )
+    @ResponseBody
+    public ModelAndView getInstance1(Integer carId1, String start, String end){
+
+        System.out.println("详情页跳转车辆订单111"+carId1);
+        System.out.println("详情页跳转订单222"+start);
+
+        //1.车辆图片、名字、日租价格
+        Car car = carService.getById(carId1);
+        //2.租车日期、还车日期、租期
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime ordPicTime = LocalDateTime.parse(start,df);
+
+        LocalDateTime ordDroTime = LocalDateTime.parse(end,df);
+        Duration duration = Duration.between(ordPicTime,ordDroTime);
+        Long ordLease = duration.toDays(); //相差的天数
+
+        System.out.println(ordDroTime);
+        System.out.println(ordPicTime);
+        System.out.println("详情页跳转订单"+ordLease);
+        System.out.println(11111111);
+
+        //3.租车网点、地址
+        ServerResponse bussiness = bussinessService.getBussiness(car.getBusId());
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("car",car);
+        mav.addObject("bussiness",bussiness.getData());
+        mav.addObject("start",start);
+        mav.addObject("end",end);
+        mav.addObject("ordDroTime",start);
+        mav.addObject("ordPicTime",end);
+        mav.addObject("ordLease",ordLease);
+        mav.setViewName("order/order_drop");
+        System.out.println("详情页跳转订单"+car);
+        return mav;
     }
 
 
