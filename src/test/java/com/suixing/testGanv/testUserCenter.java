@@ -70,7 +70,7 @@ public class testUserCenter {
 
     @Test
     public void getAllOrder(){
-        ServerResponse response = userCenterService.getUserOrderAll(1);
+        ServerResponse response = userCenterService.getUserOrderAll(6);
         System.out.println(response.getData());
     }
 

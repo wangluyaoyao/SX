@@ -102,7 +102,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
             mapOrder.put("ordNumber",order.getOrdNumber());
             mapOrder.put("ordSatus",order.getOrdSatus());
             mapOrder.put("ordPicTime",order.getOrdPicTime());
-            mapOrder.put("ordDroTime",order.getOrdPicTime());
+            mapOrder.put("ordDroTime",order.getOrdDroTime());
             mapOrder.put("carName",car.getCarName());
             mapOrder.put("carModel",car.getCarModel());
             mapOrder.put("carCase",car.getCarCase());
