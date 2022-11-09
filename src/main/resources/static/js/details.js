@@ -1,4 +1,4 @@
-btn();
+//btn();
 function btn() {
     var t1 =  $(".t1").val()
     var t2 =  $(".t2").val()
