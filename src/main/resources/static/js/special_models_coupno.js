@@ -29,15 +29,19 @@ function getCoupno(){
         }
     })
 }
+
+
 $(".special_coupno").on('click',"#cou_receive",function(event){
     var couid = event.target.previousElementSibling.value;
   //  console.log(tel)  //prev()前一个元素
 
     var userId =  $(".userId").val()
     // var couid =  $(".couId").prev().val()
-    console.log(couid)
-    if (userId == null)
+    console.log(userId)
+    if (userId == "") {
         layer.msg("请先登陆")
+        return
+    }
     $.ajax({
         url:"/userRecCoupon",
         type:"get",

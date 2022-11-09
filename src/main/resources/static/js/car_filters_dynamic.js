@@ -1,8 +1,12 @@
 //设置默认时间
 {
     var now = new Date();
-    var valuetime = now.getFullYear() + ":" + (now.getMonth() + 1) + ":" + now.getDate()
-    $(".start-time").val(valuetime)
+    var  day;
+    if (now.getDate()<10)
+        day = "0"+now.getDate();
+    var valuetime = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + day
+
+    $(".t1").val(valuetime)
     if (now.getHours() < 10) {
         var hour = "0" + now.getHours()
     } else var hour = now.getHours()
@@ -12,7 +16,8 @@
     if (now.getSeconds() < 10) {
         var seco = "0" + now.getSeconds()
     } else var seco = now.getSeconds()
-    $(".satrt-hour").val(hour + ":" + minu + ":" + seco)
+    $(".t2").val(hour + ":" + minu + ":" + seco)
+
 }
 
 //车辆品牌冒泡
@@ -20,7 +25,7 @@
 $(".car-model a").click(function (){
     var carModel = $(this).text().replace(/\s*/g,"");
     console.log(carModel)
-    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
+    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g,"")
     var carBrand = $(".car-brand .active").text()
     getByPage(1,carModel,carBrand,carPrice)
 })
@@ -61,6 +66,7 @@ $(".car-name a").click(function() {
     var carName = text.text();
     var carBrand = $(".car-name .active").text()+carName
     var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
+    console.log(carModel)
     var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
     console.log(carBrand)
     getByPage(1,carModel,carBrand,carPrice)
@@ -129,29 +135,25 @@ $(".pagination a").click(function (){
 
 
 })
+var start1 ;
+var start2 ;
+var start3 ;
+var start4 ;
+
 $(".pro-sumbit").click(function (){
 
-    var start1 = $(".t1").val();
-    var start2 = $(".t2").val();
-    var start3 = $(".t3").val();
-    var start4 = $(".t4").val();
-
-    var start = start1+" "+start2;
-    var end = start3+" "+start4;
-    if (start1 == null || start2 == null ||start3 == null ||start4 == null){
-        layer.msg("请先选择时间")
-        return
-    }
     getByPage(1);
 })
-$(".pro-order12").click(function (){
-    var start1 = $(".t1").val();
-    var start2 = $(".t2").val();
-    var start3 = $(".t3").val();
-    var start4 = $(".t4").val();
-    if (start1 == null || start2 == null ||start3 == null ||start4 == null){
+
+$(".pro-product").on("click",".pro-order",function (event){
+    start1 = $(".t1").val();
+    start2 = $(".t2").val();
+    start3 = $(".t3").val();
+    start4 = $(".t4").val();
+    if (start1 == "" || start2 == "" ||start3 == "" ||start4 == ""){
+        console.log("时间没选")
+        event.target.parentElement.href ="javascript:void(0)";
         layer.msg("请先选择时间")
-        return null;
     }
 })
 
@@ -168,10 +170,9 @@ function showCar(carArray){
     var end = start3+" "+start4;
     if (start1 == null || start2 == null ||start3 == null ||start4 == null){
         layer.msg("请先选择时间")
-        return
     }
-    console.log(start+"111111")
-    console.log(end+"22222222")
+    // console.log(start+"111111")
+    // console.log(end+"22222222")
 
     for (var i =0 ; i<carArray.length;i++){
         var car = carArray[i];

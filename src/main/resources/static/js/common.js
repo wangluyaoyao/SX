@@ -20,7 +20,7 @@ function userShow(){
                 $(".registAfter").text(user.userName);
                 $(".bye").attr("href", "../index.html")
                 $(".bye").attr("class", "bye")
-                let ele ="  <span>我的消息</span>\n" ;
+                let ele ="<a href=\"../customer/customer_center.html\">我的消息</a>" ;
                  $(".header-top .left .name").html(ele);
                 $.ajax({
                     type: "get",

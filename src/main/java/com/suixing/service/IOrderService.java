@@ -1,7 +1,9 @@
 package com.suixing.service;
 
+import org.springframework.amqp.core.Message;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rabbitmq.client.Channel;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Order;
 
@@ -19,9 +21,9 @@ public interface IOrderService  {
 
     Order getById(Integer ordId);
     ServerResponse getOrderAll();
-    ServerResponse saveOrder(Order order);
+    void saveOrder(Order order, Channel channel, Message message);
     ServerResponse updateOrder(Order order);
-
+    Order getBuOrderNum(Long numId);
     ServerResponse orderStatusSccess(Long ordNumber);
 
 

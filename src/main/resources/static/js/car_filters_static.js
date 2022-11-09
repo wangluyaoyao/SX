@@ -189,7 +189,7 @@ document.querySelector(".pro-sort").onclick = function(event) {
     }
      element.className += " sort-active"
 }
-document.querySelector(".area").onclick = function showall(){
+document.querySelector(".left").onclick = function showall(){
   var e = document.getElementById("showAll")
   console.log(e)
   if(e.style.display == 'none'){
@@ -203,7 +203,6 @@ document.querySelector(".area").onclick = function showall(){
   console.log("show")
   // document.querySelector(".show").className += " showAll"
 }
-
 document.querySelector(".area1").onclick = function showall1(){
   var e = document.querySelector(".showAll1")
   console.log(e)

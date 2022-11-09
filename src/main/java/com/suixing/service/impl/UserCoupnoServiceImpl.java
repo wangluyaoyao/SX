@@ -89,7 +89,9 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
         Integer userId = Integer.parseInt(map.get("userId").toString());
         User user =  userMapper.selectById(userId);
 
-        Coupon coupon = (Coupon) map.get("coupon");
+        Integer couId =  (Integer) map.get("couId");
+        Coupon coupon =  couponMapper.selectById(couId); //查询对应的优惠卷信息
+        System.out.println(coupon);
         String msg = "尊敬的："+user.getUserPetname()+" 你领取的优惠券为"+coupon.getCouExplain()+"优惠周期:"+coupon.getCouCycle()+
                 "天"+"优惠金额:"+coupon.getCouPrice()+"元，请您尽快使用";
         System.out.println("优惠券信息："+msg);
@@ -128,30 +130,42 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
 
        // QueryWrapper<Coupon> cidition = new QueryWrapper<>();
      //   cidition.eq("cou_id",couId);
-         Coupon coupon =  couponMapper.selectById(couId); //查询对应的优惠卷信息
+
 //        UserCoupno usercoupon = caeatUserCou(coupon,userId); //生成用户领取优惠券相关信息添加到UserCoupno
 //        if (userCoupnoMapper.insert(usercoupon)>0){
 //            System.out.println("用户优惠券信息添加成功");
 //        }
-        return ServerResponse.success(result,coupon); //返回领取的优惠券信息
+        return ServerResponse.success(result,result); //返回领取的优惠券信息
     }
 
 
     //redis处理高并发
     public String setRedis(int userId,int couId){
         // 先查 redis
+        String keyOld = userId+"-"+couId;
+
         Coupon coupon = null;
         String key  =  "skill_pro_"+couId;
         String uuid = UUID.randomUUID().toString().replace("-","");
         boolean isLock = redisTemplate.opsForValue().setIfAbsent(key,uuid,100, TimeUnit.SECONDS);
-        if (isLock){//某人获得了锁
+        if (isLock){
+            if (redisTemplate.opsForValue().get(keyOld)!=null) {
+                Long execute = (Long) redisTemplate.execute(script, Arrays.asList(key),uuid);
+                return  "您已经领取过该优惠券了";
+            }
+            QueryWrapper<UserCoupno> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("user_id",userId);
+            queryWrapper.eq("cou_id",couId);
+            if (userCoupnoMapper.selectOne(queryWrapper)!=null){
+                Long execute = (Long) redisTemplate.execute(script, Arrays.asList(key),uuid);
+                return "您已经领取过了";
+            }
+            //某人获得了锁
          //   System.out.println(Thread.currentThread().getName()+"抢到了该优惠券");
             //查询优惠券信息
             coupon = (Coupon)redisTemplate.opsForValue().get("coupon_"+couId);
          //   System.out.println("在redis中查询到优惠券的数据"+coupon);
-            if (coupon == null)
-                return "优惠券被抢光了";
-            if (coupon.getCouAmount() == 0) {
+            if (coupon == null && coupon.getCouAmount() == 0){
                 return "优惠券被抢光了";
             }else {
                 coupon.setCouAmount(coupon.getCouAmount()-1);
@@ -159,22 +173,28 @@ public class UserCoupnoServiceImpl extends ServiceImpl<UserCoupnoMapper, UserCou
                 //执行lua脚本 ，删除锁，保证原子性
                 Long execute = (Long) redisTemplate.execute(script, Arrays.asList(key),uuid);
 
+                redisTemplate.opsForValue().set(keyOld,coupon);
+                return "领取成功";
             }
-            return "领取成功";
+
+
         }else { //加锁失败，过0.1秒再获得锁
             try {
                 Thread.sleep(100);
                 coupon = (Coupon) redisTemplate.opsForValue().get("coupon_"+couId);
                 if (coupon != null && coupon.getCouAmount()>0){
-                    userRecCou(userId,couId);
-                    return null;
+                    return setRedis(userId,couId);
+
                 }else {
-                    return null;
+                    return "商品被抢完啦";
                 }
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
+                return "系统异常";
             }
+
         }
+
     }
     //发送消息到RabbiMQ修改数据库
     @Transactional
