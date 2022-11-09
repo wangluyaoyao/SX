@@ -4,6 +4,7 @@ package com.suixing.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Comments;
+import com.suixing.entity.Order;
 import com.suixing.entity.User;
 
 import java.util.List;
@@ -26,6 +27,8 @@ public interface ICommentsService extends IService<Comments> {
     //点赞数量的获取
 //    public ServerResponse Up
 
+    public ServerResponse saveComments(Comments comments,Order order);
     public List<Map<String,Object>> getCommentReplyByCarId(Integer carId,Integer userId);
 
+    public Order getOrderId(Long ordNumber);
 }

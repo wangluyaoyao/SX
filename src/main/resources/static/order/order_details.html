@@ -139,6 +139,16 @@
                     <div class="order_success">
                         <input id="ordNumber" name="ordNumber" type="hidden"  th:value="${order.ordNumber}">
                         <button class="order_success_button" th:value="${order.ordNumber}">立即还车</button>
+
+
+                        <div id="window" class="window_css">
+                        <label>
+                            <textarea class="comm-box" placeholder="请输入回复内容......."></textarea>
+                        </label>
+
+                        <input type="submit" value="评论" class="comm-btn" onclick="saveComments()" id="reply-btn">
+                            <input type="submit" value="取消" onclick="hideWindow()" class="clear-btn">
+                        </div>
                     </div>
 
 
@@ -197,6 +207,20 @@
 
 <script src="../js/order_details.js"></script>
 <script src="../js/common.js"></script>
+<script type="text/javascript">
+    /*当点击调用此方法后,将悬浮窗口显示出来,背景变暗*/
+    function displayWindow() {
+        /*悬浮窗口的显示,需要将display变成block*/
+        document.getElementById("window").style.display = "block";
+        /*将背景变暗*/
+        document.getElementById("shadow").style.display = "block";
+    }
 
+    /*当点击调用此方法,将悬浮窗口和背景全部隐藏*/
+    function hideWindow() {
+        document.getElementById("window").style.display = "none";
+        document.getElementById("shadow").style.display = "none";
+    }
+</script>
 </body>
 </html>

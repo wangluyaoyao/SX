@@ -3,14 +3,13 @@ package com.suixing.controller;
 
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Comments;
+import com.suixing.entity.Order;
 import com.suixing.service.ICommentsService;
+import com.suixing.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,16 +27,22 @@ public class CommentsController {
 
     @Autowired
     private ICommentsService commentsService;
-    @GetMapping("/details/{carId}/page/{pageNum}")
-    public ServerResponse getUserDetail(@PathVariable("pageNum")Integer pageNum,@PathVariable("carId")Integer carId){
-        if (pageNum == null)
-            pageNum = 1;
 
-        return commentsService.getCommentsByCarForPage(pageNum);
-    }
 
-    @GetMapping("/getComments/")
-    public Comments getComments(Integer carId){
-    return null;
+
+    @PostMapping("/saveComments")
+    public ServerResponse getComments(Comments comments,Long ordNumber){
+        System.out.println(ordNumber);
+        System.out.println(comments);
+        Order order = commentsService.getOrderId(ordNumber);
+
+        ServerResponse commentResponse = commentsService.saveComments(comments,order);
+        System.out.println("保存的评论为："+commentResponse);
+        if (commentResponse.getResultcode() == 200){
+            return ServerResponse.success("评论成功",commentResponse);
+        }else {
+            return ServerResponse.fail("评论失败",null);
+        }
+
     }
 }

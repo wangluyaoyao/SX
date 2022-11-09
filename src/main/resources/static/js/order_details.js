@@ -15,11 +15,21 @@ $(".order_success_button").click(function () {
                 data:{
                     "ordNumber":ordNumber
                 },
-                success:function (result){
+                success:function (response){
+
+                    // console.log("sadsdas"+response.data)
+
                     console.log("成功");
-                    location.reload();
+                    // location.reload();
+                    layer.closeAll();
+                    layer.msg('还了')
+                    displayWindow()
+
+
                 }
             })
+
+
         }
         , btn2: function () {
             layer.msg('已取消');
@@ -27,3 +37,28 @@ $(".order_success_button").click(function () {
     })
 });
 
+
+// $(".comm-btn").click(function (){
+//     saveComments()
+// })
+function saveComments(){
+    var ordNumber = $("#ordNumber").val()
+    var userId = $(".userId").val()
+    var commContent = $(".comm-box").val()
+    console.log(ordNumber)
+    $.ajax({
+        type: "post",
+        url:"/saveComments",
+        data: {
+            ordNumber:ordNumber,
+            userId:userId,
+            commContent:commContent
+        },
+        success: function (commentResponse){
+            if (commentResponse.resultcode == 200){
+                layer.msg("评论成功")
+                location.reload()
+            }
+        }
+    })
+}

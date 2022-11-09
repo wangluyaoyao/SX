@@ -201,6 +201,7 @@ public class OrderController {
     @ResponseBody
     public ServerResponse successOrder(Long ordNumber){
         ServerResponse response = orderService.orderStatusSccess(ordNumber);
+        System.out.println("response:"+response);
         return response;
     }
 
