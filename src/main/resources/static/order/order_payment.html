@@ -61,6 +61,10 @@
     <p>实付金额：<span class="payPrice" th:text="${total_amount}"></span></p>
     <p>下单车辆：<span class="carName" th:text="${carName}"></span></p>
 
+    <form method="post" action="/orderStatus">
+        <input name="ordNumber" th:value="*{out_trade_no}" type="hidden">
+    </form>
+
 
 
 
@@ -69,5 +73,5 @@
 <script src="../js/common.js"></script>
 
 
-</body>
+</body >
 </html>
