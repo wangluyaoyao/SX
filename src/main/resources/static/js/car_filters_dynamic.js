@@ -20,28 +20,11 @@
 
 }
 
-//车辆品牌冒泡
-
-$(".car-model a").click(function (){
-    var carModel = $(this).text().replace(/\s*/g,"");
-    console.log(carModel)
-    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g,"")
-    var carBrand = $(".car-brand .active").text()
-    getByPage(1,carModel,carBrand,carPrice)
-})
 
 
 
-//价格冒泡
-$(".car-price a").click(function() {
-    var temp = $(this);
-    var price = temp.text().replace(/[\u4e00-\u9fa5]/g,"");
-    console.log(price);
 
-    var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
-    var carBrand = $(".car-brand .active").text()
-    getByPage(1,carModel,carBrand,price)
-})
+
 
  getByPage(1);//默认查询第一页
 //根据页数查询到数据
@@ -57,6 +40,24 @@ function getByPage(pageNum,carModel,carName,carPrice){
        console.log(url)
        carSelect(url);
 }
+
+
+//车辆品牌冒泡
+var carModel;
+$(".car-model a").click(function (){
+    carModel = $(this).text().replace(/\s*/g,"");
+    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g,"")
+    var carBrand = $(".car-brand .active").text()
+    getByPage(1,carModel,carBrand,carPrice)
+})
+//价格冒泡
+$(".car-price a").click(function() {
+    var temp = $(this);
+    var price = temp.text().replace(/[\u4e00-\u9fa5]/g,"");
+    console.log(price);
+    var carBrand = $(".car-brand .active").text()
+    getByPage(1,carModel,carBrand,price)
+})
 $(".car-name a").click(function() {
     var text = $(this);
     if(text.attr('class')==='active'){
@@ -65,7 +66,6 @@ $(".car-name a").click(function() {
     // console.log(text.text());
     var carName = text.text();
     var carBrand = $(".car-name .active").text()+carName
-    var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
     console.log(carModel)
     var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
     console.log(carBrand)
@@ -78,10 +78,10 @@ function carSelect(url){
         url:url,
         type:"get",
         success:function (response){
-            console.log(response.data)
+         //   console.log(response.data)
             var result = response.data;
             var CarArray =  response.data.records;
-            console.log(CarArray)
+            // console.log(CarArray)
             showCar(CarArray)
             //页码信息;
             {
@@ -93,44 +93,48 @@ function carSelect(url){
     })
 }
 //上一页，下一页按钮监听
-$(".upper").click(function () {
-
-    var carBrand = $(".car-name .active").text()
-    var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
-    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
-    var page = parseInt($(".page-select .current").text())-1
-    getByPage(page,carModel,carBrand,carPrice)
-    console.log("上一页")
-})
-$(".down").click(function () {
-
-  //  }
-    var carBrand = $(".car-name .active").text()
-    var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
-    var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
-    var page = parseInt($(".page-select .current").text()) + 1
-    if ($(this).attr("id") == "strat"&&$(".pagination .active").text()!=1)
-        now = parseInt(now)-1
-    console.log(now)
-    getByPage(page,carModel,carBrand,carPrice)
-    console.log("下一页")
-})
+// $(".upper").click(function () {
+//
+//     var carBrand = $(".car-name .active").text()
+//     var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
+//     var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
+//     var page = parseInt($(".page-select .current").text())-1
+//     getByPage(page,carModel,carBrand,carPrice)
+//     console.log("上一页")
+// })
+// $(".down").click(function () {
+//
+//   //  }
+//     var carBrand = $(".car-name .active").text()
+//    carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
+//     var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
+//     var page = parseInt($(".page-select .current").text()) + 1
+//     if ($(this).attr("id") == "strat"&&$(".pagination .active").text()!=1)
+//         now = parseInt(now)-1
+//     console.log(now)
+//     getByPage(page,carModel,carBrand,carPrice)
+// })
 
 $(".pagination a").click(function (){
     var now =  ($(this).text())
- //   var now = $(".pagination .active").text())«»
+ //  var now = $(".pagination .active").text())«»
 
     var carBrand = $(".car-name .active").text()
-    var carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
+   carModel = $(".car-model .hot-active").text().replace(/\s*/g,""); //去除字符串空格
     var carPrice = $(".car-select .active").text().replace(/[\u4e00-\u9fa5]/g, "")
     console.log($(this).attr("id"))
-    if ($(this).attr("id") == "strat"&&$(".pagination .active").text()!=1)
+    if ($(this).attr("id") == "strat"&&$(".pagination .active").text()!="1")
         now = parseInt(now)+1
-    console.log(now)
-    if (now>$(".page-select .pages").val()) {
-        layer.msg('已经是最后一页了')
-        return;
+    if (now > $(".pages").val()) {
+        layer.msg("当前已经是最后一页了")
+        now = parseInt(now) - 1
     }
+
+    console.log(now)
+    // if (now$(".page-select .pages").val()) {
+    //
+    //     return;
+    // }
     getByPage(now,carModel,carBrand,carPrice)
 
 
@@ -190,7 +194,7 @@ function showCar(carArray){
 
     for (var i =0 ; i<carArray.length;i++){
         var car = carArray[i];
-        console.log(car);
+       // console.log(car);
         var ele = " <div class=\"pro-rearly\">\n" +
             "                    <div class=\"img\">\n" +
             "                        <img src=\""+car.carImg+"\" alt=\"\">\n" +

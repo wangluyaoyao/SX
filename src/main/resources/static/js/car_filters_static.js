@@ -118,24 +118,28 @@ document.querySelector("#strat").onclick = function (event) {
         element.className = "active"
     }
 }
+
 document.querySelector("#end").onclick = function (event) {
-    if (now>$(".page-select .pages").val()) {
-        return;
-    }
+
+
     var element = event.target;
     var name = element.innerText;
+    // if (name>$(".page-select .pages").val()) {
+    //     return;
+    // }
     //    修改树枝
     var numberArray = document.querySelector(".pagination").children;
     var pages = document.querySelector(".page-select .pages").value
-    if (name <pages) {
+    var current = document.querySelector(".page-select .current").value
+    if (name ==pages) {
         for (var i = 1; i < numberArray.length-1; i++) {
             numberArray[i].innerText = parseInt(numberArray[i].innerText) + 1
             numberArray[i].className = " "
         }
         element.previousElementSibling.className = "active"
-        return
+        return null;
     }
-    else {
+    else if (name <pages) {
         var workArray = document.querySelector(".pagination").children;
         for (var i = 0; i < workArray.length; i++) {
             workArray[i].className = " "
@@ -144,6 +148,7 @@ document.querySelector("#end").onclick = function (event) {
     }
 
 }
+
 //分页事件冒泡
 document.querySelector(".pagination").onclick = function(event){
    // console.log("aaaa")
@@ -203,6 +208,7 @@ document.querySelector(".left").onclick = function showall(){
   console.log("show")
   // document.querySelector(".show").className += " showAll"
 }
+
 document.querySelector(".area1").onclick = function showall1(){
   var e = document.querySelector(".showAll1")
   console.log(e)
