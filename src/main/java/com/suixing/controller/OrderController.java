@@ -149,6 +149,8 @@ public class OrderController {
             order.setCouId(couId);
         }
 //        ServerResponse result = orderService.saveOrder(order);
+
+
         rabbitTemplate.convertAndSend("OrderDrawDirectExchange","order12138",order);
 
         try {

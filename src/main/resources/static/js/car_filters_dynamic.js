@@ -146,6 +146,15 @@ $(".pro-sumbit").click(function (){
 })
 
 $(".pro-product").on("click",".pro-order",function (event){
+    //地点
+    f1 = $(".area").val();
+    f2 = $(".area1").val();
+    if (f1 == "" || f2 == ""){
+        event.target.parentElement.href ="javascript:void(0)";
+        layer.msg("请选择取车还车门店")
+        return
+    }
+    //时间
     start1 = $(".t1").val();
     start2 = $(".t2").val();
     start3 = $(".t3").val();
@@ -154,6 +163,8 @@ $(".pro-product").on("click",".pro-order",function (event){
         console.log("时间没选")
         event.target.parentElement.href ="javascript:void(0)";
         layer.msg("请先选择时间")
+    }else if(event.target.parentElement.href =="javascript:void(0)"){
+        layer.msg("记得点击确认选择按钮哦")
     }
 })
 
