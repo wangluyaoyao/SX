@@ -44,11 +44,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     //普通登录
     @Override
     public ServerResponse login(User user) {
-        System.out.println(user);
+        System.out.println("user:"+user);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("user_tel",user.getUserTel());
         wrapper.eq("user_psd",MD5Util.string2MD5(user.getUserPsd()));
 
+        user.setUserPsd(MD5Util.string2MD5(user.getUserPsd()));
+        System.out.println(MD5Util.string2MD5(user.getUserPsd()));
         User loginUser = userMapper.selectOne(wrapper);
         System.out.println("查询到的登录账户："+loginUser);
 

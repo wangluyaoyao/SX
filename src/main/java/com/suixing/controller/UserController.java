@@ -7,6 +7,7 @@ import com.suixing.entity.LoginCustomer;
 import com.suixing.entity.User;
 import com.suixing.mapper.UserMapper;
 import com.suixing.service.IUserService;
+import com.suixing.util.MD5Util;
 import com.suixing.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -80,6 +81,7 @@ public class UserController {
     }
     @PostMapping("register")
     public ServerResponse regist(User user,HttpServletRequest request,HttpServletResponse response){
+        user.setUserPsd(MD5Util.string2MD5(user.getUserPsd()));
         ServerResponse registResponse = userService.regist(user);
         System.out.println("注册的账号为："+registResponse);
 
