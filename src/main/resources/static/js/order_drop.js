@@ -59,12 +59,19 @@
 
         });
 
-        $(".t_price").val(document.querySelector(".t_price").innerText);
+
 
 
 
 
     })
+
+function qq() {
+    $(".t_price").val(document.querySelector(".t_price").innerText);
+    console.log($(".t_price").val())
+
+}
+
 
 
 select();
@@ -72,7 +79,6 @@ select();
         var url = "/coupon";
         var token = localStorage.getItem("token");
         console.log(token);
-
         $.ajax({
             type:"get",
             url:url,
@@ -80,10 +86,10 @@ select();
             headers:{'token':token},
             success:function (result) {
                 var coupon = result.data;
-                var userId = coupon[0].userId;
+                //var userId = coupon[0].userId;
                 console.log(coupon)
-                console.log(userId)
-                $("#userId").val(userId);
+                //console.log(userId)
+
                 for (var i=0; i<coupon.length;i++) {
                     var coupon1 = coupon[i];
                     var couId = coupon1["couId"];
@@ -121,5 +127,12 @@ console.log($("#couId").val()+"123456")
 console.log()
 
 
+function sdc(){
+    var userId = $(".userId").val();
+    console.log(userId)
+    $("#userId").val(userId);
+    console.log($("#userId").val())
+}
+sdc();
 
 

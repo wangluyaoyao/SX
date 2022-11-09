@@ -31,7 +31,7 @@ a{
     display: block;
     float: left;
     width: 68%;
-    height: 750px;
+    /*height: 750px;*/
     border: 1px solid gray;
     /*background-color: #31b0d5;*/
 
@@ -133,7 +133,7 @@ a{
 /*==================优惠活动========================================================*/
 #main .preferential{
     width: 100%;
-    /*height: 330px;*/
+    /*height: 550px;*/
     /*background-color: palevioletred;*/
     margin-top: 280px;
 }
@@ -151,8 +151,8 @@ a{
 #main .preferential .coupon{
     display: none;
     width: 100%;
-    /*height: 170px;*/
-    border: 1px solid red;
+    height: 230px;
+    /*border: 1px solid red;*/
 }
 
 #main .preferential .coupon1{
@@ -165,6 +165,7 @@ a{
     border: 1px solid orange;
     display: block;
     float: left;
+    margin-top: 10px;
 }
 
 #main .preferential .coupon1 p{
@@ -191,10 +192,11 @@ a{
 
 
 
-/*============其他服务=================*/
+/*============发票信息=================*/
+
 #main .service .ser_content{
     width: 95%;
-    height: 200px;
+    /*height: 200px;*/
     margin: 10px;
     /*background: orange;*/
     color: #00a5cb;

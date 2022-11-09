@@ -87,7 +87,7 @@ function login(){
             url:"../customer/login",
             data:{
                 userTel:$(".userTel").val(),
-                userPsd:$(".userPsd").val()
+                userPsd:md5($(".userPsd").val())
                 // box:$(".loginAgree").val()
             },
             success:function (result) {

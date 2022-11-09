@@ -9,9 +9,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 //import com.github.pagehelper.PageInfo;
 import com.suixing.commons.ServerResponse;
 import com.suixing.entity.Comments;
+import com.suixing.entity.Order;
 import com.suixing.entity.Reply;
 import com.suixing.entity.User;
 import com.suixing.mapper.CommentsMapper;
+import com.suixing.mapper.OrderMapper;
 import com.suixing.mapper.ReplyMapper;
 import com.suixing.mapper.UserMapper;
 import com.suixing.service.ICommentsService;
@@ -20,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +50,8 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
     @Autowired
     private LikeService likeService;
 
+    @Autowired
+    private OrderMapper orderMapper;
 
     @Override
     public ServerResponse getCommentsByCarId(Integer carId) {
@@ -80,6 +85,21 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         Comments comments = commentsMapper.selectById(carId);
         Integer userId = comments.getUserId();
         return userMapper.selectById(userId);
+    }
+
+    @Override
+    public ServerResponse saveComments(Comments comments,Order order) {
+        System.out.println(order);
+
+        comments.setCommTime(LocalDateTime.now());
+        comments.setCarId(order.getCarId());
+        comments.setOrderId(order.getOrdId());
+        int rows = commentsMapper.insert(comments);
+        if (rows > 0){
+            return ServerResponse.success("保存评论成功",comments);
+        }else {
+            return ServerResponse.fail("保存评论失败",null);
+        }
     }
 
     @Override
@@ -129,6 +149,20 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         }
 
         return list;
+    }
+
+    @Override
+    public Order getOrderId(Long ordNumber) {
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        wrapper.eq("ord_number",ordNumber);
+        Order order = orderMapper.selectOne(wrapper);
+        System.out.println("查询到的订单"+order);
+        if (order != null){
+            return order;
+        }else {
+            return null;
+        }
+
     }
 
 

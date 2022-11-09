@@ -35,8 +35,8 @@ public class CarDetailController {
         System.out.println("carId1:"+carId);
         Car car = carService.getById(carId);
         System.out.println("1");
-        System.out.println(car.getBusId());
-        System.out.println(car);
+//        System.out.println(car.getBusId());
+//        System.out.println(car);
         //网点信息
         Bussiness bussiness = bussinessService.getBussinessWithInfo(car.getBusId());
         System.out.println(bussiness);

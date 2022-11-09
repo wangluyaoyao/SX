@@ -753,3 +753,14 @@ ul{
     width: 50px;
     margin-left: 5%;
 }
+
+#to_order{
+    width: 100px;
+    height: 50px;
+    background-color: white;
+    border: 0;
+    font-size: 20px;
+    position: relative;
+    bottom: 10px;
+    color: #00a5cb;
+}
