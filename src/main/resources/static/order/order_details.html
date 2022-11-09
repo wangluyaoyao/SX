@@ -154,7 +154,7 @@
                     <ul>
                         <li>
                             <p>车辆租赁费及门店服务费 (原价：<span th:text="${car.carPrice}">246.00元</span>，折扣优惠：0.00元)
-                                <span class="price1">¥<span th:text="${car.carPrice}" >276.00</span></span>
+                                <span class="price1">¥<span th:text="${car.carPrice}*${order.ordLease}" >276.00</span></span>
                             </p>
                         </li>
 
@@ -168,9 +168,15 @@
                                 <span class="price4">¥<span >20.00</span></span>
                             </p>
                         </li>
-                        <li>
+                        <li >
                             <p>优惠折扣
-                                <span class="price5">¥-<span >0.00</span></span>
+                                <tr th:if="${order.ordCouMoney} ne null ">
+                                    <span class="price5">¥-<span th:text="${order.ordCouMoney}" >0.00</span></span>
+                                </tr>
+                                <tr th:if="${order.ordCouMoney} eq null ">
+                                    <span class="price5">¥-<span  >0.00</span></span>
+                                </tr>
+
                             </p>
                         </li>
                         <li>

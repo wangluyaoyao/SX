@@ -19,6 +19,7 @@ function userShow(){
                 $(".registAfter").text(user.userName);
                 $(".left").append("<input class=\"userId\" value=\"\" type=\"hidden\">");
                 $(".userId").val(user.userId)
+                $("#userId").val(user.userId)
                 $(".bye").attr("href", "../index.html")
                 $(".bye").attr("class", "bye")
                 let ele ="<a href=\"../customer/customer_center.html\">我的消息</a>" ;
