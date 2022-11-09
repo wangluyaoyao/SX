@@ -8,8 +8,15 @@ function showCollect(){
           url: url,
           headers: {'token': token},
           success:function (result){
+
+
                //console.log(result);
                var data = result.data;
+               console.log(data)
+               if (data.length !== 0){
+                    $(".collcet-ul").text("")
+               }
+               var userId = $(".userId").val();
                for (var i=0; i<data.length;i++){
                     var dataele = data[i];
                     var car = dataele['car'];
@@ -27,7 +34,7 @@ function showCollect(){
                     var collectEle = "<li>\n" +
                         "                <div class=\"collect-car-box\">\n" +
                         "                    <div class=\"car-img\">\n" +
-                        "                        <a href=\"/details/"+carId+"\"><img src=\""+carImg+"\"></a>\n" +
+                        "                        <a href=\"/details?carId="+carId+"&userId="+userId+"\"><img src=\""+carImg+"\"></a>\n" +
                         "                    </div>\n" +
                         "                    <div class=\"car-esc\">\n" +
                         "                        <button class=\"esc\" value=\""+collectId+"\">取消收藏</button>\n" +

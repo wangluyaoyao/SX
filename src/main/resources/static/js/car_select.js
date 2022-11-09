@@ -64,9 +64,10 @@ function getCarFilter(carKeyword){
 function showCar(carArray) {
     for (var i = 0; i < carArray.length; i++) {
         var  car = carArray[i];
+        var userId = $(".userId").val()
         console.log(car)
         var ele = "<div class=\"pro-rearly\">\n" +
-            "                <a href=\"/details/"+car.carId+"\">\n" +
+            "                <a href=\"/details?carId="+car.carId+"&userId="+userId+"\">\n" +
             "                    <div class=\"img\">\n" +
             "                        <img src=\""+car.carImg+"\" alt=\"\">\n" +
             "                    </div>\n" +

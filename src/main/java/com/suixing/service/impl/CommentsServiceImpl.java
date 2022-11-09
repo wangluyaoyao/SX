@@ -93,18 +93,20 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         for (Comments comment:comments){
             Map<String,Object> map = new HashMap<>();
             User commentUser = userMapper.selectById(comment.getUserId());
-            QueryWrapper<Reply> replyQueryWrapper = new QueryWrapper<>();
-            replyQueryWrapper.eq("comm_id",comment.getCommId());
+
             //判断点赞状态
             int commentStatus = likeService.getLikeStatus(userId,comment.getCommId());
             Long commentLikeCount = likeService.likeCount(comment.getCommId());
 
 
 
-            Map<String,Object> mapReply = new HashMap<>();
+
+            QueryWrapper<Reply> replyQueryWrapper = new QueryWrapper<>();
+            replyQueryWrapper.eq("comm_id",comment.getCommId());
             List<Map<String,Object>> replyList = new ArrayList<>();
             List<Reply> replies = replyMapper.selectList(replyQueryWrapper);
             for (Reply reply : replies){
+                Map<String,Object> mapReply = new HashMap<>();
                 User replyUser = userMapper.selectById(reply.getUserId());
                 //判断点赞状态
                 int replyStatus = likeService.getLikeStatus(userId,reply.getReplyId());
