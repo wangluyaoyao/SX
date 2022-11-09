@@ -137,7 +137,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         if (couId != null){
             QueryWrapper wrapper = new QueryWrapper<>();
             wrapper.eq("cou_id",couId);
-            UserCoupno coupon = userCoupnoMapper.selectOne(queryWrapper);
+            UserCoupno coupon = userCoupnoMapper.selectOne(wrapper);
             coupon.setUserCouState("1");
         }
         return ServerResponse.success("ok",order);
