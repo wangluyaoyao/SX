@@ -1,21 +1,19 @@
 package com.suixing.service.impl;
 
-import org.springframework.amqp.core.Message;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.rabbitmq.client.Channel;
 import com.suixing.commons.ServerResponse;
+import com.suixing.entity.Coupon;
 import com.suixing.entity.Order;
+import com.suixing.entity.UserCoupno;
+import com.suixing.mapper.CouponMapper;
 import com.suixing.mapper.OrderMapper;
+import com.suixing.mapper.UserCoupnoMapper;
 import com.suixing.service.IOrderService;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +32,8 @@ import java.util.UUID;
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private UserCoupnoMapper userCoupnoMapper;
 
     @Override
     public Order getById(Integer ordId) {
@@ -48,19 +48,16 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         return ServerResponse.success("查询成功",orderlist);
     }
 
-
-    @Transactional
-    @RabbitHandler
-    @RabbitListener(queues = "OrderDrawDirectQueue")
     @Override
-    public void saveOrder(Order order, Channel channel, Message message) {
-        System.out.println("OrderDrawDirectQueue"+order);
-       orderMapper.insert(order);
-        try {
-            channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
-        } catch (IOException e) {
-           e.printStackTrace();
+    public ServerResponse saveOrder(Order order) {
+        int rows = orderMapper.insert(order);
+        if(rows >0){
+            System.out.println("添加成功");
+            return ServerResponse.success("添加成功",order);
         }
+        else
+            System.out.println("添加失败");
+            return ServerResponse.fail("添加失败",null);
     }
 
     @Override
@@ -79,10 +76,26 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public Order getBuOrderNum(Long numId) {
-        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("ord_number",numId);
-        return orderMapper.selectOne(queryWrapper);
+    public Order jixuzhifu(Long ordNumber) {
+        QueryWrapper queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("ord_number",ordNumber);
+        Order order = orderMapper.selectOne(queryWrapper);
+        return order;
+    }
+
+    //订单状态修改
+    @Override
+    public ServerResponse orderStatus(Long ordNumber) {
+        QueryWrapper queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("ord_number",ordNumber);
+        Order order = orderMapper.selectOne(queryWrapper);
+        order.setOrdSatus("租赁中");
+        Integer couId =  order.getCouId();
+        if (couId != null){
+            UserCoupno coupon = userCoupnoMapper.selectById(couId);
+            coupon.setUserCouState("1");
+        }
+        return ServerResponse.success("ok",order);
     }
 
     @Override
