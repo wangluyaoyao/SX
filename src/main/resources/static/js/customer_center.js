@@ -248,7 +248,7 @@ $("#Submit").click(function (){
 
 //验证用户名
 if ($(".userPetname").val() != null){
-    $(".userPetname").focus(checkUsername);
+    $(".userPetname").blur(checkUsername);
 }
 function checkUsername(){
     var userPetname = $(".userPetname").val();
@@ -263,7 +263,7 @@ function checkUsername(){
 }
 //验证手机号
 if ($(".usertel").val() != null){
-    $(".usertel").focus(checkUsertel);
+    $(".usertel").blur(checkUsertel);
 }
 function checkUsertel(){
     var usertel = $(".usertel").val();
@@ -278,7 +278,7 @@ function checkUsertel(){
 
 //验证邮箱
 if ($(".useremail").val() != null){
-    $(".useremail").focus(checkUseremail);
+    $(".useremail").blur(checkUseremail);
 }
 
 function checkUseremail(){
@@ -293,7 +293,7 @@ function checkUseremail(){
 }
 //验证身份证
 if($(".useridcardIpt").val() != null){
-    $(".useridcardIpt").focus(checkUserIdCard);
+    $(".useridcardIpt").blur(checkUserIdCard);
 }
 function checkUserIdCard(){
     var useridcardIpt = $(".useridcardIpt").val();

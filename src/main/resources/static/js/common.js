@@ -13,10 +13,12 @@ function userShow(){
                 // if (userName!=null){
                 //更新页面
                 console.log(user)
+                var userPetname = user.userPetname;
+                console.log(userPetname)
                 $(".loginAfter").text("欢迎回来!");
                 $(".loginAfter").attr("href", "../customer/customer_center.html")
                 $(".registAfter").attr("href", "../customer/customer_center.html")
-                $(".registAfter").text(user.userName);
+                $(".registAfter").text(user.userPetname);
                 $(".left").append("<input class=\"userId\" value=\"\" type=\"hidden\">");
                 $(".userId").val(user.userId)
                 $("#userId").val(user.userId)

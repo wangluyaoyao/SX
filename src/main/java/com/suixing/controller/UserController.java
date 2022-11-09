@@ -75,9 +75,12 @@ public class UserController {
         if (token!=null){
             loginCustomer = TokenUtil.parseToken(token);
             loginUserName =   loginCustomer.getUserName();
+
         }
+        Integer userId = TokenUtil.parseToken(token).getUserId();
+        User user = userService.getById(userId);
        // System.out.println("loginUserName:"+loginUserName);
-        return ServerResponse.success("查询成功",loginCustomer);
+        return ServerResponse.success("查询成功",user);
     }
     @PostMapping("register")
     public ServerResponse regist(User user,HttpServletRequest request,HttpServletResponse response){
