@@ -44,6 +44,8 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private LikeService likeService;
 
 
     @Override
@@ -81,31 +83,47 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
     }
 
     @Override
-    public List<Map<String,Object>> getCommentReplyByCarId(Integer carId) {
+    public List<Map<String,Object>> getCommentReplyByCarId(Integer carId,Integer userId) {
         List<Map<String,Object>> list = new ArrayList<>();
         QueryWrapper<Comments> commentsQueryWrapper= new QueryWrapper<>();
         commentsQueryWrapper.eq("car_id",carId);
         List<Comments> comments = commentsMapper.selectList(commentsQueryWrapper);
 
+
         for (Comments comment:comments){
             Map<String,Object> map = new HashMap<>();
             User commentUser = userMapper.selectById(comment.getUserId());
+
+            //判断点赞状态
+            int commentStatus = likeService.getLikeStatus(userId,comment.getCommId());
+            Long commentLikeCount = likeService.likeCount(comment.getCommId());
+
+
+
+
             QueryWrapper<Reply> replyQueryWrapper = new QueryWrapper<>();
             replyQueryWrapper.eq("comm_id",comment.getCommId());
-
-            Map<String,Object> mapReply = new HashMap<>();
             List<Map<String,Object>> replyList = new ArrayList<>();
             List<Reply> replies = replyMapper.selectList(replyQueryWrapper);
             for (Reply reply : replies){
+                Map<String,Object> mapReply = new HashMap<>();
                 User replyUser = userMapper.selectById(reply.getUserId());
+                //判断点赞状态
+                int replyStatus = likeService.getLikeStatus(userId,reply.getReplyId());
+                Long replyLikeCount = likeService.likeCount(reply.getReplyId());
+
                 mapReply.put("replyUser",replyUser);
                 mapReply.put("reply",reply);
+                map.put("replyStatus",replyStatus);
+                map.put("replyLikeCount",replyLikeCount);
                 replyList.add(mapReply);
             }
 
 
             map.put("comment",comment);
             map.put("commentUser",commentUser);
+            map.put("commentStatus",commentStatus);
+            map.put("commentLikeCount",commentLikeCount);
             map.put("reply",replyList);
             list.add(map);
         }

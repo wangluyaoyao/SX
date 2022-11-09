@@ -14,10 +14,11 @@ function userShow(){
                 //更新页面
                 console.log(user)
                 $(".loginAfter").text("欢迎回来!");
-                $(".userId").val(user.userId)
                 $(".loginAfter").attr("href", "../customer/customer_center.html")
                 $(".registAfter").attr("href", "../customer/customer_center.html")
                 $(".registAfter").text(user.userName);
+                $(".left").append("<input class=\"userId\" value=\"\" type=\"hidden\">");
+                $(".userId").val(user.userId)
                 $(".bye").attr("href", "../index.html")
                 $(".bye").attr("class", "bye")
                 let ele ="<a href=\"../customer/customer_center.html\">我的消息</a>" ;

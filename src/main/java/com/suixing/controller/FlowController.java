@@ -70,9 +70,9 @@ public class FlowController {
         Float total_amount = orderPrice;
         //订单名称，必填
         String subject = carName;
-        System.out.println(out_trade_no);
-        System.out.println(total_amount);
-        System.out.println(subject);
+        //System.out.println(out_trade_no);
+        //System.out.println(total_amount);
+        //System.out.println(subject);
 
         // 该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m。
         String timeout_express = "15m";
@@ -85,7 +85,7 @@ public class FlowController {
 
         //3.请求支付
         String result = alipayClient.pageExecute(payRequest).getBody();
-        System.out.println(result);
+        //System.out.println(result);
         return result;
     }
 
@@ -93,8 +93,8 @@ public class FlowController {
     //同步请求
     @RequestMapping("alipayReturnNotice")
     public ModelAndView returnNotice(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, AlipayApiException {
-        System.out.println("支付成功后，支付宝返回的所有数据:"+request);
-        System.out.println("支付成功, 进入同步通知接口...");
+        //System.out.println("支付成功后，支付宝返回的所有数据:"+request);
+        //System.out.println("支付成功, 进入同步通知接口...");
 
         //获取支付宝GET过来反馈信息
         Map<String,String> params = new HashMap<>();
@@ -112,7 +112,7 @@ public class FlowController {
             for (int i=0;i<values.length;i++){
                 valueStr=(i==values.length-1)?valueStr + values[i] : valueStr + values[i]+",";
             }
-            System.out.println(valueStr);
+            //System.out.println(valueStr);
 
             //乱码解决，这段代码在出现乱码时使用
             valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
@@ -121,7 +121,7 @@ public class FlowController {
 
         //调用SDK验证签名
         boolean signVerified =  AlipaySignature.rsaCheckV1(params,AlipayConfig.alipay_public_key,AlipayConfig.charset,AlipayConfig.sign_type);//调用SDK验证签名
-        System.out.println(signVerified);
+        //System.out.println(signVerified);
         ModelAndView mv = new ModelAndView("order/order_payment");
 
         if(signVerified) {

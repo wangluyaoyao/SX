@@ -18,4 +18,6 @@ public interface IReplyService extends IService<Reply> {
     public ServerResponse getReplyByCommId(Integer carId);
 
     public User getUserByReplyId(Integer carId);
+
+    public ServerResponse saveReply(Reply reply);
 }

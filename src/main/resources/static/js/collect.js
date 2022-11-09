@@ -8,8 +8,15 @@ function showCollect(){
           url: url,
           headers: {'token': token},
           success:function (result){
+
+
                //console.log(result);
                var data = result.data;
+               console.log(data)
+               if (data.length !== 0){
+                    $(".collcet-ul").text("")
+               }
+               var userId = $(".userId").val();
                for (var i=0; i<data.length;i++){
                     var dataele = data[i];
                     var car = dataele['car'];
@@ -27,7 +34,7 @@ function showCollect(){
                     var collectEle = "<li>\n" +
                         "                <div class=\"collect-car-box\">\n" +
                         "                    <div class=\"car-img\">\n" +
-                        "                        <a href=\"/details/"+carId+"\"><img src=\""+carImg+"\"></a>\n" +
+                        "                        <a href=\"/details?carId="+carId+"&userId="+userId+"\"><img src=\""+carImg+"\"></a>\n" +
                         "                    </div>\n" +
                         "                    <div class=\"car-esc\">\n" +
                         "                        <button class=\"esc\" value=\""+collectId+"\">取消收藏</button>\n" +
@@ -108,17 +115,18 @@ function decideCollect(){
           },
           headers: {'token': token},
           success:function (result){
-               if (result != null){
+               console.log(result)
+               if ( result !== '' ){
                     $(".collect_sucess_text").text("已收藏!");
                     $(".collect_img").attr("src","../images/collect/collectsuccess.png");
                     $(".collect_img").attr("class","collect_sucess");
+                    $(".collectId").val(result.data.collectId);
                }
-
           }
      })
 }
 //收藏车辆
-$(".collect_img").click(function (){
+$(document).on( 'click',".collect_img",function (){
      var url = "/sx-collect/collectSave";
      var token = localStorage.getItem("token");
      var carId = $(".carId").val();
@@ -130,11 +138,48 @@ $(".collect_img").click(function (){
               },
               headers: {'token': token},
               success: function (result) {
-                   console.log("成功!")
+                   console.log(result);
+                   $(".collect_sucess_text").text("已收藏!");
+                   $(".collect_img").attr("src","../images/collect/collectsuccess.png");
+                   $(".collect_img").attr("class","collect_sucess");
+                   $(".collectId").val(result.data.collectId);
               }
          })
 });
 
+//取消收藏
+$(document).on( 'click',".collect_sucess",function() {
+     layer.alert('确定提交吗？', {
+          skin: 'layui-layer-molv' //样式类名 自定义样式
+          , closeBtn: 1 // 是否显示关闭按钮
+          , title : '提示！！' //标题
+          , anim: 1 //动画类型
+          , btn: ['确定', '取消'] //按钮
+          , yes: function() {//这里也可以写响应的ajax请求
+               var collectId = $(".collectId").val();
+               console.log(collectId)
+               var url = "/sx-collect/collectEsc";
+               $.ajax({
+                    type: "post",
+                    url: url,
+                    data:{
+                         "collectId":collectId
+                    },
+                    success:function (){
+                         $(".collect_sucess_text").text("收藏吧!");
+                         $(".collect_img").attr("src","../images/collect/collect.png");
+                         $(".collect_img").attr("class","collect_img");
+                         $(".collectId").val();
+                         console.log("成功");
+                         location.reload();
+                    }
+               })
+          }
+          , btn2: function () {
+               layer.msg('已取消');
+          }
+     })
+})
 
 //推荐其他车辆
 showRecommend();

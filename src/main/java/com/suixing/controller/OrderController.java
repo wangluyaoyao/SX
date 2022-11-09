@@ -1,7 +1,6 @@
 package com.suixing.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.suixing.commons.ServerResponse;
 import com.suixing.config.delay.DelayConfig;
 import com.suixing.entity.*;
@@ -51,7 +50,7 @@ public class OrderController {
     @Autowired
     private IUserCenterService userCenterService;
     @Autowired
-    private RabbitTemplate rabbitTemplate;
+    private AmqpTemplate rabbitTemplate;
 
     //订单确认页面
     @GetMapping("/order_confirm")
@@ -148,43 +147,32 @@ public class OrderController {
         if (couId !=null){
             order.setCouId(couId);
         }
-//        ServerResponse result = orderService.saveOrder(order);
-        rabbitTemplate.convertAndSend("OrderDrawDirectExchange","order12138",order);
+        ServerResponse result = orderService.saveOrder(order);
+        System.out.println(order);
+        System.out.println(result);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject(result);
+        mav.setViewName("order/order_update");
+        Integer ordId = order.getOrdId();
+        mav.addObject("ordId",ordId);
 
-        try {
-            Thread.currentThread().sleep(1000);
-            Order order1 = orderService.getBuOrderNum(ordNumber);
-            System.out.println("order1:"+order1);
-            ServerResponse result = ServerResponse.success("添加成功",order);
-            ModelAndView mav = new ModelAndView();
-            mav.addObject(result);
-            mav.setViewName("order/order_update");
-
-            Integer ordId = order1.getOrdId();
-            mav.addObject("ordId",ordId);
-
-            String msg = "超时";
+        String msg = "超时";
 
 
-            rabbitTemplate.convertAndSend("delayed-exchange","key3",msg,message ->{
-                message.getMessageProperties().setDelay(900000);
-                System.out.println(message);
-                return  message;
-            });
+        rabbitTemplate.convertAndSend("delayed-exchange","key3",msg,message ->{
+            message.getMessageProperties().setDelay(900000);
+            System.out.println(message);
+            return  message;
+        });
 
-            return mav;
-
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
+        return mav;
     }
 
     //添加身份证、驾驶证信息
     @PostMapping("updateOrder")
     @ResponseBody
     public ModelAndView updateOrder(Order order) {
-        System.out.println("接收到的订单"+order);
+
         ServerResponse result = orderService.updateOrder(order);
 
         Order order1 = (Order) result.getData();

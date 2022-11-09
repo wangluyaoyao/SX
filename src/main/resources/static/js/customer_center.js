@@ -83,10 +83,26 @@ function showUser(){
                 userGender = '女';
             }
             userIdcard = user.userIdcard;
+            if (userIdcard === null){
+                userIdcard = '';
+            }
             userName = user.userName;
+            if (userName === null){
+                userName = ' ';
+            }
             userEmail = user.userEmail;
+            if (userEmail === null){
+                userEmail = ' ';
+            }
             userBir = user.userBir;
+            if (userBir === null){
+                userBir = '2000-01-01';
+            }
             userPetname = user.userPetname;
+            if (userPetname === null){
+                userPetname = '';
+            }
+
             var userEle = "<h2>用户信息</h2>\n" +
                 "                <div class=\"mod information-index\">\n" +
                 "                    <div class=\"ui-bfc information-index-panel\">\n" +

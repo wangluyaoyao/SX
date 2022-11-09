@@ -32,52 +32,52 @@ function getLikeStatus(){
 }
 
 //点赞
-$(document).on( 'click',".like-img",function(event){
+$(document).on( 'click',".like",function(event){
     var url = "/like";
     var token = localStorage.getItem("token");
     var ele = event.target;
     console.log(ele)
-    var carId = ele.id;
-    console.log(carId)
+    var commId = ele.id;
+    console.log(commId)
     console.log("点赞")
     $.ajax({
         type: "post",
         url: url,
         data:{
-            'carId':carId,
+            'commId':commId,
         },
         headers: {'token': token},
         success: function (result) {
             console.log(result);
-            $("#"+carId+"").attr("src","../images/haslike.png");
-            $("#"+carId+"").attr("class","haslike-img");
-            $(".like-count"+carId+"").text(result);
+            //$("#"+commId+"").attr("src","../images/haslike.png");
+            $("#"+commId+"").attr("class","haslike");
+            $(".like-comment"+commId+"").text(result);
         }
     })
 })
 
 
 //取消点赞
-$(document).on( 'click',".haslike-img",function(event){
+$(document).on( 'click',".haslike",function(event){
     var url = "/dislike";
     var token = localStorage.getItem("token");
     var ele = event.target;
     console.log(ele)
-    var carId = ele.id;
-    console.log(carId)
+    var commId = ele.id;
+    console.log(commId)
     console.log("取消点赞")
     $.ajax({
         type: "post",
         url: url,
         data:{
-            'carId':carId,
+            'commId':commId,
         },
         headers: {'token': token},
         success: function (result) {
             console.log(result);
-            $("#"+carId+"").attr("src","../images/like.png");
-            $("#"+carId+"").attr("class","like-img");
-            $(".like-count"+carId+"").text(result);
+            //$("#"+carId+"").attr("src","../images/like.png");
+            $("#"+commId+"").attr("class","like");
+            $(".like-comment"+commId+"").text(result);
         }
     })
 })

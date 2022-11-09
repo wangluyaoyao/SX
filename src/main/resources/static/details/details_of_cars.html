@@ -60,6 +60,7 @@
                 <div class="common-modalBox">
                     <div class="current-carname">
                         <input type="hidden" th:value="${car.carId}" class="carId">
+                        <input type="hidden" value="" class="collectId">
                         <h3 th:text="${car.carName}"></h3>
                     </div>
                 </div>
@@ -180,7 +181,7 @@
                                         <div class="layui-inline">
                                             <div class="layui-inline" id="test6">
                                                 <div class="layui-input-inline">
-                                                    <input type="text" autocomplete="off" id="test-startDate-1" class="layui-input input-start" placeholder="开始日期">
+                                                    <input type="text" autocomplete="off" id="test-startDate-1"  class="layui-input input-start t1" placeholder="开始日期">
                                                 </div>
                                             </div>
                                         </div>
@@ -190,7 +191,7 @@
 
                                 <div class="layui-inline">
                                     <div class="layui-input-inline time">
-                                        <input type="text" class="layui-input" id="test-limit3" placeholder="HH:mm:ss" value="12:00:00">
+                                        <input type="text" class="layui-input t2" id="test-limit3"  placeholder="HH:mm:ss" value="12:00:00">
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +202,7 @@
                                         <div class="layui-inline">
                                             <div class="layui-inline" id="test6">
                                                 <div class="layui-input-inline">
-                                                    <input type="text" autocomplete="off" id="test-endDate-1" class="layui-input " placeholder="结束日期">
+                                                    <input type="text" autocomplete="off" id="test-endDate-1" class="layui-input t3" placeholder="结束日期">
                                                 </div>
                                             </div>
                                         </div>
@@ -210,7 +211,7 @@
                                 <!-- 时间 -->
                                 <div class="layui-inline">
                                     <div class="layui-input-inline time">
-                                        <input type="text" class="layui-input" id="test-limit3" placeholder="HH:mm:ss" value="12:00:00">
+                                        <input type="text" class="layui-input t4" id="test-limit3" placeholder="HH:mm:ss" value="12:00:00">
                                     </div>
                                 </div>
                             </div>
@@ -228,9 +229,14 @@
                     <button type="button" class="btn btn-default" id="btn_collect" style="border: 0">
                         <img alt="" src="../images/collect/collect.png" class="collect_img" id="btn_collect_icon"><span class="collect_sucess_text">收藏吧！</span>
                     </button>
-                    <button type="button" class="order_btn" id="to_order">
-                        立即购买！
-                    </button>
+                    <form method="post" action="/dropOrder1">
+                        <input type="submit" id="to_order" onmouseenter="btn()"  value="立即购买">
+                        <input type="hidden" id="start" name="start" value="">
+                        <input type="hidden" id="end" name="end" value="">
+                        <input type="hidden" id="carId1" name="carId1" value="">
+                    </form>
+
+
                 </div>
                 <div>
                 <div class="current-carintro">
@@ -256,14 +262,35 @@
                             <span class="type-text" th:text="${comment.comment.commContent}">车子很干净，ce车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车车子很干净，车子很干净，nice，车子很干净，子很干净净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice</span>
                             <div class="comment-handle">
                                 <span class="evaluate-time" th:text="${comment.comment.commTime}">2021/9/3 12:20:33</span>
-                                <a class="replay-handle" href="javascript:void(0)">回复</a>
-                                <div></div>
+                                <a class="replay-handle" href="javascript:(0)"  th:id="'comment'+${comment.comment.commId} " onclick="displayWindow()">回复</a>
+                                <!--悬浮窗口-->
+                                <div id="window" class="window_css">
+<!--                                    <label>-->
+<!--                                        <input type="text" class="reply-box" placeholder="请输入回复内容.....">-->
+<!--                                    </label>-->
+                                    <label>
+                                        <textarea class="reply-box" placeholder="请输入回复内容......."></textarea>
+                                    </label>
+
+                                    <input type="submit" value="回复" class="reply-btn" id="reply-btn">
+                                    <input type="submit" value="取消" onclick="hideWindow()" class="clear-btn">
+                                </div>
                                 <span>|</span>
-                                <a href="">
-                                    <span class="icon-act"></span>
-                                </a>
-                                <span  class="praise-number" th:text="${comment.comment.commFabulous}"></span>
+                                <span th:if="${comment.commentStatus} le 0 ">
+                                    <a href="javascript:(0)">
+                                        <span class="like" th:id="${comment.comment.commId}"></span>
+                                    </a>
+                                    <span  th:class="'like-comment'+${comment.comment.commId}" th:text="${comment.commentLikeCount}"></span>
+                                </span>
+                                <span th:if="${comment.commentStatus} eq 1 ">
+                                    <a href="javascript:(0)">
+                                        <span class="haslike" th:id="${comment.comment.commId}"></span>
+                                    </a>
+                                    <span  th:class="'like-comment'+${comment.comment.commId} " th:text="${comment.commentLikeCount}"></span>
+                                </span>
+
                             </div>
+
                         </div>
                     </div>
                     <ul class="replay-ul">
@@ -291,38 +318,78 @@
 <script src="../js/details_time.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../js/common.js"></script>
-<script>
+<script src="../js/collect.js"></script>
+<script src="../js/like.js"></script>
+<script type="text/javascript">
+    /*当点击调用此方法后,将悬浮窗口显示出来,背景变暗*/
+    function displayWindow() {
+        /*悬浮窗口的显示,需要将display变成block*/
+        document.getElementById("window").style.display = "block";
+        /*将背景变暗*/
+        document.getElementById("shadow").style.display = "block";
+    }
 
-    $(function (){
-        $(".replay-handle").click(function (){
-            $(".reply_textarea").remove();
-            $(this).parent().append("<div class='reply_textarea'><textarea name='' cols='40' rows='5'></textarea><br/><input type='submit' value='发表' /></div>")
+    /*当点击调用此方法,将悬浮窗口和背景全部隐藏*/
+    function hideWindow() {
+        document.getElementById("window").style.display = "none";
+        document.getElementById("shadow").style.display = "none";
+    }
+
+
+    $(".replay-handle").click(function (event){
+        var ele = event.target;
+        var commEle= ele.id;
+        var commEleLenght = commEle.length;
+        // console.log(commEle)
+        var commId = commEle.substring(commEleLenght-1);
+        var replyTime = new Date();
+
+        console.log("commId1:"+commId)
+        var userId = $(".userId").val();
+        console.log(userId)
+
+        // function getUserId(){
+        //     var token = localStorage.getItem("token");
+        //     console.log(token)
+        //     $.ajax({
+        //         type: "get",
+        //         url: "/getUserId/",
+        //         async:false,
+        //         headers:{'token':token},
+        //         success:
+        //     })
+        // }
+        $(".reply-btn").click(function (){
+            saveReply()
         })
+        function saveReply(){
+            var replyContent = $(".reply-box").val()
+            console.log("commId2:"+commId)
+            $.ajax({
+                type:"post",
+                url:"/savaReply/",
+                data:{
+                    commId: commId,
+                    userId: userId,
+                    replyContent : replyContent
+
+                },
+                success: function (replyResponse){
+                    if (replyResponse.resultcode ==200){
+                        alert("回复成功")
+                        location.reload();
+                    }
+                }
+            })
+        }
     })
-<!--    收藏按钮-->
-   var btn = document.getElementById("btn_collect_icon")
-   var flag = false;
-
-   btn.onclick = function (){
-       if (flag){
-           btn.src = "../images/collect/collect.png"
-           flag=false;
-       }else{
-           btn.src= "../images/collect/collectsuccess.png"
-           btn.style="collect_sucess"
-           flag = true;
-       }
-   }
-
-   function getComments(){
 
 
-   }
+
+
 
 
 </script>
-<script src="../js/collect.js"></script>
-<script src="../js/common.js"></script>
 
 </body>
 </html>

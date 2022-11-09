@@ -5,6 +5,7 @@ import com.suixing.commons.ServerResponse;
 import com.suixing.entity.*;
 import com.suixing.mapper.*;
 import com.suixing.service.IUserCenterService;
+import com.suixing.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
     @Override
     public ServerResponse getUserById(Integer userId) {
         User user = userMapper.selectById(userId);
+        //user.setUserPsd(MD5Util.convertMD5(MD5Util.convertMD5(user.getUserPsd())));
         if (user != null){
             return ServerResponse.success("查询成功",user);
         }
@@ -38,6 +40,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
     @Override
     public User getUserUpdateById(Integer userId) {
         User user = userMapper.selectById(userId);
+
         return user;
     }
 
@@ -99,7 +102,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
             mapOrder.put("ordNumber",order.getOrdNumber());
             mapOrder.put("ordSatus",order.getOrdSatus());
             mapOrder.put("ordPicTime",order.getOrdPicTime());
-            mapOrder.put("ordDroTime",order.getOrdPicTime());
+            mapOrder.put("ordDroTime",order.getOrdDroTime());
             mapOrder.put("carName",car.getCarName());
             mapOrder.put("carModel",car.getCarModel());
             mapOrder.put("carCase",car.getCarCase());

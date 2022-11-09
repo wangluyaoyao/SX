@@ -263,12 +263,19 @@ ul{
     margin-left: 79px;
 }
 
-.comment-handle .icon-act {
+.comment-handle .like {
     position: relative;
     top: 3px;
     width: 22px;
     height: 22px;
-    background: url(../images/details/zan.png);
+    background: url(../images/like.png);
+}
+.comment-handle .haslike {
+    position: relative;
+    top: 3px;
+    width: 22px;
+    height: 22px;
+    background: url(../images/haslike.png);
 }
 
 
@@ -690,4 +697,59 @@ ul{
 
 .myshowbox-container{
     border-bottom: 1px solid lavender;
+}
+
+.shadow_css {
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 10;
+    /* 为mozilla firefox 设置透明度  */
+    -moz-opacity: 0.6;
+    /* 设置透明度 */
+    opacity: .60;
+    /* 为IE 设置透明度  */
+    filter: alpha(opacity=66);
+}
+
+.window_css {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 65%;
+    width: 400px;
+    height: 330px;
+    border: 3px solid #FF7E00;
+    background-color: aliceblue;
+    z-index: 11;
+}
+
+.reply-box{
+    width: 100%;
+    height: 85%;
+    /*top: 10%;*/
+    /*left: 5%;*/
+    border: none;
+    position: relative;
+    /*text-align: center;*/
+    padding-top: 0;
+    overflow: auto;
+    resize: none;
+}
+
+
+.reply-btn{
+    display: inline-block;
+    width: 50px;
+    margin-left: 30%;
+}
+
+.clear-btn{
+    display: inline-block;
+    width: 50px;
+    margin-left: 5%;
 }
