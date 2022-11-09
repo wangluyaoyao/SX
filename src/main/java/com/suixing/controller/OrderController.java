@@ -166,7 +166,7 @@ public class OrderController {
 //            String msg = "超时";
 
             rabbitTemplate.convertAndSend("delayed-exchange-order", "key3",order1, message -> {
-                message.getMessageProperties().setDelay(10000); //15分钟"：900000
+                message.getMessageProperties().setDelay(60000); //15分钟"：900000
                 System.out.println(message);
                 return message;
             });
