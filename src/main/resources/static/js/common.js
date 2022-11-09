@@ -18,7 +18,13 @@ function userShow(){
                 $(".loginAfter").text("欢迎回来!");
                 $(".loginAfter").attr("href", "../customer/customer_center.html")
                 $(".registAfter").attr("href", "../customer/customer_center.html")
-                $(".registAfter").text(user.userPetname);
+                if(userPetname != null){
+                    $(".registAfter").text(user.userPetname);
+                }else {
+                    $(".registAfter").text(" ");
+                }
+
+
                 $(".left").append("<input class=\"userId\" value=\"\" type=\"hidden\">");
                 $(".userId").val(user.userId)
                 $("#userId").val(user.userId)
