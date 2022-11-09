@@ -13,6 +13,7 @@ import com.suixing.service.IReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -58,6 +59,7 @@ public class ReplyServiceImpl extends ServiceImpl<ReplyMapper, Reply> implements
     @Override
     public ServerResponse saveReply(Reply reply) {
 
+        reply.setReplyTime(LocalDateTime.now());
         int rows = replyMapper.insert(reply);
         if (rows > 0){
             return ServerResponse.success("保存回复成功",reply);

@@ -262,7 +262,19 @@
                             <span class="type-text" th:text="${comment.comment.commContent}">车子很干净，ce车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车车子很干净，车子很干净，nice，车子很干净，子很干净净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，车子很干净，nice，车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice车子很干净，nice</span>
                             <div class="comment-handle">
                                 <span class="evaluate-time" th:text="${comment.comment.commTime}">2021/9/3 12:20:33</span>
-                                <a class="replay-handle" href="javascript:(0)" th:id="'comment'+${comment.comment.commId} ">回复</a>
+                                <a class="replay-handle" href="javascript:(0)"  th:id="'comment'+${comment.comment.commId} " onclick="displayWindow()">回复</a>
+                                <!--悬浮窗口-->
+                                <div id="window" class="window_css">
+<!--                                    <label>-->
+<!--                                        <input type="text" class="reply-box" placeholder="请输入回复内容.....">-->
+<!--                                    </label>-->
+                                    <label>
+                                        <textarea class="reply-box" placeholder="请输入回复内容......."></textarea>
+                                    </label>
+
+                                    <input type="submit" value="回复" class="reply-btn" id="reply-btn">
+                                    <input type="submit" value="取消" onclick="hideWindow()" class="clear-btn">
+                                </div>
                                 <span>|</span>
                                 <span th:if="${comment.commentStatus} le 0 ">
                                     <a href="javascript:(0)">
@@ -308,7 +320,76 @@
 <script src="../js/common.js"></script>
 <script src="../js/collect.js"></script>
 <script src="../js/like.js"></script>
+<script type="text/javascript">
+    /*当点击调用此方法后,将悬浮窗口显示出来,背景变暗*/
+    function displayWindow() {
+        /*悬浮窗口的显示,需要将display变成block*/
+        document.getElementById("window").style.display = "block";
+        /*将背景变暗*/
+        document.getElementById("shadow").style.display = "block";
+    }
 
+    /*当点击调用此方法,将悬浮窗口和背景全部隐藏*/
+    function hideWindow() {
+        document.getElementById("window").style.display = "none";
+        document.getElementById("shadow").style.display = "none";
+    }
+
+
+    $(".replay-handle").click(function (event){
+        var ele = event.target;
+        var commEle= ele.id;
+        var commEleLenght = commEle.length;
+        // console.log(commEle)
+        var commId = commEle.substring(commEleLenght-1);
+        var replyTime = new Date();
+
+        console.log("commId1:"+commId)
+        var userId = $(".userId").val();
+        console.log(userId)
+
+        // function getUserId(){
+        //     var token = localStorage.getItem("token");
+        //     console.log(token)
+        //     $.ajax({
+        //         type: "get",
+        //         url: "/getUserId/",
+        //         async:false,
+        //         headers:{'token':token},
+        //         success:
+        //     })
+        // }
+        $(".reply-btn").click(function (){
+            saveReply()
+        })
+        function saveReply(){
+            var replyContent = $(".reply-box").val()
+            console.log("commId2:"+commId)
+            $.ajax({
+                type:"post",
+                url:"/savaReply/",
+                data:{
+                    commId: commId,
+                    userId: userId,
+                    replyContent : replyContent
+
+                },
+                success: function (replyResponse){
+                    if (replyResponse.resultcode ==200){
+                        alert("回复成功")
+                        location.reload();
+                    }
+                }
+            })
+        }
+    })
+
+
+
+
+
+
+</script>
 
 </body>
 </html>
