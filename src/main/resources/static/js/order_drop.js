@@ -59,12 +59,18 @@
 
         });
 
-        $(".t_price").val(document.querySelector(".t_price").innerText);
+
 
 
 
 
     })
+
+function qq() {
+    $(".t_price").val(document.querySelector(".t_price").innerText);
+    console.log($(".t_price").val())
+
+}
 
 
 
