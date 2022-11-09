@@ -135,7 +135,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setOrdSatus("租赁中");
         Integer couId =  order.getCouId();
         if (couId != null){
-            UserCoupno coupon = userCoupnoMapper.selectById(couId);
+            QueryWrapper wrapper = new QueryWrapper<>();
+            wrapper.eq("cou_id",couId);
+            UserCoupno coupon = userCoupnoMapper.selectOne(queryWrapper);
             coupon.setUserCouState("1");
         }
         return ServerResponse.success("ok",order);
