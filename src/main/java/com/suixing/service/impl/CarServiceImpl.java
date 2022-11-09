@@ -35,7 +35,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
     public ServerResponse getPageCarModelCarNameCarPrice(int page, String carModel, String carBrand, String carPrice) {
         QueryWrapper<Car> queryWrapper = new QueryWrapper<>();
         String redisKey = page+carModel+carBrand+carPrice;
-        System.out.println("当前查询的页数："+page);
+//        System.out.println("当前查询的页数："+page);
         Object object =  getRedis(redisKey);      //先查询redis数据库中的数据
         if (object != null){
             return ServerResponse.success("查询成功",object);
@@ -48,7 +48,6 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
             queryWrapper.and(wrapper -> {
                     for (int i = 0; i < brandArray.length; i++) {
                        wrapper.or().eq("car_brand",brandArray[i].trim());
-                       System.out.println(brandArray[i].trim());
                  }
             });
         }
@@ -71,10 +70,9 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
         }
 
 
-        Page<Car> curret = new Page<>(page,5);
+        Page<Car> curret = new Page<>(page,4);
         Page<Car> pageInfo = carMapper.selectPage(curret,queryWrapper);
-
-
+        System.out.println("pageInfo:"+pageInfo);
 //        List<Car> list = pageInfo.getRecords();
         System.out.println(pageInfo.getRecords());
         if (pageInfo.getRecords() != null) {

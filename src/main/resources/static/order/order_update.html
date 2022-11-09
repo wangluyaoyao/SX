@@ -71,10 +71,10 @@
 
             <form class="idCard">
                 <div class="contentBtn1">
-                    <span class="nameBrn"></span>姓名：<input type="text" value="" class="nameBtn" id="idCardName">
+                    <span class="nameBrn"></span>姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名：<input type="text" value="" class="nameBtn" id="idCardName">
                 </div>
                 <div class="contentBtn2">
-                    <span class="nameBrn"></span>性别：<input type="text" value="" class="genderBtn" id="idCardSex">
+                    <span class="nameBrn"></span>性&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp别：<input type="text" value="" class="genderBtn" id="idCardSex">
                 </div>
                 <div class="contentBtn3">
                     出生日期：<input type="text" value="" class="nameBtn" id="idCardBirth">
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="contentBtn1">
-                    <span class="nameBrn"></span>地址：<input type="text" value="" class="addressBtn" id="idCardAddress">
+                    <span class="nameBrn"></span>地&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp址：<input type="text" value="" class="addressBtn" id="idCardAddress">
                 </div>
 
             </form>
@@ -105,32 +105,38 @@
             </div>
             <span class="information_main_font">上传驾驶证正面图片文件,支持jpg/png,且不超过500kb</span>
             <form class="driver">
-                <div class="contentBtn1">
-                    <span class="nameBrn"></span>姓名：<input type="text" value="" class="nameBtn" id="driverName">
-                </div>
-                <div class="contentBtn2">
-                    <span class="nameBrn"></span>性别：<input type="text" value="" class="genderBtn" id="driverSex">
-                </div>
-                <div class="contentBtn3">
-                    <span class="nameBrn"></span>开始时间：<input type="text" value="" class="timeBtn" id="driverStartTime">
+                <div class="left-input">
+                    <div class="contentBtn1">
+                        <span class="nameBrn"></span>姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名：<input type="text" value="" class="nameBtn" id="driverName">
+                    </div>
+                    <div class="contentBtn2">
+                        <span class="nameBrn"></span>性&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp别：<input type="text" value="" class="genderBtn" id="driverSex">
+                    </div>
+                    <div class="contentBtn3">
+                        <span class="nameBrn"></span>开始时间：<input type="text" value="" class="timeBtn" id="driverStartTime">
+                    </div>
+
+                    <div class="contentBtn5">
+                        <span class="nameBrn"></span>国&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp籍：<input type="text" value="" class="nationBtn" id="driverNation">
+                    </div>
+
+                    <div class="contentBtn1">
+                        <span class="nameBrn"></span>类&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp型：<input type="text" value="" class="nameBtn" id="driverType">
+                    </div>
                 </div>
 
-                <div class="contentBtn5">
-                    <span class="nameBrn"></span>国籍：<input type="text" value="" class="nationBtn" id="driverNation">
+                <div class="right-bottom">
+                    <div class="contentBtn6">
+                        <span class="nameBrn"></span>结束时间：<input type="text" value="" class="dateBtn" id="driverEndTime">
+                    </div>
+                    <div class="contentBtn7">
+                        <span class="nameBrn"></span>驾驶证号：<input type="text" value="" class="carIdBtn" id="ordPicCard">
+                    </div>
+                    <div class="contentBtn1">
+                        <span class="nameBrn"></span>地&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp址：<input type="text" value="" class="addressBtn" id="driverAddress">
+                    </div >
                 </div>
 
-                <div class="contentBtn1">
-                    <span class="nameBrn"></span>类型：<input type="text" value="" class="nameBtn" id="driverType">
-                </div>
-                <div class="contentBtn6">
-                    <span class="nameBrn"></span>结束时间：<input type="text" value="" class="dateBtn" id="driverEndTime">
-                </div>
-                <div class="contentBtn7">
-                    <span class="nameBrn"></span>驾驶证号：<input type="text" value="" class="carIdBtn" id="ordPicCard">
-                </div>
-                <div class="contentBtn1">
-                    <span class="nameBrn"></span>地址：<input type="text" value="" class="addressBtn" id="driverAddress">
-                </div>
             </form>
         </div>
         <div class="main_footer">
@@ -223,7 +229,6 @@
                 console.log("结束时间是"+result.data.end_date);
                 console.log("驾驶证号"+result.data.num);
                 console.log("地址"+result.data.addr);
-
                 var name = result.data.name;//姓名
                 var num = result.data.num;//身份证号
                 var birth_date = result.data.birth_date;//生日
@@ -243,6 +248,8 @@
                 $("#driverEndTime").val(end_date);
                 $("#ordPicCard").val(num);
                 $("#ordPicCard1").val(num);
+                var a =$("#ordPicCard1");
+
                 $("#driverAddress").val(address);
             }
         } )

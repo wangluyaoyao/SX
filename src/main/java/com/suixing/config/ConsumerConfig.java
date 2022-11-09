@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @Component
 public class ConsumerConfig {
-    @RabbitListener(queues = "delayed-queue")
+    @RabbitListener(queues = "delayed-queue-order")
     public void getMsg(String msg, Channel channel, Message message){
         System.out.println("消费者收到的消息是：" + msg);
         try{

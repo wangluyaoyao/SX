@@ -21,7 +21,7 @@ function userShow(){
                 $(".userId").val(user.userId)
                 $(".bye").attr("href", "../index.html")
                 $(".bye").attr("class", "bye")
-                let ele ="  <span>我的消息</span>\n" ;
+                let ele ="<a href=\"../customer/customer_center.html\">我的消息</a>" ;
                  $(".header-top .left .name").html(ele);
                 $.ajax({
                     type: "get",

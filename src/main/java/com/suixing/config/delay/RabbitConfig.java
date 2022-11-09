@@ -22,7 +22,7 @@ public class RabbitConfig {
     @Bean
     public Queue newDelayQueue(){
 
-        return new Queue("delayed-queue",true);
+        return new Queue("delayed-queue-order",true);
     }
     //绑定
     @Bean
