@@ -12,20 +12,20 @@ import java.util.Map;
 public class RabbitConfig {
 
     //延时交换机
-    @Bean
+    @Bean(value = "order-newDelayExchange")
     public CustomExchange newDelayExchange(){
         Map<String,Object> args = new HashMap<>();
         args.put("x-delayed-type","direct");
-        return new CustomExchange("delayed-exchange","x-delayed-message",true,false,args);
+        return new CustomExchange("delayed-exchange-order","x-delayed-message",true,false,args);
     }
     //延时队列
-    @Bean
+    @Bean(value = "delayed-queue-order")
     public Queue newDelayQueue(){
 
         return new Queue("delayed-queue-order",true);
     }
     //绑定
-    @Bean
+    @Bean(value = "order-bindingDelayedQueue")
     public Binding bindingDelayedQueue(  ){
         return BindingBuilder.bind(newDelayQueue()).to(newDelayExchange()).with("key3").noargs();
     }

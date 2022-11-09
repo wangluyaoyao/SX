@@ -2,21 +2,28 @@ package com.suixing.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rabbitmq.client.Channel;
 import com.suixing.commons.ServerResponse;
-import com.suixing.entity.Coupon;
-import com.suixing.entity.Order;
-import com.suixing.entity.UserCoupno;
+import com.suixing.entity.*;
 import com.suixing.mapper.CouponMapper;
 import com.suixing.mapper.OrderMapper;
 import com.suixing.mapper.UserCoupnoMapper;
+import com.suixing.mapper.UserMapper;
 import com.suixing.service.IOrderService;
+import com.suixing.websocket.WebSocketProcess;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -34,7 +41,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private OrderMapper orderMapper;
     @Autowired
     private UserCoupnoMapper userCoupnoMapper;
+    @Autowired
+    private UserMapper userMapper;
 
+    @Autowired
+    private WebSocketProcess webSocketProcess;
     @Override
     public Order getById(Integer ordId) {
         return orderMapper.selectById(ordId);
@@ -48,17 +59,21 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         return ServerResponse.success("查询成功",orderlist);
     }
 
+
+    @Transactional
+    @RabbitHandler
+    @RabbitListener(queues = "OrderDrawDirectQueue")
     @Override
-    public ServerResponse saveOrder(Order order) {
-        int rows = orderMapper.insert(order);
-        if(rows >0){
-            System.out.println("添加成功");
-            return ServerResponse.success("添加成功",order);
+    public void saveOrder(Order order, Channel channel, Message message) {
+        System.out.println("OrderDrawDirectQueue"+order);
+        orderMapper.insert(order);
+        try {
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        else
-            System.out.println("添加失败");
-            return ServerResponse.fail("添加失败",null);
     }
+
 
     @Override
     public ServerResponse updateOrder(Order order) {
@@ -82,6 +97,30 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Order order = orderMapper.selectOne(queryWrapper);
         return order;
     }
+    /*
+     * 订单超时修改支付装
+     * */
+    @RabbitHandler
+    @RabbitListener(queues = "delayed-queue-order")
+    public void processMsg(Channel channel, Message message, Order order1) {
+        order1.setOrdSatus("已取消");
+        String msg = "您的订单已超时自动取消,订单号："+order1.getOrdNumber();
+        UserMsg userMsg = new UserMsg();
+        userMsg.setUserId(order1.getUserId());
+        userMsg.setUserMsgContent(msg);
+        userMsg.setUserMsgStatus("0");
+        userMsg.setUserMsgTime(new Date());
+        userMsg.setUserMsgType("1");
+        try {
+            webSocketProcess.sendMessage(order1.getUserId(),msg,userMsg);
+            orderMapper.updateById(order1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("消息确认结束");
+    }
+
+
 
     //订单状态修改
     @Override
@@ -96,6 +135,13 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             coupon.setUserCouState("1");
         }
         return ServerResponse.success("ok",order);
+    }
+
+    @Override
+    public Order getBuOrderNum(Long numId) {
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("ord_number",numId);
+        return orderMapper.selectOne(queryWrapper);
     }
 
     @Override

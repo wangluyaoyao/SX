@@ -611,7 +611,7 @@ function msgshow(msgArray){
         if (msgArray[i].userMsgStatus == 0) {
             eleplus =  "<input type=\"hidden\" class=\"user-id\" value=\""+msgArray[i].userId+"\">\n" +
                 "                            <input type=\"hidden\" class=\"user-msg-id\" value=\""+msgArray[i].userMsgId+"\">\n" +
-                "                            <a href=\"javascript:void (0)\" id=\"yidu-botton-rrr\">已读</a>"
+                "                            <a href=\"javascript:void (0)\" id=\"yidu-botton-rrr\">收到</a>"
         }else {
             eleplus = "";
         }

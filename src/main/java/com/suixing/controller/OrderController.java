@@ -118,15 +118,15 @@ public class OrderController {
     //创建订单
     @PostMapping( "/saveOrder")
     @ResponseBody
-    public ModelAndView saveOrder(Integer carId,Order order,Integer userId,Integer couId,Float ordCouMoney){
+    public ModelAndView saveOrder(Integer carId,Order order,Integer userId,Integer couId,Float ordCouMoney) {
 
         //订单编号
         Long number = UUID.randomUUID().getMostSignificantBits();
         String o = String.valueOf(number);
-        String onum = o.substring(0,16);
+        String onum = o.substring(0, 16);
         Long ordNumber = Long.valueOf(onum);
 
-        if(ordNumber<0){
+        if (ordNumber < 0) {
             ordNumber = -ordNumber;
         }
         //订单状态
@@ -144,28 +144,38 @@ public class OrderController {
         order.setUserId(userId);
 
 
-        if (couId !=null){
+        if (couId != null) {
             order.setCouId(couId);
         }
-        ServerResponse result = orderService.saveOrder(order);
-        System.out.println(order);
-        System.out.println(result);
-        ModelAndView mav = new ModelAndView();
-        mav.addObject(result);
-        mav.setViewName("order/order_update");
-        Integer ordId = order.getOrdId();
-        mav.addObject("ordId",ordId);
+//        ServerResponse result = orderService.saveOrder(order);
 
 
+        rabbitTemplate.convertAndSend("OrderDrawDirectExchange", "order12138", order);
 
-        String msg = "支付超时";
-        rabbitTemplate.convertAndSend("delayed-exchange","key3",msg,message ->{
-            message.getMessageProperties().setDelay(900000);
-            System.out.println(message);
-            return  message;
-        });
+        try {
+            Thread.currentThread().sleep(1000);
+            Order order1 = orderService.getBuOrderNum(ordNumber);
+            System.out.println("order1:" + order1);
+            ServerResponse result = ServerResponse.success("添加成功", order);
+            ModelAndView mav = new ModelAndView();
+            mav.addObject(result);
+            mav.setViewName("order/order_update");
 
-        return mav;
+            Integer ordId = order1.getOrdId();
+            mav.addObject("ordId", ordId);
+//            String msg = "超时";
+
+            rabbitTemplate.convertAndSend("delayed-exchange-order", "key3",order1, message -> {
+                message.getMessageProperties().setDelay(10000); //15分钟"：900000
+                System.out.println(message);
+                return message;
+            });
+
+            return mav;
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
