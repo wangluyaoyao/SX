@@ -162,11 +162,8 @@ public class OrderController {
 
             Integer ordId = order1.getOrdId();
             mav.addObject("ordId",ordId);
-
             String msg = "超时";
-
-
-            rabbitTemplate.convertAndSend("delayed-exchange","key3",msg,message ->{
+            rabbitTemplate.convertAndSend("delayed-exchange-order","key3",msg,message ->{
                 message.getMessageProperties().setDelay(900000);
                 System.out.println(message);
                 return  message;
