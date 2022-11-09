@@ -13,7 +13,7 @@ function btn() {
     console.log(t3)
     console.log(t4)
     if (t1 == '' || t2 == '' ||t3 == '' ||t4 == ''){
-        alert("请先选择时间")
+        layer.msg("请先选择时间")
 
     }
 

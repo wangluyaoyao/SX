@@ -291,5 +291,11 @@ dd {
     margin-left: 5%; !important;
 }
 
+#jixu{
+    color: #23b7b7;
+    background-color:rgba(195, 176, 145, 0.1) ;
+    width: 90px;
+    height: 30px;
 
+}
 

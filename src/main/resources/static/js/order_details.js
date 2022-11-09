@@ -62,3 +62,11 @@ function saveComments(){
         }
     })
 }
+
+function jixuzhifu() {
+    if ($(".status").text() !== "预约中"){
+        layer.msg("该订单不可继续支付")
+
+    }
+
+}
