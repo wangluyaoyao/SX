@@ -103,20 +103,24 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @RabbitHandler
     @RabbitListener(queues = "delayed-queue-order")
     public void processMsg(Channel channel, Message message, Order order1) {
-        order1.setOrdSatus("已取消");
-        String msg = "您的订单已超时自动取消,订单号："+order1.getOrdNumber();
-        UserMsg userMsg = new UserMsg();
-        userMsg.setUserId(order1.getUserId());
-        userMsg.setUserMsgContent(msg);
-        userMsg.setUserMsgStatus("0");
-        userMsg.setUserMsgTime(new Date());
-        userMsg.setUserMsgType("1");
-        try {
-            webSocketProcess.sendMessage(order1.getUserId(),msg,userMsg);
-            orderMapper.updateById(order1);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        Order order = orderMapper.selectById(order1.getOrdId());
+        if (order.getOrdSatus()!= "租赁中"){
+            order1.setOrdSatus("已取消");
+            String msg = "您的订单已超时自动取消,订单号："+order1.getOrdNumber();
+            UserMsg userMsg = new UserMsg();
+            userMsg.setUserId(order1.getUserId());
+            userMsg.setUserMsgContent(msg);
+            userMsg.setUserMsgStatus("0");
+            userMsg.setUserMsgTime(new Date());
+            userMsg.setUserMsgType("1");
+            try {
+                webSocketProcess.sendMessage(order1.getUserId(),msg,userMsg);
+                orderMapper.updateById(order1);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
+
         System.out.println("消息确认结束");
     }
 
