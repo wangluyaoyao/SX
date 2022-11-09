@@ -158,7 +158,7 @@ a{
 #main .preferential .coupon1{
     width: 25%;
     height: 90px;
-    background: orange;
+    /*background: orange;*/
     color: white;
     font-size: 12px;
     margin-left: 55px;
