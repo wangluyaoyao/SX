@@ -73,7 +73,7 @@ function showCollect(){
 
 //取消收藏
 $(document).on( 'click',".esc",function(event){
-     layer.alert('确定提交吗？', {
+     layer.alert('确定取消收藏吗？', {
           skin: 'layui-layer-molv' //样式类名 自定义样式
           , closeBtn: 1 // 是否显示关闭按钮
           , title : '提示！！' //标题

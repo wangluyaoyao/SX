@@ -125,7 +125,7 @@ function showUser(){
                 "                                        <td>\n" +
                 "                                            <p>"+userEmail+"</p>\n" +
                 // "                                            <span class=\"gray\">(未验证)</span>\n" +
-                "                                            <a class=\"update-info\"  onclick=\"jump()\">修改</a>\n" +
+                // "                                            <a class=\"update-info\"  onclick=\"jump()\">修改</a>\n" +
                 "                                        </td>\n" +
                 "\n" +
                 "                                    </tr>\n" +
@@ -134,7 +134,7 @@ function showUser(){
                 "                                        <td>\n" +
                 "                                            <p>"+userTel+"</p>\n" +
                 // "                                            <span class=\"gray\">(未验证)</span>\n" +
-                "                                            <a class=\"update-info\"  onclick=\"jump()\">修改</a>\n" +
+                // "                                            <a class=\"update-info\"  onclick=\"jump()\">修改</a>\n" +
                 "                                        </td>\n" +
                 "                                    </tr>\n" +
                 "                                <tr>\n" +
@@ -142,7 +142,7 @@ function showUser(){
                 "                                    <td>\n" +
                 "                                        <p>"+userIdcard+"</p>\n" +
                 //"                                        <span class=\"gray\">(未验证)</span>\n" +
-                "                                        <a class=\"update-info\"  onclick=\"jump()\">修改</a>\n" +
+                // "                                        <a class=\"update-info\"  onclick=\"jump()\">修改</a>\n" +
                 "                                    </td>\n" +
                 "                                </tr>\n" +
                 "                                <tr>\n" +
