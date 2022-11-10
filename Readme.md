@@ -68,7 +68,7 @@ SpringBoot、MyBatis-Plus、Redis、 Elasticsearch搜索引擎、Mahout推荐，
 
 
 
-![](img\关键字查询.png)
+![](img/关键字查询.png)
 
 ![](img/车辆详情和评论.png)
 
