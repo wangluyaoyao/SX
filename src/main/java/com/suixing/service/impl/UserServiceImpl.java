@@ -119,7 +119,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
          */
 
         DefaultProfile profile = DefaultProfile.getProfile(
-                "cn-hangzhou", "LTAI5tAuf9NzKcXVeVdf5m7K", "FkwGJUt85vXGyXCiVTPV82IUTJXYnW");
+                "cn-hangzhou", "****", "*****");
         IAcsClient client = new DefaultAcsClient(profile);
         // 构建请求：
         CommonRequest request = new CommonRequest();
